@@ -21,10 +21,10 @@ public class HiRezAPI {
         this.devId = Integer.toString(devId);
         this.authKey = authKey;
     }
-//
-//    public SmiteAPI smite(String platform) {
-//        return new SmiteAPI(platform, getAuthorizations());
-//    }
+
+    public SmiteAPI smite(SmiteAPI.Platform platform) {
+        return new SmiteAPI(devId, authKey, platform);
+    }
 
     public Map<String, String> getAuthorizations() {
        Map<String, String> auths = new HashMap<String, String>();
@@ -32,8 +32,8 @@ public class HiRezAPI {
        auths.put("authKey", authKey);
        return auths;
     }
-//
-//    public PaladinsAPI paladins(String platform) {
-//
-//    }
+
+    public PaladinsAPI paladins(PaladinsAPI.Platform platform) {
+        return new PaladinsAPI(devId, authKey, platform);
+    }
 }
