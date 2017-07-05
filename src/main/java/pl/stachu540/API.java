@@ -4,7 +4,6 @@ package pl.stachu540;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 
-import javax.net.ssl.HttpsURLConnection;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -14,7 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by stachu on 03.07.17.
+ * @author Damian Staszewski <damian@stachuofficial.pl>
+ * @since 1.8
  */
 public class API {
     private final String source;
@@ -87,7 +87,7 @@ public class API {
                 try {
                     is.close();
                 } catch (Exception e) {
-                    fillJSONObject(jsonData, false, req.name(), post, url_path, 0, e.getClass().getSimpleName(), e.getMessage(), content);
+                    fillJSONObject(jsonData, false, req.name(), post, url_path, 0, e.getClass().getName(), e.getMessage(), content);
                     System.err.println(e.getMessage());
                 }
             }

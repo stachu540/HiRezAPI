@@ -1,7 +1,8 @@
 package com.hirezstudios.games.smite;
 
 /**
- * Created by stachu on 04.07.17.
+ * @author Damian Staszewski <damian@stachuofficial.pl>
+ * @since 1.8
  */
 public enum Methods {
     CREATESESSION,

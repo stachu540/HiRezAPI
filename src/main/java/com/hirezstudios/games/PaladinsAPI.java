@@ -4,7 +4,8 @@ import org.json.JSONObject;
 import pl.stachu540.API;
 
 /**
- * Created by stachu on 04.07.17.
+ * @author Damian Staszewski <damian@stachuofficial.pl>
+ * @since 1.8
  */
 public class PaladinsAPI extends API {
     private final String devId;

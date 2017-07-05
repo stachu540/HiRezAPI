@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by stachu on 04.07.17.
+ * @author Damian Staszewski <damian@stachuofficial.pl>
+ * @since 1.8
  */
 public enum Language {
     English(1),
