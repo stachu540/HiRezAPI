@@ -1,8 +1,8 @@
 # HiRezAPI
 
 Java-Based API API Wrapper for Hi-Rez Studios games. Currently supports:
- * Smite
- * Paladins
+ * [Smite](https://smitegame.com/)
+ * [Paladins](https://paladinsgame.com/)
  
 ## Features
 
