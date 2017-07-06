@@ -1,4 +1,4 @@
-package com.hirezstudios.games.smite;
+package pl.stachu540.hirezstudios.instance;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -51,5 +51,9 @@ public enum TierLeauge {
 
     public static TierLeauge valueOf(int id) {
         return map.get(id);
+    }
+
+    public final String getName() {
+        return name().replace("_", " ");
     }
 }

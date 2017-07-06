@@ -1,4 +1,4 @@
-package com.hirezstudios.games.smite;
+package pl.stachu540.hirezstudios.instance;
 
 import java.util.HashMap;
 import java.util.Map;
