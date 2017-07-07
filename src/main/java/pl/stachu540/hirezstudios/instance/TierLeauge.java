@@ -49,6 +49,8 @@ public enum TierLeauge {
         this.id = id;
     }
 
+    public int getId() { return id; }
+
     public static TierLeauge valueOf(int id) {
         return map.get(id);
     }

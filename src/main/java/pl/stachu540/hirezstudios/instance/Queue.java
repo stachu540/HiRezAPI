@@ -44,6 +44,8 @@ public enum Queue {
         this.id = id;
     }
 
+    public int getId() { return id; }
+
     public static Queue valueOf(int id) {
         return map.get(id);
     }

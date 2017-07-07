@@ -32,6 +32,8 @@ public enum Language {
         this.id = id;
     }
 
+    public int getId() { return id; }
+
     public static Language valueOf(int id) {
         return map.get(id);
     }

@@ -1,6 +1,7 @@
 package pl.stachu540.util;
 
 
+import com.sun.istack.internal.Nullable;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 
@@ -17,9 +18,13 @@ import java.util.Map;
  * @since 1.8
  */
 public class API {
-    private final String source;
+    private String source;
     private final Map<String, String> headers = new HashMap<String, String>();
     private static final int timeout = 2 * 1000;
+
+    public void setUrl(String url) {
+        this.source = url;
+    }
 
     public enum requestType {
         GET, POST, PUT, DELETE
@@ -43,11 +48,11 @@ public class API {
     }
 
     public JSONObject getData(requestType req, String path) {
-        return getData(req, path, null);
+        return getData(req, path, new JSONObject());
     }
 
     @SuppressWarnings("UseSpecificCatch")
-    public JSONObject getData(requestType req, String path, JSONObject post) {
+    public JSONObject getData(requestType req, String path, @Nullable JSONObject post) {
         JSONObject jsonData = new JSONObject("{}");
         InputStream is = null;
         String content = "";
@@ -105,7 +110,7 @@ public class API {
         data.put("responseCode", responseCode);
 
         jsonObject.put("data", data);
-        jsonObject.put("content", new JSONObject(jsonContent));
+        jsonObject.put("content", jsonContent);
         jsonObject.put("exception", exception);
 
     }
