@@ -3,6 +3,7 @@ package pl.stachu540.util;
 
 import com.sun.istack.internal.Nullable;
 import org.apache.commons.io.IOUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.InputStream;
@@ -110,8 +111,9 @@ public class API {
         data.put("responseCode", responseCode);
 
         jsonObject.put("data", data);
-        jsonObject.put("content", jsonContent);
+        if (jsonContent.startsWith("{") && jsonContent.endsWith("}")) jsonObject.put("content", new JSONObject(jsonContent));
+        else if (jsonContent.startsWith("[") && jsonContent.endsWith("]")) jsonObject.put("content", new JSONArray(jsonContent));
+        else  jsonObject.put("content", jsonContent);
         jsonObject.put("exception", exception);
-
     }
 }
