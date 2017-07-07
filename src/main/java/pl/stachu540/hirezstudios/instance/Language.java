@@ -1,4 +1,4 @@
-package com.hirezstudios.games.smite;
+package pl.stachu540.hirezstudios.instance;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +31,8 @@ public enum Language {
     Language(final int id) {
         this.id = id;
     }
+
+    public int getId() { return id; }
 
     public static Language valueOf(int id) {
         return map.get(id);
