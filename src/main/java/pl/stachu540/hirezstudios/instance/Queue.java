@@ -1,4 +1,4 @@
-package com.hirezstudios.games.paladins;
+package pl.stachu540.hirezstudios.instance;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,6 +43,8 @@ public enum Queue {
     Queue(final int id) {
         this.id = id;
     }
+
+    public int getId() { return id; }
 
     public static Queue valueOf(int id) {
         return map.get(id);

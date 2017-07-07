@@ -1,6 +1,7 @@
-package pl.stachu540;
+package pl.stachu540.util;
 
 
+import com.sun.istack.internal.Nullable;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 
@@ -17,9 +18,13 @@ import java.util.Map;
  * @since 1.8
  */
 public class API {
-    private final String source;
+    private String source;
     private final Map<String, String> headers = new HashMap<String, String>();
     private static final int timeout = 2 * 1000;
+
+    public void setUrl(String url) {
+        this.source = url;
+    }
 
     public enum requestType {
         GET, POST, PUT, DELETE
@@ -43,11 +48,11 @@ public class API {
     }
 
     public JSONObject getData(requestType req, String path) {
-        return getData(req, path, "");
+        return getData(req, path, new JSONObject());
     }
 
     @SuppressWarnings("UseSpecificCatch")
-    public JSONObject getData(requestType req, String path, String post) {
+    public JSONObject getData(requestType req, String path, @Nullable JSONObject post) {
         JSONObject jsonData = new JSONObject("{}");
         InputStream is = null;
         String content = "";
@@ -62,33 +67,32 @@ public class API {
             c.setRequestMethod(req.name());
             c.setConnectTimeout(timeout);
 
-            if (!post.isEmpty()) c.setDoOutput(true);
+            if (post.length() > 0) c.setDoOutput(true);
             c.connect();
-            if (!post.isEmpty()) {
+            if (post.length() > 0) {
                 try (OutputStream o = c.getOutputStream()){
-                    o.write(post.getBytes(Charset.forName("UTF-8")));
+                    o.write(post.toString().getBytes(Charset.forName("UTF-8")));
                 }
             }
 
             is = c.getInputStream();
             content = IOUtils.toString(is, c.getContentEncoding());
 
-            fillJSONObject(jsonData, true, req.name(), post, url_path, c.getResponseCode(), "", "", content);
+            fillJSONObject(jsonData, true, req, post, url_path, c.getResponseCode(), null, content);
         } catch (Exception e) {
             Throwable rootCause = e;
             while (rootCause.getCause() != null && rootCause.getCause() != rootCause) {
                 rootCause = rootCause.getCause();
             }
-
-            fillJSONObject(jsonData, false, req.name(), post, url_path, 0, e.getClass().getSimpleName(), e.getMessage(), content);
-            System.err.println(e.getMessage());
+            fillJSONObject(jsonData, false, req, post, url_path, 0, e, content);
+            e.printStackTrace();
         } finally {
             if (is != null) {
                 try {
                     is.close();
                 } catch (Exception e) {
-                    fillJSONObject(jsonData, false, req.name(), post, url_path, 0, e.getClass().getName(), e.getMessage(), content);
-                    System.err.println(e.getMessage());
+                    fillJSONObject(jsonData, false, req, post, url_path, 0, e, content);
+                    e.printStackTrace();
                 }
             }
         }
@@ -96,14 +100,18 @@ public class API {
         return jsonData;
     }
 
-    private void fillJSONObject(JSONObject jsonObject, boolean success, String type, String post, String url, int responseCode, String exception, String exceptionMessage, String jsonContent) {
-        jsonObject.put("_success", success);
-        jsonObject.put("_type", type);
-        jsonObject.put("_post", post);
-        jsonObject.put("_url", url);
-        jsonObject.put("_http", responseCode);
-        jsonObject.put("_exception", exception);
-        jsonObject.put("_exceptionMessage", exceptionMessage);
-        jsonObject.put("_content", jsonContent);
+    private void fillJSONObject(JSONObject jsonObject, boolean success, requestType type, JSONObject post, String url, int responseCode, Exception exception, String jsonContent) {
+
+        JSONObject data = new JSONObject("{}");
+        data.put("status", success);
+        data.put("requestType", type.name());
+        data.put("url", url);
+        data.put("postData", post);
+        data.put("responseCode", responseCode);
+
+        jsonObject.put("data", data);
+        jsonObject.put("content", jsonContent);
+        jsonObject.put("exception", exception);
+
     }
 }
