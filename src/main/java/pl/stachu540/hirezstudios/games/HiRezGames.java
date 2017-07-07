@@ -21,7 +21,7 @@ class HiRezGames extends API {
 
     private final String devId;
     private final String authKey;
-    private String sessionId;
+    private String sessionId = "";
 
     /**
      * Hi-Rez Studios API for Smite and Paladins games
@@ -74,6 +74,7 @@ class HiRezGames extends API {
      * @param args arguments in the correct order
      * @return data object in {@link JSONObject}
      */
+    // TODO: testSession() is looping while he throwing StackOverflowError exception
     JSONObject catchData(String endpoint, String... args) {
         if (!sessionId.isEmpty()) {
             JSONObject test = testSession();
@@ -93,7 +94,10 @@ class HiRezGames extends API {
         String timestamp = getTimestamp();
         String signature = getSignature("createsession", timestamp);
         JSONObject ses = getData(requestType.GET, "/createsessionJson/" + devId + "/" + signature + "/" + timestamp);
-        if (ses.getJSONObject("data").getInt("responseCode") == 200 && ses.getJSONObject("content").getString("ret_msg").equals("Approved")) sessionId = ses.getJSONObject("content").getString("session_id");
+        if (
+                ses.getJSONObject("data").getInt("responseCode") == 200 &&
+                ses.getJSONObject("content").getString("ret_msg").equals("Approved")
+           ) sessionId = ses.getJSONObject("content").getString("session_id");
     }
 
     /**
