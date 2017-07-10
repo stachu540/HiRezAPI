@@ -34,9 +34,9 @@ public class HiRezAPI {
     public Paladins paladins;
 
     /**
-     * Initialize Hi-Rez API. All stuff will delivered by Hi-Rez employer via E-Mail.
-     * Please fill <a href="https://fs12.formsite.com/HiRez/form48/secure_index.html">this form first</a> to using script.
-     * After acceptation your request, you can proceed to action.
+     * <p>Initialize Hi-Rez API. All stuff will delivered by Hi-Rez employer via E-Mail.<br />
+     * Please fill <a href="https://fs12.formsite.com/HiRez/form48/secure_index.html">this form first</a> to using script.<br />
+     * After acceptation your request, you can proceed to action.</p>
      * @param devId Developer ID (DevId)
      * @param authKey Authorization Key (AuthKey)
      */
@@ -47,13 +47,14 @@ public class HiRezAPI {
     }
 
     /**
-     * Before using variables {@link #smite} and {@link #paladins} define platform first. (Default platform is "PC")
-     * You can use it with variables mentioned above.
-     * Example:
-     * <blockqote>
-     *   HiRezAPI hirez = new HiRezAPI("1004","23DF3C7E9BD14D84BF892AD206B6755C");
+     * <p>Before using variables {@link #smite} and {@link #paladins} define platform first. (Default platform is "PC")<br />
+     * You can use it with variables mentioned above.</p>
+     * <p>Example:<br /><br />
+     * <code>
+     *   HiRezAPI hirez = new HiRezAPI("1004","23DF3C7E9BD14D84BF892AD206B6755C");<br />
      *   hirez.setPlatform("xbox").smite.getPlayer("stachu Official");
-     * </blockquote>
+     * </code>
+     * </p>
      * @param platform Platform name <b>PC</b>/<b>XBOX</b>/<b>PS4</b>
      */
     public HiRezAPI setPlatform(String platform) {
