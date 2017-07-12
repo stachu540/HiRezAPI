@@ -121,9 +121,7 @@ class HiRezGames extends API {
      * @return Function returns UP/DOWN status for the primary game/platform environments. Data is cached once a minute.
      */
     public JSONObject getServerStatus() {
-        String timestamp = getTimestamp();
-        String signature = getSignature("gethirezserverstatus", timestamp);
-        return getData(requestType.GET, "/gethirezserverstatusJson/" + devId + "/" + signature + "/" + timestamp);
+        return catchData("gethirezserverstatus");
     }
 
     /**
