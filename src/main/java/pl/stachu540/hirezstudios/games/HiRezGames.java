@@ -329,9 +329,27 @@ class HiRezGames extends API {
         return catchData("gettopmatches");
     }
 
-//    public JSONObject getPlayerAchievements(String username) {
-//
-//    }
+    /**
+     * getting player achievements
+     * @param username This may either be:
+     *                a.) the Player Name, or
+     *                b.) the Hi-Rez internally stored player_id
+     *                (available to API developers via the {@link #getPlayer(String)} API method).
+     * @return
+     */
+    public JSONObject getPlayerAchievements(String username) {
+        int player_id = getPlayer(username).getJSONArray("content").getJSONObject(0).getInt("Id");
+        return getPlayerAchievements(player_id);
+    }
+
+    /**
+     * getting player achievements
+     * @param playerId This is the Player ID
+     * @return Returns select achievement totals (Double kills, Tower Kills, First Bloods, etc) for the specified playerId.
+     */
+    public JSONObject getPlayerAchievements(int playerId) {
+        return catchData("getplayerachievements", String.valueOf(playerId));
+    }
 
     /**
      * Getting information about current deployed patch
