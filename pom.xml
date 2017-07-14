@@ -4,9 +4,40 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.hirezstudios</groupId>
+    <groupId>pl.stachu540</groupId>
     <artifactId>HiRezAPI</artifactId>
-    <version>0.1.0</version>
+    <version>0.6.0</version>
+    <packaging>jar</packaging>
+
+    <name>Hi-Rez API</name>
+    <description>Java-Based API Wrapper for Hi-Rez Studios games.</description>
+    <url>https://github.com/stachu540/HiRezAPI/releases</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://github.com/stachu540/HiRezAPI/blob/master/LICENSE</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Damian Staszewski</name>
+            <email>damian@stachuofficial.pl</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/stachu540/HiRezAPI.git</connection>
+        <developerConnection>scm:git:ssh://github.com:stachu540/HiRezAPI.git</developerConnection>
+        <url>https://github.com/stachu540/HiRezAPI</url>
+    </scm>
+
+    <properties>
+        <projec.build.sourceEncodingt>UTF-8</projec.build.sourceEncodingt>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
