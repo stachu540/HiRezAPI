@@ -1,6 +1,5 @@
 package pl.stachu540;
 
-import com.sun.istack.internal.NotNull;
 import pl.stachu540.hirezstudios.Paladins;
 import pl.stachu540.hirezstudios.Smite;
 
@@ -49,7 +48,7 @@ public class HiRezAPI {
      * @param devId Developer ID (DevId)
      * @param authKey Authorization Key (AuthKey)
      */
-    public HiRezAPI(@NotNull String devId, @NotNull String authKey) {
+    public HiRezAPI(String devId, String authKey) {
         this.devId = devId;
         this.authKey = authKey;
         try {
