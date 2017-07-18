@@ -1,16 +1,13 @@
-package pl.stachu540.hirezstudios.games;
+package pl.stachu540.hirezstudios;
 
-import org.json.JSONObject;
 import pl.stachu540.hirezstudios.instance.Language;
-import pl.stachu540.hirezstudios.instance.Queue;
+import pl.stachu540.util.StringData;
 
-/**
- * @author Damian Staszewski <damian@stachuofficial.pl>
- * @since 1.8
- */
+import java.util.HashMap;
+import java.util.Map;
+
 public class Smite extends HiRezGames {
-
-    public enum Endpoint {
+    public enum Platform {
         /**
          * Smite PC API
          */
@@ -27,41 +24,76 @@ public class Smite extends HiRezGames {
         /**
          * API Url
          */
-        private final String url;
+        final String url;
 
         /**
          * End points for API
          * @param url URL for API
          */
-        Endpoint(String url) {
+        Platform(String url) {
             this.url = url;
         }
 
-        /**
-         * Getting URL
-         * @return API URL
-         */
-        public String getUrl() { return url; }
+        public String getUrl() {
+            return url;
+        }
+    }
+
+    public enum Queue {
+        Conquest_5vs5(423),
+        Novice_Queue(424),
+        Conquest(426),
+        Practice(427),
+        Conquest_Challenge(429),
+        Conquest_Ranked(430),
+        Domination(433),
+        MOTD(434), // (use with 465 to get all MOTD matches)
+        Arena(435),
+        Arena_Challenge(438),
+        Domination_Challenge(439),
+        Duel(440),
+        Joust_Challenge(441),
+        Assault(445),
+        Assault_Challenge(446),
+        Joust(448),
+        Joust_Ranked(450),
+        Conquest_Ranked2(451),
+        Arena_Ranked(452),
+        MOTD_List(465), // List of MOTD's (Supports “closing” the Queue by our platform; use with 434)
+        Clash(466),
+        Clash_Challenge(467);
+
+        private int id;
+
+        private static Map<Integer, Queue> map = new HashMap<Integer, Queue>();
+
+        static {
+            for(Queue queue : Queue.values()) {
+                map.put(queue.id, queue);
+            }
+        }
+
+        Queue(final int id) {
+            this.id = id;
+        }
+
+        public int getId() { return id; }
+
+        public static Queue valueOf(int id) {
+            return map.get(id);
+        }
     }
 
     /**
      * Smite API
      * @param devId Developer ID (DevId)
      * @param authKey Authorization Key (AuthKey)
-     * @param endpoint Endpoint platform for API
+     * @param platform Platform in {@link Smite.Platform}
      */
-    public Smite(String devId, String authKey, Smite.Endpoint endpoint) {
-        super(devId, authKey, endpoint);
+    public Smite(Smite.Platform platform, String devId, String authKey) {
+        super(platform, devId, authKey);
     }
 
-
-    /**
-     * Change platform
-     * @param endpoint Endpoint
-     */
-    public void setPlatform(Smite.Endpoint endpoint) {
-        super.setUrl(endpoint.getUrl());
-    }
     /**
      * Getting God ranks by player
      * @param username This may either be:
@@ -70,8 +102,8 @@ public class Smite extends HiRezGames {
      *                (available to API developers via the {@link #getPlayer(String)} API method).
      * @return Returns the Rank and Worshippers value for each God a player has played.
      */
-    public JSONObject getGodRanks(String username) {
-        return catchData("getgodranks", username);
+    public StringData getGodRanks(String username) {
+        return get("getgodranks", username);
     }
 
     /**
@@ -79,14 +111,14 @@ public class Smite extends HiRezGames {
      * @param language the language Id that you want results returned in. Check out {@link Language}. (Default {@value Language#English})
      * @return Returns all Gods and their various attributes.
      */
-    public JSONObject getGods(Language language) {
-        return catchData("getgods", String.valueOf(language.getId()));
+    public StringData getGods(Language language) {
+        return get("getgods", String.valueOf(language.getId()));
     }
     /**
-     * Getting god list. (Default {@value Language#English})
+     * Getting god list. (Default {@link Language#English})
      * @return Returns all Gods and their various attributes.
      */
-    public JSONObject getGods() {
+    public StringData getGods() {
         return getGods(Language.English);
     }
 
@@ -96,8 +128,8 @@ public class Smite extends HiRezGames {
      * @param queue the id of the game mode. See {@link Queue}
      * @return Returns the current season’s leaderboard for a god/queue combination.
      */
-    public JSONObject getGodLeaderboard(String godId, Queue queue) {
-        return catchData("getgodleaderboard", godId, String.valueOf(queue.getId()));
+    public StringData getGodLeaderboard(String godId, Queue queue) {
+        return get("getgodleaderboard", godId, String.valueOf(queue.getId()));
     }
 
     /**
@@ -106,7 +138,7 @@ public class Smite extends HiRezGames {
      * @param queue the id of the game mode. See {@link Queue}
      * @return Returns the current season’s leaderboard for a god/queue combination.
      */
-    public JSONObject getGodLeaderboard(int godId, Queue queue) {
+    public StringData getGodLeaderboard(int godId, Queue queue) {
         return getGodLeaderboard(String.valueOf(godId), queue);
     }
 
@@ -116,8 +148,8 @@ public class Smite extends HiRezGames {
      * @param language the language Id that you want results returned in. Check out {@link Language}. (Default {@value Language#English})
      * @return Returns all available skins for a particular God.
      */
-    public JSONObject getGodSkins(String godId, Language language) {
-        return catchData("getgodskins", godId, String.valueOf(language.getId()));
+    public StringData getGodSkins(String godId, Language language) {
+        return get("getgodskins", godId, String.valueOf(language.getId()));
     }
 
     /**
@@ -126,25 +158,25 @@ public class Smite extends HiRezGames {
      * @param language the language Id that you want results returned in. Check out {@link Language}. (Default {@value Language#English})
      * @return Returns all available skins for a particular God.
      */
-    public JSONObject getGodSkins(int godId, Language language) {
+    public StringData getGodSkins(int godId, Language language) {
         return getGodSkins(String.valueOf(godId), language);
     }
 
     /**
-     * Getting list skins of the God. (Default {@value Language#English})
+     * Getting list skins of the God. (Default {@link Language#English})
      * @param godId God id listed by {@link #getGods()}
      * @return Returns all available skins for a particular God.
      */
-    public JSONObject getGodSkins(String godId) {
+    public StringData getGodSkins(String godId) {
         return getGodSkins(godId, Language.English);
     }
 
     /**
-     * Getting list skins of the God. (Default {@value Language#English})
+     * Getting list skins of the God. (Default {@link Language#English})
      * @param godId God id listed by {@link #getGods()}
      * @return Returns all available skins for a particular God.
      */
-    public JSONObject getGodSkins(int godId) {
+    public StringData getGodSkins(int godId) {
         return getGodSkins(godId, Language.English);
     }
 
@@ -154,8 +186,8 @@ public class Smite extends HiRezGames {
      * @param language the language Id that you want results returned in. Check out {@link Language}. (Default {@value Language#English})
      * @return Returns the Recommended Items for a particular God.
      */
-    public JSONObject getGodRecommendedItems(String godId, Language language) {
-        return catchData("getgodrecommendeditems", godId, String.valueOf(language.getId()));
+    public StringData getGodRecommendedItems(String godId, Language language) {
+        return get("getgodrecommendeditems", godId, String.valueOf(language.getId()));
     }
 
     /**
@@ -164,7 +196,7 @@ public class Smite extends HiRezGames {
      * @param language the language Id that you want results returned in. Check out {@link Language}. (Default {@value Language#English})
      * @return Returns the Recommended Items for a particular God.
      */
-    public JSONObject getGodRecommendedItems(int godId, Language language) {
+    public StringData getGodRecommendedItems(int godId, Language language) {
         return getGodRecommendedItems(String.valueOf(godId), language);
     }
 
@@ -173,7 +205,7 @@ public class Smite extends HiRezGames {
      * @param godId God id listed by {@link #getGods()}
      * @return Returns the Recommended Items for a particular God.
      */
-    public JSONObject getGodRecommendedItems(String godId) {
+    public StringData getGodRecommendedItems(String godId) {
         return getGodRecommendedItems(godId, Language.English);
     }
 
@@ -182,7 +214,7 @@ public class Smite extends HiRezGames {
      * @param godId God id listed by {@link #getGods()}
      * @return Returns the Recommended Items for a particular God.
      */
-    public JSONObject getGodRecommendedItems(int godId) {
+    public StringData getGodRecommendedItems(int godId) {
         return getGodRecommendedItems(godId, Language.English);
     }
 }
