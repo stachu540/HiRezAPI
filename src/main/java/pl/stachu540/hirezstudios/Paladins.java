@@ -1,15 +1,15 @@
-package pl.stachu540.hirezstudios.games;
+package pl.stachu540.hirezstudios;
 
-import org.json.JSONObject;
+
 import pl.stachu540.hirezstudios.instance.Language;
+import pl.stachu540.util.StringData;
 
-/**
- * @author Damian Staszewski <damian@stachuofficial.pl>
- * @since 1.8
- */
-public class Paladins extends HiRezGames {
+import java.util.HashMap;
+import java.util.Map;
 
-    public enum Endpoint {
+public class Paladins extends HiRezGames{
+
+    public enum Platform {
         /**
          * Paladins PC API
          */
@@ -26,13 +26,13 @@ public class Paladins extends HiRezGames {
         /**
          * API Url
          */
-        private final String url;
+        final String url;
 
         /**
          * End points for API
          * @param url URL for API
          */
-        Endpoint(String url) {
+        Platform(String url) {
             this.url = url;
         }
 
@@ -43,23 +43,77 @@ public class Paladins extends HiRezGames {
         public String getUrl() { return url; }
     }
 
-    /**
-     * Paladins API
-     * @param devId Developer ID (DevId)
-     * @param authKey Authorization Key (AuthKey)
-     * @param endpoint Endpoint platform for API
-     */
-    public Paladins(String devId, String authKey, Paladins.Endpoint endpoint) {
-        super(devId, authKey, endpoint);
+    public enum Queue {
+        Custom_K_StoneKeep(423),
+        LIVE_Casual(424),
+        LIVE_Practice_Siege(425),
+        Challenge_Match(426),
+        LIVE_Payload_Practice(427),
+        LIVE_Competitive(428),
+        WIP_Test_MOTD_PvE(429),
+        Custom_F_TimberMill(430),
+        Custom_F_Dock(431),
+        Custom_I_Igloo(432),
+        Custom_T_Isle(433),
+        Shooting_Range(434),
+        PerfCaptureMap(435),
+        Tencent_Alpha_Siege_Queue_Coop(436),
+        LIVE_Payload(437),
+        Custom_T_Temple(438),
+        Custom_I_Mine(439),
+        Custom_T_Beach(440),
+        Custom_TP(441),
+        Custom_FP(442),
+        Custom_IP(443),
+        Tutorial(444),
+        LIVE_Test_Maps(445),
+        zOLD_PvE_Seismic_Smash(446),
+        zOLD_PvE_Coven(447),
+        zOLD_PvE_Volcanic_Wrath(448),
+        zOLD_PvE_Archery_Contest(449),
+        zOLD_PvE_Cops_and_Robbers(450),
+        zOLD_PvE_Kill_it_with_Fire(451),
+        LIVE_Onslaught(452),
+        LIVE_Onslaught_Practice(453),
+        Custom_I_Junction_Onslaught(454),
+        Custom_T_Court_Onslaught(455),
+        Tencent_Alpha_Payload(456),
+        Tencent_Alpha_Survival_Queue_Coop(457),
+        Custom_B_Brightmarsh(458),
+        Multi_Queue(999);
+
+        private int id;
+
+        private static Map<Integer, Queue> map = new HashMap<Integer, Queue>();
+
+        static {
+            for(Queue queue : Queue.values()) {
+                map.put(queue.id, queue);
+            }
+        }
+
+        Queue(final int id) {
+            this.id = id;
+        }
+
+        public int getId() { return id; }
+
+        public static Queue valueOf(int id) {
+            return map.get(id);
+        }
     }
 
+
     /**
-     * Change platform
-     * @param endpoint Endpoint
+     * Smite API
+     * @param devId Developer ID (DevId)
+     * @param authKey Authorization Key (AuthKey)
+     * @param platform Platform in {@link Paladins.Platform}
      */
-    public void setPlatform(Paladins.Endpoint endpoint) {
-        super.setUrl(endpoint.getUrl());
+    public Paladins(Paladins.Platform platform, String devId, String authKey) {
+        super(platform, devId, authKey);
     }
+
     /**
      * Getting Champion ranks by player
      * @param username This may either be:
@@ -68,8 +122,8 @@ public class Paladins extends HiRezGames {
      *                (available to API developers via the {@link #getPlayer(String)} API method).
      * @return Returns the Rank and Worshippers value for each Champion a player has played.
      */
-    public JSONObject getChampionRanks(String username) {
-        return catchData("getchampionranks", username);
+    public StringData getChampionRanks(String username) {
+        return get("getchampionranks", username);
     }
 
     /**
@@ -77,15 +131,15 @@ public class Paladins extends HiRezGames {
      * @param language the language Id that you want results returned in. Check out {@link Language}. (Default {@value Language#English})
      * @return Returns all Champions and their various attributes.
      */
-    public JSONObject getChampions(Language language) {
-        return catchData("getchampions", String.valueOf(language.getId()));
+    public StringData getChampions(Language language) {
+        return get("getchampions", String.valueOf(language.getId()));
     }
 
     /**
-     * Getting Champions list. (Default {@value Language#English})
+     * Getting Champions list. (Default {@link Language#English})
      * @return Returns all Champions and their various attributes.
      */
-    public JSONObject getChampions() {
+    public StringData getChampions() {
         return getChampions(Language.English);
     }
 
@@ -95,8 +149,8 @@ public class Paladins extends HiRezGames {
      * @param language the language Id that you want results returned in. Check out {@link Language}. (Default {@value Language#English})
      * @return Returns all available skins for a particular Champion.
      */
-    public JSONObject getChampionSkins(String champId, Language language) {
-        return catchData("getchampionskins", champId, String.valueOf(language.getId()));
+    public StringData getChampionSkins(String champId, Language language) {
+        return get("getchampionskins", champId, String.valueOf(language.getId()));
     }
 
     /**
@@ -105,25 +159,25 @@ public class Paladins extends HiRezGames {
      * @param language the language Id that you want results returned in. Check out {@link Language}. (Default {@value Language#English})
      * @return Returns all available skins for a particular Champion.
      */
-    public JSONObject getChampionSkins(int champId, Language language) {
+    public StringData getChampionSkins(int champId, Language language) {
         return getChampionSkins(String.valueOf(champId), language);
     }
 
     /**
-     * Getting list skins of the Champion. (Default {@value Language#English})
+     * Getting list skins of the Champion. (Default {@link Language#English})
      * @param champId God id listed by {@link #getChampions()}
      * @return Returns all available skins for a particular Champion.
      */
-    public JSONObject getChampionSkins(String champId) {
+    public StringData getChampionSkins(String champId) {
         return getChampionSkins(champId, Language.English);
     }
 
     /**
-     * Getting list skins of the Champion. (Default {@value Language#English})
+     * Getting list skins of the Champion. (Default {@link Language#English})
      * @param champId God id listed by {@link #getChampions()}
      * @return Returns all available skins for a particular Champion.
      */
-    public JSONObject getChampionSkins(int champId) {
+    public StringData getChampionSkins(int champId) {
         return getChampionSkins(champId, Language.English);
     }
 
@@ -133,7 +187,7 @@ public class Paladins extends HiRezGames {
      * @param language the language Id that you want results returned in. Check out {@link Language}. (Default {@value Language#English})
      * @return Returns the Recommended Items for a particular Champion.
      */
-    public JSONObject getChampionRecommendedItems(String champId, Language language) { return catchData("getchampionecommendeditems", champId, String.valueOf(language.getId())); }
+    public StringData getChampionRecommendedItems(String champId, Language language) { return get("getchampionecommendeditems", champId, String.valueOf(language.getId())); }
 
     /**
      * Getting list items recommended for Champion.
@@ -141,21 +195,21 @@ public class Paladins extends HiRezGames {
      * @param language the language Id that you want results returned in. Check out {@link Language}. (Default {@value Language#English})
      * @return Returns the Recommended Items for a particular Champion.
      */
-    public JSONObject getChampionRecommendedItems(int champId, Language language) { return getChampionRecommendedItems(String.valueOf(champId), language);}
+    public StringData getChampionRecommendedItems(int champId, Language language) { return getChampionRecommendedItems(String.valueOf(champId), language);}
 
     /**
      * Getting list items recommended for Champion.
      * @param champId God id listed by {@link #getChampions()}
      * @return Returns the Recommended Items for a particular Champion.
      */
-    public JSONObject getChampionRecommendedItems(String champId) { return getChampionRecommendedItems(champId, Language.English); }
+    public StringData getChampionRecommendedItems(String champId) { return getChampionRecommendedItems(champId, Language.English); }
 
     /**
      * Getting list items recommended for Champion.
      * @param champId God id listed by {@link #getChampions()}
      * @return Returns the Recommended Items for a particular Champion.
      */
-    public JSONObject getChampionRecommendedItems(int champId) { return getChampionRecommendedItems(champId, Language.English); }
+    public StringData getChampionRecommendedItems(int champId) { return getChampionRecommendedItems(champId, Language.English); }
 
 
 }
