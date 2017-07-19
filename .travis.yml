@@ -4,12 +4,19 @@ jdk:
 
 cache:
   directories:
-  - .autoconf
-  - $HOME/.m2
+  - /tmp/.hirezsessions
+  - ~/.m2/repository
 
 before_install:
-  - mvn -v
+  - .deploy/pre-deploy.sh
 install:
-  - mvn dependency:go-offline -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+  - mvn install -P !build-extras -DskipTests=true -Dmaven.javadoc.skip=true -B
+  - mvn dependency:go-offline -P !build-extras -DskipTests=true -Dmaven.javadoc.skip=true -B
 script:
-  - mvn verify -Dmaven.javadoc.skip=true -B -V
+  - mvn test -P !build-extras -B
+deploy:
+  provider: script
+  script: .deploy/deploy.sh
+  skip_cleanup: true
+  on:
+    tags: true
