@@ -1,65 +1,203 @@
 package pl.stachu540;
 
 import org.junit.jupiter.api.*;
-import pl.stachu540.hirezstudios.HiRezGames;
 import pl.stachu540.hirezstudios.Paladins;
 import pl.stachu540.hirezstudios.Smite;
+import pl.stachu540.util.StringData;
 
-import java.util.Arrays;
-import java.util.HashMap;
-
+@DisplayName("Testing API")
 class HiRezAPITest {
 
-    static HiRezAPI api;
-    static HashMap<String, HiRezGames> games = new HashMap<String, HiRezGames>();
+    static class HiRezTest extends HiRezAPI{
+
+        HiRezTest(String devId, String authKey) {
+            super(devId, authKey);
+        }
+
+        StringData ping(Smite.Platform platform) {
+            return new StringData(smite(platform).ping());
+        }
+
+        StringData test(Smite.Platform platform) {
+            return new StringData(smite(platform).testSession());
+        }
+
+        StringData patch(Smite.Platform platform) {
+            return smite(platform).getPatchInfo();
+        }
+
+        StringData ping(Paladins.Platform platform) {
+            return new StringData(paladins(platform).ping());
+        }
+
+        StringData test(Paladins.Platform platform) {
+            return new StringData(paladins(platform).testSession());
+        }
+
+        StringData patch(Paladins.Platform platform) {
+            return paladins(platform).getPatchInfo();
+        }
+    }
+
+    static HiRezTest apitest;
 
     @BeforeAll
-    static void prepare(){
+    static void setUp() {
         String dev_id = System.getenv("DEV_ID");
         String auth_key = System.getenv("AUTH_KEY");
-        if (!dev_id.isEmpty() || !auth_key.isEmpty()) api = new HiRezAPI(dev_id, auth_key);
-        else if (dev_id.isEmpty()) throw new Error("Developer ID is empty.");
+        if (dev_id.isEmpty()) throw new Error("Developer ID is empty.");
         else if (auth_key.isEmpty()) throw new Error("Authorization Key empty.");
-        Arrays.asList(Smite.Platform.values()).forEach(platform -> games.put("SMITE_" + platform.name(), api.smite(platform)));
-        Arrays.asList(Paladins.Platform.values()).forEach(platform -> games.put("PALADINS_" + platform.name(), api.paladins(platform)));
-    }
-
-    @BeforeEach
-    void setUp() {
-    }
-
-
-    @Test
-    @DisplayName("Ping Test")
-    void pingTesting() {
-        games.forEach((s, api_data) -> {
-            System.out.println(api_data.ping());
-        });
+        apitest = new HiRezTest(dev_id, auth_key);
     }
 
     @Test
-    @DisplayName("Session Test")
-    void sessionTesting() {
-        games.forEach((s, api_data) -> {
-            System.out.println(api_data.testSession().toJsonArray().toString());
-        });
+    @DisplayName("Smite PC")
+    void smitePc() {
+        Assertions.assertAll(
+                () -> {
+                    String data = apitest.ping(Smite.Platform.PC).toString();
+                    Assertions.assertTrue(data.contains("Ping successful."), "Ping API");
+                    System.out.println(data);
+                },
+                () -> {
+                    String data = apitest.test(Smite.Platform.PC).toString();
+                    Assertions.assertTrue(
+                            data.contains("This was a successful test with the following parameters added:"),
+                            "Session Test");
+                    System.out.println(data);
+                },
+                () -> {
+                    StringData data = apitest.patch(Smite.Platform.PC);
+                    Assertions.assertTrue(
+                            data.toJsonObject().get("ret_msg").equals(null) && !data.toJsonObject().getString("version_string").isEmpty(),
+                            "Patch Notes Test");
+                    System.out.println(data.toJsonObject().toString());
+                });
+    }
+    @Test
+    @DisplayName("Smite XBOX")
+    void smiteXbox() {
+        Assertions.assertAll(
+                () -> {
+                    String data = apitest.ping(Smite.Platform.XBOX).toString();
+                    Assertions.assertTrue(data.contains("Ping successful."), "Ping API");
+                    System.out.println(data);
+                },
+                () -> {
+                    String data = apitest.test(Smite.Platform.XBOX).toString();
+                    Assertions.assertTrue(
+                            data.contains("This was a successful test with the following parameters added:"),
+                            "Session Test");
+                    System.out.println(data);
+                },
+                () -> {
+                    StringData data = apitest.patch(Smite.Platform.XBOX);
+                    Assertions.assertTrue(
+                            data.toJsonObject().get("ret_msg").equals(null) && !data.toJsonObject().getString("version_string").isEmpty(),
+                            "Patch Notes Test");
+                    System.out.println(data.toJsonObject().toString());
+                });
+    }
+    @Test
+    @DisplayName("Smite PS4")
+    void smitePs4() {
+        Assertions.assertAll(
+                () -> {
+                    String data = apitest.ping(Smite.Platform.PS4).toString();
+                    Assertions.assertTrue(data.contains("Ping successful."), "Ping API");
+                    System.out.println(data);
+                },
+                () -> {
+                    String data = apitest.test(Smite.Platform.PS4).toString();
+                    Assertions.assertTrue(
+                            data.contains("This was a successful test with the following parameters added:"),
+                            "Session Test");
+                    System.out.println(data);
+                },
+                () -> {
+                    StringData data = apitest.patch(Smite.Platform.PS4);
+                    Assertions.assertTrue(
+                            data.toJsonObject().get("ret_msg").equals(null) && !data.toJsonObject().getString("version_string").isEmpty(),
+                            "Patch Notes Test");
+                    System.out.println(data.toJsonObject().toString());
+                });
     }
 
     @Test
-    @DisplayName("List Patches Test")
-    void patchesTesting() {
-        games.forEach((s, api_data) -> {
-            System.out.println(api_data.getPatchInfo().toJsonArray().toString());
-        });
+    @DisplayName("Paladins PC")
+    void paladinsPc() {
+        Assertions.assertAll(
+                () -> {
+                    String data = apitest.ping(Paladins.Platform.PC).toString();
+                    Assertions.assertTrue(data.contains("Ping successful."), "Ping API");
+                    System.out.println(data);
+                },
+                () -> {
+                    String data = apitest.test(Paladins.Platform.PC).toString();
+                    Assertions.assertTrue(
+                            data.contains("This was a successful test with the following parameters added:"),
+                            "Session Test");
+                    System.out.println(data);
+                },
+                () -> {
+                    StringData data = apitest.patch(Paladins.Platform.PC);
+                    Assertions.assertTrue(
+                            data.toJsonObject().get("ret_msg").equals(null) && !data.toJsonObject().getString("version_string").isEmpty(),
+                            "Patch Notes Test");
+                    System.out.println(data.toJsonObject().toString());
+                });
+    }
+    @Test
+    @DisplayName("Paladins XBOX")
+    void paladinsXbox() {
+        Assertions.assertAll(
+                () -> {
+                    String data = apitest.ping(Paladins.Platform.XBOX).toString();
+                    Assertions.assertTrue(data.contains("Ping successful."), "Ping API");
+                    System.out.println(data);
+                },
+                () -> {
+                    String data = apitest.test(Paladins.Platform.XBOX).toString();
+                    Assertions.assertTrue(
+                            data.contains("This was a successful test with the following parameters added:"),
+                            "Session Test");
+                    System.out.println(data);
+                },
+                () -> {
+                    StringData data = apitest.patch(Paladins.Platform.XBOX);
+                    Assertions.assertTrue(
+                            data.toJsonObject().get("ret_msg").equals(null) && !data.toJsonObject().getString("version_string").isEmpty(),
+                            "Patch Notes Test");
+                    System.out.println(data.toJsonObject().toString());
+                });
+    }
+    @Test
+    @DisplayName("Paladins PS4")
+    void paladinsPs4() {
+        Assertions.assertAll(
+                () -> {
+                    String data = apitest.ping(Paladins.Platform.PS4).toString();
+                    Assertions.assertTrue(data.contains("Ping successful."), "Ping API");
+                    System.out.println(data);
+                },
+                () -> {
+                    String data = apitest.test(Paladins.Platform.PS4).toString();
+                    Assertions.assertTrue(
+                            data.contains("This was a successful test with the following parameters added:"),
+                            "Session Test");
+                    System.out.println(data);
+                },
+                () -> {
+                    StringData data = apitest.patch(Paladins.Platform.PS4);
+                    Assertions.assertTrue(
+                            data.toJsonObject().get("ret_msg").equals(null) && !data.toJsonObject().getString("version_string").isEmpty(),
+                            "Patch Notes Test");
+                    System.out.println(data.toJsonObject().toString());
+                });
     }
 
     @AfterEach
     void tearDown() {
 
     }
-    @AfterAll
-    static void release() {
-
-    }
-
 }
