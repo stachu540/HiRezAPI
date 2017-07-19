@@ -7,6 +7,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.SimpleTimeZone;
 
+/**
+ * @author <a href="damian@stachuofficial.pl">Damian Staszewski</a>
+ * @since 1.8
+ */
 public class Utility {
     /**
      * Generating timestamp

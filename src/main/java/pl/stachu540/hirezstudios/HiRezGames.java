@@ -8,6 +8,10 @@ import pl.stachu540.util.StringData;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * @author <a href="damian@stachuofficial.pl">Damian Staszewski</a>
+ * @since 1.8
+ */
 public class HiRezGames extends HttpClient {
     private final String devId;
     private final String authKey;
@@ -62,7 +66,7 @@ public class HiRezGames extends HttpClient {
 
     /**
      * Rarely used in lieu of {@link #getMatchDetails(String)} )}.
-     * @param match_id The id of the match. Can be obtained from <b>{@link #getMatchHistory(String)}</b>, <b>{@link #getTopMatches()}</b> & <b>{@link #getMatchIDsByQueue}</b>.
+     * @param match_id The id of the match. Can be obtained from <b>{@link #getMatchHistory(String)}</b>, <b>{@link #getTopMatches()}</b> &amp; <b>{@link #getMatchIDsByQueue}</b>.
      * @return Returns information regarding a particular match.
      */
     public StringData getDemoDetails(String match_id) {
@@ -71,7 +75,7 @@ public class HiRezGames extends HttpClient {
 
     /**
      * Rarely used in lieu of {@link #getMatchDetails(int)} )}.
-     * @param match_id The id of the match. Can be obtained from <b>{@link #getMatchHistory(String)}</b>, <b>{@link #getTopMatches()}</b> & <b>{@link #getMatchIDsByQueue}</b>.
+     * @param match_id The id of the match. Can be obtained from <b>{@link #getMatchHistory(String)}</b>, <b>{@link #getTopMatches()}</b> &amp; <b>{@link #getMatchIDsByQueue}</b>.
      * @return Returns information regarding a particular match.
      */
     public StringData getDemoDetails(int match_id) {
@@ -101,7 +105,7 @@ public class HiRezGames extends HttpClient {
 
     /**
      * Getting items with the stats and attributes.
-     * @param lang the language Id that you want results returned in. Check out {@link Language}. (Default {@value Language#English})
+     * @param lang the language Id that you want results returned in. Check out {@link Language}. (Default {@link Language#English})
      * @return Returns all Items and their various attributes.
      */
     public StringData getItems(Language lang) {
@@ -117,7 +121,7 @@ public class HiRezGames extends HttpClient {
 
     /**
      * Getting match details.
-     * @param match_id The id of the match. Can be obtained from <b>{@link #getMatchHistory(String)}</b>, <b>{@link #getTopMatches()}</b> & <b>{@link #getMatchIDsByQueue}</b>.
+     * @param match_id The id of the match. Can be obtained from <b>{@link #getMatchHistory(String)}</b>, <b>{@link #getTopMatches()}</b> &amp; <b>{@link #getMatchIDsByQueue}</b>.
      * @return Returns the statistics for a particular completed match.
      */
     public StringData getMatchDetails(String match_id) {
@@ -126,7 +130,7 @@ public class HiRezGames extends HttpClient {
 
     /**
      * Getting match details.
-     * @param match_id The id of the match. Can be obtained from <b>{@link #getMatchHistory(String)}</b>, <b>{@link #getTopMatches()}</b> & <b>{@link #getMatchIDsByQueue}</b>.
+     * @param match_id The id of the match. Can be obtained from <b>{@link #getMatchHistory(String)}</b>, <b>{@link #getTopMatches()}</b> &amp; <b>{@link #getMatchIDsByQueue}</b>.
      * @return Returns the statistics for a particular completed match.
      */
     public StringData getMatchDetails(int match_id) {
@@ -135,7 +139,7 @@ public class HiRezGames extends HttpClient {
 
     /**
      * Getting live match details.
-     * @param match_id The id of the match. Can be obtained from <b>{@link #getMatchHistory(String)}</b>, <b>{@link #getTopMatches()}</b> & <b>{@link #getMatchIDsByQueue}</b>.
+     * @param match_id The id of the match. Can be obtained from <b>{@link #getMatchHistory(String)}</b>, <b>{@link #getTopMatches()}</b> &amp; <b>{@link #getMatchIDsByQueue}</b>.
      * @return Returns player information for a live match.
      */
     public StringData getMatchPlayingDetails(String match_id) {
@@ -144,7 +148,7 @@ public class HiRezGames extends HttpClient {
 
     /**
      * Getting live match details.
-     * @param match_id The id of the match. Can be obtained from <b>{@link #getMatchHistory(String)}</b>, <b>{@link #getTopMatches()}</b> & <b>{@link #getMatchIDsByQueue}</b>.
+     * @param match_id The id of the match. Can be obtained from <b>{@link #getMatchHistory(String)}</b>, <b>{@link #getTopMatches()}</b> &amp; <b>{@link #getMatchIDsByQueue}</b>.
      * @return Returns player information for a live match.
      */
     public StringData getMatchPlayingDetails(int match_id) {

@@ -7,6 +7,11 @@ import java.io.*;
 import java.nio.file.Paths;
 import java.util.Properties;
 
+
+/**
+ * @author <a href="damian@stachuofficial.pl">Damian Staszewski</a>
+ * @since 1.8
+ */
 public class HiRezAPI {
     private static final File filesession = Paths.get(System.getProperty("java.io.tmpdir"), ".hirezsessions").toFile();
 
@@ -39,9 +44,9 @@ public class HiRezAPI {
     private final String authKey;
 
     /**
-     * <p>Initialize Hi-Rez API. All stuff will delivered by Hi-Rez employer via E-Mail.<br />
-     * Please fill <a href="https://fs12.formsite.com/HiRez/form48/secure_index.html">this form first</a> to using script.<br />
-     * After acceptation your request, you can proceed to action.</p>
+     * <p>Initialize Hi-Rez API. All stuff will delivered by Hi-Rez employer via E-Mail.</p>
+     * <p>Please fill <a href="https://fs12.formsite.com/HiRez/form48/secure_index.html">this form first</a> to using script.</p>
+     * <p>After acceptation your request, you can proceed to action.</p>
      * @param devId Developer ID (DevId)
      * @param authKey Authorization Key (AuthKey)
      */
@@ -71,7 +76,7 @@ public class HiRezAPI {
     /**
      * Smite API
      * @param platform Platform
-     * @see Smite
+     * @return {@link Smite}
      */
     public Smite smite(Smite.Platform platform) {
         return new Smite(platform, devId, authKey);
@@ -80,7 +85,7 @@ public class HiRezAPI {
     /**
      * Paladins API
      * @param platform Platform
-     * @see Paladins
+     * @return {@link Paladins}
      */
     public Paladins paladins(Paladins.Platform platform) {
         return new Paladins(platform, devId, authKey);

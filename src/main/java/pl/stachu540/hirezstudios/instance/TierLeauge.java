@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author Damian Staszewski <damian@stachuofficial.pl>
+ * @author <a href="damian@stachuofficial.pl">Damian Staszewski</a>
  * @since 1.8
  */
 public enum TierLeauge {

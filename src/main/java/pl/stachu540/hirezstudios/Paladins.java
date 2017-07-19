@@ -7,6 +7,10 @@ import pl.stachu540.util.StringData;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author <a href="damian@stachuofficial.pl">Damian Staszewski</a>
+ * @since 1.8
+ */
 public class Paladins extends HiRezGames{
 
     public enum Platform {
@@ -128,7 +132,7 @@ public class Paladins extends HiRezGames{
 
     /**
      * Getting Champions list.
-     * @param language the language Id that you want results returned in. Check out {@link Language}. (Default {@value Language#English})
+     * @param language the language Id that you want results returned in. Check out {@link Language}. (Default {@link Language#English})
      * @return Returns all Champions and their various attributes.
      */
     public StringData getChampions(Language language) {
@@ -146,7 +150,7 @@ public class Paladins extends HiRezGames{
     /**
      * Getting list skins of the Champion
      * @param champId God id listed by {@link #getChampions()}
-     * @param language the language Id that you want results returned in. Check out {@link Language}. (Default {@value Language#English})
+     * @param language the language Id that you want results returned in. Check out {@link Language}. (Default {@link Language#English})
      * @return Returns all available skins for a particular Champion.
      */
     public StringData getChampionSkins(String champId, Language language) {
@@ -156,7 +160,7 @@ public class Paladins extends HiRezGames{
     /**
      * Getting list skins of the Champion
      * @param champId God id listed by {@link #getChampions()}
-     * @param language the language Id that you want results returned in. Check out {@link Language}. (Default {@value Language#English})
+     * @param language the language Id that you want results returned in. Check out {@link Language}. (Default {@link Language#English})
      * @return Returns all available skins for a particular Champion.
      */
     public StringData getChampionSkins(int champId, Language language) {
@@ -184,7 +188,7 @@ public class Paladins extends HiRezGames{
     /**
      * Getting list items recommended for Champion.
      * @param champId God id listed by {@link #getChampions()}
-     * @param language the language Id that you want results returned in. Check out {@link Language}. (Default {@value Language#English})
+     * @param language the language Id that you want results returned in. Check out {@link Language}. (Default {@link Language#English})
      * @return Returns the Recommended Items for a particular Champion.
      */
     public StringData getChampionRecommendedItems(String champId, Language language) { return get("getchampionecommendeditems", champId, String.valueOf(language.getId())); }
@@ -192,7 +196,7 @@ public class Paladins extends HiRezGames{
     /**
      * Getting list items recommended for Champion.
      * @param champId God id listed by {@link #getChampions()}
-     * @param language the language Id that you want results returned in. Check out {@link Language}. (Default {@value Language#English})
+     * @param language the language Id that you want results returned in. Check out {@link Language}. (Default {@link Language#English})
      * @return Returns the Recommended Items for a particular Champion.
      */
     public StringData getChampionRecommendedItems(int champId, Language language) { return getChampionRecommendedItems(String.valueOf(champId), language);}

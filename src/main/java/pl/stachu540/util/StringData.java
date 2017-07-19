@@ -3,6 +3,10 @@ package pl.stachu540.util;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+/**
+ * @author <a href="damian@stachuofficial.pl">Damian Staszewski</a>
+ * @since 1.8
+ */
 public class StringData {
 
     private final String string;

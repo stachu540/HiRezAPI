@@ -8,6 +8,10 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author <a href="damian@stachuofficial.pl">Damian Staszewski</a>
+ * @since 1.8
+ */
 public class HttpClient {
     private final String base_url;
     private final int timeout = 10; // default timeout is 10 seconds

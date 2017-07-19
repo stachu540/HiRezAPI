@@ -6,6 +6,10 @@ import pl.stachu540.util.StringData;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author <a href="damian@stachuofficial.pl">Damian Staszewski</a>
+ * @since 1.8
+ */
 public class Smite extends HiRezGames {
     public enum Platform {
         /**
@@ -108,7 +112,7 @@ public class Smite extends HiRezGames {
 
     /**
      * Getting Gods list.
-     * @param language the language Id that you want results returned in. Check out {@link Language}. (Default {@value Language#English})
+     * @param language the language Id that you want results returned in. Check out {@link Language}. (Default {@link Language#English})
      * @return Returns all Gods and their various attributes.
      */
     public StringData getGods(Language language) {
@@ -145,7 +149,7 @@ public class Smite extends HiRezGames {
     /**
      * Getting list skins of the God
      * @param godId God id listed by {@link #getGods()}
-     * @param language the language Id that you want results returned in. Check out {@link Language}. (Default {@value Language#English})
+     * @param language the language Id that you want results returned in. Check out {@link Language}. (Default {@link Language#English})
      * @return Returns all available skins for a particular God.
      */
     public StringData getGodSkins(String godId, Language language) {
@@ -155,7 +159,7 @@ public class Smite extends HiRezGames {
     /**
      * Getting list skins of the God
      * @param godId God id listed by {@link #getGods()}
-     * @param language the language Id that you want results returned in. Check out {@link Language}. (Default {@value Language#English})
+     * @param language the language Id that you want results returned in. Check out {@link Language}. (Default {@link Language#English})
      * @return Returns all available skins for a particular God.
      */
     public StringData getGodSkins(int godId, Language language) {
@@ -183,7 +187,7 @@ public class Smite extends HiRezGames {
     /**
      * Getting list items recommended for God.
      * @param godId God id listed by {@link #getGods()}
-     * @param language the language Id that you want results returned in. Check out {@link Language}. (Default {@value Language#English})
+     * @param language the language Id that you want results returned in. Check out {@link Language}. (Default {@link Language#English})
      * @return Returns the Recommended Items for a particular God.
      */
     public StringData getGodRecommendedItems(String godId, Language language) {
@@ -193,7 +197,7 @@ public class Smite extends HiRezGames {
     /**
      * Getting list items recommended for God.
      * @param godId God id listed by {@link #getGods()}
-     * @param language the language Id that you want results returned in. Check out {@link Language}. (Default {@value Language#English})
+     * @param language the language Id that you want results returned in. Check out {@link Language}. (Default {@link Language#English})
      * @return Returns the Recommended Items for a particular God.
      */
     public StringData getGodRecommendedItems(int godId, Language language) {

@@ -5,6 +5,10 @@ import pl.stachu540.util.HttpClient;
 import pl.stachu540.util.StringData;
 import pl.stachu540.util.Utility;
 
+/**
+ * @author <a href="damian@stachuofficial.pl">Damian Staszewski</a>
+ * @since 1.8
+ */
 public class Session extends HttpClient {
     private final String platform;
     private final String devId;
