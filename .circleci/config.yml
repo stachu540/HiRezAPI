@@ -23,6 +23,8 @@ jobs:
     steps:
       - checkout
 
+      - run: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -30,9 +32,7 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run:
-        - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-        - mvn dependency:go-offline -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+      - run: mvn dependency:go-offline -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
       - save_cache:
           paths:
