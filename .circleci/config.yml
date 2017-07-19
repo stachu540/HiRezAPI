@@ -38,6 +38,6 @@ jobs:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
-      # run tests!
-      - run: mvn integration-test -Dmaven.javadoc.skip=true -B -V
+      # verifying before deploy!
+      - run: mvn verify -Dmaven.javadoc.skip=true -B -V
 
