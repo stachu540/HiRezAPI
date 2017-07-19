@@ -14,9 +14,6 @@ install:
   - mvn dependency:go-offline -P !build-extras -DskipTests=true -Dmaven.javadoc.skip=true -B
 script:
   - mvn test -P !build-extras -B
-deploy:
-  provider: script
-  script: .deploy/deploy.sh
-  skip_cleanup: true
-  on:
-    tags: true
+
+after_success:
+ - .deploy/deploy.sh
