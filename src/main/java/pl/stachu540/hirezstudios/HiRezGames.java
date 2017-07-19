@@ -46,7 +46,7 @@ public class HiRezGames extends HttpClient {
      * Testing session when it is established.
      * @return A means of validating that a session is established.
      */
-    public StringData testSession() { return this.session.testSession(); }
+    public String testSession() { return this.session.testSession(); }
 
     /**
      * Checking server status.
