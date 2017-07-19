@@ -38,9 +38,6 @@ public class HiRezAPI {
      */
     private final String authKey;
 
-    public Smite smite;
-    public Paladins paladins;
-
     /**
      * <p>Initialize Hi-Rez API. All stuff will delivered by Hi-Rez employer via E-Mail.<br />
      * Please fill <a href="https://fs12.formsite.com/HiRez/form48/secure_index.html">this form first</a> to using script.<br />
