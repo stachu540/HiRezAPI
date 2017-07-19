@@ -65,10 +65,6 @@
                         <version>5.0.0-M5</version>
                     </dependency>
                 </dependencies>
-                <configuration>
-                    <forkMode>pertest</forkMode>
-                    <argLine>-Xms512m -Xmx1G -XX:MaxPermSize=512m -Dfork=true</argLine>
-                </configuration>
             </plugin>
         </plugins>
     </build>
