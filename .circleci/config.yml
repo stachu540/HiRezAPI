@@ -30,7 +30,9 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: mvn dependency:go-offline
+      - run:
+        - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+        - mvn dependency:go-offline -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
       - save_cache:
           paths:
@@ -38,5 +40,5 @@ jobs:
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
       # run tests!
-      - run: mvn integration-test
+      - run: mvn integration-test -Dmaven.javadoc.skip=true -B -V
 

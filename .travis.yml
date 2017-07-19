@@ -1,7 +1,10 @@
 language: java
 jdk:
   - oraclejdk8
--  - openjdk8
 
-script:
+install:
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+before_script:
+  - mvn dependency:go-offline -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+script:
+  - mvn integration-test -Dmaven.javadoc.skip=true -B -V
