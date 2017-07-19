@@ -8,7 +8,7 @@ import pl.stachu540.util.StringData;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-class HiRezGames extends HttpClient {
+public class HiRezGames extends HttpClient {
     private final String devId;
     private final String authKey;
     private final Session session;
