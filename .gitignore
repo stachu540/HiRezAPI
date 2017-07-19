@@ -39,4 +39,4 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-.deploy/hirezapi.asc
+deploying/hirezapi.asc
