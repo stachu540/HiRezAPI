@@ -8,6 +8,7 @@ cache:
   - ~/.m2/repository
 
 before_install:
+  - chmod +x ./deploying/*.sh
   - ./deploying/pre-deploy.sh
 install:
   - mvn install -P !build-extras -DskipTests=true -Dmaven.javadoc.skip=true -B
