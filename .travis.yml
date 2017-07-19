@@ -12,4 +12,4 @@ before_install:
 install:
   - mvn dependency:go-offline -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 script:
-  - mvn integration-test -Dmaven.javadoc.skip=true -B -V
+  - mvn verify -Dmaven.javadoc.skip=true -B -V
