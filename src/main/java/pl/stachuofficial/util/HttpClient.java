@@ -1,4 +1,4 @@
-package pl.stachu540.util;
+package pl.stachuofficial.util;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;

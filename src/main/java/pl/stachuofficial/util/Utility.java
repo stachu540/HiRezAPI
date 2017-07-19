@@ -1,6 +1,6 @@
-package pl.stachu540.util;
+package pl.stachuofficial.util;
 
-import pl.stachu540.HiRezAPI;
+import pl.stachuofficial.HiRezAPI;
 
 import java.security.MessageDigest;
 import java.text.SimpleDateFormat;

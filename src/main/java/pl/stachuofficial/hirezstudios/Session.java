@@ -1,9 +1,9 @@
-package pl.stachu540.hirezstudios;
+package pl.stachuofficial.hirezstudios;
 
-import pl.stachu540.HiRezAPI;
-import pl.stachu540.util.HttpClient;
-import pl.stachu540.util.StringData;
-import pl.stachu540.util.Utility;
+import pl.stachuofficial.HiRezAPI;
+import pl.stachuofficial.util.HttpClient;
+import pl.stachuofficial.util.StringData;
+import pl.stachuofficial.util.Utility;
 
 /**
  * @author <a href="damian@stachuofficial.pl">Damian Staszewski</a>

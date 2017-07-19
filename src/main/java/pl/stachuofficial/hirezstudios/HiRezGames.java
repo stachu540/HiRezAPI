@@ -1,9 +1,9 @@
-package pl.stachu540.hirezstudios;
+package pl.stachuofficial.hirezstudios;
 
-import pl.stachu540.hirezstudios.instance.Language;
-import pl.stachu540.hirezstudios.instance.TierLeauge;
-import pl.stachu540.util.HttpClient;
-import pl.stachu540.util.StringData;
+import pl.stachuofficial.hirezstudios.instance.Language;
+import pl.stachuofficial.hirezstudios.instance.TierLeauge;
+import pl.stachuofficial.util.HttpClient;
+import pl.stachuofficial.util.StringData;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

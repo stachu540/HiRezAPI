@@ -1,4 +1,4 @@
-package pl.stachu540.util;
+package pl.stachuofficial.util;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

@@ -1,8 +1,8 @@
-package pl.stachu540.hirezstudios;
+package pl.stachuofficial.hirezstudios;
 
 
-import pl.stachu540.hirezstudios.instance.Language;
-import pl.stachu540.util.StringData;
+import pl.stachuofficial.hirezstudios.instance.Language;
+import pl.stachuofficial.util.StringData;
 
 import java.util.HashMap;
 import java.util.Map;

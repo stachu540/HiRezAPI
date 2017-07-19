@@ -1,9 +1,9 @@
-package pl.stachu540;
+package pl.stachuofficial;
 
 import org.junit.jupiter.api.*;
-import pl.stachu540.hirezstudios.Paladins;
-import pl.stachu540.hirezstudios.Smite;
-import pl.stachu540.util.StringData;
+import pl.stachuofficial.hirezstudios.Paladins;
+import pl.stachuofficial.hirezstudios.Smite;
+import pl.stachuofficial.util.StringData;
 
 @DisplayName("Testing API")
 class HiRezAPITest {

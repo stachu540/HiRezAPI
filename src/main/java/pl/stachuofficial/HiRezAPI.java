@@ -1,7 +1,7 @@
-package pl.stachu540;
+package pl.stachuofficial;
 
-import pl.stachu540.hirezstudios.Paladins;
-import pl.stachu540.hirezstudios.Smite;
+import pl.stachuofficial.hirezstudios.Paladins;
+import pl.stachuofficial.hirezstudios.Smite;
 
 import java.io.*;
 import java.nio.file.Paths;
