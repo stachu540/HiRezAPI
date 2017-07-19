@@ -43,8 +43,8 @@ public class Session extends HttpClient {
         }
     }
 
-    StringData testSession() {
-        return get("testsession");
+    String testSession() {
+        return get("testsession").toString();
     }
 
     StringData getDataUsage() {
