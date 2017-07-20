@@ -39,7 +39,7 @@ class HiRezAPITest {
         }
     }
 
-    static HiRezTest apitest;
+    private static HiRezTest apitest;
 
     @BeforeAll
     static void setUp() {
