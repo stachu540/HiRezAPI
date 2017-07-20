@@ -17,26 +17,13 @@ class HiRezAPITest {
         StringData ping(Smite.Platform platform) {
             return new StringData(smite(platform).ping());
         }
+        StringData ping(Paladins.Platform platform) { return new StringData(paladins(platform).ping()); }
 
-        StringData test(Smite.Platform platform) {
-            return new StringData(smite(platform).testSession());
-        }
+        StringData patch(Smite.Platform platform) { return smite(platform).getPatchInfo(); }
+        StringData patch(Paladins.Platform platform) { return paladins(platform).getPatchInfo(); }
 
-        StringData patch(Smite.Platform platform) {
-            return smite(platform).getPatchInfo();
-        }
-
-        StringData ping(Paladins.Platform platform) {
-            return new StringData(paladins(platform).ping());
-        }
-
-        StringData test(Paladins.Platform platform) {
-            return new StringData(paladins(platform).testSession());
-        }
-
-        StringData patch(Paladins.Platform platform) {
-            return paladins(platform).getPatchInfo();
-        }
+        StringData test(Paladins.Platform platform) { return new StringData(paladins(platform).testSession()); }
+        StringData test(Smite.Platform platform) { return new StringData(smite(platform).testSession()); }
     }
 
     private static HiRezTest apitest;
