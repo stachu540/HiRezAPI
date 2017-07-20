@@ -19,7 +19,7 @@ possible. Thank you!
 <!-- Describe exactly your problem. For codes or console logs use tripple backquote (`) 
 For example:
 ```java
-package pl.stachu540.examples
+package pl.stachuofficial.examples
 public class ExampleTest {
     public static void main(String[] args){
         System.out.println("This is a example compiled text.")
