@@ -32,8 +32,8 @@ https://fs12.formsite.com/HiRez/form48/secure_index.html
 3. To starting using script try to using example below:
     
     For examples I will use example credentials
-    **DevId**: 1004
-    **AuthKey**: 23DF3C7E9BD14D84BF892AD206B6755C
+    * **DevId**: 1004
+    * **AuthKey**: 23DF3C7E9BD14D84BF892AD206B6755C
     
     a. For Smite **PC** i want getting player info for "HiRezTina"
 ```java
