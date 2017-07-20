@@ -9,8 +9,8 @@ cache:
   - ~/.m2/repository
 
 before_install:
-  - chmod +x ./deploying/*.sh
-  - ./deploying/pre-deploy.sh
+  - chmod +x $TRAVIS_BUILD_DIR/deploying/*.sh
+  - $TRAVIS_BUILD_DIR/deploying/pre-deploy.sh
 install:
   - mvn install -P !build-extras -DskipTests=true -Dmaven.javadoc.skip=true -B
   - mvn dependency:go-offline -P !build-extras -DskipTests=true -Dmaven.javadoc.skip=true -B
@@ -18,4 +18,4 @@ script:
   - mvn test -P !build-extras -B
 
 after_success:
- - ./deploying/deploy.sh
+ - $TRAVIS_BUILD_DIR/deploying/deploy.sh
