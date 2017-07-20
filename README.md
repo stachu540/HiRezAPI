@@ -66,5 +66,7 @@ class PaladinsStatusServer {
 }
 ```
 
+For some more detail's, check out [source documentation](https://stachu540.github.io/HiRezAPI/).
+
 ## Question and suggestions
 Any more questions or some suggestions changes are welcome. Don't be shy, just open your [Issues](https://github.com/stachu540/HiRezAPI/issues) if you have some problem. [Pull Request's](https://github.com/stachu540/HiRezAPI/pulls) and any other contribution are welcome.
