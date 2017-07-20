@@ -1,3 +1,6 @@
+Master: [![Build Status](https://travis-ci.org/stachu540/HiRezAPI.svg?branch=master)](https://travis-ci.org/stachu540/HiRezAPI)
+Dev: [![Build Status](https://travis-ci.org/stachu540/HiRezAPI.svg?branch=dev)](https://travis-ci.org/stachu540/HiRezAPI)
+
 # HiRezAPI
 
 Java-Based API Wrapper for Hi-Rez Studios games. Currently supports:
