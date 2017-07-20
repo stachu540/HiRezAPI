@@ -6,7 +6,7 @@
 
     <groupId>pl.stachuofficial</groupId>
     <artifactId>HiRezAPI</artifactId>
-    <version>1.0</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Hi-Rez API</name>
