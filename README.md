@@ -24,7 +24,7 @@ https://fs12.formsite.com/HiRez/form48/secure_index.html
 <dependency>
     <groupId>pl.stachuofficial</groupId>
     <artifactId>HiRezAPI</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
 </dependency>
 ```
 
