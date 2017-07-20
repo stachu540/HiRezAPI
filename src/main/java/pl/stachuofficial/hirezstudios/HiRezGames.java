@@ -121,12 +121,38 @@ public class HiRezGames extends HttpClient {
 
     /**
      * Getting match details.
+     * <i><b>NOTE</b> There is a byte limit to the amount of data returned; please limit the CSV parameter to 5 to 10 matches because of this and for Hi-Rez DB Performance reasons.</i>
      * @param match_id The id of the match. Can be obtained from <b>{@link #getMatchHistory(String)}</b>, <b>{@link #getTopMatches()}</b> &amp; <b>{@link #getMatchIDsByQueue}</b>.
      * @return Returns the statistics for a particular completed match.
      */
-    public StringData getMatchDetails(String match_id) {
-        return get("getmatchdetails", match_id);
+    public StringData getMatchDetails(String... match_id) {
+        if (match_id.length <= 10 && match_id.length > 1) {
+            return get("getmatchdetailsbatch", String.join(",", match_id));
+        } else if (match_id.length == 1) return getMatchDetails(match_id[0]);
+        else return new StringData("You cannot batching more than 10 matches.");
     }
+
+    /**
+     * Getting match details.
+     * <i><b>NOTE</b> There is a byte limit to the amount of data returned; please limit the CSV parameter to 5 to 10 matches because of this and for Hi-Rez DB Performance reasons.</i>
+     * @param match_id The id of the match. Can be obtained from <b>{@link #getMatchHistory(String)}</b>, <b>{@link #getTopMatches()}</b> &amp; <b>{@link #getMatchIDsByQueue}</b>.
+     * @return Returns the statistics for a particular completed match.
+     */
+    public StringData getMatchDetails(int... match_id) {
+        String[] ids = new String[match_id.length];
+        for (int id = 0; id < match_id.length; id++) {
+            ids[id] = Integer.toString(match_id[id]);
+        }
+        return getMatchDetails(ids);
+    }
+
+
+    /**
+     * Getting match details.
+     * @param match_id The id of the match. Can be obtained from <b>{@link #getMatchHistory(String)}</b>, <b>{@link #getTopMatches()}</b> &amp; <b>{@link #getMatchIDsByQueue}</b>.
+     * @return Returns the statistics for a particular completed match.
+     */
+    public StringData getMatchDetails(String match_id) { return get("getmatchdetails", match_id); }
 
     /**
      * Getting match details.
