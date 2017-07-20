@@ -56,21 +56,21 @@ class HiRezAPITest {
         Assertions.assertAll(
                 () -> {
                     String data = apitest.ping(Smite.Platform.PC).toString();
-                    Assertions.assertTrue(data.contains("Ping successful."), "Ping API");
+                    Assertions.assertTrue(data.contains("Ping successful."), "Smite PC - Ping API");
                     System.out.println(data);
                 },
                 () -> {
                     String data = apitest.test(Smite.Platform.PC).toString();
                     Assertions.assertTrue(
                             data.contains("This was a successful test with the following parameters added:"),
-                            "Session Test");
+                            "Smite PC - Session Test");
                     System.out.println(data);
                 },
                 () -> {
                     StringData data = apitest.patch(Smite.Platform.PC);
                     Assertions.assertTrue(
                             data.toJsonObject().get("ret_msg").equals(null) && !data.toJsonObject().getString("version_string").isEmpty(),
-                            "Patch Notes Test");
+                            "Smite PC - Patch Notes Test");
                     System.out.println(data.toJsonObject().toString());
                 });
     }
@@ -80,21 +80,21 @@ class HiRezAPITest {
         Assertions.assertAll(
                 () -> {
                     String data = apitest.ping(Smite.Platform.XBOX).toString();
-                    Assertions.assertTrue(data.contains("Ping successful."), "Ping API");
+                    Assertions.assertTrue(data.contains("Ping successful."), "Smite XBOX - Ping API");
                     System.out.println(data);
                 },
                 () -> {
                     String data = apitest.test(Smite.Platform.XBOX).toString();
                     Assertions.assertTrue(
                             data.contains("This was a successful test with the following parameters added:"),
-                            "Session Test");
+                            "Smite XBOX - Session Test");
                     System.out.println(data);
                 },
                 () -> {
                     StringData data = apitest.patch(Smite.Platform.XBOX);
                     Assertions.assertTrue(
                             data.toJsonObject().get("ret_msg").equals(null) && !data.toJsonObject().getString("version_string").isEmpty(),
-                            "Patch Notes Test");
+                            "Smite XBOX - Patch Notes Test");
                     System.out.println(data.toJsonObject().toString());
                 });
     }
@@ -104,21 +104,21 @@ class HiRezAPITest {
         Assertions.assertAll(
                 () -> {
                     String data = apitest.ping(Smite.Platform.PS4).toString();
-                    Assertions.assertTrue(data.contains("Ping successful."), "Ping API");
+                    Assertions.assertTrue(data.contains("Ping successful."), "Smite PS4 - Ping API");
                     System.out.println(data);
                 },
                 () -> {
                     String data = apitest.test(Smite.Platform.PS4).toString();
                     Assertions.assertTrue(
                             data.contains("This was a successful test with the following parameters added:"),
-                            "Session Test");
+                            "Smite PS4 - Session Test");
                     System.out.println(data);
                 },
                 () -> {
                     StringData data = apitest.patch(Smite.Platform.PS4);
                     Assertions.assertTrue(
                             data.toJsonObject().get("ret_msg").equals(null) && !data.toJsonObject().getString("version_string").isEmpty(),
-                            "Patch Notes Test");
+                            "Smite PS4 - Patch Notes Test");
                     System.out.println(data.toJsonObject().toString());
                 });
     }
@@ -129,21 +129,21 @@ class HiRezAPITest {
         Assertions.assertAll(
                 () -> {
                     String data = apitest.ping(Paladins.Platform.PC).toString();
-                    Assertions.assertTrue(data.contains("Ping successful."), "Ping API");
+                    Assertions.assertTrue(data.contains("Ping successful."), "Paladins PC - Ping API");
                     System.out.println(data);
                 },
                 () -> {
                     String data = apitest.test(Paladins.Platform.PC).toString();
                     Assertions.assertTrue(
                             data.contains("This was a successful test with the following parameters added:"),
-                            "Session Test");
+                            "Paladins PC - Session Test");
                     System.out.println(data);
                 },
                 () -> {
                     StringData data = apitest.patch(Paladins.Platform.PC);
                     Assertions.assertTrue(
                             data.toJsonObject().get("ret_msg").equals(null) && !data.toJsonObject().getString("version_string").isEmpty(),
-                            "Patch Notes Test");
+                            "Paladins PC - Patch Notes Test");
                     System.out.println(data.toJsonObject().toString());
                 });
     }
@@ -153,21 +153,21 @@ class HiRezAPITest {
         Assertions.assertAll(
                 () -> {
                     String data = apitest.ping(Paladins.Platform.XBOX).toString();
-                    Assertions.assertTrue(data.contains("Ping successful."), "Ping API");
+                    Assertions.assertTrue(data.contains("Ping successful."), "Paladins XBOX - Ping API");
                     System.out.println(data);
                 },
                 () -> {
                     String data = apitest.test(Paladins.Platform.XBOX).toString();
                     Assertions.assertTrue(
                             data.contains("This was a successful test with the following parameters added:"),
-                            "Session Test");
+                            "Paladins XBOX - Session Test");
                     System.out.println(data);
                 },
                 () -> {
                     StringData data = apitest.patch(Paladins.Platform.XBOX);
                     Assertions.assertTrue(
                             data.toJsonObject().get("ret_msg").equals(null) && !data.toJsonObject().getString("version_string").isEmpty(),
-                            "Patch Notes Test");
+                            "Paladins XBOX - Patch Notes Test");
                     System.out.println(data.toJsonObject().toString());
                 });
     }
@@ -177,21 +177,21 @@ class HiRezAPITest {
         Assertions.assertAll(
                 () -> {
                     String data = apitest.ping(Paladins.Platform.PS4).toString();
-                    Assertions.assertTrue(data.contains("Ping successful."), "Ping API");
+                    Assertions.assertTrue(data.contains("Ping successful."), "Paladins PS4 - Ping API");
                     System.out.println(data);
                 },
                 () -> {
                     String data = apitest.test(Paladins.Platform.PS4).toString();
                     Assertions.assertTrue(
                             data.contains("This was a successful test with the following parameters added:"),
-                            "Session Test");
+                            "Paladins PS4 - Session Test");
                     System.out.println(data);
                 },
                 () -> {
                     StringData data = apitest.patch(Paladins.Platform.PS4);
                     Assertions.assertTrue(
                             data.toJsonObject().get("ret_msg").equals(null) && !data.toJsonObject().getString("version_string").isEmpty(),
-                            "Patch Notes Test");
+                            "Paladins PS4 - Patch Notes Test");
                     System.out.println(data.toJsonObject().toString());
                 });
     }
