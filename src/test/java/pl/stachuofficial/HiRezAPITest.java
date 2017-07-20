@@ -51,9 +51,9 @@ class HiRezAPITest {
     }
 
     void testData(boolean condition, String title) {
-        Assertions.assertTrue(condition, title);
         if (condition) System.out.println(title+": OK");
         else System.err.println(title+": ERROR");
+        Assertions.assertTrue(condition, title);
     }
 
     @Test
