@@ -12,10 +12,10 @@ before_install:
   - chmod +x $TRAVIS_BUILD_DIR/deploying/*.sh
   - $TRAVIS_BUILD_DIR/deploying/pre-deploy.sh
 install:
-  - mvn install -P !build-extras -DskipTests=true -Dmaven.javadoc.skip=true -B
-  - mvn dependency:go-offline -P !build-extras -DskipTests=true -Dmaven.javadoc.skip=true -B
+  - mvn install -P !build-extras -Dmaven.javadoc.skip=true -B
+  - mvn dependency:go-offline -P !build-extras -Dmaven.javadoc.skip=true -B
 script:
-  - mvn test -P !build-extras -B
+  - mvn test -DskipTest=false -P !build-extras -B
 
 after_success:
  - $TRAVIS_BUILD_DIR/deploying/deploy.sh
