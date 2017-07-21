@@ -35,8 +35,9 @@ https://fs12.formsite.com/HiRez/form48/secure_index.html
     * **DevId**: 1004
     * **AuthKey**: 23DF3C7E9BD14D84BF892AD206B6755C
     
-    a. For Smite **PC** i want getting player info for "HiRezTina"
+   
 ```java
+// For Smite PC, I want getting player info for "HiRezTina"
 package example;
 
 import pl.stachuofficial.HiRezAPI; // Main class
@@ -52,8 +53,8 @@ class SmitePlayer {
     }
 }
 ```
-    b. For Paladins **XBOX** i want know about server status.
 ```java
+// For Paladins XBOX, I want know about server status.
 package example;
 
 import pl.stachuofficial.HiRezAPI; // Main class
