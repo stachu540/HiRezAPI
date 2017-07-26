@@ -1,14 +1,14 @@
-package pl.stachuofficial;
+package pl.stachuofficial.hirezapi;
 
 import org.junit.jupiter.api.*;
-import pl.stachuofficial.hirezstudios.Paladins;
-import pl.stachuofficial.hirezstudios.Smite;
-import pl.stachuofficial.util.StringData;
+import pl.stachuofficial.hirezapi.games.Paladins;
+import pl.stachuofficial.hirezapi.games.Smite;
+import pl.stachuofficial.hirezapi.api.StringData;
 
 @DisplayName("Testing API")
 class HiRezAPITest {
 
-    static class HiRezTest extends HiRezAPI{
+    static class HiRezTest extends HiRezAPI {
 
         HiRezTest(String devId, String authKey) {
             super(devId, authKey);

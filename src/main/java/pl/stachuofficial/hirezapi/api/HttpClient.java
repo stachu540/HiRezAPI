@@ -1,4 +1,4 @@
-package pl.stachuofficial.util;
+package pl.stachuofficial.hirezapi.api;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;

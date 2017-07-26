@@ -1,4 +1,4 @@
-package pl.stachuofficial.util;
+package pl.stachuofficial.hirezapi.api;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

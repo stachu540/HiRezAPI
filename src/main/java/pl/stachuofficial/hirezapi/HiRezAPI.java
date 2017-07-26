@@ -1,7 +1,7 @@
-package pl.stachuofficial;
+package pl.stachuofficial.hirezapi;
 
-import pl.stachuofficial.hirezstudios.Paladins;
-import pl.stachuofficial.hirezstudios.Smite;
+import pl.stachuofficial.hirezapi.games.Paladins;
+import pl.stachuofficial.hirezapi.games.Smite;
 
 import java.io.*;
 import java.nio.file.Paths;
@@ -13,7 +13,7 @@ import java.util.Properties;
  * @since 1.8
  */
 public class HiRezAPI {
-    private static final File filesession = Paths.get(System.getProperty("java.io.tmpdir"), ".hirezsessions").toFile();
+    private static final File filesession = Paths.get(System.getProperty("java.io.tmpdir"), ".sessions").toFile();
 
     /**
      * Session keys for specific base API url type

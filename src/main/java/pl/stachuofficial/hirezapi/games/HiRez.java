@@ -1,9 +1,10 @@
-package pl.stachuofficial.hirezstudios;
+package pl.stachuofficial.hirezapi.games;
 
-import pl.stachuofficial.hirezstudios.instance.Language;
-import pl.stachuofficial.hirezstudios.instance.TierLeauge;
-import pl.stachuofficial.util.HttpClient;
-import pl.stachuofficial.util.StringData;
+import pl.stachuofficial.hirezapi.api.Session;
+import pl.stachuofficial.hirezapi.api.instance.Language;
+import pl.stachuofficial.hirezapi.api.instance.TierLeauge;
+import pl.stachuofficial.hirezapi.api.HttpClient;
+import pl.stachuofficial.hirezapi.api.StringData;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,19 +13,19 @@ import java.util.Date;
  * @author <a href="damian@stachuofficial.pl">Damian Staszewski</a>
  * @since 1.8
  */
-public class HiRezGames extends HttpClient {
+public class HiRez extends HttpClient {
     private final String devId;
     private final String authKey;
     private final Session session;
 
-    HiRezGames(Smite.Platform platform, String devId, String authKey) {
+    HiRez(Smite.Platform platform, String devId, String authKey) {
         super(platform.url);
         this.devId = devId;
         this.authKey = authKey;
         this.session = new Session(platform, devId, authKey);
     }
 
-    HiRezGames(Paladins.Platform platform, String devId, String authKey) {
+    HiRez(Paladins.Platform platform, String devId, String authKey) {
         super(platform.url);
         this.devId = devId;
         this.authKey = authKey;
