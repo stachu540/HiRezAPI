@@ -1,4 +1,4 @@
-package pl.stachuofficial.hirezstudios.instance;
+package pl.stachuofficial.hirezapi.api.instance;
 
 import java.util.HashMap;
 import java.util.Map;

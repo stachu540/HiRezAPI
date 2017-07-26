@@ -1,7 +1,7 @@
-package pl.stachuofficial.hirezstudios;
+package pl.stachuofficial.hirezapi.games;
 
-import pl.stachuofficial.hirezstudios.instance.Language;
-import pl.stachuofficial.util.StringData;
+import pl.stachuofficial.hirezapi.api.instance.Language;
+import pl.stachuofficial.hirezapi.api.StringData;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +10,8 @@ import java.util.Map;
  * @author <a href="damian@stachuofficial.pl">Damian Staszewski</a>
  * @since 1.8
  */
-public class Smite extends HiRezGames {
+public class Smite extends HiRez {
+
     public enum Platform {
         /**
          * Smite PC API
@@ -38,9 +39,19 @@ public class Smite extends HiRezGames {
             this.url = url;
         }
 
-        public String getUrl() {
-            return url;
+        /**
+         * Retrieve variable name
+         * @return Full game name with the platform.
+         */
+        public final String toName() {
+            return "Smite " + name();
         }
+
+        /**
+         * Getting URL
+         * @return API URL
+         */
+        public String getUrl() { return url; }
     }
 
     public enum Queue {
@@ -69,10 +80,10 @@ public class Smite extends HiRezGames {
 
         private int id;
 
-        private static Map<Integer, Queue> map = new HashMap<Integer, Queue>();
+        private static Map<Integer, Smite.Queue> map = new HashMap<Integer, Smite.Queue>();
 
         static {
-            for(Queue queue : Queue.values()) {
+            for(Smite.Queue queue : Smite.Queue.values()) {
                 map.put(queue.id, queue);
             }
         }
@@ -83,7 +94,7 @@ public class Smite extends HiRezGames {
 
         public int getId() { return id; }
 
-        public static Queue valueOf(int id) {
+        public static Smite.Queue valueOf(int id) {
             return map.get(id);
         }
     }

@@ -1,8 +1,8 @@
-package pl.stachuofficial.hirezstudios;
+package pl.stachuofficial.hirezapi.games;
 
 
-import pl.stachuofficial.hirezstudios.instance.Language;
-import pl.stachuofficial.util.StringData;
+import pl.stachuofficial.hirezapi.api.instance.Language;
+import pl.stachuofficial.hirezapi.api.StringData;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +11,7 @@ import java.util.Map;
  * @author <a href="damian@stachuofficial.pl">Damian Staszewski</a>
  * @since 1.8
  */
-public class Paladins extends HiRezGames{
+public class Paladins extends HiRez {
 
     public enum Platform {
         /**
@@ -38,6 +38,14 @@ public class Paladins extends HiRezGames{
          */
         Platform(String url) {
             this.url = url;
+        }
+
+        /**
+         * Retrieve variable name
+         * @return Full game name with the platform.
+         */
+        public final String toName() {
+            return "Paladins " + name();
         }
 
         /**
@@ -86,7 +94,7 @@ public class Paladins extends HiRezGames{
         Custom_B_Brightmarsh(458),
         Multi_Queue(999);
 
-        private int id;
+        private final int id;
 
         private static Map<Integer, Queue> map = new HashMap<Integer, Queue>();
 
@@ -102,11 +110,15 @@ public class Paladins extends HiRezGames{
 
         public int getId() { return id; }
 
+        @Override
+        public String toString() {
+            return super.toString().replace("_", " ").replace("Coop", "(Coop)");
+        }
+
         public static Queue valueOf(int id) {
             return map.get(id);
         }
     }
-
 
     /**
      * Smite API
