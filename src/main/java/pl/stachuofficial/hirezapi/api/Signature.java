@@ -58,8 +58,8 @@ public class Signature {
         String url = method + "Json/";
         url += devId + "/";
         url += generateSignature(method) + "/";
-        url += HiRezAPI.sessions.getProperty(platform);
-        url += generateTimestamp() + "/";
+        url += HiRezAPI.sessions.getProperty(platform) + "/";
+        url += generateTimestamp();
 
         return url;
     }
@@ -68,7 +68,7 @@ public class Signature {
         String url = "createsessionJson/";
         url += devId + "/";
         url += generateSignature("createsession") + "/";
-        url += generateTimestamp() + "/";
+        url += generateTimestamp();
 
         return url;
     }
