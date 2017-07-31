@@ -40,3 +40,5 @@ crashlytics-build.properties
 fabric.properties
 
 deploying/deploy.asc
+src/test/java/pl/stachuofficial/hirezapi/**.java
+!src/test/java/pl/stachuofficial/hirezapi/HiRezAPITest.java
