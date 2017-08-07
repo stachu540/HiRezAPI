@@ -10,15 +10,11 @@ import pl.stachuofficial.hirezapi.games.Smite;
  */
 public class Session extends HttpClient {
     private final String platform;
-    private final String devId;
-    private final String authKey;
     private final Signature sig;
 
     public Session(Smite.Platform platform, String devId, String authKey) {
         super(platform.getUrl());
         this.platform = "SMITE_" + platform.name();
-        this.devId = devId;
-        this.authKey = authKey;
         this.sig = new Signature(platform, devId, authKey);
         if (!HiRezAPI.sessions.containsKey(this.platform)) this.generateSession();
         if (!testSession().toString().startsWith("\"This was a successful test with the following parameters added:")) this.generateSession();
@@ -27,8 +23,6 @@ public class Session extends HttpClient {
     public Session(Paladins.Platform platform, String devId, String authKey) {
         super(platform.getUrl());
         this.platform = "PALADINS_" + platform.name();
-        this.devId = devId;
-        this.authKey = authKey;
         this.sig = new Signature(platform, devId, authKey);
         if (!HiRezAPI.sessions.containsKey(this.platform)) this.generateSession();
         if (!testSession().toString().startsWith("\"This was a successful test with the following parameters added:")) this.generateSession();
@@ -38,15 +32,16 @@ public class Session extends HttpClient {
         return new StringData(request(this.sig.generateUrl(endpoint), args));
     }
 
-    public void generateSession() {
+    public StringData generateSession() {
+        StringData data = new StringData(request(this.sig.createSession()));
         try {
-            StringData data = new StringData(request(this.sig.createSession()));
             if (data.toJsonObject().getString("ret_msg").equals("Approved")) {
                 HiRezAPI.sessions.setProperty(this.platform, data.toJsonObject().getString("session_id"));
-            } else throw new Exception(data.toJsonObject().getString("ret_msg"));
-        } catch (Exception ex) {
+            } else throw new SessionException(data.toJsonObject().getString("ret_msg"));
+        } catch (SessionException ex) {
             ex.printStackTrace();
         }
+        return data;
     }
 
     public String testSession() {

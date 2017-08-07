@@ -41,12 +41,12 @@ public class HiRez extends HttpClient {
      * @return A quick way of validating access to the Hi-Rez API.
      */
     public String ping() {
-        return request("pingJson").replace("\\", "");
+        return new StringData(request("pingJson")).toString();
     }
     /**
      * A required step to Authenticate the developerId/signature for further API use.
      */
-    public void createSession() { this.session.generateSession(); }
+    public StringData createSession() { return this.session.generateSession(); }
     /**
      * Testing session when it is established.
      * @return A means of validating that a session is established.
@@ -193,8 +193,8 @@ public class HiRez extends HttpClient {
         SimpleDateFormat date_path = (allDay) ? new SimpleDateFormat("yyyyMMdd/-1") : new SimpleDateFormat("yyyyMMdd/HH");
         SimpleDateFormat minute = new SimpleDateFormat("mm");
         String min = String.valueOf(Integer.parseInt(minute.format(date)) - (Integer.parseInt(minute.format(date)) % 10));
-        String path = date_path.format(date) + ((allDay) ? "," + min : "");
-        return get("getmatchidsbyqueue", path);
+        String path = date_path.format(date) + ((!allDay) ? "," + min : "");
+        return get("getmatchidsbyqueue", Integer.toString(queue.getId()), path);
     }
 
     /**
@@ -208,8 +208,8 @@ public class HiRez extends HttpClient {
         SimpleDateFormat date_path = (allDay) ? new SimpleDateFormat("yyyyMMdd/-1") : new SimpleDateFormat("yyyyMMdd/HH");
         SimpleDateFormat minute = new SimpleDateFormat("mm");
         String min = String.valueOf(Integer.parseInt(minute.format(date)) - (Integer.parseInt(minute.format(date)) % 10));
-        String path = date_path.format(date) + ((allDay) ? "," + min : "");
-        return get("getmatchidsbyqueue", path);
+        String path = date_path.format(date) + ((!allDay) ? "," + min : "");
+        return get("getmatchidsbyqueue", Integer.toString(queue.getId()), path);
     }
 
     /**
@@ -231,7 +231,7 @@ public class HiRez extends HttpClient {
      * @return Returns the top players for a particular league (as indicated by the queue/tier/season parameters).
      */
     public StringData getLeagueLeaderboard(Paladins.Queue queue, TierLeauge tier, String season) {
-        return get("getleagueleaderboard", String.valueOf(queue.getId()), String.valueOf(tier.getId()), season);
+        return get("getleagueleaderboard", Integer.toString(queue.getId()), String.valueOf(tier.getId()), season);
     }
 
     /**

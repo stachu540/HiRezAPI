@@ -4,7 +4,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
@@ -36,6 +35,9 @@ public class HttpClient {
             url += (Arrays.asList(args).toArray().length > 0) ?
                     String.join("/", Arrays.asList(args)) :
                     "";
+            if (Boolean.valueOf(System.getProperty("hirez.debug"))) {
+                System.out.println(url);
+            }
 
             Request request = new Request.Builder()
                     .url(url)
@@ -43,7 +45,13 @@ public class HttpClient {
                     .build();
 
             Response response = client.newCall(request).execute();
-                if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+                if (!response.isSuccessful()) {
+                    String res_data = "Protocol: " + response.protocol().toString();
+                    res_data += ";\r\nCode: " + response.code();
+                    res_data += ";\r\nMessage: " + response.message();
+                    res_data += ";\r\nURL: " + url;
+                    throw new SessionException("Unexpected code \r\n" + res_data);
+                }
 
             return response.body().string();
         } catch (Exception ex) {
