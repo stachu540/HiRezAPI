@@ -51,6 +51,9 @@ public class HiRezAPI {
      * @param authKey Authorization Key (AuthKey)
      */
     public HiRezAPI(String devId, String authKey) {
+        if (!Boolean.valueOf(System.getProperty("hirez.debug"))) {
+            System.setProperty("hirez.debug","false");
+        }
         this.devId = devId;
         this.authKey = authKey;
         try {
