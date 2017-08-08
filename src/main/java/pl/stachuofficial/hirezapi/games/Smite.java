@@ -1,8 +1,9 @@
 package pl.stachuofficial.hirezapi.games;
 
-import pl.stachuofficial.hirezapi.api.instance.Language;
 import pl.stachuofficial.hirezapi.api.StringData;
+import pl.stachuofficial.hirezapi.api.instance.Language;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -231,5 +232,17 @@ public class Smite extends HiRez {
      */
     public StringData getGodRecommendedItems(int godId) {
         return getGodRecommendedItems(godId, Language.English);
+    }
+
+
+    /**
+     * Getting matches ID by Queue.
+     * @param queue the id of the game mode. See {@link Smite.Queue}
+     * @param date Date using by {@link Date} or similar.
+     * @param allDay An parameter represents it would be the entire day, but be warned that this may be more data than we can return for certain queues.
+     * @return Lists all Match IDs for a particular Match Queue; useful for API developers interested in constructing data by Queue.
+     */
+    public StringData getMatchIDsByQueue(Smite.Queue queue, Date date, boolean allDay) {
+        return getMatchIDsByQueue(queue.getId(), date, allDay);
     }
 }

@@ -183,36 +183,6 @@ public class HiRez extends HttpClient {
     }
 
     /**
-     * Getting matches ID by Queue.
-     * @param queue the id of the game mode. See {@link Smite.Queue}
-     * @param date Date using by {@link Date} or similar.
-     * @param allDay An parameter represents it would be the entire day, but be warned that this may be more data than we can return for certain queues.
-     * @return Lists all Match IDs for a particular Match Queue; useful for API developers interested in constructing data by Queue.
-     */
-    public StringData getMatchIDsByQueue(Smite.Queue queue, Date date, boolean allDay) {
-        SimpleDateFormat date_path = (allDay) ? new SimpleDateFormat("yyyyMMdd/-1") : new SimpleDateFormat("yyyyMMdd/HH");
-        SimpleDateFormat minute = new SimpleDateFormat("mm");
-        String min = String.valueOf(Integer.parseInt(minute.format(date)) - (Integer.parseInt(minute.format(date)) % 10));
-        String path = date_path.format(date) + ((!allDay) ? "," + min : "");
-        return get("getmatchidsbyqueue", Integer.toString(queue.getId()), path);
-    }
-
-    /**
-     * Getting matches ID by Queue.
-     * @param queue the id of the game mode. See {@link Smite.Queue}
-     * @param date Date using by {@link Date} or similar. Required to limiting data return.
-     * @param allDay An parameter represents it would be the entire day, but be warned that this may be more data than we can return for certain queues.
-     * @return Lists all Match IDs for a particular Match Queue; useful for API developers interested in constructing data by Queue.
-     */
-    public StringData getMatchIDsByQueue(Paladins.Queue queue, Date date, boolean allDay) {
-        SimpleDateFormat date_path = (allDay) ? new SimpleDateFormat("yyyyMMdd/-1") : new SimpleDateFormat("yyyyMMdd/HH");
-        SimpleDateFormat minute = new SimpleDateFormat("mm");
-        String min = String.valueOf(Integer.parseInt(minute.format(date)) - (Integer.parseInt(minute.format(date)) % 10));
-        String path = date_path.format(date) + ((!allDay) ? "," + min : "");
-        return get("getmatchidsbyqueue", Integer.toString(queue.getId()), path);
-    }
-
-    /**
      * Getting League Leaderboard
      * @param queue the id of the game mode. See {@link Smite.Queue}
      * @param tier League tier. See {@link TierLeauge}
@@ -304,6 +274,22 @@ public class HiRez extends HttpClient {
      */
     public StringData getPlayer(String username) {
         return get("getplayer", username);
+    }
+
+
+    /**
+     * Getting matches ID by Queue.
+     * @param queue the id of the game mode. See {@link Smite.Queue}
+     * @param date Date using by {@link Date} or similar. Required to limiting data return.
+     * @param allDay An parameter represents it would be the entire day, but be warned that this may be more data than we can return for certain queues.
+     * @return Lists all Match IDs for a particular Match Queue; useful for API developers interested in constructing data by Queue.
+     */
+    StringData getMatchIDsByQueue(int queue, Date date, boolean allDay) {
+        SimpleDateFormat date_path = (allDay) ? new SimpleDateFormat("yyyyMMdd/-1") : new SimpleDateFormat("yyyyMMdd/HH");
+        SimpleDateFormat minute = new SimpleDateFormat("mm");
+        String min = String.valueOf(Integer.parseInt(minute.format(date)) - (Integer.parseInt(minute.format(date)) % 10));
+        String path = date_path.format(date) + ((!allDay) ? "," + min : "");
+        return get("getmatchidsbyqueue", Integer.toString(queue), path);
     }
 
     /**
