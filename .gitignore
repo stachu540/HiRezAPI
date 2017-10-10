@@ -15,30 +15,9 @@ buildNumber.properties
 
 !.github/
 
-### JetBrains template
+### JetBrains
 .idea/**
 *.iml
 
-## File-based project format:
-*.iws
-
-## Plugin-specific files:
-
-# IntelliJ
-/out/
-
-# mpeltonen/sbt-idea plugin
-.idea_modules/
-
-# JIRA plugin
-atlassian-ide-plugin.xml
-
-# Crashlytics plugin (for Android Studio and IntelliJ)
-com_crashlytics_export_strings.xml
-crashlytics.properties
-crashlytics-build.properties
-fabric.properties
-
-deploying/deploy.asc
-src/test/java/com/github/stachu540/hirezapi/**.java
+src/test/java/com/github/stachu540/hirezapi/*.java
 !src/test/java/com/github/stachu540/hirezapi/HiRezAPITest.java
