@@ -39,15 +39,14 @@ https://fs12.formsite.com/HiRez/form48/secure_index.html
 package example;
 
 import com.github.stachu540.hirezapi.HiRezAPI; // Main class
-import com.github.stachu540.hirezstudios.Smite; // for importing enum platforms
-import com.github.stachu540.util.StringData; // for using variable data
+import com.github.stachu540.hirezapi.api.Smite; // for importing enum platforms
 
 class SmitePlayer {
     public static void main(String[] args) {
         HiRezAPI api = new HiRezAPI("1004", "23DF3C7E9BD14D84BF892AD206B6755C");
-        StringData mydata = api.smite(Smite.Platform.PC).getPlayer("HiRezTina");
+        Smite smite = api.getFor(com.github.stachu540.hirezapi.enums.url.Smite.PC);
         // cause data returning as JSONArray i will use toJsonArray() method
-        System.out.println(mydata.toJsonArray());
+        System.out.println(smite.getPlayer("HiRezTina"));
     }
 }
 ```
@@ -59,15 +58,14 @@ class SmitePlayer {
 package example;
 
 import com.github.stachu540.hirezapi.HiRezAPI; // Main class
-import com.github.stachu540.hirezstudios.Paladins; // for importing enum platforms
-import com.github.stachu540.util.StringData; // for using variable data
+import com.github.stachu540.hirezapi.api.Paladins; // for importing enum platforms
 
 class PaladinsStatusServer {
     public static void main(String[] args) {
         HiRezAPI api = new HiRezAPI("1004", "23DF3C7E9BD14D84BF892AD206B6755C");
-        StringData mydata = api.paladins(Paladins.Platform.XBOX).getServerStatus();
+        Paladins paladins = api.getFor(com.github.stachu540.hirezapi.enums.url.Paladins.XBOX);
         // cause data returning as JSONArray i will use toJsonArray() method
-        System.out.println(mydata.toJsonArray());
+        System.out.println(mydata.getServerStatus());
     }
 }
 ```
