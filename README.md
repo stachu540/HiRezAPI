@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/stachu540/HiRezAPI.svg)](https://travis-ci.org/stachu540/HiRezAPI)
-[![Javadocs](http://javadoc.io/badge/pl.stachuofficial/HiRezAPI.svg?color=brightgreen)](http://javadoc.io/doc/pl.stachuofficial/HiRezAPI)
+[![Javadocs](https://img.shields.io/badge/Javadoc-v2.0-brightgreen.svg)](https://jitpack.io/com/github/stachu540/HiRezAPI/v2.0/javadoc/)
+[![Release](https://jitpack.io/v/stachu540/HiRezAPI.svg)](https://jitpack.io/#stachu540/HiRezAPI)
 
 # HiRezAPI
 
@@ -19,16 +20,48 @@ All features will be on [Projects](https://github.com/stachu540/HiRezAPI/project
 1. To access the APIs you'll need your own set of credentials which consist of a Developer ID (**devId**) and an Authentication Key (**authKey**). To getting those credentials, you need filling form on this link: 
 https://fs12.formsite.com/HiRez/form48/secure_index.html
 
-2. For next step. Add dependency to `pom.xml` build.
+2. Choose your Build
+#### Maven
+Add to `pom.xml` build.
 ```xml
-<dependency>
-    <groupId>pl.stachuofficial</groupId>
-    <artifactId>HiRezAPI</artifactId>
-    <version>1.0</version>
-</dependency>
+<repositories>
+    ...
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+...
+<dependencies>
+    ...
+    <dependency>
+          <groupId>com.github.stachu540</groupId>
+          <artifactId>HiRezAPI</artifactId>
+          <version>2.0</version>
+     </dependency>
+</dependencies>
+...
+```
+#### Gradle
+Add to `build.gradle` build.
+```groovy
+...
+repositories {
+  ...
+  maven {
+    url  "https://jitpack.io"
+  }
+}
+...
+dependencies {
+  ...
+  compile "com.github.austinv11:Discord4J:@VERSION@"
+  //compile "com.github.austinv11:Discord4J:@VERSION@:shaded" //Use this line instead of the one above it if you want a shaded jar (all the Discord4J dependencies bundled into one jar)
+}
+...
 ```
 
-3. To starting using script try to using example below:
+4. To starting using script try to using example below:
     
     For examples I will use example credentials
     **DevId**: 1004
