@@ -1,6 +1,5 @@
-Master: [![Build Status](https://travis-ci.org/stachu540/HiRezAPI.svg?branch=master)](https://travis-ci.org/stachu540/HiRezAPI)
-
-Dev: [![Build Status](https://travis-ci.org/stachu540/HiRezAPI.svg?branch=dev)](https://travis-ci.org/stachu540/HiRezAPI)
+[![Build Status](https://travis-ci.org/stachu540/HiRezAPI.svg)](https://travis-ci.org/stachu540/HiRezAPI)
+[![Javadocs](http://javadoc.io/badge/pl.stachuofficial/HiRezAPI.svg?color=brightgreen)](http://javadoc.io/doc/pl.stachuofficial/HiRezAPI)
 
 # HiRezAPI
 
@@ -25,24 +24,23 @@ https://fs12.formsite.com/HiRez/form48/secure_index.html
 <dependency>
     <groupId>pl.stachuofficial</groupId>
     <artifactId>HiRezAPI</artifactId>
-    <version>1.1</version>
+    <version>1.0</version>
 </dependency>
 ```
 
 3. To starting using script try to using example below:
     
     For examples I will use example credentials
-    * **DevId**: 1004
-    * **AuthKey**: 23DF3C7E9BD14D84BF892AD206B6755C
+    **DevId**: 1004
+    **AuthKey**: 23DF3C7E9BD14D84BF892AD206B6755C
     
-   
+    a. For Smite **PC** i want getting player info for "HiRezTina"
 ```java
-// For Smite PC, I want getting player info for "HiRezTina"
 package example;
 
-import pl.stachuofficial.HiRezAPI; // Main class
-import pl.stachuofficial.hirezstudios.Smite; // for importing enum platforms
-import pl.stachuofficial.util.StringData; // for using variable data
+import com.github.stachu540.hirezapi.HiRezAPI; // Main class
+import com.github.stachu540.hirezstudios.Smite; // for importing enum platforms
+import com.github.stachu540.util.StringData; // for using variable data
 
 class SmitePlayer {
     public static void main(String[] args) {
@@ -53,13 +51,16 @@ class SmitePlayer {
     }
 }
 ```
+    
+    b. For Paladins **XBOX** i want know about server status.
+    
+    
 ```java
-// For Paladins XBOX, I want know about server status.
 package example;
 
-import pl.stachuofficial.HiRezAPI; // Main class
-import pl.stachuofficial.hirezstudios.Paladins; // for importing enum platforms
-import pl.stachuofficial.util.StringData; // for using variable data
+import com.github.stachu540.hirezapi.HiRezAPI; // Main class
+import com.github.stachu540.hirezstudios.Paladins; // for importing enum platforms
+import com.github.stachu540.util.StringData; // for using variable data
 
 class PaladinsStatusServer {
     public static void main(String[] args) {
