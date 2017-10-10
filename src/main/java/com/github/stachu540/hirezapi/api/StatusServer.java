@@ -62,4 +62,9 @@ public class StatusServer {
         reload();
         return incidents.get(i);
     }
+
+    @Override
+    public String toString() {
+        return incidents.toString();
+    }
 }
