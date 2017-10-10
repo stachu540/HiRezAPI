@@ -1,0 +1,10 @@
+codecov:
+  notify:
+    require_ci_to_pass: yes
+    max_report_age: off
+
+comment:
+  branches:
+    - dev
+    - feature/*
+    - fix/*

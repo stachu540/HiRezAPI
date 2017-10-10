@@ -3,19 +3,14 @@ jdk:
   - oraclejdk8
 
 cache:
-  files:
-  - /tmp/.hirezsessions
   directories:
   - ~/.m2/repository
 
-before_install:
-  - chmod +x $TRAVIS_BUILD_DIR/deploying/*.sh
-  - $TRAVIS_BUILD_DIR/deploying/pre-deploy.sh
 install:
-  - mvn install -P !build-extras -Dmaven.javadoc.skip=true -B
-  - mvn dependency:go-offline -P !build-extras -Dmaven.javadoc.skip=true -B
+  - mvn install -Dmaven.javadoc.skip=true  -P !build-extras -B
+  - mvn dependency:go-offline -Dmaven.javadoc.skip=true -P !build-extras -B
 script:
-  - mvn test -DskipTest=false -P !build-extras -B
-
+  - mvn test -DskipTest=false -Dmaven.javadoc.skip=true -P !build-extras -B
+  - mvn cobertura:cobertura -Dmaven.javadoc.skip=true -P !build-extras -B
 after_success:
- - $TRAVIS_BUILD_DIR/deploying/deploy.sh
+  - bash <(curl -s https://codecov.io/bash)
