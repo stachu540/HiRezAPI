@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/stachu540/HiRezAPI.svg)](https://travis-ci.org/stachu540/HiRezAPI)
+[![codecov](https://codecov.io/gh/stachu540/HiRezAPI/branch/master/graph/badge.svg)](https://codecov.io/gh/stachu540/HiRezAPI)
 [![Javadocs](https://img.shields.io/badge/Javadoc-v2.0-brightgreen.svg)](https://jitpack.io/com/github/stachu540/HiRezAPI/v2.0/javadoc/)
 [![Release](https://jitpack.io/v/stachu540/HiRezAPI.svg)](https://jitpack.io/#stachu540/HiRezAPI)
 
