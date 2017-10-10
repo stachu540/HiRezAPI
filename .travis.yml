@@ -11,3 +11,6 @@ install:
   - mvn dependency:go-offline -Dmaven.javadoc.skip=true -P !build-extras -B
 script:
   - mvn test -DskipTest=false -Dmaven.javadoc.skip=true -P !build-extras -B
+  - mvn cobertura:cobertura -Dmaven.javadoc.skip=true -P !build-extras -B
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

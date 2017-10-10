@@ -55,8 +55,7 @@ repositories {
 ...
 dependencies {
   ...
-  compile "com.github.austinv11:Discord4J:@VERSION@"
-  //compile "com.github.austinv11:Discord4J:@VERSION@:shaded" //Use this line instead of the one above it if you want a shaded jar (all the Discord4J dependencies bundled into one jar)
+  compile "com.github.stachu540:HiRezAPI:2.0"
 }
 ...
 ```
