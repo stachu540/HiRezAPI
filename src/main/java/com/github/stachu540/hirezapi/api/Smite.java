@@ -1,9 +1,10 @@
 package com.github.stachu540.hirezapi.api;
 
 import com.github.stachu540.hirezapi.HiRezAPI;
+import com.github.stachu540.hirezapi.enums.url.ESmite;
 
-public class Smite extends HiRez<com.github.stachu540.hirezapi.enums.url.Smite> {
-    public Smite(HiRezAPI main, com.github.stachu540.hirezapi.enums.url.Smite platform) {
+public class Smite extends HiRez {
+    public Smite(HiRezAPI main, ESmite platform) {
         super(main, platform);
     }
 }

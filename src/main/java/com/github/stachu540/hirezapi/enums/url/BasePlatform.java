@@ -4,6 +4,12 @@ public interface BasePlatform {
     String getUrl();
     String getPlatform();
     default String getGame() {
-        return getClass().getSimpleName();
+        String name = getClass().getSimpleName();
+        name = (name.startsWith("E")) ? name.substring(1) : name;
+        return name;
+    }
+
+    default String getName() {
+        return String.format("%S_%S", getGame(), getPlatform());
     }
 }
