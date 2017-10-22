@@ -2,13 +2,13 @@ package com.github.stachu540.hirezapi.api;
 
 import com.github.stachu540.hirezapi.HiRezAPI;
 import com.github.stachu540.hirezapi.annotations.Endpoint;
+import com.github.stachu540.hirezapi.api.rest.RestClient;
 import com.github.stachu540.hirezapi.enums.DataType;
 import com.github.stachu540.hirezapi.enums.url.BasePlatform;
 import com.github.stachu540.hirezapi.exception.SessionException;
 import com.github.stachu540.hirezapi.models.TestSession;
 import com.github.stachu540.hirezapi.models.json.CreateSession;
 import com.github.stachu540.hirezapi.models.json.Model;
-import com.github.stachu540.hirezapi.api.rest.RestClient;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
