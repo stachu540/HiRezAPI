@@ -16,12 +16,13 @@ All features will be on [Projects](https://github.com/stachu540/HiRezAPI/project
  * [Smite API](https://github.com/stachu540/HiRezAPI/projects/1)
  * [Paladins API](https://github.com/stachu540/HiRezAPI/projects/2)
 
-## Usage
+## Getting Started
 
-1. To access the APIs you'll need your own set of credentials which consist of a Developer ID (**devId**) and an Authentication Key (**authKey**). To getting those credentials, you need filling form on this link: 
-https://fs12.formsite.com/HiRez/form48/secure_index.html
+### Request API access
+To access the APIs you'll need your own set of credentials which consist of a Developer ID (devId) and an Authentication Key (authKey). To getting those credentials, you need filling form on this link: https://fs12.formsite.com/HiRez/form48/secure_index.html
 
-2. Choose your Build
+### Sample supported builds
+
 #### Maven
 Add to `pom.xml` build.
 ```xml
@@ -61,49 +62,7 @@ dependencies {
 ...
 ```
 
-4. To starting using script try to using example below:
-    
-    For examples I will use example credentials
-    **DevId**: 1004
-    **AuthKey**: 23DF3C7E9BD14D84BF892AD206B6755C
-    
-    a. For Smite **PC** i want getting player info for "HiRezTina"
-```java
-package example;
-
-import com.github.stachu540.hirezapi.HiRezAPI; // Main class
-import com.github.stachu540.hirezapi.api.Smite; // for importing enum platforms
-
-class SmitePlayer {
-    public static void main(String[] args) {
-        HiRezAPI api = new HiRezAPI("1004", "23DF3C7E9BD14D84BF892AD206B6755C");
-        Smite smite = api.getFor(com.github.stachu540.hirezapi.enums.url.Smite.PC);
-        // cause data returning as JSONArray i will use toJsonArray() method
-        System.out.println(smite.getPlayer("HiRezTina"));
-    }
-}
-```
-    
-    b. For Paladins **XBOX** i want know about server status.
-    
-    
-```java
-package example;
-
-import com.github.stachu540.hirezapi.HiRezAPI; // Main class
-import com.github.stachu540.hirezapi.api.Paladins; // for importing enum platforms
-
-class PaladinsStatusServer {
-    public static void main(String[] args) {
-        HiRezAPI api = new HiRezAPI("1004", "23DF3C7E9BD14D84BF892AD206B6755C");
-        Paladins paladins = api.getFor(com.github.stachu540.hirezapi.enums.url.Paladins.XBOX);
-        // cause data returning as JSONArray i will use toJsonArray() method
-        System.out.println(mydata.getServerStatus());
-    }
-}
-```
-
-For some more detail's, check out [source documentation](https://stachu540.github.io/HiRezAPI/).
+For starting using script check [Wiki page](wiki/Example-Usage).
 
 ## Question and suggestions
 Any more questions or some suggestions changes are welcome. Don't be shy, just open your [Issues](https://github.com/stachu540/HiRezAPI/issues) if you have some problem. [Pull Request's](https://github.com/stachu540/HiRezAPI/pulls) and any other contribution are welcome.
