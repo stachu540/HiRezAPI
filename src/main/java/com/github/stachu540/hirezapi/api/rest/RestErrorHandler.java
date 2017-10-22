@@ -1,4 +1,4 @@
-package com.github.stachu540.hirezapi.util;
+package com.github.stachu540.hirezapi.api.rest;
 
 import com.github.stachu540.hirezapi.exception.ResponseException;
 import org.springframework.http.HttpStatus;
