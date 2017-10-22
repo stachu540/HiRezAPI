@@ -51,12 +51,12 @@ public class HiRezAPI {
 
     @SuppressWarnings("unchecked")
     public <T extends HiRez, P extends BasePlatform> T getFor(P platform) {
-        if (platform.getGame().toLowerCase().equals("smite"))
+        if (platform.getGame().equalsIgnoreCase("smite"))
             return (T) new Smite(this, (ESmite) platform);
-        else if (platform.getGame().toLowerCase().equals("paladins"))
+        else if (platform.getGame().equalsIgnoreCase("paladins"))
             return (T) new Paladins(this, (EPaladins) platform);
         // TODO: Hand of the Gods API (Soon)
-//        else if (platform.getGame().toLowerCase().equals("hotg"))
+//        else if (platform.getGame().equalsIgnoreCase("hotg"))
 //            return (T)
         else throw new BasePlatformException(platform);
     }
