@@ -33,7 +33,18 @@
         <connection>scm:git:git://github.com/stachu540/HiRezAPI.git</connection>
         <developerConnection>scm:git:ssh://github.com:stachu540/HiRezAPI.git</developerConnection>
         <url>https://github.com/stachu540/HiRezAPI</url>
+        <tag>master</tag>
     </scm>
+
+    <issueManagement>
+        <system>github</system>
+        <url>https://github.com/stachu540/HiRezAPI/issue</url>
+    </issueManagement>
+
+    <ciManagement>
+        <system>travisci</system>
+        <url>https://travis-ci.org/stachu540/HiRezAPI</url>
+    </ciManagement>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -86,17 +97,33 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- Code Coverage -->
+            <!-- JaCoCo Code Coverage -->
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-                <version>2.7</version>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.7.9</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Codacy Code Coverage -->
+            <plugin>
+                <groupId>com.gavinmogan</groupId>
+                <artifactId>codacy-maven-plugin</artifactId>
+                <version>1.0.3</version>
                 <configuration>
-                    <formats>
-                        <format>html</format>
-                        <format>xml</format>
-                    </formats>
-                    <check />
+                    <coverageReportFile>target/site/jacoco/jacoco.xml</coverageReportFile>
                 </configuration>
             </plugin>
             <!-- Junit Test (JUnit 5) -->
