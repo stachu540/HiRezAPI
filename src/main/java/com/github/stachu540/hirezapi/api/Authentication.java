@@ -8,10 +8,11 @@ import com.github.stachu540.hirezapi.exception.SessionException;
 import com.github.stachu540.hirezapi.models.TestSession;
 import com.github.stachu540.hirezapi.models.json.CreateSession;
 import com.github.stachu540.hirezapi.models.json.Model;
-import com.github.stachu540.hirezapi.util.RestClient;
+import com.github.stachu540.hirezapi.api.rest.RestClient;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import org.slf4j.Logger;
 
 import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
@@ -23,7 +24,8 @@ import java.util.SimpleTimeZone;
 public class Authentication <T extends BasePlatform, H extends HiRez<T>>{
     private final String DEV_ID;
     private final String AUTH_KEY;
-    private String SESSION_KEY;
+    private final Logger logger;
+    private final HiRezSession sessions = new HiRezSession();
 
     @Getter(AccessLevel.NONE)
     private final H api;
@@ -38,6 +40,7 @@ public class Authentication <T extends BasePlatform, H extends HiRez<T>>{
         this.AUTH_KEY = main.getAuthKey();
         this.platform = base_platform;
         this.api = api;
+        this.logger = main.getLogger();
     }
 
     public String getUrl(String endpoint, String... args) {
@@ -45,10 +48,10 @@ public class Authentication <T extends BasePlatform, H extends HiRez<T>>{
     }
 
     public boolean hasSessionKey() {
-        return SESSION_KEY != null;
+        return sessions.containsKey(platform) && sessions.get(platform) != null;
     }
 
-    <O extends Object> O get(String endpoint, Class<O> classModel, String... args) {
+    <O> O get(String endpoint, Class<O> classModel, String... args) {
         O objectData = restClient.request(endpoint, classModel, args);
         if (objectData instanceof Model) {
             try {
@@ -68,10 +71,11 @@ public class Authentication <T extends BasePlatform, H extends HiRez<T>>{
         return get(endpoint, classModel, args);
     }
 
+    @SuppressWarnings("unchecked")
     private void createSession() {
         CreateSession session = api.createSession();
         if (session.getRetMsg().equals("Approved")) {
-            SESSION_KEY = session.getSessionId();
+            sessions.put(platform, session.getSessionId());
         }
     }
 
@@ -90,7 +94,7 @@ public class Authentication <T extends BasePlatform, H extends HiRez<T>>{
                 return String.format("%s/%s/%s/%s", base_endpoint, DEV_ID, getSignatue(endpoint), getTimestamp());
             default:
                 if (hasSessionKey() && (endpoint.equals("testsession") || testSession())) {
-                    return String.format("%s/%s/%s/%s/%s", base_endpoint, DEV_ID, getSignatue(endpoint), SESSION_KEY, getTimestamp());
+                    return String.format("%s/%s/%s/%s/%s", base_endpoint, DEV_ID, getSignatue(endpoint), sessions.get(platform), getTimestamp());
                 } else {
                     createSession();
                     return getEndpoint(endpoint);
