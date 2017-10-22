@@ -86,7 +86,6 @@ public class Authentication <T extends BasePlatform, H extends HiRez<T>>{
 
     private String getEndpoint(String endpoint) {
         String base_endpoint = String.format("%s%s", endpoint, dataType.name().toLowerCase());
-        String sig = getSignatue(endpoint);
         switch (endpoint) {
             case "ping":
                 return base_endpoint;
