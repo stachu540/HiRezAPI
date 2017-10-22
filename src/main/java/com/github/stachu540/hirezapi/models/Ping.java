@@ -21,7 +21,7 @@ public class Ping extends StringifyModel {
 
     public Ping(String message) {
         Matcher matcher = Pattern
-                .compile("^(?<game>Smite|Paladins)API \\(ver (?<version>(?:[0-9]+\\.){3}[0-9]+)\\) \\[PATCH - (?<versionName>.+)\\] - (?<ping>.+)\\. Server Date:(?<timestamp>.+)$")
+                .compile("^(?<game>Smite|Paladins)API \\(ver (?<version>(?:[0-9]+\\.){3}[0-9]+)\\) \\[PATCH - (?<versionName>.+)] - (?<ping>.+)\\. Server Date:(?<timestamp>.+)$")
                 .matcher(message.replace("\"", ""));
         matcher.find();
         this.game = matcher.group("game");

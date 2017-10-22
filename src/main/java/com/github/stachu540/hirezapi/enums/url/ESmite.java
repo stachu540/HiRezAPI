@@ -3,7 +3,7 @@ package com.github.stachu540.hirezapi.enums.url;
 import lombok.Getter;
 
 @Getter
-public enum Smite implements BasePlatform {
+public enum ESmite implements BasePlatform {
     /**
      * Smite PC API
      */
@@ -30,7 +30,7 @@ public enum Smite implements BasePlatform {
      * End points for API
      * @param url URL for API
      */
-    Smite(String url) {
+    ESmite(String url) {
         this.platform = name();
         this.url = url;
     }

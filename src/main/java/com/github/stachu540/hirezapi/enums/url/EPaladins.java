@@ -3,7 +3,7 @@ package com.github.stachu540.hirezapi.enums.url;
 import lombok.Getter;
 
 @Getter
-public enum Paladins implements BasePlatform {
+public enum EPaladins implements BasePlatform {
     /**
      * Paladins PC API
      */
@@ -30,7 +30,7 @@ public enum Paladins implements BasePlatform {
      * End points for API
      * @param url URL for API
      */
-    Paladins(String url) {
+    EPaladins(String url) {
         this.platform = name();
         this.url = url;
     }

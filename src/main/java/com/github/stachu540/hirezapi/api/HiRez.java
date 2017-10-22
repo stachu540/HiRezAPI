@@ -20,8 +20,10 @@ public class HiRez<T extends BasePlatform> {
         authentication = new Authentication(main, platform, this);
     }
 
-    <X extends Model> X get(Class<X> classModel, String... args) {
-        Endpoint endpoint = classModel.getAnnotation(Endpoint.class);
+    <X> X get(Class<X> classModel, String... args) {
+        Endpoint endpoint;
+        if (classModel.isArray()) endpoint = classModel.getComponentType().getAnnotation(Endpoint.class);
+        else endpoint = classModel.getAnnotation(Endpoint.class);
         return get(endpoint.value(), classModel, args);
     }
 
@@ -38,7 +40,7 @@ public class HiRez<T extends BasePlatform> {
     }
 
     public PlayerData getPlayerDataByUsername(String username) throws UnknownPlayerException {
-        PlayerData[] players = get("getplayer", PlayerData[].class, username);
+        PlayerData[] players = get( PlayerData[].class, username);
         if (players.length > 0) {
             for (PlayerData player: players) {
                 if (player.getName().toLowerCase().contains(username.toLowerCase())) {
@@ -52,7 +54,7 @@ public class HiRez<T extends BasePlatform> {
 
     public PlayerData getPlayerData(long userId) throws UnknownPlayerException {
         Achievments achievments = getPlayerAchievments(userId);
-        PlayerData[] players = get("getplayer", PlayerData[].class, achievments.getUsername());
+        PlayerData[] players = get(PlayerData[].class, achievments.getUsername());
         if (players.length > 0) {
             for (PlayerData player: players) {
                 if (player.getName().toLowerCase().contains(achievments.getUsername().toLowerCase())) {
@@ -65,7 +67,7 @@ public class HiRez<T extends BasePlatform> {
     }
 
     public Player getPlayer(String username) throws UnknownPlayerException {
-        Player[] players = get("getplayer", Player[].class, username);
+        Player[] players = get(Player[].class, username);
         if (players.length > 0) {
             for (Player player: players) {
                 if (player.getName().toLowerCase().contains(username.toLowerCase())) return player;
@@ -79,7 +81,7 @@ public class HiRez<T extends BasePlatform> {
     }
 
     public PlayerStatus getPlayerStatus(String username) {
-        PlayerStatus[] players = get("getplayerstatus", PlayerStatus[].class, username);
+        PlayerStatus[] players = get(PlayerStatus[].class, username);
         System.out.println(Arrays.asList(players).toString());
         if (players.length > 0) {
             return players[0];
@@ -101,7 +103,7 @@ public class HiRez<T extends BasePlatform> {
     }
 
     public ServiceStatus getServerStatus() throws Exception {
-        ServiceStatus status = get("gethirezserverstatus", ServiceStatus[].class)[0];
+        ServiceStatus status = get(ServiceStatus[].class)[0];
         status.setServerStatus(new StatusServer(authentication.getPlatform()));
         return status;
     }
