@@ -3,7 +3,7 @@ package com.github.stachu540.hirezapi.enums.queues;
 import lombok.Getter;
 
 @Getter
-public enum Smite implements Queue {
+public enum SmiteQ implements Queue {
     Conquest				(426, "Conquest"),
     Arena					(435, "Arena"),
     Clash					(466, "Clash"),
@@ -53,11 +53,8 @@ public enum Smite implements Queue {
     private final int id;
     private final String name;
 
-    Smite(int id, String name) {
-        this.name = name().replace("_", " ")
-                .replace("Easy", "(Easy)")
-                .replace("Medium", "(Medium)")
-                .replace("Custom", "(Custom)");
+    SmiteQ(int id, String name) {
+        this.name = name;
         this.id = id;
     }
 

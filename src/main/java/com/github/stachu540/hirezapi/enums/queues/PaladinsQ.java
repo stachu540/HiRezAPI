@@ -3,7 +3,7 @@ package com.github.stachu540.hirezapi.enums.queues;
 import lombok.Getter;
 
 @Getter
-public enum Paladins implements Queue {
+public enum PaladinsQ implements Queue {
     LIVE_Casual                     (424, "Siege"),
     LIVE_Onslaught                  (452, "Onslaught"),
     LIVE_Payload                    (437, "Payload"),
@@ -29,7 +29,7 @@ public enum Paladins implements Queue {
     private final int id;
     private final String name;
 
-    Paladins(int id, String name) {
+    PaladinsQ(int id, String name) {
         this.name = name;
         this.id = id;
     }
