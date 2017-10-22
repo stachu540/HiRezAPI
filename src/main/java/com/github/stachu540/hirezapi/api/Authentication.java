@@ -5,6 +5,7 @@ import com.github.stachu540.hirezapi.annotations.Endpoint;
 import com.github.stachu540.hirezapi.api.rest.RestClient;
 import com.github.stachu540.hirezapi.enums.DataType;
 import com.github.stachu540.hirezapi.enums.url.BasePlatform;
+import com.github.stachu540.hirezapi.exception.EndpointIsMissingException;
 import com.github.stachu540.hirezapi.exception.SessionException;
 import com.github.stachu540.hirezapi.models.TestSession;
 import com.github.stachu540.hirezapi.models.json.CreateSession;
@@ -67,7 +68,7 @@ public class Authentication <T extends BasePlatform, H extends HiRez<T>>{
 
     <T extends Model> T get(Class<T> classModel, String... args) {
         String endpoint = classModel.getDeclaredAnnotation(Endpoint.class).value();
-        if (endpoint == null) throw new NullPointerException(String.format("Missing annotation value for class: %s [full_path:%s]", classModel.getSimpleName(), classModel.getCanonicalName()));
+        if (endpoint == null && classModel.isAnnotationPresent(Endpoint.class)) throw new EndpointIsMissingException(classModel);
         return get(endpoint, classModel, args);
     }
 
