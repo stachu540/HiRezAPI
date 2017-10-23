@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/stachu540/HiRezAPI.svg)](https://travis-ci.org/stachu540/HiRezAPI)
-[![Libraries.io](https://img.shields.io/librariesio/github/stachu540/HiRezAPI.svg)](https://github.com/stachu540/HiRezAPI)
+[![Libraries.io](https://img.shields.io/librariesio/github/stachu540/HiRezAPI.svg)](https://libraries.io/github/stachu540/HiRezAPI)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ee16a92996a3425d87403780aa18f316)](https://www.codacy.com/app/stachu540/HiRezAPI?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=stachu540/HiRezAPI&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/ee16a92996a3425d87403780aa18f316)](https://www.codacy.com/app/stachu540/HiRezAPI?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=stachu540/HiRezAPI&amp;utm_campaign=Badge_Coverage)
 [![Javadocs](https://img.shields.io/badge/Javadoc-v2.0.1-brightgreen.svg)](https://jitpack.io/com/github/stachu540/HiRezAPI/v2.0.1/javadoc/)
