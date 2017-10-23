@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <logger name="ch.qos.logback" level="INFO" />
-    <logger name="org.slf4j" level="INFO" />
-    <logger name="org.springframework" level="INFO" />
+    <logger name="ch.qos.logback" level="INFO"/>
+    <logger name="org.slf4j" level="INFO"/>
+    <logger name="org.springframework" level="INFO"/>
 
-    <logger name="com.github.stachu540.hirezapi" level="DEBUG" />
+    <logger name="com.github.stachu540.hirezapi" level="DEBUG"/>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -14,6 +14,6 @@
     </appender>
 
     <root level="debug">
-        <appender-ref ref="STDOUT" />
+        <appender-ref ref="STDOUT"/>
     </root>
 </configuration>

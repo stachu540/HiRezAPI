@@ -11,11 +11,12 @@ import java.util.TimeZone;
 
 @Data
 public abstract class Model {
-    @JsonProperty("ret_msg") private String serverMessage;
+  @JsonProperty("ret_msg")
+  private String serverMessage;
 
-    Date parse(String timestamp) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
-        sdf.setTimeZone(TimeZone.getTimeZone(ZoneOffset.UTC));
-        return sdf.parse(timestamp);
-    }
+  Date parse(String timestamp) throws ParseException {
+    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
+    sdf.setTimeZone(TimeZone.getTimeZone(ZoneOffset.UTC));
+    return sdf.parse(timestamp);
+  }
 }

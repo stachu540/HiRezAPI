@@ -11,27 +11,27 @@ import lombok.EqualsAndHashCode;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @EqualsAndHashCode(callSuper = true)
 public class ServiceStatus extends Model {
-    public enum Status {
-        UP,
-        DOWN
-    }
+  private final Status status;
+  private final String version;
+  private StatusServer serverStatus;
 
-    private final Status status;
-    private final String version;
+  public ServiceStatus(
+      @JsonProperty("status") String status, @JsonProperty("version") String version) {
+    this.status = Status.valueOf(status);
+    this.version = version;
+  }
 
-    private StatusServer serverStatus;
+  public ServerStatusIncident getLastIncident() {
+    return serverStatus.getIncident(0);
+  }
 
-    public ServiceStatus(@JsonProperty("status") String status, @JsonProperty("version") String version) {
-        this.status = Status.valueOf(status);
-        this.version = version;
-    }
+  public void setServerStatus(StatusServer status) {
+    this.serverStatus = status;
+    this.serverStatus.setStatus(this.status);
+  }
 
-    public ServerStatusIncident getLastIncident() {
-        return serverStatus.getIncident(0);
-    }
-
-    public void setServerStatus(StatusServer status) {
-        this.serverStatus = status;
-        this.serverStatus.setStatus(this.status);
-    }
+  public enum Status {
+    UP,
+    DOWN
+  }
 }

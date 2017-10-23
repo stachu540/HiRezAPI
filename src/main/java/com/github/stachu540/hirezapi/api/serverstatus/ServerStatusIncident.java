@@ -13,58 +13,60 @@ import java.util.*;
 
 @Data
 public class ServerStatusIncident {
-    private final String title;
-    private final String url;
-    private final List<Incident> incidents = new ArrayList<Incident>();
+  private final String title;
+  private final String url;
+  private final List<Incident> incidents = new ArrayList<Incident>();
 
-    public ServerStatusIncident(String title, String url, String description) {
-        this.title = title;
-        this.url = url;
-        formatDescriptionIncident(description);
+  public ServerStatusIncident(String title, String url, String description) {
+    this.title = title;
+    this.url = url;
+    formatDescriptionIncident(description);
+  }
+
+  private void formatDescriptionIncident(String description) {
+    Document document = Jsoup.parse(description);
+    document.select("p").forEach(paragraph -> incidents.add(new Incident(paragraph)));
+  }
+
+  public Incident getIncident(int i) {
+    return incidents.get(i);
+  }
+
+  public boolean contains(String s) {
+    boolean contained = false;
+    if (title.contains(s)) contained = true;
+    for (Incident incident : incidents) {
+      if (incident.getDescription().contains(s)) contained = true;
+    }
+    return contained;
+  }
+
+  @Data
+  public static class Incident {
+    private final ServerStatus status;
+    private final long timestamp;
+    private final String description;
+
+    private Incident(Element message) {
+      String timestamp = message.getElementsByTag("small").first().text();
+      String description = message.text();
+      this.timestamp = parseTimestamp(timestamp);
+      this.status = ServerStatus.get(message.getElementsByTag("strong").first().text());
+      this.description =
+          description.replace(
+              new StringBuilder(timestamp).append(" ").append(status).append(" - "), "");
     }
 
-    private void formatDescriptionIncident(String description) {
-        Document document = Jsoup.parse(description);
-        document.select("p").forEach(paragraph -> incidents.add(new Incident(paragraph)));
+    private long parseTimestamp(String timestamp) {
+      DateFormat df = new SimpleDateFormat("MMM dd, kk:mm z", Locale.US);
+      df.setTimeZone(TimeZone.getTimeZone("UTC"));
+      Date date;
+      try {
+        date = df.parse(timestamp);
+      } catch (ParseException e) {
+        date = new Date();
+      }
+      return date.getTime();
     }
-
-    public Incident getIncident(int i) {
-        return incidents.get(i);
-    }
-
-    public boolean contains(String s) {
-        boolean contained = false;
-        if (title.contains(s)) contained = true;
-        for (Incident incident : incidents) {
-            if (incident.getDescription().contains(s)) contained = true;
-        }
-        return contained;
-    }
-
-    @Data
-    public static class Incident {
-        private final ServerStatus status;
-        private final long timestamp;
-        private final String description;
-
-        private Incident(Element message) {
-            String timestamp = message.getElementsByTag("small").first().text();
-            String description = message.text();
-            this.timestamp = parseTimestamp(timestamp);
-            this.status = ServerStatus.get(message.getElementsByTag("strong").first().text());
-            this.description = description.replace(new StringBuilder(timestamp).append(" ").append(status).append(" - "), "");
-        }
-
-        private long parseTimestamp(String timestamp) {
-            DateFormat df = new SimpleDateFormat("MMM dd, kk:mm z", Locale.US);
-            df.setTimeZone(TimeZone.getTimeZone("UTC"));
-            Date date;
-            try {
-                date = df.parse(timestamp);
-            } catch (ParseException e) {
-                date = new Date();
-            }
-            return date.getTime();
-        }
-    }
+  }
 }

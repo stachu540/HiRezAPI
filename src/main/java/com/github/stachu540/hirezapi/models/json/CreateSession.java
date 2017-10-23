@@ -16,15 +16,15 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @Endpoint("createsession")
 public class CreateSession extends Model {
-    private String sessionId;
-    private String retMsg;
-    private Date timestamp;
+  private String sessionId;
+  private String retMsg;
+  private Date timestamp;
 
-    public void setTimestamp(String timestamp) {
-        try {
-            this.timestamp = parse(timestamp);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+  public void setTimestamp(String timestamp) {
+    try {
+      this.timestamp = parse(timestamp);
+    } catch (ParseException e) {
+      e.printStackTrace();
     }
+  }
 }

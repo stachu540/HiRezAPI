@@ -8,14 +8,14 @@ import lombok.EqualsAndHashCode;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @EqualsAndHashCode(callSuper = true)
 public class PlayerData extends Player {
-    private Achievments achievments;
-    private PlayerStatus status;
+  private Achievments achievments;
+  private PlayerStatus status;
 
-    public void setAchievments(Achievments achievments) {
-        this.achievments = (this.achievments != null) ? this.achievments : achievments;
-    }
+  public void setAchievments(Achievments achievments) {
+    this.achievments = (this.achievments != null) ? this.achievments : achievments;
+  }
 
-    public void setStatus(PlayerStatus status) {
-        this.status = (this.status != null) ? this.status : status;
-    }
+  public void setStatus(PlayerStatus status) {
+    this.status = (this.status != null) ? this.status : status;
+  }
 }

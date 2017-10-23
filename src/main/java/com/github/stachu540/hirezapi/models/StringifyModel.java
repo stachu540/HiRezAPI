@@ -7,15 +7,15 @@ import java.util.Date;
 import java.util.TimeZone;
 
 public class StringifyModel {
-    Date parse(String timestamp) {
-        if (timestamp.contains("\\/")) timestamp = timestamp.replace("\\/", "/");
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
-            sdf.setTimeZone(TimeZone.getTimeZone(ZoneOffset.UTC));
-            return sdf.parse(timestamp);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return null;
+  Date parse(String timestamp) {
+    if (timestamp.contains("\\/")) timestamp = timestamp.replace("\\/", "/");
+    try {
+      SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
+      sdf.setTimeZone(TimeZone.getTimeZone(ZoneOffset.UTC));
+      return sdf.parse(timestamp);
+    } catch (ParseException e) {
+      e.printStackTrace();
     }
+    return null;
+  }
 }
