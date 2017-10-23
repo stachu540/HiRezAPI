@@ -6,10 +6,16 @@ import com.github.stachu540.hirezapi.enums.url.BasePlatform;
 import com.github.stachu540.hirezapi.exception.UnknownPlayerException;
 import com.github.stachu540.hirezapi.models.Ping;
 import com.github.stachu540.hirezapi.models.TestSession;
-import com.github.stachu540.hirezapi.models.json.*;
-import lombok.Getter;
+import com.github.stachu540.hirezapi.models.json.Achievments;
+import com.github.stachu540.hirezapi.models.json.CreateSession;
+import com.github.stachu540.hirezapi.models.json.Player;
+import com.github.stachu540.hirezapi.models.json.PlayerData;
+import com.github.stachu540.hirezapi.models.json.PlayerStatus;
+import com.github.stachu540.hirezapi.models.json.ServiceStatus;
 
 import java.util.Arrays;
+
+import lombok.Getter;
 
 @Getter
 public class HiRez<T extends BasePlatform> {
@@ -22,9 +28,11 @@ public class HiRez<T extends BasePlatform> {
 
   <X> X get(Class<X> classModel, String... args) {
     Endpoint endpoint;
-    if (classModel.isArray())
+    if (classModel.isArray()) {
       endpoint = classModel.getComponentType().getAnnotation(Endpoint.class);
-    else endpoint = classModel.getAnnotation(Endpoint.class);
+    } else {
+      endpoint = classModel.getAnnotation(Endpoint.class);
+    }
     return get(endpoint.value(), classModel, args);
   }
 
@@ -49,7 +57,9 @@ public class HiRez<T extends BasePlatform> {
           player.setStatus(getPlayerStatus(username));
         }
       }
-    } else throw new UnknownPlayerException(username);
+    } else {
+      throw new UnknownPlayerException(username);
+    }
     return null;
   }
 
@@ -63,7 +73,9 @@ public class HiRez<T extends BasePlatform> {
           player.setStatus(getPlayerStatus(achievments.getUsername()));
         }
       }
-    } else throw new UnknownPlayerException(achievments.getUsername());
+    } else {
+      throw new UnknownPlayerException(achievments.getUsername());
+    }
     return null;
   }
 
@@ -71,9 +83,13 @@ public class HiRez<T extends BasePlatform> {
     Player[] players = get(Player[].class, username);
     if (players.length > 0) {
       for (Player player : players) {
-        if (player.getName().toLowerCase().contains(username.toLowerCase())) return player;
+        if (player.getName().toLowerCase().contains(username.toLowerCase())) {
+          return player;
+        }
       }
-    } else throw new UnknownPlayerException(username);
+    } else {
+      throw new UnknownPlayerException(username);
+    }
     return null;
   }
 

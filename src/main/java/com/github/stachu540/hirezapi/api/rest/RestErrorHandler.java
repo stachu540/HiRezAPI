@@ -1,11 +1,10 @@
 package com.github.stachu540.hirezapi.api.rest;
 
 import com.github.stachu540.hirezapi.exception.ResponseException;
+import java.io.IOException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.client.ResponseErrorHandler;
-
-import java.io.IOException;
 
 public class RestErrorHandler implements ResponseErrorHandler {
   @Override

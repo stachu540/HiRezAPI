@@ -47,7 +47,9 @@ public enum TierLeauge {
 
   public static TierLeauge getTier(int tier) {
     for (TierLeauge tl : values()) {
-      if (tl.id == tier) return tl;
+      if (tl.id == tier) {
+        return tl;
+      }
     }
     return Qualifying;
   }

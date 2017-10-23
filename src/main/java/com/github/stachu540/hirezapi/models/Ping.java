@@ -1,12 +1,11 @@
 package com.github.stachu540.hirezapi.models;
 
 import com.github.stachu540.hirezapi.annotations.Endpoint;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Endpoint("ping")
@@ -20,10 +19,7 @@ public class Ping extends StringifyModel {
   private final Date timestamp;
 
   public Ping(String message) {
-    Matcher matcher =
-        Pattern.compile(
-                "^(?<game>Smite|Paladins)API \\(ver (?<version>(?:[0-9]+\\.){3}[0-9]+)\\) \\[PATCH - (?<versionName>.+)] - (?<ping>.+)\\. Server Date:(?<timestamp>.+)$")
-            .matcher(message.replace("\"", ""));
+    Matcher matcher = Pattern.compile("^(?<game>Smite|Paladins)API \\(ver (?<version>(?:[0-9]+\\.){3}[0-9]+)\\) \\[PATCH - (?<versionName>.+)] - (?<ping>.+)\\. Server Date:(?<timestamp>.+)$").matcher(message.replace("\"", ""));
     matcher.find();
     this.game = matcher.group("game");
     this.version = matcher.group("version");

@@ -4,11 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.github.stachu540.hirezapi.annotations.Endpoint;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.text.ParseException;
 import java.util.Date;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 
 @Data
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)

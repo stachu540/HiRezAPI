@@ -1,8 +1,7 @@
 package com.github.stachu540.hirezapi.exception;
 
-import org.springframework.http.client.ClientHttpResponse;
-
 import java.io.IOException;
+import org.springframework.http.client.ClientHttpResponse;
 
 public class ResponseException extends Exception {
   public ResponseException(ClientHttpResponse response) throws IOException {

@@ -1,12 +1,13 @@
 package com.github.stachu540.hirezapi.models;
 
 import com.github.stachu540.hirezapi.annotations.Endpoint;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Endpoint("testsession")
@@ -19,9 +20,7 @@ public class TestSession extends StringifyModel {
 
   public TestSession(String message) {
     Matcher matcher =
-        Pattern.compile(
-                "^(?<message>.+): developer: (?<devId>[0-9]{4}) time: (?<timestamp>.+) signature: (?<sig>.+) session: (?<session>.+)$")
-            .matcher(message.replace("\"", ""));
+        Pattern.compile("^(?<message>.+): developer: (?<devId>[0-9]{4}) time: (?<timestamp>.+) signature: (?<sig>.+) session: (?<session>.+)$").matcher(message.replace("\"", ""));
     matcher.find();
     this.message = matcher.group("message");
     this.devId = matcher.group("devId");

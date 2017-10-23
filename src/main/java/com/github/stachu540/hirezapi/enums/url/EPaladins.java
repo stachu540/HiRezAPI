@@ -18,7 +18,6 @@ public enum EPaladins implements BasePlatform {
 
   /**
    * End points for API
-   *
    * @param url URL for API
    */
   EPaladins(String url) {

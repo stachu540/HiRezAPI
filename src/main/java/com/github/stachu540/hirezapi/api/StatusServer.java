@@ -7,13 +7,14 @@ import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.SyndFeedInput;
 import com.rometools.rome.io.XmlReader;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -51,13 +52,16 @@ public class StatusServer {
   }
 
   private void reload() {
-    //        System.out.println(feed);
-    if (!incidents.isEmpty()) incidents.clear();
+    if (!incidents.isEmpty()) {
+      incidents.clear();
+    }
     for (SyndEntry entry : feed.getEntries()) {
       ServerStatusIncident incident =
           new ServerStatusIncident(
               entry.getTitle(), entry.getLink(), entry.getContents().get(0).getValue());
-      if ((incident.contains(game) && incident.contains(platform))) incidents.add(incident);
+      if ((incident.contains(game) && incident.contains(platform))) {
+        incidents.add(incident);
+      }
     }
   }
 

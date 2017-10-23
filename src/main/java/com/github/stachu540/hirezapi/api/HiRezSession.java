@@ -7,7 +7,10 @@ import java.util.HashMap;
 public class HiRezSession extends HashMap<BasePlatform, String> {
   @Override
   public String put(BasePlatform platform, String sessionId) {
-    if (containsKey(platform)) return replace(platform, sessionId);
-    else return super.put(platform, sessionId);
+    if (containsKey(platform)) {
+      return replace(platform, sessionId);
+    } else {
+      return super.put(platform, sessionId);
+    }
   }
 }

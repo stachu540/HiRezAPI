@@ -1,15 +1,22 @@
 package com.github.stachu540.hirezapi.api.serverstatus;
 
 import com.github.stachu540.hirezapi.enums.ServerStatus;
-import lombok.Data;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
+
+import lombok.Data;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
 
 @Data
 public class ServerStatusIncident {
@@ -34,9 +41,13 @@ public class ServerStatusIncident {
 
   public boolean contains(String s) {
     boolean contained = false;
-    if (title.contains(s)) contained = true;
+    if (title.contains(s)) {
+      contained = true;
+    }
     for (Incident incident : incidents) {
-      if (incident.getDescription().contains(s)) contained = true;
+      if (incident.getDescription().contains(s)) {
+        contained = true;
+      }
     }
     return contained;
   }

@@ -8,7 +8,9 @@ import java.util.TimeZone;
 
 public class StringifyModel {
   Date parse(String timestamp) {
-    if (timestamp.contains("\\/")) timestamp = timestamp.replace("\\/", "/");
+    if (timestamp.contains("\\/")) {
+      timestamp = timestamp.replace("\\/", "/");
+    }
     try {
       SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
       sdf.setTimeZone(TimeZone.getTimeZone(ZoneOffset.UTC));

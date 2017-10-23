@@ -9,21 +9,23 @@ import com.github.stachu540.hirezapi.exception.SessionException;
 import com.github.stachu540.hirezapi.models.TestSession;
 import com.github.stachu540.hirezapi.models.json.CreateSession;
 import com.github.stachu540.hirezapi.models.json.Model;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
-import org.slf4j.Logger;
 
 import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.SimpleTimeZone;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
+import org.slf4j.Logger;
+
+
 @Getter
 @Setter
 public class Authentication<T extends BasePlatform, H extends HiRez<T>> {
-  private final String DEV_ID;
-  private final String AUTH_KEY;
+  private final String devId;
+  private final String authKey;
   private final Logger logger;
   private final HiRezSession sessions = new HiRezSession();
 
@@ -34,10 +36,10 @@ public class Authentication<T extends BasePlatform, H extends HiRez<T>> {
 
   private final RestClient restClient = new RestClient(this);
 
-  public Authentication(HiRezAPI main, T base_platform, H api) {
-    this.DEV_ID = main.getDevId();
-    this.AUTH_KEY = main.getAuthKey();
-    this.platform = base_platform;
+  public Authentication(HiRezAPI main, T basePlatform, H api) {
+    this.devId = main.getDevId();
+    this.authKey = main.getAuthKey();
+    this.platform = basePlatform;
     this.api = api;
     this.logger = main.getLogger();
   }
@@ -59,8 +61,9 @@ public class Authentication<T extends BasePlatform, H extends HiRez<T>> {
     if (objectData instanceof Model) {
       try {
         Model model = (Model) objectData;
-        if (model.getServerMessage() != null && !endpoint.equals("createsession"))
+        if (model.getServerMessage() != null && !endpoint.equals("createsession")) {
           throw new SessionException(model.getServerMessage());
+        }
       } catch (SessionException e) {
         e.printStackTrace();
       }
@@ -70,9 +73,11 @@ public class Authentication<T extends BasePlatform, H extends HiRez<T>> {
 
   <T extends Model> T get(Class<T> classModel, String... args) {
     String endpoint = classModel.getDeclaredAnnotation(Endpoint.class).value();
-    if (endpoint == null && classModel.isAnnotationPresent(Endpoint.class))
+    if (endpoint == null && classModel.isAnnotationPresent(Endpoint.class)) {
       throw new EndpointIsMissingException(classModel);
-    return get(endpoint, classModel, args);
+    } else {
+      return get(endpoint, classModel, args);
+    }
   }
 
   @SuppressWarnings("unchecked")
@@ -89,18 +94,18 @@ public class Authentication<T extends BasePlatform, H extends HiRez<T>> {
   }
 
   private String getEndpoint(String endpoint) {
-    String base_endpoint = String.format("%s%s", endpoint, "json");
+    String baseEndpoint = String.format("%s%s", endpoint, "json");
     switch (endpoint) {
       case "ping":
-        return base_endpoint;
+        return baseEndpoint;
       case "createsession":
         return String.format(
-            "%s/%s/%s/%s", base_endpoint, DEV_ID, getSignatue(endpoint), getTimestamp());
+            "%s/%s/%s/%s", baseEndpoint, devId, getSignatue(endpoint), getTimestamp());
       default:
         if (hasSessionKey() && (endpoint.equals("testsession") || testSession())) {
           return String.format(
               "%s/%s/%s/%s/%s",
-              base_endpoint, DEV_ID, getSignatue(endpoint), sessions.get(platform), getTimestamp());
+                baseEndpoint, devId, getSignatue(endpoint), sessions.get(platform), getTimestamp());
         } else {
           createSession();
           return getEndpoint(endpoint);
@@ -110,16 +115,18 @@ public class Authentication<T extends BasePlatform, H extends HiRez<T>> {
 
   private String getSignatue(String endpoint) {
     try {
-      String sig = DEV_ID + endpoint + AUTH_KEY + getTimestamp();
+      String sig = devId + endpoint + authKey + getTimestamp();
       StringBuilder sb = new StringBuilder();
 
       MessageDigest md = MessageDigest.getInstance("MD5");
       md.update(sig.getBytes());
-      byte bytes[] = md.digest();
+      byte[] bytes = md.digest();
 
       for (byte bit : bytes) {
         String hex = Integer.toHexString(0xff & bit);
-        if (hex.length() == 1) sb.append("0");
+        if (hex.length() == 1) {
+          sb.append("0");
+        }
         sb.append(hex);
       }
       return sb.toString();

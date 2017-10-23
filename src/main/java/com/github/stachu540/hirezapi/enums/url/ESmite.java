@@ -18,7 +18,6 @@ public enum ESmite implements BasePlatform {
 
   /**
    * End points for API
-   *
    * @param url URL for API
    */
   ESmite(String url) {
