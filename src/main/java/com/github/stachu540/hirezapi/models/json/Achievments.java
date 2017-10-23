@@ -16,7 +16,7 @@ public class Achievments extends Model {
   @JsonProperty("RampageSpree")
   private final long rampages;
   @JsonProperty("UnstoppableSpree")
-  private final long unstioppables;
+  private final long unstoppables;
   @JsonProperty("DivineSpree")
   private final long divines;
   @JsonProperty("ImmortalSpree")
