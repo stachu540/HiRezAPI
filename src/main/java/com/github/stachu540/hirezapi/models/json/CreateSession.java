@@ -22,6 +22,10 @@ public class CreateSession extends Model {
   private String retMsg;
   private Date timestamp;
 
+  /**
+   * Setting timestamp.
+   * @param timestamp stringify timestamp
+   */
   public void setTimestamp(String timestamp) {
     try {
       this.timestamp = parse(timestamp);

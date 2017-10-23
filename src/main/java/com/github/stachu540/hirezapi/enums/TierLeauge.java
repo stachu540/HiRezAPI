@@ -4,7 +4,7 @@ import lombok.Getter;
 
 /**
  * @author <a href="damian@stachuofficial.pl">Damian Staszewski</a>
- * @since 1.8
+ * @since 1.0
  */
 @Getter
 public enum TierLeauge {

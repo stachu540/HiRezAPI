@@ -15,8 +15,9 @@ import lombok.experimental.Accessors;
 import org.slf4j.LoggerFactory;
 
 /**
+ * API wrapper for Hi-Rez Studio games
  * @author <a href="damian@stachuofficial.pl">Damian Staszewski</a>
- * @since 1.8
+ * @since 1.0
  */
 @Getter
 public class HiRezAPI {

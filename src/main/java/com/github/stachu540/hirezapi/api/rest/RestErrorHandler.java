@@ -6,6 +6,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.client.ResponseErrorHandler;
 
+/**
+ * Custom Error Handler
+ * @author <a href="damian@stachuofficial.pl">Damian Staszewski</a>
+ * @since 2.0
+ */
 public class RestErrorHandler implements ResponseErrorHandler {
   @Override
   public boolean hasError(ClientHttpResponse response) throws IOException {

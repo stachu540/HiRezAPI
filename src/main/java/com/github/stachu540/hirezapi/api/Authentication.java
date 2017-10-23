@@ -20,9 +20,15 @@ import lombok.Getter;
 import lombok.Setter;
 import org.slf4j.Logger;
 
-
-@Getter
+/**
+ * Authentication class response for handling session keys and replacing if it is expired.
+ * @author <a href="damian@stachuofficial.pl">Damian Staszewski</a>
+ * @since 2.0
+ * @param <T> enum type extended {@link BasePlatform}
+ * @param <H> api
+ */
 @Setter
+@Getter(AccessLevel.PACKAGE)
 public class Authentication<T extends BasePlatform, H extends HiRez<T>> {
   private final String devId;
   private final String authKey;
@@ -36,6 +42,12 @@ public class Authentication<T extends BasePlatform, H extends HiRez<T>> {
 
   private final RestClient restClient = new RestClient(this);
 
+  /**
+   * Constructor class for session handler.
+   * @param main the core class {@link HiRezAPI}
+   * @param basePlatform Base Platform
+   * @param api api type
+   */
   public Authentication(HiRezAPI main, T basePlatform, H api) {
     this.devId = main.getDevId();
     this.authKey = main.getAuthKey();
@@ -44,6 +56,12 @@ public class Authentication<T extends BasePlatform, H extends HiRez<T>> {
     this.logger = main.getLogger();
   }
 
+  /**
+   * Getting url.
+   * @param endpoint base url
+   * @param args endpoint arguments
+   * @return formatted URL
+   */
   public String getUrl(String endpoint, String... args) {
     return String.format(
         "%s/%s%s",
@@ -52,10 +70,22 @@ public class Authentication<T extends BasePlatform, H extends HiRez<T>> {
         (args.length > 0) ? "/" + String.join("/", args) : "");
   }
 
+  /**
+   * Checking if session key is exist.
+   * @return existing session key for specified {@link BasePlatform}
+   */
   public boolean hasSessionKey() {
     return sessions.containsKey(platform) && sessions.get(platform) != null;
   }
 
+  /**
+   * Getting data from base url.
+   * @param endpoint base url
+   * @param classModel Class model
+   * @param args arguments
+   * @param <O> basic model
+   * @return data from specified base url to class model
+   */
   <O> O get(String endpoint, Class<O> classModel, String... args) {
     O objectData = restClient.request(endpoint, classModel, args);
     if (objectData instanceof Model) {
@@ -71,6 +101,14 @@ public class Authentication<T extends BasePlatform, H extends HiRez<T>> {
     return restClient.request(endpoint, classModel, args);
   }
 
+  /**
+   * getting data from class model containing {@link Endpoint}.
+   * @param classModel class model with {@link Endpoint} annotation
+   * @param args arguments
+   * @param <T> basic class {@link Model}
+   * @return data from specified model contains {@link Endpoint} annotation into class model
+   * @throws EndpointIsMissingException class extended {@link Model} doesn't contain {@link Endpoint} annotation
+   */
   <T extends Model> T get(Class<T> classModel, String... args) {
     String endpoint = classModel.getDeclaredAnnotation(Endpoint.class).value();
     if (endpoint == null && classModel.isAnnotationPresent(Endpoint.class)) {
@@ -80,6 +118,9 @@ public class Authentication<T extends BasePlatform, H extends HiRez<T>> {
     }
   }
 
+  /**
+   * Creating session for specify {@link BasePlatform}.
+   */
   @SuppressWarnings("unchecked")
   private void createSession() {
     CreateSession session = api.createSession();
@@ -88,11 +129,20 @@ public class Authentication<T extends BasePlatform, H extends HiRez<T>> {
     }
   }
 
+  /**
+   * Testing created session.
+   * @return test successful
+   */
   private boolean testSession() {
     TestSession session = api.testSession();
-    return session.isSucessful();
+    return session.isSuccessful();
   }
 
+  /**
+   * Getting base url endpoint.
+   * @param endpoint endpoint name
+   * @return base URL from specify {@link BasePlatform}
+   */
   private String getEndpoint(String endpoint) {
     String baseEndpoint = String.format("%s%s", endpoint, "json");
     switch (endpoint) {
@@ -113,6 +163,11 @@ public class Authentication<T extends BasePlatform, H extends HiRez<T>> {
     }
   }
 
+  /**
+   * Getting signature.
+   * @param endpoint endpoint name
+   * @return MD5 converted signature format <code>devId + endpoint + authKey + {@link #getTimestamp()}</code>
+   */
   private String getSignatue(String endpoint) {
     try {
       String sig = devId + endpoint + authKey + getTimestamp();
@@ -136,6 +191,11 @@ public class Authentication<T extends BasePlatform, H extends HiRez<T>> {
     }
   }
 
+  /**
+   * Getting current timestamp.
+   * @return timestamp formatted into UTC timezone <code>yyyMMddHHmmss</code>
+   * @see SimpleDateFormat
+   */
   private String getTimestamp() {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
     sdf.setTimeZone(new SimpleTimeZone(SimpleTimeZone.UTC_TIME, "UTC"));

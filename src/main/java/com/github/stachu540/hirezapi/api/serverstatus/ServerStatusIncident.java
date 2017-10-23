@@ -17,7 +17,11 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-
+/**
+ * Getting status Incidents from status page
+ * @author <a href="mailto:damian@stachuofficial.pl">Damian Staszewski</a>
+ * @since 2.0
+ */
 @Data
 public class ServerStatusIncident {
   private final String title;

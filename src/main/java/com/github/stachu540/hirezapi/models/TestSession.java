@@ -28,7 +28,7 @@ public class TestSession extends StringifyModel {
     this.signature = matcher.group("sig");
   }
 
-  public boolean isSucessful() {
+  public boolean isSuccessful() {
     return message.equals("This was a successful test with the following parameters added");
   }
 }
