@@ -3,7 +3,6 @@ package com.github.stachu540.hirezapi.api;
 import com.github.stachu540.hirezapi.HiRezAPI;
 import com.github.stachu540.hirezapi.annotations.Endpoint;
 import com.github.stachu540.hirezapi.api.rest.RestClient;
-import com.github.stachu540.hirezapi.enums.DataType;
 import com.github.stachu540.hirezapi.enums.url.BasePlatform;
 import com.github.stachu540.hirezapi.exception.EndpointIsMissingException;
 import com.github.stachu540.hirezapi.exception.SessionException;
@@ -32,7 +31,6 @@ public class Authentication <T extends BasePlatform, H extends HiRez<T>>{
     private final H api;
 
     private final T platform;
-    private DataType dataType = DataType.JSON;
 
     private final RestClient restClient = new RestClient(this);
 
@@ -86,7 +84,7 @@ public class Authentication <T extends BasePlatform, H extends HiRez<T>>{
     }
 
     private String getEndpoint(String endpoint) {
-        String base_endpoint = String.format("%s%s", endpoint, dataType.name().toLowerCase());
+        String base_endpoint = String.format("%s%s", endpoint, "json");
         switch (endpoint) {
             case "ping":
                 return base_endpoint;
