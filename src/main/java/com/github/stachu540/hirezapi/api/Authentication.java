@@ -28,7 +28,7 @@ import org.slf4j.Logger;
  * @param <H> api
  */
 @Setter
-@Getter(AccessLevel.PACKAGE)
+@Getter
 public class Authentication<T extends BasePlatform, H extends HiRez<T>> {
   private final String devId;
   private final String authKey;
