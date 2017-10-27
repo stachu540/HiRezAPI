@@ -59,8 +59,12 @@ public class StatusServer {
       ServerStatusIncident incident =
           new ServerStatusIncident(
               entry.getTitle(), entry.getLink(), entry.getContents().get(0).getValue());
-      if ((incident.contains(game) && incident.contains(platform))) {
-        incidents.add(incident);
+      if (incident.contains(game)) {
+        if (platform != null && incident.contains(platform)) {
+          incidents.add(incident);
+        } else {
+          incidents.add(incident);
+        }
       }
     }
   }
