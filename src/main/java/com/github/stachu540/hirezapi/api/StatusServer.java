@@ -28,16 +28,16 @@ public class StatusServer {
   private String platform;
   private ServiceStatus.Status status;
 
-  StatusServer() throws Exception {
+  public StatusServer() throws Exception {
     reload();
   }
 
-  StatusServer(BasePlatform platform, boolean allPlatforms) throws Exception {
+  public StatusServer(BasePlatform platform, boolean allPlatforms) throws Exception {
     setGamePlatform(platform, allPlatforms);
     reload();
   }
 
-  StatusServer(BasePlatform platform) throws Exception {
+  public StatusServer(BasePlatform platform) throws Exception {
     setGamePlatform(platform);
     reload();
   }
