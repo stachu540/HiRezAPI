@@ -13,6 +13,7 @@ import com.github.stachu540.hirezapi.models.json.Model;
 import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 import java.util.SimpleTimeZone;
 
 import lombok.AccessLevel;
@@ -29,11 +30,11 @@ import org.slf4j.Logger;
  */
 @Setter
 @Getter
-public class Authentication<T extends BasePlatform, H extends HiRez<T>> {
+public class Authentication<M extends Map<T, String>, T extends BasePlatform, H extends HiRez<T>> {
   private final String devId;
   private final String authKey;
   private final Logger logger;
-  private final HiRezSession sessions = new HiRezSession();
+  private final M sessions;
 
   @Getter(AccessLevel.NONE)
   private final H api;
@@ -48,12 +49,14 @@ public class Authentication<T extends BasePlatform, H extends HiRez<T>> {
    * @param basePlatform Base Platform
    * @param api api type
    */
+  @SuppressWarnings("unchecked")
   public Authentication(HiRezAPI main, T basePlatform, H api) {
     this.devId = main.getDevId();
     this.authKey = main.getAuthKey();
     this.platform = basePlatform;
     this.api = api;
     this.logger = main.getLogger();
+    this.sessions = (M) main.getSessionCache();
   }
 
   /**

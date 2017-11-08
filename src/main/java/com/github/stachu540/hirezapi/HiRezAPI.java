@@ -13,6 +13,10 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.Assert;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * API wrapper for Hi-Rez Studio games
@@ -20,7 +24,7 @@ import org.slf4j.LoggerFactory;
  * @since 1.0
  */
 @Getter
-public class HiRezAPI {
+public class HiRezAPI<M extends Map<P, String>, P extends BasePlatform> {
 
   /**
    * Developer ID (DevId)
@@ -37,6 +41,10 @@ public class HiRezAPI {
   private final String authKey;
 
   private final Logger logger = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+
+  @Setter
+  @SuppressWarnings("unchecked")
+  private M sessionCache = (M) new HashMap<P, String>();
 
   /**
    * Initialize Hi-Rez API. All stuff will delivered by Hi-Rez employer via E-Mail.
@@ -56,6 +64,13 @@ public class HiRezAPI {
     this.authKey = authKey;
   }
 
+  /**
+   * Get endpoint from {@link BasePlatform}
+   * @param platform Base Platform
+   * @param <T> {@link Smite} / {@link Paladins} if endpoint is specified
+   * @param <P> {@link ESmite} / {@link EPaladins}
+   * @return Endpoint'ed platform
+   */
   @SuppressWarnings("unchecked")
   public <T extends HiRez, P extends BasePlatform> T getFor(P platform) {
     if (platform.getGame().equalsIgnoreCase("smite")) {
@@ -81,8 +96,10 @@ public class HiRezAPI {
     }
 
     public HiRezAPI build() {
-      HiRezAPI api = new HiRezAPI(devId, authKey);
-      return api;
+      Assert.notNull(devId, "Required \"Developer ID\"");
+      Assert.notNull(authKey, "Required \"Authorization Key\"");
+
+      return new HiRezAPI(devId, authKey);
     }
   }
 }
