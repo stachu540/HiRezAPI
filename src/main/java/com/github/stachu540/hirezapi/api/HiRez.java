@@ -55,6 +55,7 @@ public class HiRez<T extends BasePlatform> {
         if (player.getName().toLowerCase().contains(username.toLowerCase())) {
           player.setAchievments(getPlayerAchievments(player.getId()));
           player.setStatus(getPlayerStatus(username));
+          return player;
         }
       }
     } else {
@@ -71,6 +72,7 @@ public class HiRez<T extends BasePlatform> {
         if (player.getName().toLowerCase().contains(achievments.getUsername().toLowerCase())) {
           player.setAchievments(getPlayerAchievments(player.getId()));
           player.setStatus(getPlayerStatus(achievments.getUsername()));
+          return player;
         }
       }
     } else {
