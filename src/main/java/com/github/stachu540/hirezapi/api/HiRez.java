@@ -101,7 +101,6 @@ public class HiRez<T extends BasePlatform> {
 
   public PlayerStatus getPlayerStatus(String username) {
     PlayerStatus[] players = get(PlayerStatus[].class, username);
-    System.out.println(Arrays.asList(players).toString());
     if (players.length > 0) {
       return players[0];
     }

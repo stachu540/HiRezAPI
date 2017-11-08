@@ -101,7 +101,7 @@ public class Authentication<M extends Map<T, String>, T extends BasePlatform, H 
         e.printStackTrace();
       }
     }
-    return restClient.request(endpoint, classModel, args);
+    return objectData;
   }
 
   /**
