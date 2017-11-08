@@ -1,12 +1,14 @@
 package com.github.stachu540.hirezapi.models.json;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.github.stachu540.hirezapi.annotations.Endpoint;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@JsonIgnoreProperties(ignoreUnknown = true)
+@Endpoint("getplayer")
 @EqualsAndHashCode(callSuper = true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PlayerData extends Player {
   private Achievments achievments;
   private PlayerStatus status;
