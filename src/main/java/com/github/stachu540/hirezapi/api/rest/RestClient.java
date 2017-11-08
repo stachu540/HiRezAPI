@@ -28,7 +28,8 @@ public class RestClient {
    */
   public <O extends Object> O request(String endpoint, Class<O> model, String... args) {
     String url = authentication.getUrl(endpoint, args);
-    Logger.debug(this,"Request for endpoint url: %s", url);
+    String className = (model.isArray()) ? model.getComponentType().getSimpleName() : model.getSimpleName();
+    Logger.debug(this,"[%s] Requesting for endpoint url: %s", className, url);
     return rest.getForObject(url, model);
   }
 }
