@@ -1,7 +1,5 @@
 package com.github.stachu540.hirezapi;
 
-import ch.qos.logback.classic.Level;
-import ch.qos.logback.classic.Logger;
 import com.github.stachu540.hirezapi.api.HiRez;
 import com.github.stachu540.hirezapi.api.Paladins;
 import com.github.stachu540.hirezapi.api.Smite;
@@ -12,7 +10,6 @@ import com.github.stachu540.hirezapi.exception.BasePlatformException;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 
 import java.util.HashMap;
@@ -40,8 +37,6 @@ public class HiRezAPI<M extends Map<P, String>, P extends BasePlatform> {
    */
   private final String authKey;
 
-  private final Logger logger = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
-
   @Setter
   @SuppressWarnings("unchecked")
   private M sessionCache = (M) new HashMap<P, String>();
@@ -58,8 +53,6 @@ public class HiRezAPI<M extends Map<P, String>, P extends BasePlatform> {
    * @param authKey Authorization Key (AuthKey)
    */
   public HiRezAPI(String devId, String authKey) {
-    logger.setLevel(
-        (System.getProperties().containsKey("hirez.debug")) ? Level.DEBUG : Level.ERROR);
     this.devId = devId;
     this.authKey = authKey;
   }

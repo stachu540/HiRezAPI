@@ -19,7 +19,6 @@ import java.util.SimpleTimeZone;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
-import org.slf4j.Logger;
 
 /**
  * Authentication class response for handling session keys and replacing if it is expired.
@@ -33,7 +32,6 @@ import org.slf4j.Logger;
 public class Authentication<M extends Map<T, String>, T extends BasePlatform, H extends HiRez<T>> {
   private final String devId;
   private final String authKey;
-  private final Logger logger;
   private final M sessions;
 
   @Getter(AccessLevel.NONE)
@@ -55,7 +53,6 @@ public class Authentication<M extends Map<T, String>, T extends BasePlatform, H 
     this.authKey = main.getAuthKey();
     this.platform = basePlatform;
     this.api = api;
-    this.logger = main.getLogger();
     this.sessions = (M) main.getSessionCache();
   }
 
