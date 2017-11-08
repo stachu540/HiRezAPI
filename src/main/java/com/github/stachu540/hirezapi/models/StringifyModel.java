@@ -14,7 +14,11 @@ public class StringifyModel {
     try {
       SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
       sdf.setTimeZone(TimeZone.getTimeZone(ZoneOffset.UTC));
-      return sdf.parse(timestamp);
+      if (timestamp == null) {
+        return new Date();
+      } else {
+        return sdf.parse(timestamp);
+      }
     } catch (ParseException e) {
       e.printStackTrace();
     }
