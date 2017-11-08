@@ -13,22 +13,14 @@ import lombok.EqualsAndHashCode;
 @Endpoint("testsession")
 @EqualsAndHashCode(callSuper = true)
 public class TestSession extends StringifyModel {
-  private final String message;
-  private final String devId;
+  private final boolean successful;
   private final Date timestamp;
-  private final String signature;
 
   public TestSession(String message) {
     Matcher matcher =
-        Pattern.compile("^(?<message>.+): developer: (?<devId>[0-9]{4}) time: (?<timestamp>.+) signature: (?<sig>.+) session: (?<session>.+)$").matcher(message.replace("\"", ""));
+        Pattern.compile("^(.+): developer: ([0-9]{4}) time: (?<timestamp>.+) signature: (.+) session: (.+)$").matcher(message.replace("\"", ""));
     matcher.find();
-    this.message = matcher.group("message");
-    this.devId = matcher.group("devId");
+    this.successful = matcher.group(0).startsWith("This was a successful test with the following parameters added:");
     this.timestamp = parse(matcher.group("timestamp"));
-    this.signature = matcher.group("sig");
-  }
-
-  public boolean isSuccessful() {
-    return message.equals("This was a successful test with the following parameters added");
   }
 }
