@@ -5,11 +5,7 @@ import com.github.stachu540.hirezapi.enums.ServerStatus;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
+import java.util.*;
 
 import lombok.Data;
 
@@ -73,11 +69,11 @@ public class ServerStatusIncident {
     }
 
     private long parseTimestamp(String timestamp) {
-      DateFormat df = new SimpleDateFormat("MMM dd, kk:mm z", Locale.US);
+      DateFormat df = new SimpleDateFormat("yyyyMMMdd,kk:mmz", Locale.US);
       df.setTimeZone(TimeZone.getTimeZone("UTC"));
       Date date;
       try {
-        date = df.parse(timestamp);
+        date = df.parse(String.valueOf(Calendar.getInstance(Locale.US).get(Calendar.YEAR)) + timestamp.replaceAll("\\s+", ""));
       } catch (ParseException e) {
         date = new Date();
       }
