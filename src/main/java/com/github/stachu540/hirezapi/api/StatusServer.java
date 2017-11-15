@@ -57,8 +57,7 @@ public class StatusServer {
     }
     for (SyndEntry entry : feed.getEntries()) {
       ServerStatusIncident incident =
-          new ServerStatusIncident(
-              entry.getTitle(), entry.getLink(), entry.getContents().get(0).getValue());
+          new ServerStatusIncident(entry.getTitle(), entry.getLink(), entry.getContents().get(0).getValue(), entry.getPublishedDate());
       if (incident.contains(game)) {
         if (platform != null && incident.contains(platform)) {
           incidents.add(incident);
