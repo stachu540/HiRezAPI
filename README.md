@@ -9,7 +9,7 @@
 
 Java-Based API Wrapper for Hi-Rez Studios games. Currently supports:
  * [Smite](https://smitegame.com/)
- * [Paladins](https://paladinsgame.com/)
+ * [Paladins](https://paladins.com/)
  
 ## Features
 
@@ -28,37 +28,39 @@ Add to `pom.xml` build.
 <repositories>
     ...
     <repository>
-        <id>jitpack.io</id>
-        <url>https://jitpack.io</url>
+        <id>jcenter</id>
+        <url>https://jcenter.bintray.com</url>
     </repository>
 </repositories>
-...
+
 <dependencies>
-    ...
     <dependency>
           <groupId>com.github.stachu540</groupId>
-          <artifactId>HiRezAPI</artifactId>
-          <version>2.0.1</version>
+          <!--for all games-->
+          <artifactId>HiRezAPI-core</artifactId> 
+          <!--for paladins-->
+          <!--<artifactId>HiRezAPI-paladins</artifactId>-->
+          <!--for smite-->
+          <!--<artifactId>HiRezAPI-smite</artifactId>-->
+          <version>2.1.0</version>
      </dependency>
 </dependencies>
-...
 ```
 #### Gradle
 Add to `build.gradle` build.
 ```groovy
-...
 repositories {
-  ...
-  maven {
-    url  "https://jitpack.io"
-  }
+  jcenter()
 }
-...
+
 dependencies {
-  ...
-  compile "com.github.stachu540:HiRezAPI:2.0.1"
+    // for all games
+  compile "com.github.stachu540:HiRezAPI-core:2.1.0"
+    // for paladins
+//  compile "com.github.stachu540:HiRezAPI-paladins:2.1.0"
+    // for smite
+//  compile "com.github.stachu540:HiRezAPI-smite:2.1.0"
 }
-...
 ```
 
 For starting using script check [Wiki page](https://github.com/stachu540/HiRezAPI/wiki/Example-Usage).
