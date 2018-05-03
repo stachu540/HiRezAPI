@@ -1,0 +1,11 @@
+
+dependencies {
+    compile "com.squareup.okhttp3:okhttp:${versions.okhttp}"
+    compile "com.fasterxml.jackson.core:jackson-databind"
+    compile "org.jsoup:jsoup:${versions.jsoup}"
+    compile "org.apache.commons:commons-lang3"
+    compile "org.springframework:spring-web"
+    compile "com.rometools:rome"
+
+    testCompile "com.squareup.okhttp3:mockwebserver:${versions.okhttp}"
+}

@@ -1,0 +1,129 @@
+plugins {
+    id "idea"
+    id "maven"
+    id "jacoco"
+    id "maven-publish"
+    id "net.ltgt.apt" version "0.15"
+    id "com.jfrog.bintray" version "1.8.0"
+    id "io.spring.dependency-management" version "1.0.5.RELEASE"
+}
+
+ext {
+    versions = [
+            // ALL
+            slf4j: "1.7.25",
+//            immutables: "2.5.6",
+            lombok: "1.16.20",
+            logback: "1.2.3",
+            junit: "4.12",
+            // Common
+            jackson: "2.9.5",
+            okhttp: "3.10.0",
+            rome: "1.9.0",
+            jsoup: "1.11.3",
+            spring_platform: "Cairo-RELEASE",
+            reactor: "Bismuth-SR8",
+            apache: [
+                    commons: [
+                            lang3: "3.7"
+                    ]
+            ]
+    ]
+}
+
+allprojects {
+    apply plugin: "jacoco"
+    apply plugin: "net.ltgt.apt"
+    apply plugin: "maven-publish"
+    apply plugin: "com.jfrog.bintray"
+
+    group = 'com.github.stachu540'
+    version = '2.0.0-SNAPSHOT'
+
+    repositories {
+        jcenter()
+    }
+
+    plugins.withType(JavaPlugin) {
+        plugins.withId("net.ltgt.apt-idea") {
+            afterEvaluate {
+                project.idea.module.apt.addAptDependencies = false
+            }
+        }
+    }
+
+    configurations { codacy }
+}
+
+subprojects {
+    apply plugin: "java"
+    apply plugin: "io.spring.dependency-management"
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    ext.projectName = (project.name == "HiRezApi") ? "HiRezApi" : "HiRezApi-${project.name}"
+
+    sourceSets {
+        main {
+            java {
+                srcDirs = ['build/generated/source/apt/main', 'src/main/java']
+            }
+        }
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "io.spring.platform:platform-bom:${versions.spring_platform}"
+        }
+    }
+
+    dependencies {
+        compile "org.slf4j:slf4j-api"
+//        annotationProcessor "org.immutables:value:${versions.immutables}"
+//        compileOnly "org.immutables:value:${versions.immutables}"
+        annotationProcessor "org.projectlombok:lombok"
+        compileOnly "org.projectlombok:lombok"
+
+        testCompile "junit:junit"
+        testCompile "ch.qos.logback:logback-classic"
+        testCompile "org.springframework:spring-test"
+
+        codacy "com.codacy:codacy-coverage-reporter:4.0.0"
+    }
+
+    publishing {
+        publications {
+            mainProject(MavenPublication) {
+                from project.components.java
+                groupId group
+                artifact projectName
+                version version
+            }
+        }
+    }
+
+    bintray {
+        user = System.getenv('BINTRAY_USER')
+        key = System.getenv('BINTRAY_API_KEY')
+        publications = ['mainProject']
+    }
+}
+
+task codacyCoverage(type: JavaExec) {
+    main = "com.codacy.CodacyCoverageReporter"
+    classpath = configurations.codacy
+    args = [
+            "report",
+            "-l",
+            "Java",
+            "-r",
+            "${buildDir}/reports/jacoco/test/jacocoTestReport.xml"
+    ]
+    dependsOn(task("jacocoTestReport"))
+}
+
+wrapper {
+    gradleVersion = "4.7"
+    distributionType = Wrapper.DistributionType.ALL
+}

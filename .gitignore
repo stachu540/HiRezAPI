@@ -1,23 +1,6 @@
-# Created by .ignore support plugin (hsz.mobi)
-### Maven template
-target/
-pom.xml.tag
-pom.xml.releaseBackup
-pom.xml.versionsBackup
-pom.xml.next
-release.properties
-dependency-reduced-pom.xml
-buildNumber.properties
-.mvn/timing.properties
-
-# Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
-!/.mvn/wrapper/maven-wrapper.jar
-
-!.github/
-
-### JetBrains
-.idea/**
+.idea
 *.iml
-
-src/test/java/com/github/stachu540/hirezapi/*.java
-!src/test/java/com/github/stachu540/hirezapi/HiRezAPITest.java
+out/
+.gradle
+build/
+logs/
