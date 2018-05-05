@@ -13,7 +13,7 @@ public class PaladinsEndpoint extends GameEndpoint {
     }
 
     @Override
-    public List getSkins(AbstractHero hero, Language language) {
+    public List getSkins(long id, Language language) {
         return null;
     }
 

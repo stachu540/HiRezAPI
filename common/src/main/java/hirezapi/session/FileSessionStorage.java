@@ -35,7 +35,12 @@ public class FileSessionStorage implements SessionStorage {
     }
 
     @Override
-    public Boolean remove(Platform platform) {
+    public boolean remove(Platform platform) {
         return properties.remove(retrieveName(platform)) != null;
+    }
+
+    @Override
+    public boolean contains(Platform platform) {
+        return properties.contains(retrieveName(platform));
     }
 }

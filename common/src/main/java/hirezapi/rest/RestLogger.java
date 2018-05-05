@@ -8,7 +8,10 @@ import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.stream.Collectors;
 
 public class RestLogger implements ClientHttpRequestInterceptor {
 
@@ -27,12 +30,11 @@ public class RestLogger implements ClientHttpRequestInterceptor {
     private void log(HttpRequest request, byte[] body, ClientHttpResponse response) throws IOException {
         // do logging
         logger.info("Request:");
-        logger.info("\tURI: %s", request.getURI());
-        logger.info("\tMethod: %s", request.getMethod());
-        logger.info("\tHeaders: %s", request.getHeaders());
-        logger.info("\tHeaders: %s", request.getHeaders());
-        logger.info("\tBody: %s", new String(body));
+        logger.info("\tURI: {}", request.getURI());
+        logger.info("\tMethod: {}", request.getMethod());
+        logger.info("\tHeaders: {}", request.getHeaders());
+        logger.info("\tBody: {}", new String(body));
         logger.info("-----------------------------");
-        logger.info("\tResponse:%s", System.lineSeparator() + new ObjectMapper().readValue(response.getBody(), String.class));
+        logger.info("\tResponse:{}", System.lineSeparator() + new BufferedReader(new InputStreamReader(response.getBody())).lines().collect(Collectors.toList()));
     }
 }

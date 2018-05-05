@@ -2,6 +2,8 @@ package hirezapi.endpoints;
 
 import hirezapi.HiRezApi;
 import hirezapi.Platform;
+import hirezapi.json.SessionCreation;
+import hirezapi.session.SessionCreationException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,10 +17,14 @@ import java.util.SimpleTimeZone;
 @RequiredArgsConstructor
 public abstract class AbstractEndpoint {
     protected final HiRezApi api;
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     protected String buildUrl(String endpoint, String... queryParams) {
         final String realEndpoint = "/" + ((!endpoint.toLowerCase().endsWith("json")) ? endpoint + "json" : endpoint);
         final String timestamp = getTimestamp();
+
+
+        log.debug("Building URL with Endpoint \"{}\" with {}", endpoint, (queryParams.length > 0) ? String.format("Params: \"[%s]\"", String.join("/", queryParams)) : "no params");
 
         switch (endpoint.toLowerCase()) {
             case "ping":
@@ -30,15 +36,19 @@ public abstract class AbstractEndpoint {
                         timestamp);
             default:
                 if (hasSession(api.getConfiguration().getPlatform()) && (endpoint.equalsIgnoreCase("testsession") || api.sessionEndpoint().test().isSuccessful())) {
+                    log.debug("Execute Endpoint \"{}\" with {}", endpoint, (queryParams.length > 0) ? String.format("Params: \"[%s]\"", String.join("/", queryParams)) : "no params");
                     return String.format("%s/%s/%s/%s", realEndpoint,
                             api.getConfiguration().getDevId(),
                             generateSignature(endpoint, timestamp),
                             timestamp)
                             + ((queryParams.length > 0) ? "/" + String.join("/", queryParams) : "");
                 } else {
-                    synchronized (api.sessionEndpoint().create()) {
-                        return buildUrl(endpoint, queryParams);
+                    log.debug("The Session key is missing. Starting create session");
+                    SessionCreation session = api.sessionEndpoint().create();
+                    if (!session.isApproved()) {
+                        throw new SessionCreationException(session);
                     }
+                    return buildUrl(endpoint, queryParams);
                 }
         }
     }

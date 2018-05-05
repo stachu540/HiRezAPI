@@ -1,31 +1,26 @@
 package hirezapi.paladins;
 
-import hirezapi.Configuration;
+import hirezapi.AbstractAPI;
 import hirezapi.paladins.enums.Paladins;
 import hirezapi.rest.RestClient;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.Objects;
 
-@Setter
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public class PaladinsAPI {
-    private final Paladins platform;
-    private RestTemplate restClient;
+public class PaladinsAPI extends AbstractAPI {
+
+    private PaladinsAPI(Paladins platform) {
+        super(platform);
+    }
 
     public static PaladinsAPI of(Paladins platform) {
         return new PaladinsAPI(platform);
     }
 
     public PaladinsGame init(String devId, String authKey) {
-        if (Objects.isNull(restClient)) {
-            this.restClient = new RestClient(platform).getRestClient();
+        if (Objects.isNull(getRestClient())) {
+            setRestClient(new RestClient(getPlatform()).getRestClient());
         }
 
-        return new PaladinsGame(Configuration.of(platform, devId, authKey), restClient);
+        return new PaladinsGame(buildConfiguration(Objects.requireNonNull(devId, "DEV_ID"), Objects.requireNonNull(authKey, "AUTH_KEY")), getRestClient(), getSessionStorage());
     }
 }
