@@ -8,14 +8,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.client.RestTemplate;
 
 @Getter
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class HiRezApi<G extends GameEndpoint> {
     protected final Configuration configuration;
     protected final RestTemplate restClient;
-
-    protected HiRezApi(Configuration configuration) {
-        this(configuration, new RestClient(configuration.getPlatform()).getRestClient());
-    }
 
     public UserEndpoint userEndpoint() {
         return new UserEndpoint(this);
