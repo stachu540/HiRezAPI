@@ -8,5 +8,7 @@ public interface SessionStorage {
 
     String get(Platform platform);
 
-    Boolean remove(Platform platform);
+    boolean remove(Platform platform);
+
+    boolean contains(Platform platform);
 }
