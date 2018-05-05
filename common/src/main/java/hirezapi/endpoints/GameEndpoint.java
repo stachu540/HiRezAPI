@@ -1,6 +1,7 @@
 package hirezapi.endpoints;
 
 import hirezapi.HiRezApi;
+import hirezapi.endpoints.statuspage.ServerStatus;
 import hirezapi.enums.Language;
 import hirezapi.json.AbstractHero;
 import hirezapi.json.AbstractItem;
@@ -19,7 +20,12 @@ public abstract class GameEndpoint<H extends AbstractHero, S extends AbstractSki
         return new ServerStatus(api);
     }
 
-    public abstract List<S> getSkins(H hero, Language language);
+    public List<S> getSkins(H hero, Language language) {
+        return getSkins(hero.getId(), language);
+    }
+
+    public abstract List<S> getSkins(long id, Language language);
+
     public abstract List<I> getItems(Language language);
 
     public PatchInfo getPatchInfo() {

@@ -36,8 +36,14 @@ public class GodItem extends AbstractItem {
     @JsonProperty("StartingItem")
     private boolean startingItem;
 
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
     public static class Description {
         private String description;
         private List<hirezapi.smite.json.Description.Item> menuItems;
+        private String secondaryDescription;
     }
 }

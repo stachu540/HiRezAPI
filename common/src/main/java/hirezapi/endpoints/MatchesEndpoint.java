@@ -16,7 +16,7 @@ public class MatchesEndpoint extends AbstractEndpoint {
         super(api);
     }
 
-//    public DemoDetails getDemoDetails(Match match) {
+    //    public DemoDetails getDemoDetails(Match match) {
 //        return getDemoDetails(match.getId());
 //    }
     public DemoDetails getDemoDetails(long matchId) {

@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class Achievments extends Model {
+public class Achievements extends Model {
     @JsonProperty("KillingSpree")
     private long killingSprees;
     @JsonProperty("RampageSpree")

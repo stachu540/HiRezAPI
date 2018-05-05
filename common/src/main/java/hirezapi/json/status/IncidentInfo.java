@@ -25,13 +25,13 @@ public class IncidentInfo {
         In_progress,
         Completed;
 
+        public static Status get(String status) {
+            return valueOf(status.replace(" ", "_"));
+        }
+
         @Override
         public String toString() {
             return this.name().replace("_", " ");
-        }
-
-        public static Status get(String status) {
-            return valueOf(status.replace(" ", "_"));
         }
     }
 }

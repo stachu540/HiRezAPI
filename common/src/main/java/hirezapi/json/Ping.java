@@ -41,7 +41,8 @@ public class Ping {
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
             sdf.setTimeZone(TimeZone.getTimeZone(ZoneOffset.UTC));
             return sdf.parse(timestamp).toInstant();
-        } catch (ParseException ignore) {}
+        } catch (ParseException ignore) {
+        }
         return Instant.now();
     }
 }

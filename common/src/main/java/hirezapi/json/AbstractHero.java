@@ -3,7 +3,9 @@ package hirezapi.json;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import hirezapi.json.deserializer.BooleanTextDeserializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -33,6 +35,7 @@ public class AbstractHero<A extends Ability<?>> extends Model {
     private float health;
     private String lore;
     private String name;
+    @JsonDeserialize(using = BooleanTextDeserializer.class)
     private boolean freeRotation;
     private String roles;
     private float speed;

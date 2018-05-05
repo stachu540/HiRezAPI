@@ -32,7 +32,7 @@ public class SessionEndpoint extends AbstractEndpoint {
 
     public SessionCreation create() {
         SessionCreation sessionCreation = api.getRestClient().getForObject(buildUrl("createsession"), SessionCreation.class);
-        if (!sessionCreation.getReturnedMessage().equals("Approved")){
+        if (!sessionCreation.getReturnedMessage().equals("Approved")) {
             throw new SessionCreationException(sessionCreation);
         } else {
             sessionStorage.set(api.getConfiguration().getPlatform(), sessionCreation);

@@ -1,5 +1,6 @@
 package hirezapi.rest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpRequest;
@@ -31,5 +32,7 @@ public class RestLogger implements ClientHttpRequestInterceptor {
         logger.info("\tHeaders: %s", request.getHeaders());
         logger.info("\tHeaders: %s", request.getHeaders());
         logger.info("\tBody: %s", new String(body));
+        logger.info("-----------------------------");
+        logger.info("\tResponse:%s", System.lineSeparator() + new ObjectMapper().readValue(response.getBody(), String.class));
     }
 }

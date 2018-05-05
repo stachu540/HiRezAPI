@@ -25,8 +25,8 @@ public class SmiteEndpoint extends GameEndpoint<God, GodSkin, GodItem> {
     }
 
     @Override
-    public List<GodSkin> getSkins(God god, Language language) {
-        return Arrays.asList(api.getRestClient().getForObject(buildUrl("getgodskins", Long.toString(god.getId()), Integer.toString(language.getId())), GodSkin[].class));
+    public List<GodSkin> getSkins(long id, Language language) {
+        return Arrays.asList(api.getRestClient().getForObject(buildUrl("getgodskins", Long.toString(id), Integer.toString(language.getId())), GodSkin[].class));
     }
 
     @Override

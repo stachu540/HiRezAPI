@@ -47,9 +47,9 @@ public class Feeds {
                 if (e.getContents().get(0).getValue().matches("([hH]i[Rr]ez(/s)?[Gg]ame[s]?)") &&
                         e.getTitle().matches("([hH]i[Rr]ez(/s)?[Gg]ame[s]?)")) {
                     return true;
-                } else if(allPlatforms) {
-                   return StringUtils.containsIgnoreCase(e.getContents().get(0).getValue(), configuration.getPlatform().getGame()) &&
-                           StringUtils.containsIgnoreCase(e.getTitle(), configuration.getPlatform().getGame());
+                } else if (allPlatforms) {
+                    return StringUtils.containsIgnoreCase(e.getContents().get(0).getValue(), configuration.getPlatform().getGame()) &&
+                            StringUtils.containsIgnoreCase(e.getTitle(), configuration.getPlatform().getGame());
                 } else {
                     return StringUtils.containsIgnoreCase(e.getContents().get(0).getValue(), configuration.getPlatform().getGame()) &&
                             StringUtils.containsIgnoreCase(e.getTitle(), configuration.getPlatform().getGame()) &&

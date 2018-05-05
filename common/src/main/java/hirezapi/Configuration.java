@@ -11,7 +11,7 @@ public class Configuration {
     private final String devId;
     private final String authKey;
 
-    public static Configuration of(Platform platform, String devId, String authKey) {
-        return new Configuration(platform, devId, authKey) ;
+    public static Configuration of(final Platform platform, final String devId, final String authKey) {
+        return new Configuration(platform, devId, authKey);
     }
 }

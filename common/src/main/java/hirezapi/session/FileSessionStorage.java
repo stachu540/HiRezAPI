@@ -16,7 +16,7 @@ public class FileSessionStorage implements SessionStorage {
         try {
             this.properties.load(new FileInputStream(file));
         } catch (IOException e) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
     }
 

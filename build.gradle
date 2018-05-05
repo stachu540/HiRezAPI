@@ -10,24 +10,11 @@ plugins {
 
 ext {
     versions = [
-            // ALL
-            slf4j: "1.7.25",
 //            immutables: "2.5.6",
-            lombok: "1.16.20",
-            logback: "1.2.3",
-            junit: "4.12",
             // Common
-            jackson: "2.9.5",
-            okhttp: "3.10.0",
-            rome: "1.9.0",
-            jsoup: "1.11.3",
-            spring_platform: "Cairo-RELEASE",
-            reactor: "Bismuth-SR8",
-            apache: [
-                    commons: [
-                            lang3: "3.7"
-                    ]
-            ]
+            okhttp         : "3.10.0",
+            jsoup          : "1.11.3",
+            spring_platform: "Cairo-RELEASE"
     ]
 }
 
@@ -85,8 +72,8 @@ subprojects {
         compileOnly "org.projectlombok:lombok"
 
         testCompile "junit:junit"
+        testCompile "org.mockito:mockito-core"
         testCompile "ch.qos.logback:logback-classic"
-        testCompile "org.springframework:spring-test"
 
         codacy "com.codacy:codacy-coverage-reporter:4.0.0"
     }
@@ -126,7 +113,6 @@ subprojects {
         user = System.getenv('BINTRAY_USER')
         key = System.getenv('BINTRAY_API_KEY')
         publications = ['mainProject']
-        configurations = ['archives']
         pkg {
             repo = 'Java'
             name = 'HiRezAPI'
@@ -136,7 +122,7 @@ subprojects {
             vcsUrl = 'https://github.com/stachu540/HiRezAPI.git'
             issueTrackerUrl = 'https://github.com/stachu540/HiRezAPI/issues'
             licenses = ['MIT']
-            labels = ['hi-rez','api-wrapper','smite','paladins']
+            labels = ['hi-rez', 'api-wrapper', 'smite', 'paladins']
             publicDownloadNumbers = true
             version {
                 name = project.version

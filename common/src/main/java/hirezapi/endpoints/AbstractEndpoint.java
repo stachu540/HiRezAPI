@@ -10,12 +10,11 @@ import java.util.Date;
 import java.util.SimpleTimeZone;
 
 @RequiredArgsConstructor
-public abstract class AbstractEndpoint<T extends HiRezApi> {
-    protected final T api;
+public abstract class AbstractEndpoint {
+    protected final HiRezApi api;
 
     protected String buildUrl(String endpoint, String... queryParams) {
-        final String realEndpoint = "/" + ((!endpoint.toLowerCase().endsWith("json")) ?
-            endpoint + "json" : endpoint);
+        final String realEndpoint = "/" + ((!endpoint.toLowerCase().endsWith("json")) ? endpoint + "json" : endpoint);
         if (endpoint.equalsIgnoreCase("ping")) {
             return realEndpoint;
         }
