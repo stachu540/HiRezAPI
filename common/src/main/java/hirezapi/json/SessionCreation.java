@@ -21,7 +21,7 @@ public class SessionCreation extends Model {
     private String sessionId;
     private Instant timestamp;
 
-    private boolean isApproved() {
+    public boolean isApproved() {
         return getReturnedMessage().equals("Approved");
     }
 }
