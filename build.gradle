@@ -5,16 +5,21 @@ plugins {
     id "maven-publish"
     id "net.ltgt.apt" version "0.15"
     id "com.jfrog.bintray" version "1.8.0"
-    id "io.spring.dependency-management" version "1.0.5.RELEASE"
 }
 
 ext {
     versions = [
-//            immutables: "2.5.6",
-            // Common
-            okhttp         : "3.10.0",
-            jsoup          : "1.11.3",
-            spring_platform: "Cairo-RELEASE"
+            lombok          : "1.16.20",
+            slf4j           : "1.7.25",
+            logback         : "1.2.3",
+            jackson         : "2.9.5",
+            rome            : "1.9.0",
+            commons_lang3   : "3.7",
+            okhttp          : "3.10.0",
+            jsoup           : "1.11.3",
+            codacy          : "4.0.0",
+            mockito         : "2.18.3",
+            junit           : "4.12"
     ]
 }
 
@@ -43,7 +48,6 @@ subprojects {
     apply plugin: "net.ltgt.apt"
     apply plugin: "maven-publish"
     apply plugin: "com.jfrog.bintray"
-    apply plugin: "io.spring.dependency-management"
 
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
@@ -58,24 +62,16 @@ subprojects {
         }
     }
 
-    dependencyManagement {
-        imports {
-            mavenBom "io.spring.platform:platform-bom:${versions.spring_platform}"
-        }
-    }
-
     dependencies {
-        compile "org.slf4j:slf4j-api"
-//        annotationProcessor "org.immutables:value:${versions.immutables}"
-//        compileOnly "org.immutables:value:${versions.immutables}"
-        annotationProcessor "org.projectlombok:lombok"
-        compileOnly "org.projectlombok:lombok"
+        compile "org.slf4j:slf4j-api:${versions.slf4j}"
+        annotationProcessor "org.projectlombok:lombok:${versions.lombok}"
+        compileOnly "org.projectlombok:lombok:${versions.lombok}"
 
-        testCompile "junit:junit"
-        testCompile "org.mockito:mockito-core"
-        testCompile "ch.qos.logback:logback-classic"
+        testCompile "junit:junit:${versions.junit}"
+        testCompile "org.mockito:mockito-core:${versions.mockito}"
+        testCompile "ch.qos.logback:logback-classic:${versions.logback}"
 
-        codacy "com.codacy:codacy-coverage-reporter:4.0.0"
+        codacy "com.codacy:codacy-coverage-reporter::${versions.codacy}"
     }
 
     // custom tasks for creating source/javadoc jars

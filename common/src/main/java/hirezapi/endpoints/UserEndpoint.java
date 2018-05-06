@@ -16,11 +16,11 @@ public class UserEndpoint extends AbstractEndpoint {
      * @return player information
      */
     public Player getPlayer(String user) {
-        return api.getRestClient().getForObject(buildUrl("getplayer", user, "UTF-8"), Player[].class)[0];
+        return api.getRestController().request(buildUrl("getplayer", user), Player[].class)[0];
     }
 
     public Achievements getPlayerAchievments(long id) {
-        return api.getRestClient().getForObject(buildUrl("getplayerachievements", Long.toString(id)), Achievements.class);
+        return api.getRestController().request(buildUrl("getplayerachievements", Long.toString(id)), Achievements.class);
     }
 
     /**
@@ -29,6 +29,6 @@ public class UserEndpoint extends AbstractEndpoint {
      * @return player information
      */
     public PlayerStatus getPlayerStatus(String user) {
-        return api.getRestClient().getForObject(buildUrl("getplayerstatus", user, "UTF-8"), PlayerStatus[].class)[0];
+        return api.getRestController().request(buildUrl("getplayerstatus", user), PlayerStatus[].class)[0];
     }
 }

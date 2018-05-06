@@ -27,11 +27,11 @@ public class SessionEndpoint extends AbstractEndpoint {
     }
 
     public Ping ping() {
-        return new Ping(api.getRestClient().getForObject("/pingjson", String.class));
+        return new Ping(api.getRestController().request(buildUrl("ping"), String.class));
     }
 
     public SessionCreation create() {
-        SessionCreation sessionCreation = api.getRestClient().getForObject(buildUrl("createsession"), SessionCreation.class);
+        SessionCreation sessionCreation = api.getRestController().request(buildUrl("createsession"), SessionCreation.class);
         if (!sessionCreation.getReturnedMessage().equals("Approved")) {
             throw new SessionCreationException(sessionCreation);
         } else {
@@ -42,10 +42,10 @@ public class SessionEndpoint extends AbstractEndpoint {
     }
 
     public SessionTest test() {
-        return new SessionTest(api.getRestClient().getForObject(buildUrl("testsession"), String.class));
+        return new SessionTest(api.getRestController().request(buildUrl("testsession"), String.class));
     }
 
     public DataUsage getDataUsage() {
-        return api.getRestClient().getForObject(buildUrl("getdataused"), DataUsage[].class)[0];
+        return api.getRestController().request(buildUrl("getdataused"), DataUsage[].class)[0];
     }
 }

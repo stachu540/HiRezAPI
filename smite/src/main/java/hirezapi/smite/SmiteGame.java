@@ -4,11 +4,10 @@ import hirezapi.Configuration;
 import hirezapi.HiRezApi;
 import hirezapi.session.SessionStorage;
 import hirezapi.smite.endpoint.SmiteEndpoint;
-import org.springframework.web.client.RestTemplate;
 
 public class SmiteGame extends HiRezApi<SmiteEndpoint> {
-    SmiteGame(Configuration config, RestTemplate restClient, SessionStorage sessionStorage) {
-        super(config, restClient, sessionStorage);
+    SmiteGame(Configuration config, SessionStorage sessionStorage) {
+        super(config, sessionStorage);
     }
 
     @Override

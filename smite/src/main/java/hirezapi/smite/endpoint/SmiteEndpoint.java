@@ -17,20 +17,20 @@ public class SmiteEndpoint extends GameEndpoint<God, GodSkin, GodItem> {
     }
 
     public List<God> getGods(Language language) {
-        return Arrays.asList(api.getRestClient().getForObject(buildUrl("getgods", Integer.toString(language.getId())), God[].class));
+        return Arrays.asList(api.getRestController().request(buildUrl("getgods", Integer.toString(language.getId())), God[].class));
     }
 
     public List<GodRecommendedItem> getRecommendedItems(God god, Language language) {
-        return Arrays.asList(api.getRestClient().getForObject(buildUrl("getgodrecommendeditems", Long.toString(god.getId()), Integer.toString(language.getId())), GodRecommendedItem[].class));
+        return Arrays.asList(api.getRestController().request(buildUrl("getgodrecommendeditems", Long.toString(god.getId()), Integer.toString(language.getId())), GodRecommendedItem[].class));
     }
 
     @Override
     public List<GodSkin> getSkins(long id, Language language) {
-        return Arrays.asList(api.getRestClient().getForObject(buildUrl("getgodskins", Long.toString(id), Integer.toString(language.getId())), GodSkin[].class));
+        return Arrays.asList(api.getRestController().request(buildUrl("getgodskins", Long.toString(id), Integer.toString(language.getId())), GodSkin[].class));
     }
 
     @Override
     public List<GodItem> getItems(Language language) {
-        return Arrays.asList(api.getRestClient().getForObject(buildUrl("getitems", Integer.toString(language.getId())), GodItem[].class));
+        return Arrays.asList(api.getRestController().request(buildUrl("getitems", Integer.toString(language.getId())), GodItem[].class));
     }
 }

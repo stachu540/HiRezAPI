@@ -3,6 +3,7 @@ package hirezapi.smite.enums;
 import hirezapi.Platform;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import okhttp3.HttpUrl;
 
 @Getter
 @RequiredArgsConstructor
@@ -13,5 +14,9 @@ public enum Smite implements Platform {
 
     private final String game = getClass().getSimpleName();
     private final String platform = name();
-    private final String baseUrl;
+    private final HttpUrl baseUrl;
+
+    Smite(String url) {
+        this.baseUrl = HttpUrl.parse(url);
+    }
 }

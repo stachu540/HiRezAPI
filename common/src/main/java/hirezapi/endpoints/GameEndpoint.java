@@ -29,6 +29,6 @@ public abstract class GameEndpoint<H extends AbstractHero, S extends AbstractSki
     public abstract List<I> getItems(Language language);
 
     public PatchInfo getPatchInfo() {
-        return api.getRestClient().getForObject(buildUrl("getpatchinfo"), PatchInfo.class);
+        return api.getRestController().request(buildUrl("getpatchinfo"), PatchInfo.class);
     }
 }

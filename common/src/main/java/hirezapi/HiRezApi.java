@@ -1,19 +1,19 @@
 package hirezapi;
 
 import hirezapi.endpoints.*;
+import hirezapi.rest.RestController;
 import hirezapi.session.SessionStorage;
 import lombok.Getter;
-import org.springframework.web.client.RestTemplate;
 
 @Getter
 public abstract class HiRezApi<G extends GameEndpoint> {
     protected final Configuration configuration;
-    protected final RestTemplate restClient;
+    protected final RestController restController;
     private final SessionEndpoint sessionEndpoint;
 
-    protected HiRezApi(Configuration configuration, RestTemplate restClient, SessionStorage sessionStorage) {
+    protected HiRezApi(Configuration configuration, SessionStorage sessionStorage) {
         this.configuration = configuration;
-        this.restClient = restClient;
+        this.restController = new RestController(configuration.getPlatform());
         this.sessionEndpoint = new SessionEndpoint(this, sessionStorage);
     }
 

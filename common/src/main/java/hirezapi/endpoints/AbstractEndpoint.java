@@ -23,7 +23,6 @@ public abstract class AbstractEndpoint {
         final String realEndpoint = "/" + ((!endpoint.toLowerCase().endsWith("json")) ? endpoint + "json" : endpoint);
         final String timestamp = getTimestamp();
 
-
         log.debug("Building URL with Endpoint \"{}\" with {}", endpoint, (queryParams.length > 0) ? String.format("Params: \"[%s]\"", String.join("/", queryParams)) : "no params");
 
         switch (endpoint.toLowerCase()) {

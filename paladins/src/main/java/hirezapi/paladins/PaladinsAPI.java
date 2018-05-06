@@ -2,7 +2,6 @@ package hirezapi.paladins;
 
 import hirezapi.AbstractAPI;
 import hirezapi.paladins.enums.Paladins;
-import hirezapi.rest.RestClient;
 
 import java.util.Objects;
 
@@ -17,10 +16,6 @@ public class PaladinsAPI extends AbstractAPI {
     }
 
     public PaladinsGame init(String devId, String authKey) {
-        if (Objects.isNull(getRestClient())) {
-            setRestClient(new RestClient(getPlatform()).getRestClient());
-        }
-
-        return new PaladinsGame(buildConfiguration(Objects.requireNonNull(devId, "DEV_ID"), Objects.requireNonNull(authKey, "AUTH_KEY")), getRestClient(), getSessionStorage());
+        return new PaladinsGame(buildConfiguration(Objects.requireNonNull(devId, "DEV_ID"), Objects.requireNonNull(authKey, "AUTH_KEY")), getSessionStorage());
     }
 }

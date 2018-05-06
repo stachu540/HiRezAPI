@@ -20,14 +20,14 @@ public class MatchesEndpoint extends AbstractEndpoint {
 //        return getDemoDetails(match.getId());
 //    }
     public DemoDetails getDemoDetails(long matchId) {
-        return api.getRestClient().getForObject(buildUrl("getdemodetails", Long.toString(matchId)), DemoDetails[].class)[0];
+        return api.getRestController().request(buildUrl("getdemodetails", Long.toString(matchId)), DemoDetails[].class)[0];
     }
 
     public List<ProLeagueMatch> getEsportsProLeagueDetails() {
-        return Arrays.asList(api.getRestClient().getForObject(buildUrl("getesportsproleaguedetails"), ProLeagueMatch[].class));
+        return Arrays.asList(api.getRestController().request(buildUrl("getesportsproleaguedetails"), ProLeagueMatch[].class));
     }
 
     public List<LeagueSeason> getLeagueSeasons(Queue queue) {
-        return Arrays.asList(api.getRestClient().getForObject(buildUrl("getleagueseasons", Integer.toString(queue.getId())), LeagueSeason[].class));
+        return Arrays.asList(api.getRestController().request(buildUrl("getleagueseasons", Integer.toString(queue.getId())), LeagueSeason[].class));
     }
 }
