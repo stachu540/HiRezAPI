@@ -39,8 +39,9 @@ allprojects {
         }
     }
 
-    configurations { codacy }
 }
+
+configurations { codacy }
 
 subprojects {
     apply plugin: "java"
@@ -70,8 +71,6 @@ subprojects {
         testCompile "junit:junit:${versions.junit}"
         testCompile "org.mockito:mockito-core:${versions.mockito}"
         testCompile "ch.qos.logback:logback-classic:${versions.logback}"
-
-        codacy "com.codacy:codacy-coverage-reporter::${versions.codacy}"
     }
 
     // custom tasks for creating source/javadoc jars
@@ -125,6 +124,10 @@ subprojects {
             }
         }
     }
+}
+
+dependencies {
+    codacy "com.codacy:codacy-coverage-reporter::${versions.codacy}"
 }
 
 task codacyCoverage(type: JavaExec) {
