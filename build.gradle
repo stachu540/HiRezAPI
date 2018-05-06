@@ -127,7 +127,7 @@ subprojects {
 }
 
 dependencies {
-    codacy "com.codacy:codacy-coverage-reporter::${versions.codacy}"
+    codacy "com.codacy:codacy-coverage-reporter:${versions.codacy}"
 }
 
 task codacyCoverage(type: JavaExec) {
