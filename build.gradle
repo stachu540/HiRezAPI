@@ -41,8 +41,6 @@ allprojects {
 
 }
 
-configurations { codacy }
-
 subprojects {
     apply plugin: "java"
     apply plugin: "jacoco"
@@ -124,23 +122,6 @@ subprojects {
             }
         }
     }
-}
-
-dependencies {
-    codacy "com.codacy:codacy-coverage-reporter:${versions.codacy}"
-}
-
-task codacyCoverage(type: JavaExec) {
-    main = "com.codacy.CodacyCoverageReporter"
-    classpath = configurations.codacy
-    args = [
-            "report",
-            "-l",
-            "Java",
-            "-r",
-            "${buildDir}/reports/jacoco/test/jacocoTestReport.xml"
-    ]
-    dependsOn(task("jacocoTestReport"))
 }
 
 wrapper {
