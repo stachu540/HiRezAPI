@@ -7,6 +7,7 @@ import com.rometools.rome.io.XmlReader;
 import hirezapi.Configuration;
 import hirezapi.json.status.Incident;
 import hirezapi.json.status.IncidentInfo;
+import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -30,6 +31,7 @@ public class Feeds {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     private final Configuration configuration;
+    @Getter
     private final boolean allPlatforms;
     private List<Incident> incidents;
 
