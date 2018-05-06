@@ -3,7 +3,6 @@ package hirezapi.paladins.endpoint;
 import hirezapi.HiRezApi;
 import hirezapi.endpoints.GameEndpoint;
 import hirezapi.enums.Language;
-import hirezapi.json.AbstractHero;
 
 import java.util.List;
 

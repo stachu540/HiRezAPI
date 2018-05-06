@@ -1,6 +1,5 @@
 package hirezapi;
 
-import hirezapi.rest.RestController;
 import hirezapi.session.EnvironmentalSessionStorage;
 import hirezapi.session.SessionStorage;
 import lombok.AccessLevel;

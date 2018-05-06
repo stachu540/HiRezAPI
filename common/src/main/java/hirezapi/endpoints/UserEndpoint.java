@@ -12,6 +12,7 @@ public class UserEndpoint extends AbstractEndpoint {
 
     /**
      * Getting Player Information
+     *
      * @param user In Game Name or User ID
      * @return player information
      */
@@ -25,6 +26,7 @@ public class UserEndpoint extends AbstractEndpoint {
 
     /**
      * Getting Player Information
+     *
      * @param user In Game Name or User ID
      * @return player information
      */

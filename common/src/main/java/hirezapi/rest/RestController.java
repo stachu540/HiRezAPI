@@ -25,10 +25,8 @@ public class RestController {
     private final ObjectMapper mapper;
     private final HttpUrl baseUrl;
     private final SimpleModule simpleModule;
-
-    private RestErrorHandler errorHandler = new RestErrorHandler(this);
-
     private final Logger log = LoggerFactory.getLogger(getClass());
+    private RestErrorHandler errorHandler = new RestErrorHandler(this);
 
     public RestController(Platform platform) {
         this.baseUrl = platform.getBaseUrl();

@@ -2,7 +2,6 @@ package hirezapi.endpoints.statuspage;
 
 import hirezapi.HiRezApi;
 import hirezapi.endpoints.AbstractEndpoint;
-import hirezapi.endpoints.statuspage.Feeds;
 import hirezapi.json.ApiServerStatus;
 
 public class ServerStatus extends AbstractEndpoint {
