@@ -35,6 +35,5 @@ public class PlayerStatus extends Model {
         IN_GAME,
         ONLINE,
         UNKNOWN
-
     }
 }

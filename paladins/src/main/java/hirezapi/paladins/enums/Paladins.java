@@ -19,4 +19,9 @@ public enum Paladins implements Platform {
     Paladins(String url) {
         this.baseUrl = HttpUrl.parse(url);
     }
+
+    @Override
+    public String toString() {
+        return game + " " + platform;
+    }
 }

@@ -19,4 +19,9 @@ public enum Smite implements Platform {
     Smite(String url) {
         this.baseUrl = HttpUrl.parse(url);
     }
+
+    @Override
+    public String toString() {
+        return game + " " + platform;
+    }
 }
