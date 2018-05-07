@@ -2,7 +2,6 @@ package hirezapi.rest;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
@@ -51,7 +50,7 @@ public class RestController {
     }
 
     private OkHttpClient buildHttpClient() {
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(log::debug);
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(log::info);
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS);
 
         return new OkHttpClient.Builder()
