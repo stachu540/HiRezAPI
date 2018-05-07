@@ -1,10 +1,12 @@
 [![Build Status](https://travis-ci.org/stachu540/HiRezAPI.svg)](https://travis-ci.org/stachu540/HiRezAPI)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ee16a92996a3425d87403780aa18f316)](https://www.codacy.com/app/stachu540/HiRezAPI?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=stachu540/HiRezAPI&amp;utm_campaign=Badge_Grade)
-[![Javadocs](https://img.shields.io/badge/Javadoc-v2.0.1-brightgreen.svg)](https://jitpack.io/com/github/stachu540/HiRezAPI/v2.0.1/javadoc/)
-[![Release](https://jitpack.io/v/stachu540/HiRezAPI.svg)](https://jitpack.io/#stachu540/HiRezAPI)
-
+[![Download](https://api.bintray.com/packages/stachu540/Java/HiRezAPI/images/download.svg) ](https://bintray.com/stachu540/Java/HiRezAPI/_latestVersion)
+##### Javadocs
+[![Javadocs](http://javadoc.io/badge/com.github.stachu540/HiRezAPI-common.svg)](http://javadoc.io/doc/com.github.stachu540/HiRezAPI-common)
+[![Javadocs](http://javadoc.io/badge/com.github.stachu540/HiRezAPI-smite.svg)](http://javadoc.io/doc/com.github.stachu540/HiRezAPI-smite)
+[![Javadocs](http://javadoc.io/badge/com.github.stachu540/HiRezAPI-paladins.svg)](http://javadoc.io/doc/com.github.stachu540/HiRezAPI-paladins)
+[![Javadocs](http://javadoc.io/badge/com.github.stachu540/HiRezAPI-core.svg)](http://javadoc.io/doc/com.github.stachu540/HiRezAPI-core)
 # HiRezAPI
-
 Java-Based API Wrapper for Hi-Rez Studios games. Currently supports:
  * [Smite](https://smitegame.com/)
  * [Paladins](https://paladins.com/)
