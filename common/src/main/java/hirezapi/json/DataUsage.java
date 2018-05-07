@@ -16,18 +16,18 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class DataUsage extends Model {
-    @JsonProperty("Active_Sessions")
-    private int activeSessions;
-    @JsonProperty("Concurrent_Sessions")
-    private int concurrentSessions;
-    @JsonProperty("Request_Limit_Daily")
-    private int requestLimitDaily;
-    @JsonProperty("Session_Cap")
-    private int sessionCap;
-    @JsonProperty("Session_Time_Limit")
-    private int sessionTimeLimit;
-    @JsonProperty("Total_Requests_Today")
-    private int totalRequestsToday;
-    @JsonProperty("Total_Sessions_Today")
-    private int totalSessionsToday;
+  @JsonProperty("Active_Sessions")
+  private int activeSessions;
+  @JsonProperty("Concurrent_Sessions")
+  private int concurrentSessions;
+  @JsonProperty("Request_Limit_Daily")
+  private int requestLimitDaily;
+  @JsonProperty("Session_Cap")
+  private int sessionCap;
+  @JsonProperty("Session_Time_Limit")
+  private int sessionTimeLimit;
+  @JsonProperty("Total_Requests_Today")
+  private int totalRequestsToday;
+  @JsonProperty("Total_Sessions_Today")
+  private int totalSessionsToday;
 }

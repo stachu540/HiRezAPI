@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class LeagueSeason extends Model {
-    private boolean complete;
-    private int id;
-    private String name;
+  private boolean complete;
+  private int id;
+  private String name;
 }

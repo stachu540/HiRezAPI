@@ -16,24 +16,24 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class PlayerStatus extends Model {
-    @JsonProperty("status")
-    private Status status;
+  @JsonProperty("status")
+  private Status status;
 
-    @JsonProperty("personal_status_message")
-    private String statusMessage;
+  @JsonProperty("personal_status_message")
+  private String statusMessage;
 
-    @JsonProperty("Match")
-    private long matchId;
+  @JsonProperty("Match")
+  private long matchId;
 
-    @JsonProperty("status_string")
-    private String stringifyStatus;
+  @JsonProperty("status_string")
+  private String stringifyStatus;
 
-    public enum Status {
-        OFFLINE,
-        IN_LOBBY,
-        GOD_SELECTION,
-        IN_GAME,
-        ONLINE,
-        UNKNOWN
-    }
+  public enum Status {
+    OFFLINE,
+    IN_LOBBY,
+    GOD_SELECTION,
+    IN_GAME,
+    ONLINE,
+    UNKNOWN
+  }
 }

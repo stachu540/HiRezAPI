@@ -16,14 +16,14 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class AbstractItem extends Model {
-    @JsonProperty("DeviceName")
-    private String itemName;
-    @JsonProperty("IconId")
-    private int iconId;
-    @JsonProperty("ItemId")
-    private int itemId;
-    @JsonProperty("Price")
-    private int price;
-    @JsonProperty("itemIcon_URL")
-    private String itemImage;
+  @JsonProperty("DeviceName")
+  private String itemName;
+  @JsonProperty("IconId")
+  private int iconId;
+  @JsonProperty("ItemId")
+  private int itemId;
+  @JsonProperty("Price")
+  private int price;
+  @JsonProperty("itemIcon_URL")
+  private String itemImage;
 }

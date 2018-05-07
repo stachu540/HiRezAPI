@@ -18,27 +18,27 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class AbstractHero<A extends Ability<?>> extends Model {
-    @JsonProperty("Ability_1")
-    private A ability1;
-    @JsonProperty("Ability_2")
-    private A ability2;
-    @JsonProperty("Ability_3")
-    private A ability3;
-    @JsonProperty("Ability_4")
-    private A ability4;
-    @JsonProperty("Ability_5")
-    private A ability5;
+  @JsonProperty("Ability_1")
+  private A ability1;
+  @JsonProperty("Ability_2")
+  private A ability2;
+  @JsonProperty("Ability_3")
+  private A ability3;
+  @JsonProperty("Ability_4")
+  private A ability4;
+  @JsonProperty("Ability_5")
+  private A ability5;
 
-    private String pros;
-    private String cons;
+  private String pros;
+  private String cons;
 
-    private float health;
-    private String lore;
-    private String name;
-    @JsonDeserialize(using = BooleanTextDeserializer.class)
-    private boolean freeRotation;
-    private String roles;
-    private float speed;
-    private String title;
-    private long id;
+  private float health;
+  private String lore;
+  private String name;
+  @JsonDeserialize(using = BooleanTextDeserializer.class)
+  private boolean freeRotation;
+  private String roles;
+  private float speed;
+  private String title;
+  private long id;
 }

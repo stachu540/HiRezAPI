@@ -16,14 +16,14 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class SimpleTeam extends Model {
-    @JsonProperty("Founder")
-    private String founder;
-    @JsonProperty("Name")
-    private String name;
-    @JsonProperty("Players")
-    private int players;
-    @JsonProperty("Tag")
-    private String tag;
-    @JsonProperty("TeamId")
-    private long teamId;
+  @JsonProperty("Founder")
+  private String founder;
+  @JsonProperty("Name")
+  private String name;
+  @JsonProperty("Players")
+  private int players;
+  @JsonProperty("Tag")
+  private String tag;
+  @JsonProperty("TeamId")
+  private long teamId;
 }

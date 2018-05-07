@@ -16,12 +16,12 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 class PlayerDetails extends Model {
-    @JsonProperty("Leaves")
-    private long leaves;
-    @JsonProperty("Losses")
-    private long losses;
-    @JsonProperty("Name")
-    private String name;
-    @JsonProperty("Wins")
-    private long wins;
+  @JsonProperty("Leaves")
+  private long leaves;
+  @JsonProperty("Losses")
+  private long losses;
+  @JsonProperty("Name")
+  private String name;
+  @JsonProperty("Wins")
+  private long wins;
 }

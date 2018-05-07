@@ -10,11 +10,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Incident {
-    private String title;
-    private String url;
-    private List<IncidentInfo> incidents;
+  private String title;
+  private String url;
+  private List<IncidentInfo> incidents;
 
-    public IncidentInfo getLastIncident() {
-        return incidents.get(0);
-    }
+  public IncidentInfo getLastIncident() {
+    return incidents.get(0);
+  }
 }

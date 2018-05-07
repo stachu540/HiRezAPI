@@ -1,9 +1,9 @@
 package hirezapi.enums;
 
 public interface Queue {
-    int getId();
+  int getId();
 
-    String getName();
+  String getName();
 
-    boolean isRanked();
+  boolean isRanked();
 }

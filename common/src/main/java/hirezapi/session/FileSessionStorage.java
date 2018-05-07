@@ -9,38 +9,38 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class FileSessionStorage implements SessionStorage {
-    private final Properties properties;
+  private final Properties properties;
 
-    public FileSessionStorage(File file) {
-        this.properties = new Properties();
-        try {
-            this.properties.load(new FileInputStream(file));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+  public FileSessionStorage(File file) {
+    this.properties = new Properties();
+    try {
+      this.properties.load(new FileInputStream(file));
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+  }
 
-    @Override
-    public String set(Platform platform, SessionCreation session) {
-        return (String) properties.setProperty(retrieveName(platform), session.getSessionId());
-    }
+  @Override
+  public String set(Platform platform, SessionCreation session) {
+    return (String) properties.setProperty(retrieveName(platform), session.getSessionId());
+  }
 
-    @Override
-    public String get(Platform platform) {
-        return properties.getProperty(retrieveName(platform));
-    }
+  @Override
+  public String get(Platform platform) {
+    return properties.getProperty(retrieveName(platform));
+  }
 
-    private String retrieveName(Platform platform) {
-        return String.format("%S_%S", platform.getGame(), platform.getPlatform());
-    }
+  private String retrieveName(Platform platform) {
+    return String.format("%S_%S", platform.getGame(), platform.getPlatform());
+  }
 
-    @Override
-    public boolean remove(Platform platform) {
-        return properties.remove(retrieveName(platform)) != null;
-    }
+  @Override
+  public boolean remove(Platform platform) {
+    return properties.remove(retrieveName(platform)) != null;
+  }
 
-    @Override
-    public boolean contains(Platform platform) {
-        return properties.contains(retrieveName(platform));
-    }
+  @Override
+  public boolean contains(Platform platform) {
+    return properties.contains(retrieveName(platform));
+  }
 }

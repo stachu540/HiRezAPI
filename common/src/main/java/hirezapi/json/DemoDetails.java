@@ -15,5 +15,5 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class DemoDetails extends Model {
-    private String none;
+  private String none;
 }

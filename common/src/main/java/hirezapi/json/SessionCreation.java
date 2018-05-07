@@ -18,10 +18,10 @@ import java.time.Instant;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class SessionCreation extends Model {
-    private String sessionId;
-    private Instant timestamp;
+  private String sessionId;
+  private Instant timestamp;
 
-    public boolean isApproved() {
-        return getReturnedMessage().equals("Approved");
-    }
+  public boolean isApproved() {
+    return getReturnedMessage().equals("Approved");
+  }
 }

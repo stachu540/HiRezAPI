@@ -11,12 +11,12 @@ import lombok.Setter;
 @Getter
 @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class AbstractAPI<T extends HiRezApi> {
-    private final Platform platform;
-    private SessionStorage sessionStorage = new EnvironmentalSessionStorage();
+  private final Platform platform;
+  private SessionStorage sessionStorage = new EnvironmentalSessionStorage();
 
-    public abstract T init(String devId, String authKey);
+  public abstract T init(String devId, String authKey);
 
-    protected Configuration buildConfiguration(String devId, String authKey) {
-        return Configuration.of(platform, devId, authKey);
-    }
+  protected Configuration buildConfiguration(String devId, String authKey) {
+    return Configuration.of(platform, devId, authKey);
+  }
 }

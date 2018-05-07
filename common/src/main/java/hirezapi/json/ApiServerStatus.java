@@ -15,12 +15,12 @@ import java.time.Instant;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class ApiServerStatus {
-    private Instant entryDatetime;
-    private Status status;
-    private String version;
+  private Instant entryDatetime;
+  private Status status;
+  private String version;
 
-    public enum Status {
-        UP,
-        DOWN
-    }
+  public enum Status {
+    UP,
+    DOWN
+  }
 }

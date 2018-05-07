@@ -16,8 +16,8 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class AbstractSkin extends Model {
-    private long skinId1;
-    private long skinId2;
-    @JsonProperty("skin_name")
-    private String name;
+  private long skinId1;
+  private long skinId2;
+  @JsonProperty("skin_name")
+  private String name;
 }

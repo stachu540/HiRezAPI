@@ -18,73 +18,73 @@ import java.util.SimpleTimeZone;
 
 @RequiredArgsConstructor
 public abstract class AbstractEndpoint {
-    protected final HiRezApi api;
-    @Getter(AccessLevel.PROTECTED)
-    private final Logger log = LoggerFactory.getLogger(getClass());
+  protected final HiRezApi api;
+  @Getter(AccessLevel.PROTECTED)
+  private final Logger log = LoggerFactory.getLogger(getClass());
 
-    protected String buildUrl(String endpoint, String... queryParams) {
-        final String realEndpoint = ((!endpoint.toLowerCase().endsWith("json")) ? endpoint + "json" : endpoint);
-        final String timestamp = getTimestamp();
+  protected String buildUrl(String endpoint, String... queryParams) {
+    final String realEndpoint = ((!endpoint.toLowerCase().endsWith("json")) ? endpoint + "json" : endpoint);
+    final String timestamp = getTimestamp();
 
-        log.debug("Building URL with Endpoint \"{}\" with {}", endpoint, (queryParams.length > 0) ? String.format("Params: \"[%s]\"", String.join("/", queryParams)) : "no params");
+    log.debug("Building URL with Endpoint \"{}\" with {}", endpoint, (queryParams.length > 0) ? String.format("Params: \"[%s]\"", String.join("/", queryParams)) : "no params");
 
-        switch (endpoint.toLowerCase()) {
-            case "ping":
-                return realEndpoint;
-            case "createsession":
-                return String.format("%s/%s/%s/%s", realEndpoint,
-                        api.getConfiguration().getDevId(),
-                        generateSignature(endpoint, timestamp),
-                        timestamp);
-            default:
-                if (hasSession(api.getConfiguration().getPlatform())) {
-                    log.debug("Execute Endpoint \"{}\" with {}", endpoint, (queryParams.length > 0) ? String.format("Params: \"[%s]\"", String.join("/", queryParams)) : "no params");
-                    return String.format("%s/%s/%s/%s/%s", realEndpoint,
-                            api.getConfiguration().getDevId(),
-                            generateSignature(endpoint, timestamp),
-                            api.sessionEndpoint().getSessionStorage().get(api.getConfiguration().getPlatform()),
-                            timestamp)
-                            + ((queryParams.length > 0) ? "/" + String.join("/", queryParams) : "");
-                } else {
-                    log.debug("The Session key is missing. Starting create session");
-                    SessionCreation session = api.sessionEndpoint().create();
-                    if (!session.isApproved()) {
-                        throw new SessionCreationException(session);
-                    }
-                    return buildUrl(endpoint, queryParams);
-                }
+    switch (endpoint.toLowerCase()) {
+      case "ping":
+        return realEndpoint;
+      case "createsession":
+        return String.format("%s/%s/%s/%s", realEndpoint,
+              api.getConfiguration().getDevId(),
+              generateSignature(endpoint, timestamp),
+              timestamp);
+      default:
+        if (hasSession(api.getConfiguration().getPlatform())) {
+          log.debug("Execute Endpoint \"{}\" with {}", endpoint, (queryParams.length > 0) ? String.format("Params: \"[%s]\"", String.join("/", queryParams)) : "no params");
+          return String.format("%s/%s/%s/%s/%s", realEndpoint,
+                api.getConfiguration().getDevId(),
+                generateSignature(endpoint, timestamp),
+                api.sessionEndpoint().getSessionStorage().get(api.getConfiguration().getPlatform()),
+                timestamp)
+                + ((queryParams.length > 0) ? "/" + String.join("/", queryParams) : "");
+        } else {
+          log.debug("The Session key is missing. Starting create session");
+          SessionCreation session = api.sessionEndpoint().create();
+          if (!session.isApproved()) {
+            throw new SessionCreationException(session);
+          }
+          return buildUrl(endpoint, queryParams);
         }
     }
+  }
 
-    private boolean hasSession(Platform platform) {
-        return api.sessionEndpoint().getSessionStorage().contains(platform);
-    }
+  private boolean hasSession(Platform platform) {
+    return api.sessionEndpoint().getSessionStorage().contains(platform);
+  }
 
-    private String generateSignature(String endpoint, String timestamp) {
-        String templateSignature = api.getConfiguration().getDevId() + endpoint + api.getConfiguration().getAuthKey() + timestamp;
-        StringBuilder signatureBuilder = new StringBuilder();
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            md.update(templateSignature.getBytes());
-            byte[] bytes = md.digest();
+  private String generateSignature(String endpoint, String timestamp) {
+    String templateSignature = api.getConfiguration().getDevId() + endpoint + api.getConfiguration().getAuthKey() + timestamp;
+    StringBuilder signatureBuilder = new StringBuilder();
+    try {
+      MessageDigest md = MessageDigest.getInstance("MD5");
+      md.update(templateSignature.getBytes());
+      byte[] bytes = md.digest();
 
-            for (byte bit : bytes) {
-                String hex = Integer.toHexString(0xff & bit);
-                if (hex.length() == 1) {
-                    signatureBuilder.append("0");
-                }
-                signatureBuilder.append(hex);
-            }
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+      for (byte bit : bytes) {
+        String hex = Integer.toHexString(0xff & bit);
+        if (hex.length() == 1) {
+          signatureBuilder.append("0");
         }
-
-        return signatureBuilder.toString();
+        signatureBuilder.append(hex);
+      }
+    } catch (NoSuchAlgorithmException e) {
+      e.printStackTrace();
     }
 
-    private String getTimestamp() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-        sdf.setTimeZone(new SimpleTimeZone(SimpleTimeZone.UTC_TIME, "UTC"));
-        return sdf.format(new Date());
-    }
+    return signatureBuilder.toString();
+  }
+
+  private String getTimestamp() {
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+    sdf.setTimeZone(new SimpleTimeZone(SimpleTimeZone.UTC_TIME, "UTC"));
+    return sdf.format(new Date());
+  }
 }

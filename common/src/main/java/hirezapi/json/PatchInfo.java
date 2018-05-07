@@ -16,6 +16,6 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class PatchInfo extends Model {
-    @JsonProperty("version_string")
-    private String version;
+  @JsonProperty("version_string")
+  private String version;
 }

@@ -12,41 +12,41 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class SessionEndpoint extends AbstractEndpoint {
-    @Getter
-    @Setter
-    private SessionStorage sessionStorage;
+  @Getter
+  @Setter
+  private SessionStorage sessionStorage;
 
-    public SessionEndpoint(HiRezApi api, SessionStorage sessionStorage) {
-        super(api);
-        this.sessionStorage = sessionStorage;
+  public SessionEndpoint(HiRezApi api, SessionStorage sessionStorage) {
+    super(api);
+    this.sessionStorage = sessionStorage;
+  }
+
+  public SessionEndpoint(HiRezApi api) {
+    super(api);
+    setSessionStorage(new EnvironmentalSessionStorage());
+  }
+
+  public Ping ping() {
+    return new Ping(api.getRestController().request(buildUrl("ping"), String.class));
+  }
+
+  public SessionCreation create() {
+    SessionCreation sessionCreation = api.getRestController().request(buildUrl("createsession"), SessionCreation.class);
+    if (!sessionCreation.getReturnedMessage().equals("Approved")) {
+      throw new SessionCreationException(sessionCreation);
+    } else {
+      getLog().info("Session Created for {}", api.getConfiguration().getPlatform().toString());
+      sessionStorage.set(api.getConfiguration().getPlatform(), sessionCreation);
     }
 
-    public SessionEndpoint(HiRezApi api) {
-        super(api);
-        setSessionStorage(new EnvironmentalSessionStorage());
-    }
+    return sessionCreation;
+  }
 
-    public Ping ping() {
-        return new Ping(api.getRestController().request(buildUrl("ping"), String.class));
-    }
+  public SessionTest test() {
+    return new SessionTest(api.getRestController().request(buildUrl("testsession"), String.class));
+  }
 
-    public SessionCreation create() {
-        SessionCreation sessionCreation = api.getRestController().request(buildUrl("createsession"), SessionCreation.class);
-        if (!sessionCreation.getReturnedMessage().equals("Approved")) {
-            throw new SessionCreationException(sessionCreation);
-        } else {
-            getLog().info("Session Created for {}", api.getConfiguration().getPlatform().toString());
-            sessionStorage.set(api.getConfiguration().getPlatform(), sessionCreation);
-        }
-
-        return sessionCreation;
-    }
-
-    public SessionTest test() {
-        return new SessionTest(api.getRestController().request(buildUrl("testsession"), String.class));
-    }
-
-    public DataUsage getDataUsage() {
-        return api.getRestController().request(buildUrl("getdataused"), DataUsage[].class)[0];
-    }
+  public DataUsage getDataUsage() {
+    return api.getRestController().request(buildUrl("getdataused"), DataUsage[].class)[0];
+  }
 }

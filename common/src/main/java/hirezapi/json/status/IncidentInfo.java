@@ -10,28 +10,28 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 public class IncidentInfo {
-    private Instant timestamp;
-    private Status status;
-    private String description;
+  private Instant timestamp;
+  private Status status;
+  private String description;
 
-    public enum Status {
-        Investigating,
-        Identified,
-        Monitoring,
-        Verifying,
-        Resolved,
-        Scheduled,
-        Update,
-        In_progress,
-        Completed;
+  public enum Status {
+    Investigating,
+    Identified,
+    Monitoring,
+    Verifying,
+    Resolved,
+    Scheduled,
+    Update,
+    In_progress,
+    Completed;
 
-        public static Status get(String status) {
-            return valueOf(status.replace(" ", "_"));
-        }
-
-        @Override
-        public String toString() {
-            return this.name().replace("_", " ");
-        }
+    public static Status get(String status) {
+      return valueOf(status.replace(" ", "_"));
     }
+
+    @Override
+    public String toString() {
+      return this.name().replace("_", " ");
+    }
+  }
 }

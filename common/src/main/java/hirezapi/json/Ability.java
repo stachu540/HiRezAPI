@@ -16,12 +16,12 @@ import java.io.Serializable;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class Ability<Z extends Serializable> {
-    @JsonProperty("Description")
-    private Z description;
-    @JsonProperty("Id")
-    private long id;
-    @JsonProperty("Summary")
-    private String name;
-    @JsonProperty("URL")
-    private String abilityImage;
+  @JsonProperty("Description")
+  private Z description;
+  @JsonProperty("Id")
+  private long id;
+  @JsonProperty("Summary")
+  private String name;
+  @JsonProperty("URL")
+  private String abilityImage;
 }

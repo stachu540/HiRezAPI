@@ -3,9 +3,9 @@ package hirezapi;
 import okhttp3.HttpUrl;
 
 public interface Platform {
-    String getGame();
+  String getGame();
 
-    String getPlatform();
+  String getPlatform();
 
-    HttpUrl getBaseUrl();
+  HttpUrl getBaseUrl();
 }

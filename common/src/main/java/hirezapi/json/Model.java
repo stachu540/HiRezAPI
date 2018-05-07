@@ -10,6 +10,6 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class Model {
-    @JsonProperty("ret_msg")
-    private String returnedMessage;
+  @JsonProperty("ret_msg")
+  private String returnedMessage;
 }
