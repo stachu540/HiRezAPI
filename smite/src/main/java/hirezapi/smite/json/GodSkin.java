@@ -16,11 +16,11 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class GodSkin extends AbstractSkin {
-    private String godIcon;
-    private String godSkin;
-    private long godId;
-    private String obtainability;
-    private String godName;
-    private int priceFavor;
-    private int priceGems;
+  private String godIcon;
+  private String godSkin;
+  private long godId;
+  private String obtainability;
+  private String godName;
+  private int priceFavor;
+  private int priceGems;
 }

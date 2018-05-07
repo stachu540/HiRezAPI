@@ -10,7 +10,10 @@ import hirezapi.json.PatchInfo;
 
 import java.util.List;
 
-public abstract class GameEndpoint<H extends AbstractHero, S extends AbstractSkin, I extends AbstractItem> extends AbstractEndpoint {
+public abstract class GameEndpoint<H extends AbstractHero,
+      S extends AbstractSkin,
+      I extends AbstractItem>
+      extends AbstractEndpoint {
 
   public GameEndpoint(HiRezApi api) {
     super(api);

@@ -9,7 +9,8 @@ import java.io.IOException;
 
 public class BooleanTextDeserializer extends JsonDeserializer<Boolean> {
   @Override
-  public Boolean deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+  public Boolean deserialize(JsonParser p, DeserializationContext ctxt)
+        throws IOException, JsonProcessingException {
     try {
       return p.getBooleanValue();
     } catch (IOException ignore) {

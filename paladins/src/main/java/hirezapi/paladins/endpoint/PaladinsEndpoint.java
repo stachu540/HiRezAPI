@@ -7,17 +7,17 @@ import hirezapi.enums.Language;
 import java.util.List;
 
 public class PaladinsEndpoint extends GameEndpoint {
-    public PaladinsEndpoint(HiRezApi api) {
-        super(api);
-    }
+  public PaladinsEndpoint(HiRezApi api) {
+    super(api);
+  }
 
-    @Override
-    public List getSkins(long id, Language language) {
-        return null;
-    }
+  @Override
+  public List getSkins(long id, Language language) {
+    return null;
+  }
 
-    @Override
-    public List getItems(Language language) {
-        return null;
-    }
+  @Override
+  public List getItems(Language language) {
+    return null;
+  }
 }

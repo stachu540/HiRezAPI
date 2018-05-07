@@ -11,6 +11,11 @@ import java.util.Properties;
 public class FileSessionStorage implements SessionStorage {
   private final Properties properties;
 
+  /**
+   * A {@link SessionStorage session storage} saving into file.
+   * @see Properties
+   * @param file a file
+   */
   public FileSessionStorage(File file) {
     this.properties = new Properties();
     try {

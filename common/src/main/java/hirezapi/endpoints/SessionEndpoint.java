@@ -26,12 +26,23 @@ public class SessionEndpoint extends AbstractEndpoint {
     setSessionStorage(new EnvironmentalSessionStorage());
   }
 
+  /**
+   * Pinging into API for checking API status.
+   * @return ping Response
+   */
   public Ping ping() {
     return new Ping(api.getRestController().request(buildUrl("ping"), String.class));
   }
 
+  /**
+   * Creating session for starting query into API. It is required to using more endpoints.
+   * using {@link #ping()} is not applicable for creation session.
+   * This method automatically saving into {@link SessionStorage session storage}.
+   * @return a Session creation context
+   */
   public SessionCreation create() {
-    SessionCreation sessionCreation = api.getRestController().request(buildUrl("createsession"), SessionCreation.class);
+    SessionCreation sessionCreation = api.getRestController()
+          .request(buildUrl("createsession"), SessionCreation.class);
     if (!sessionCreation.getReturnedMessage().equals("Approved")) {
       throw new SessionCreationException(sessionCreation);
     } else {

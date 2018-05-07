@@ -1,14 +1,20 @@
 package hirezapi;
 
-import hirezapi.endpoints.*;
+import hirezapi.endpoints.GameEndpoint;
+import hirezapi.endpoints.MatchesEndpoint;
+import hirezapi.endpoints.SessionEndpoint;
+import hirezapi.endpoints.TeamsEndpoint;
+import hirezapi.endpoints.UserEndpoint;
 import hirezapi.rest.RestController;
 import hirezapi.session.SessionStorage;
+import lombok.AccessLevel;
 import lombok.Getter;
 
 @Getter
 public abstract class HiRezApi<G extends GameEndpoint> {
   protected final Configuration configuration;
   protected final RestController restController;
+  @Getter(AccessLevel.NONE)
   private final SessionEndpoint sessionEndpoint;
 
   protected HiRezApi(Configuration configuration, SessionStorage sessionStorage) {

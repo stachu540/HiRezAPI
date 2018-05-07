@@ -3,6 +3,7 @@ package hirezapi.enums;
 import lombok.Getter;
 
 /**
+ * Ranked Tier League.
  * @author <a href="damian@stachuofficial.pl">Damian Staszewski</a>
  * @since 1.0
  */
@@ -39,6 +40,11 @@ public enum RankedTier {
   @Getter
   private final String name = name().replace("_", " ");
 
+  /**
+   * Getting tier league from ordinal number.
+   * @param tier ordinal tier league
+   * @return Tier
+   */
   public static RankedTier get(int tier) {
     for (RankedTier tl : values()) {
       if (tl.ordinal() == tier) {

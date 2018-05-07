@@ -4,17 +4,18 @@ import hirezapi.HiRezApi;
 import hirezapi.Platform;
 import hirezapi.json.SessionCreation;
 import hirezapi.session.SessionCreationException;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.SimpleTimeZone;
+
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RequiredArgsConstructor
 public abstract class AbstractEndpoint {
@@ -23,10 +24,14 @@ public abstract class AbstractEndpoint {
   private final Logger log = LoggerFactory.getLogger(getClass());
 
   protected String buildUrl(String endpoint, String... queryParams) {
-    final String realEndpoint = ((!endpoint.toLowerCase().endsWith("json")) ? endpoint + "json" : endpoint);
+    final String realEndpoint = ((!endpoint.toLowerCase().endsWith("json"))
+          ? endpoint + "json" : endpoint);
     final String timestamp = getTimestamp();
 
-    log.debug("Building URL with Endpoint \"{}\" with {}", endpoint, (queryParams.length > 0) ? String.format("Params: \"[%s]\"", String.join("/", queryParams)) : "no params");
+    log.debug("Building URL with Endpoint \"{}\" with {}", endpoint,
+          (queryParams.length > 0)
+          ? String.format("Params: \"[%s]\"", String.join("/", queryParams))
+                : "no params");
 
     switch (endpoint.toLowerCase()) {
       case "ping":
@@ -38,7 +43,8 @@ public abstract class AbstractEndpoint {
               timestamp);
       default:
         if (hasSession(api.getConfiguration().getPlatform())) {
-          log.debug("Execute Endpoint \"{}\" with {}", endpoint, (queryParams.length > 0) ? String.format("Params: \"[%s]\"", String.join("/", queryParams)) : "no params");
+          log.debug("Execute Endpoint \"{}\" with {}", endpoint, (queryParams.length > 0)
+                ? String.format("Params: \"[%s]\"", String.join("/", queryParams)) : "no params");
           return String.format("%s/%s/%s/%s/%s", realEndpoint,
                 api.getConfiguration().getDevId(),
                 generateSignature(endpoint, timestamp),
@@ -57,11 +63,16 @@ public abstract class AbstractEndpoint {
   }
 
   private boolean hasSession(Platform platform) {
-    return api.sessionEndpoint().getSessionStorage().contains(platform);
+    return api.sessionEndpoint().getSessionStorage()
+          .contains(platform);
   }
 
   private String generateSignature(String endpoint, String timestamp) {
-    String templateSignature = api.getConfiguration().getDevId() + endpoint + api.getConfiguration().getAuthKey() + timestamp;
+    String templateSignature = new StringBuilder(api.getConfiguration().getDevId())
+          .append(endpoint)
+          .append(api.getConfiguration().getAuthKey())
+          .append(timestamp)
+          .toString();
     StringBuilder signatureBuilder = new StringBuilder();
     try {
       MessageDigest md = MessageDigest.getInstance("MD5");

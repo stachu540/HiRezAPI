@@ -11,7 +11,8 @@ public class ServerStatus extends AbstractEndpoint {
   }
 
   public ApiServerStatus getStatus() {
-    return api.getRestController().request(buildUrl("gethirezserverstatus"), ApiServerStatus[].class)[0];
+    return api.getRestController()
+          .request(buildUrl("gethirezserverstatus"), ApiServerStatus[].class)[0];
   }
 
   public Feeds getFeeds(boolean allPlatforms) {

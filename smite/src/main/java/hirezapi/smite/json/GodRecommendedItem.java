@@ -17,16 +17,16 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class GodRecommendedItem extends Model {
-    @JsonProperty("Category")
-    private String category;
-    @JsonProperty("Item")
-    private String item;
-    @JsonProperty("Item")
-    private String role;
-    private long categoryValueId;
-    private long godId;
-    private String godName;
-    private long iconId;
-    private long itemId;
-    private long roleValueId;
+  @JsonProperty("Category")
+  private String category;
+  @JsonProperty("Item")
+  private String item;
+  @JsonProperty("Item")
+  private String role;
+  private long categoryValueId;
+  private long godId;
+  private String godName;
+  private long iconId;
+  private long itemId;
+  private long roleValueId;
 }

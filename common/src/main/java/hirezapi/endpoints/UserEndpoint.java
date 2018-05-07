@@ -10,27 +10,18 @@ public class UserEndpoint extends AbstractEndpoint {
     super(api);
   }
 
-  /**
-   * Getting Player Information
-   *
-   * @param user In Game Name or User ID
-   * @return player information
-   */
   public Player getPlayer(String user) {
-    return api.getRestController().request(buildUrl("getplayer", user), Player[].class)[0];
+    return api.getRestController()
+          .request(buildUrl("getplayer", user), Player[].class)[0];
   }
 
   public Achievements getPlayerAchievments(long id) {
-    return api.getRestController().request(buildUrl("getplayerachievements", Long.toString(id)), Achievements.class);
+    return api.getRestController()
+          .request(buildUrl("getplayerachievements", Long.toString(id)), Achievements.class);
   }
 
-  /**
-   * Getting Player Information
-   *
-   * @param user In Game Name or User ID
-   * @return player information
-   */
   public PlayerStatus getPlayerStatus(String user) {
-    return api.getRestController().request(buildUrl("getplayerstatus", user), PlayerStatus[].class)[0];
+    return api.getRestController()
+          .request(buildUrl("getplayerstatus", user), PlayerStatus[].class)[0];
   }
 }

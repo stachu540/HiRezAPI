@@ -3,6 +3,7 @@ package hirezapi.enums;
 import lombok.Getter;
 
 /**
+ * Language.
  * @author <a href="damian@stachuofficial.pl">Damian Staszewski</a>
  * @since 1.8
  */

@@ -15,7 +15,8 @@ import java.util.TimeZone;
 
 public class InstantTimeDeserializer extends JsonDeserializer<Instant> {
   @Override
-  public Instant deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+  public Instant deserialize(JsonParser p, DeserializationContext ctxt)
+        throws IOException, JsonProcessingException {
     DateFormat format = new SimpleDateFormat("M/d/yyyy h:mm:ss a");
     format.setTimeZone(TimeZone.getTimeZone("UTC"));
     try {

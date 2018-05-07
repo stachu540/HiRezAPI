@@ -6,11 +6,11 @@ import hirezapi.smite.SmiteAPI;
 import hirezapi.smite.enums.Smite;
 
 public class API {
-    public static SmiteAPI smite(Smite platform) {
-        return SmiteAPI.of(platform);
-    }
+  public static SmiteAPI smite(Smite platform) {
+    return SmiteAPI.of(platform);
+  }
 
-    public static PaladinsAPI paladins(Paladins platform) {
-        return PaladinsAPI.of(platform);
-    }
+  public static PaladinsAPI paladins(Paladins platform) {
+    return PaladinsAPI.of(platform);
+  }
 }

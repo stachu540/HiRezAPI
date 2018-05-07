@@ -7,13 +7,6 @@ import com.rometools.rome.io.XmlReader;
 import hirezapi.Configuration;
 import hirezapi.json.status.Incident;
 import hirezapi.json.status.IncidentInfo;
-import lombok.Getter;
-import org.apache.commons.lang3.StringUtils;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -21,9 +14,20 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
+import lombok.Getter;
+import org.apache.commons.lang3.StringUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Feeds {
   private static final String URL = "http://status.hirezstudios.com/history.atom";
@@ -35,30 +39,47 @@ public class Feeds {
   private final boolean allPlatforms;
   private List<Incident> incidents;
 
+  /**
+   * Feed constructor.
+   * @param configuration configuration.
+   * @param allPlatforms if it is all platforms for specific game setted from {@link Configuration}.
+   */
   public Feeds(Configuration configuration, boolean allPlatforms) {
     this.configuration = configuration;
     this.allPlatforms = allPlatforms;
     fetchIncidents();
   }
 
+  /**
+   * Fetching incidents from Status Page. You can trigger it manually.
+   */
   public void fetchIncidents() {
     try {
       final SyndFeed feed = new SyndFeedInput().build(new XmlReader(new URL(URL)));
       final List<Incident> incidents = new CopyOnWriteArrayList<>();
       incidents.addAll(feed.getEntries().stream().filter(e -> {
-        if (e.getContents().get(0).getValue().matches("([hH]i[Rr]ez(/s)?[Gg]ame[s]?)") &&
-              e.getTitle().matches("([hH]i[Rr]ez(/s)?[Gg]ame[s]?)")) {
+        if (e.getContents().get(0).getValue().matches("([hH]i[Rr]ez(/s)?[Gg]ame[s]?)")
+              && e.getTitle().matches("([hH]i[Rr]ez(/s)?[Gg]ame[s]?)")) {
           return true;
         } else if (allPlatforms) {
-          return StringUtils.containsIgnoreCase(e.getContents().get(0).getValue(), configuration.getPlatform().getGame()) &&
-                StringUtils.containsIgnoreCase(e.getTitle(), configuration.getPlatform().getGame());
+          return StringUtils.containsIgnoreCase(e.getContents().get(0).getValue(),
+                configuration.getPlatform().getGame())
+                && StringUtils.containsIgnoreCase(e.getTitle(),
+                configuration.getPlatform().getGame());
         } else {
-          return StringUtils.containsIgnoreCase(e.getContents().get(0).getValue(), configuration.getPlatform().getGame()) &&
-                StringUtils.containsIgnoreCase(e.getTitle(), configuration.getPlatform().getGame()) &&
-                StringUtils.containsIgnoreCase(e.getContents().get(0).getValue(), configuration.getPlatform().getPlatform()) &&
-                StringUtils.containsIgnoreCase(e.getTitle(), configuration.getPlatform().getPlatform());
+          return StringUtils.containsIgnoreCase(e.getContents().get(0).getValue(),
+                configuration.getPlatform().getGame())
+                && StringUtils.containsIgnoreCase(e.getTitle(),
+                configuration.getPlatform().getGame())
+                && StringUtils.containsIgnoreCase(e.getContents().get(0).getValue(),
+                configuration.getPlatform().getPlatform())
+                && StringUtils.containsIgnoreCase(e.getTitle(),
+                configuration.getPlatform().getPlatform());
         }
-      }).map(e -> new Incident(e.getTitle(), e.getLink(), buildInfo(e.getContents().get(0).getValue(), e.getPublishedDate())))
+      }).map(e -> new Incident(e.getTitle(),
+            e.getLink(),
+            buildInfo(e.getContents().get(0).getValue(),
+                  e.getPublishedDate())))
             .collect(Collectors.toList()));
       this.incidents = Collections.unmodifiableList(incidents);
     } catch (FeedException e) {
@@ -73,9 +94,12 @@ public class Feeds {
   private List<IncidentInfo> buildInfo(String value, Date publishedDate) {
     Document document = Jsoup.parse(value);
     return Collections.unmodifiableList(document.select("p").stream().map(paragraph -> {
-      Instant timestamp = dateFormat(paragraph.getElementsByTag("small").first().text(), publishedDate);
-      IncidentInfo.Status status = IncidentInfo.Status.get(paragraph.getElementsByTag("strong").first().text());
-      String description = paragraph.text().replace(new StringBuilder(paragraph.getElementsByTag("small").first().text())
+      Instant timestamp = dateFormat(paragraph.getElementsByTag("small").first().text(),
+            publishedDate);
+      IncidentInfo.Status status = IncidentInfo.Status
+            .get(paragraph.getElementsByTag("strong").first().text());
+      String description = paragraph.text()
+            .replace(new StringBuilder(paragraph.getElementsByTag("small").first().text())
             .append(" ").append(status).append(" - "), "");
       return new IncidentInfo(timestamp, status, description);
     }).collect(Collectors.toList()));
@@ -88,25 +112,45 @@ public class Feeds {
     Calendar calendar = Calendar.getInstance();
     calendar.setTime(publishedDate);
     try {
-      date = df.parse(String.valueOf(calendar.get(Calendar.YEAR) + timestamp.replaceAll("\\s+", "")));
+      date = df.parse(String.valueOf(calendar.get(Calendar.YEAR)
+            + timestamp.replaceAll("\\s+", "")));
     } catch (ParseException e) {
       date = new Date();
     }
     return date.toInstant();
   }
 
+  /**
+   * Getting one incident.
+   * @param index index
+   * @return a incident from Status Page
+   */
   public Incident getIncident(int index) {
-    if (notInitialize()) fetchIncidents();
+    if (notInitialize()) {
+      fetchIncidents();
+    }
     return incidents.get(index);
   }
 
+  /**
+   * Getting latest incident.
+   * @return a incident from Status Page
+   */
   public Incident getLastIncident() {
-    if (notInitialize()) fetchIncidents();
+    if (notInitialize()) {
+      fetchIncidents();
+    }
     return getIncident(0);
   }
 
+  /**
+   * Getting list of all incidents.
+   * @return a incidents from Status Page
+   */
   public List<Incident> getIncidents() {
-    if (notInitialize()) fetchIncidents();
+    if (notInitialize()) {
+      fetchIncidents();
+    }
     return incidents;
   }
 
