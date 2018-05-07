@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/stachu540/HiRezAPI.svg)](https://travis-ci.org/stachu540/HiRezAPI)
-[![Libraries.io](https://img.shields.io/librariesio/github/stachu540/HiRezAPI.svg)](https://libraries.io/github/stachu540/HiRezAPI)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ee16a92996a3425d87403780aa18f316)](https://www.codacy.com/app/stachu540/HiRezAPI?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=stachu540/HiRezAPI&amp;utm_campaign=Badge_Grade)
 [![Javadocs](https://img.shields.io/badge/Javadoc-v2.0.1-brightgreen.svg)](https://jitpack.io/com/github/stachu540/HiRezAPI/v2.0.1/javadoc/)
 [![Release](https://jitpack.io/v/stachu540/HiRezAPI.svg)](https://jitpack.io/#stachu540/HiRezAPI)
@@ -25,7 +24,6 @@ To access the APIs you'll need your own set of credentials which consist of a De
 Add to `pom.xml` build.
 ```xml
 <repositories>
-    ...
     <repository>
         <id>jcenter</id>
         <url>https://jcenter.bintray.com</url>
@@ -62,7 +60,7 @@ dependencies {
 }
 ```
 
-For starting using script check [Wiki page](https://github.com/stachu540/HiRezAPI/wiki/Example-Usage).
+For starting using script check [Wiki page](https://github.com/stachu540/HiRezAPI/wiki).
 
 ## Question and suggestions
 Any more questions or some suggestions changes are welcome. Don't be shy, just open your [Issues](https://github.com/stachu540/HiRezAPI/issues) if you have some problem. [Pull Request's](https://github.com/stachu540/HiRezAPI/pulls) and any other contribution are welcome.
