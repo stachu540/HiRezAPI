@@ -1,0 +1,8 @@
+dependencies {
+    compile "com.squareup.okhttp3:okhttp:${versions.okhttp}"
+    compile "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}"
+    compile "com.fasterxml.jackson.core:jackson-databind:${versions.jackson}"
+    compile "org.jsoup:jsoup:${versions.jsoup}"
+    compile "org.apache.commons:commons-lang3:${versions.commons_lang3}"
+    compile "com.rometools:rome:${versions.rome}"
+}
