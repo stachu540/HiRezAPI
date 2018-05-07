@@ -1,6 +1,7 @@
 package hirezapi.smite;
 
 import hirezapi.AbstractAPI;
+import hirezapi.session.SessionStorage;
 import hirezapi.smite.enums.Smite;
 
 import java.util.Objects;
@@ -24,5 +25,11 @@ public class SmiteAPI extends AbstractAPI {
     return new SmiteGame(buildConfiguration(Objects.requireNonNull(devId, "DEV_ID"),
           Objects.requireNonNull(authKey, "AUTH_KEY")),
           getSessionStorage());
+  }
+
+  @Override
+  public SmiteAPI sessionStorage(SessionStorage sessionStorage) {
+    setSessionStorage(sessionStorage);
+    return this;
   }
 }

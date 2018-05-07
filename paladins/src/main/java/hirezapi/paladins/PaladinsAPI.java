@@ -2,6 +2,7 @@ package hirezapi.paladins;
 
 import hirezapi.AbstractAPI;
 import hirezapi.paladins.enums.Paladins;
+import hirezapi.session.SessionStorage;
 
 import java.util.Objects;
 
@@ -26,5 +27,11 @@ public class PaladinsAPI extends AbstractAPI {
           Objects.requireNonNull(devId, "DEV_ID"),
           Objects.requireNonNull(authKey, "AUTH_KEY")),
           getSessionStorage());
+  }
+
+  @Override
+  public PaladinsAPI sessionStorage(SessionStorage sessionStorage) {
+    setSessionStorage(sessionStorage);
+    return this;
   }
 }
