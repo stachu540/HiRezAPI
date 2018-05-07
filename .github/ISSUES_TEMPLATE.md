@@ -11,7 +11,9 @@ possible. Thank you!
 -->
 ### Versioning
 **Version**: <!-- Package version -->
+
 **OS Platform**: <!-- Operating system version with platform (x86 or x64) -->
+
 **Java Version ( >= 1.8 )**: <!-- Recommending using Java 8, Specify Java Build version -->
 
 ### Description
@@ -19,7 +21,7 @@ possible. Thank you!
 <!-- Describe exactly your problem. For codes or console logs use tripple backquote (`) 
 For example:
 ```java
-package pl.stachuofficial.examples
+package com.examples
 public class ExampleTest {
     public static void main(String[] args){
         System.out.println("This is a example compiled text.")
