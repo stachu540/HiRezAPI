@@ -26,6 +26,7 @@ ext {
 allprojects {
     group = 'com.github.stachu540'
     version = '2.1.0'
+    description = "Java-Based API Wrapper for Hi-Rez Studios games."
 
     repositories {
         jcenter()
@@ -51,7 +52,34 @@ subprojects {
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 
-    ext.subprojectName = (project.name == "HiRezApi") ? "HiRezApi" : "HiRezApi-${project.name}"
+    ext {
+        subprojectName = (project.name == "HiRezApi") ? "HiRezApi" : "HiRezApi-${project.name}"
+        pomConf = {
+            groupId = project.group
+            artifactId = subprojectName
+            version = project.version
+            description = project.description
+            name = "Hi-Rez API"
+            url = "https://github.com/stachu540/HiRezAPI"
+            licenses {
+                license {
+                    name "MIT Licence"
+                    url "https://github.com/stachu540/HiRezAPI/blob/master/LICENSE"
+                    distribution "repo"
+                }
+            }
+            developers {
+                developer {
+                    id "stachu540"
+                    name "Damian Staszewski"
+                    email "damian@stachuofficial.pl"
+                }
+            }
+            scm {
+                url "https://github.com/stachu540/HiRezAPI.git"
+            }
+        }
+    }
 
     sourceSets {
         main {
@@ -98,6 +126,11 @@ subprojects {
                 version version
                 artifact sourcesJar
                 artifact javadocJar
+                description project.description
+                pom.withXml {
+                    def root = asNode()
+                    root.children().last() + pomConf
+                }
             }
         }
     }
@@ -110,7 +143,7 @@ subprojects {
             repo = 'Java'
             name = 'HiRezAPI'
             userOrg = user
-            desc = 'Java-Based API Wrapper for Hi-Rez Studios games.'
+            desc = project.description
             websiteUrl = 'https://github.com/stachu540/HiRezAPI'
             vcsUrl = 'https://github.com/stachu540/HiRezAPI.git'
             issueTrackerUrl = 'https://github.com/stachu540/HiRezAPI/issues'
