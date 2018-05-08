@@ -55,12 +55,6 @@ subprojects {
     ext {
         subprojectName = (project.name == "HiRezApi") ? "HiRezApi" : "HiRezApi-${project.name}"
         pomConf = {
-            groupId = project.group
-            artifactId = subprojectName
-            version = project.version
-            description = project.description
-            name = "Hi-Rez API"
-            url = "https://github.com/stachu540/HiRezAPI"
             licenses {
                 license {
                     name "MIT Licence"
@@ -121,14 +115,16 @@ subprojects {
         publications {
             mainProject(MavenPublication) {
                 from project.components.java
-                groupId group
+                groupId project.group
                 artifactId subprojectName
-                version version
+                version project.version
                 artifact sourcesJar
                 artifact javadocJar
-                description project.description
                 pom.withXml {
                     def root = asNode()
+                    root.appendNode("description", project.description)
+                    root.appendNode("name", "HiRezAPI")
+                    root.appendNode('url', 'https://github.com/stachu540/HiRezAPI')
                     root.children().last() + pomConf
                 }
             }
