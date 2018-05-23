@@ -25,7 +25,8 @@ ext {
 
 allprojects {
     group = 'com.github.stachu540'
-    version = '2.1.0'
+    version = '2.1.1-SNAPSHOT'
+    description = "Java-Based API Wrapper for Hi-Rez Studios games."
 
     repositories {
         jcenter()
@@ -51,7 +52,28 @@ subprojects {
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 
-    ext.subprojectName = (project.name == "HiRezApi") ? "HiRezApi" : "HiRezApi-${project.name}"
+    ext {
+        subprojectName = (project.name == "HiRezApi") ? "HiRezApi" : "HiRezApi-${project.name}"
+        pomConf = {
+            licenses {
+                license {
+                    name "MIT Licence"
+                    url "https://github.com/stachu540/HiRezAPI/blob/master/LICENSE"
+                    distribution "repo"
+                }
+            }
+            developers {
+                developer {
+                    id "stachu540"
+                    name "Damian Staszewski"
+                    email "damian@stachuofficial.pl"
+                }
+            }
+            scm {
+                url "https://github.com/stachu540/HiRezAPI.git"
+            }
+        }
+    }
 
     sourceSets {
         main {
@@ -93,11 +115,18 @@ subprojects {
         publications {
             mainProject(MavenPublication) {
                 from project.components.java
-                groupId group
+                groupId project.group
                 artifactId subprojectName
-                version version
+                version project.version
                 artifact sourcesJar
                 artifact javadocJar
+                pom.withXml {
+                    def root = asNode()
+                    root.appendNode("description", project.description)
+                    root.appendNode("name", "HiRezAPI")
+                    root.appendNode('url', 'https://github.com/stachu540/HiRezAPI')
+                    root.children().last() + pomConf
+                }
             }
         }
     }
@@ -110,7 +139,7 @@ subprojects {
             repo = 'Java'
             name = 'HiRezAPI'
             userOrg = user
-            desc = 'Java-Based API Wrapper for Hi-Rez Studios games.'
+            desc = project.description
             websiteUrl = 'https://github.com/stachu540/HiRezAPI'
             vcsUrl = 'https://github.com/stachu540/HiRezAPI.git'
             issueTrackerUrl = 'https://github.com/stachu540/HiRezAPI/issues'
