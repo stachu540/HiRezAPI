@@ -20,3 +20,9 @@ deploy:
     script: ./gradlew bintrayUpload
     on:
       tags: true
+
+notifications:
+  webhooks:
+    urls:
+      - $WEBHOOK_URL
+    on_cancel: never
