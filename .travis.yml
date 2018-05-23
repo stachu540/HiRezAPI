@@ -22,7 +22,4 @@ deploy:
       tags: true
 
 notifications:
-  webhooks:
-    urls:
-      - $WEBHOOK_URL
-    on_cancel: never
+  webhooks: https://hooks.zapier.com/hooks/catch/2597637/a5zdyy/
