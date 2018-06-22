@@ -26,4 +26,6 @@ public class AbstractItem extends Model {
   private Integer price;
   @JsonProperty("itemIcon_URL")
   private String itemImage;
+  @JsonProperty("ShortDesc")
+  private String shortDescription;
 }

@@ -28,8 +28,6 @@ public class GodItem extends AbstractItem {
   private int price;
   @JsonProperty("RootItemId")
   private long rootItemId;
-  @JsonProperty("ShortDesc")
-  private String shortDescription;
   @JsonProperty("Type")
   private String type;
   @JsonProperty("StartingItem")

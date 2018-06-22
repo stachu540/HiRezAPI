@@ -1,7 +1,7 @@
 package hirezapi.enums;
 
 public interface Queue {
-  int getId();
+  Integer getId();
 
   String getName();
 

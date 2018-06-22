@@ -29,16 +29,25 @@ public class AbstractHero<A extends Ability<?>> extends Model {
   @JsonProperty("Ability_5")
   private A ability5;
 
+  @JsonProperty("Pros")
   private String pros;
+  @JsonProperty("Cons")
   private String cons;
 
+  @JsonProperty("Health")
   private float health;
+  @JsonProperty("Lore")
   private String lore;
+  @JsonProperty("Name")
   private String name;
+  @JsonProperty("OnFreeRotation")
   @JsonDeserialize(using = BooleanTextDeserializer.class)
   private boolean freeRotation;
+  @JsonProperty("Roles")
   private String roles;
+  @JsonProperty("Speed")
   private float speed;
+  @JsonProperty("Title")
   private String title;
   private Long id;
 }

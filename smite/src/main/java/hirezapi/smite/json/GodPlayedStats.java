@@ -1,8 +1,10 @@
-package hirezapi.json;
+package hirezapi.smite.json;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import hirezapi.json.PlayerStats;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,9 +16,9 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class Friend extends Model {
-  private Long playerId;
-  private Long accountId;
-  private String avatarUrl;
-  private String name;
+public class GodPlayedStats extends PlayerStats {
+  @JsonProperty("God")
+  private String godName;
+  @JsonProperty("GodId")
+  private long godId;
 }

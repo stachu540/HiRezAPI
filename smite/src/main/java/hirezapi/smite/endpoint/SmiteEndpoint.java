@@ -3,15 +3,13 @@ package hirezapi.smite.endpoint;
 import hirezapi.HiRezApi;
 import hirezapi.endpoints.GameEndpoint;
 import hirezapi.enums.Language;
-import hirezapi.smite.json.God;
-import hirezapi.smite.json.GodItem;
-import hirezapi.smite.json.GodRecommendedItem;
-import hirezapi.smite.json.GodSkin;
+import hirezapi.enums.Queue;
+import hirezapi.smite.json.*;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class SmiteEndpoint extends GameEndpoint<God, GodSkin, GodItem> {
+public class SmiteEndpoint extends GameEndpoint<God, GodSkin, GodItem, GodPlayedStats> {
   public SmiteEndpoint(HiRezApi api) {
     super(api);
   }
@@ -41,11 +39,11 @@ public class SmiteEndpoint extends GameEndpoint<God, GodSkin, GodItem> {
   }
 
   @Override
-  public List<GodSkin> getSkins(long id, Language language) {
+  public List<GodSkin> getSkins(Long id, Language language) {
     return Arrays.asList(api.getRestController()
           .request(buildUrl("getgodskins",
-                Long.toString(id),
-                Integer.toString(language.getId())), GodSkin[].class));
+                id.toString(),
+                language.getId().toString()), GodSkin[].class));
   }
 
   @Override
@@ -53,5 +51,10 @@ public class SmiteEndpoint extends GameEndpoint<God, GodSkin, GodItem> {
     return Arrays.asList(api.getRestController()
           .request(buildUrl("getitems",
                 Integer.toString(language.getId())), GodItem[].class));
+  }
+
+  @Override
+  public List<GodPlayedStats> getQueueStats(String username, Queue queue) {
+    return Arrays.asList(api.getRestController().request(buildUrl("getqueuestats", username, queue.getId().toString()), GodPlayedStats[].class));
   }
 }

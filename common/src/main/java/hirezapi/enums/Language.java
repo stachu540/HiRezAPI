@@ -19,7 +19,7 @@ public enum Language {
   Polish(12),
   Turkish(13);
 
-  private final int id;
+  private final Integer id;
   private final String name;
 
   Language(final int id) {
