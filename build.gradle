@@ -93,6 +93,12 @@ subprojects {
         testCompile "ch.qos.logback:logback-classic:${versions.logback}"
     }
 
+    javadoc {
+        title subprojectName
+        options.encoding = "UTF-8"
+        options.windowTitle = subprojectName
+    }
+
     // custom tasks for creating source/javadoc jars
     task sourcesJar(type: Jar, dependsOn: classes) {
         classifier = 'sources'
@@ -154,6 +160,6 @@ subprojects {
 }
 
 wrapper {
-    gradleVersion = "4.7"
+    gradleVersion = "4.8.1"
     distributionType = Wrapper.DistributionType.ALL
 }
