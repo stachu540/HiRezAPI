@@ -19,11 +19,11 @@ public class AbstractItem extends Model {
   @JsonProperty("DeviceName")
   private String itemName;
   @JsonProperty("IconId")
-  private int iconId;
+  private Long iconId;
   @JsonProperty("ItemId")
-  private int itemId;
+  private Long itemId;
   @JsonProperty("Price")
-  private int price;
+  private Integer price;
   @JsonProperty("itemIcon_URL")
   private String itemImage;
 }

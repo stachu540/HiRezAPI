@@ -40,5 +40,5 @@ public class AbstractHero<A extends Ability<?>> extends Model {
   private String roles;
   private float speed;
   private String title;
-  private long id;
+  private Long id;
 }

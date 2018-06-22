@@ -15,9 +15,6 @@ before_install:
 script:
   - ./gradlew test
 
-notifications:
-  webhooks: https://hooks.zapier.com/hooks/catch/2597637/a5zdyy/
-
 deploy:
   - provider: script
     script: ./gradlew bintrayUpload
