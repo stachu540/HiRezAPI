@@ -52,7 +52,7 @@ public enum SmiteQueue implements Queue {
   Conquest_Practice_Easy(458, "Conquest Practice (Easy)", false),
   Jungle_Practice(444, "Jungle Practice", false);
 
-  private final int id;
+  private final Integer id;
   private final String name;
   private final boolean ranked;
 }

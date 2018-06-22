@@ -24,8 +24,6 @@ public class GodItem extends AbstractItem {
   private Description itemDescription;
   @JsonProperty("ItemTier")
   private int itemTier;
-  @JsonProperty("Price")
-  private int price;
   @JsonProperty("RootItemId")
   private long rootItemId;
   @JsonProperty("Type")

@@ -5,5 +5,5 @@ public interface Queue {
 
   String getName();
 
-  Boolean isRanked();
+  boolean isRanked();
 }

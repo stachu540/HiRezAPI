@@ -37,7 +37,7 @@ public enum PaladinsQueue implements Queue {
   Custom_O_Primal_Court(455, "Primal Court [Onslaught] (Custom)", false),
   Custom_O_Snowfall_Junction(454, "Snowfall Junction [Onslaught] (Custom)", false);
 
-  private final int id;
+  private final Integer id;
   private final String name;
   private final boolean ranked;
 }

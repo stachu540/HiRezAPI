@@ -34,6 +34,6 @@ public class MatchesEndpoint extends AbstractEndpoint {
   public List<LeagueSeason> getLeagueSeasons(Queue queue) {
     return Arrays.asList(api.getRestController()
           .request(buildUrl("getleagueseasons",
-                Integer.toString(queue.getId())), LeagueSeason[].class));
+                queue.getId().toString()), LeagueSeason[].class));
   }
 }
