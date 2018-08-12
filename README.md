@@ -36,11 +36,11 @@ Add to `pom.xml` build.
     <dependency>
           <groupId>com.github.stachu540</groupId>
           <!--for all games-->
-          <artifactId>HiRezAPI-core</artifactId> 
+          <artifactId>HiRezApi-core</artifactId> 
           <!--for paladins-->
-          <!--<artifactId>HiRezAPI-paladins</artifactId>-->
+          <!--<artifactId>HiRezApi-paladins</artifactId>-->
           <!--for smite-->
-          <!--<artifactId>HiRezAPI-smite</artifactId>-->
+          <!--<artifactId>HiRezApi-smite</artifactId>-->
           <version>2.1.0</version>
      </dependency>
 </dependencies>
