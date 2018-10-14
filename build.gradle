@@ -31,15 +31,6 @@ allprojects {
     repositories {
         jcenter()
     }
-
-    plugins.withType(JavaPlugin) {
-        plugins.withId("net.ltgt.apt-idea") {
-            afterEvaluate {
-                project.idea.module.apt.addAptDependencies = false
-            }
-        }
-    }
-
 }
 
 subprojects {
@@ -52,9 +43,11 @@ subprojects {
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 
+    archivesBaseName = "HiRezApi-${project.name}"
+
     ext {
-        subprojectName = (project.name == "HiRezApi") ? "HiRezApi" : "HiRezApi-${project.name}"
         pomConf = {
+            url = "https://stachu540.github.io/HiRezAPI"
             licenses {
                 license {
                     name "MIT Licence"
@@ -66,7 +59,6 @@ subprojects {
                 developer {
                     id "stachu540"
                     name "Damian Staszewski"
-                    email "damian@stachuofficial.pl"
                 }
             }
             scm {
@@ -94,21 +86,17 @@ subprojects {
     }
 
     javadoc {
-        title subprojectName
         options.encoding = "UTF-8"
-        options.windowTitle = subprojectName
     }
 
     // custom tasks for creating source/javadoc jars
     task sourcesJar(type: Jar, dependsOn: classes) {
         classifier = 'sources'
-        baseName = 'HiRezApi-' + baseName
         from sourceSets.main.allSource
     }
 
     task javadocJar(type: Jar, dependsOn: javadoc) {
         classifier = 'javadoc'
-        baseName = 'HiRezApi-' + baseName
         from javadoc.destinationDir
     }
 
@@ -122,7 +110,7 @@ subprojects {
             mainProject(MavenPublication) {
                 from project.components.java
                 groupId project.group
-                artifactId subprojectName
+                artifactId archivesBaseName
                 version project.version
                 artifact sourcesJar
                 artifact javadocJar
@@ -160,6 +148,6 @@ subprojects {
 }
 
 wrapper {
-    gradleVersion = "4.8.1"
+    gradleVersion = "4.10.2"
     distributionType = Wrapper.DistributionType.ALL
 }

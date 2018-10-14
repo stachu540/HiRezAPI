@@ -1,3 +1,6 @@
-rootProject.name = 'HiRezAPI'
+include("core")
+include("smite")
+include("paladins")
+include("common")
 
-include "core", "smite", "paladins", "common"
+enableFeaturePreview('STABLE_PUBLISHING')
