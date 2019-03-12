@@ -1,6 +1,0 @@
-include("core")
-include("smite")
-include("paladins")
-include("common")
-
-enableFeaturePreview('STABLE_PUBLISHING')
