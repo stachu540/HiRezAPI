@@ -72,7 +72,7 @@ abstract class AbstractAPI<P : Player> protected constructor(
 							if (it.returnMessage != null || !(endpoint == "createsession" && it.returnMessage == "Approved"))
 								sink.onError(SessionException(it.returnMessage!!))
 							else sink.onSuccess(it)
-						}	else sink.onSuccess(it)
+						} else sink.onSuccess(it)
 					}
 				}
 	

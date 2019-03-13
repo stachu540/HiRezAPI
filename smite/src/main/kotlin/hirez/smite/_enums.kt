@@ -11,7 +11,7 @@ import hirez.Queue
 enum class GameQueue(
 			override val id: Int,
 			override val value: String
-): Queue {
+) : Queue {
 	ARENA(435, "Arena"),
 	JOUST(448, "Joust"),
 	CONQUEST(426, "Conquest"),

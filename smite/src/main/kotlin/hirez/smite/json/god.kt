@@ -15,92 +15,92 @@ import java.io.Serializable
  * @since 1.0
  */
 data class God(
-    @SerializedName("Ability_1")
-    override val ability1: GodAbility,
-    @SerializedName("Ability_2")
-    override val ability2: GodAbility,
-    @SerializedName("Ability_3")
-    override val ability3: GodAbility,
-    @SerializedName("Ability_4")
-    override val ability4: GodAbility,
-    @SerializedName("Ability_5")
-    override val ability5: GodAbility,
-		override val returnMessage: String?,
-    @SerializedName("AttackSpeed")
-    val attackSpeed: Float,
-    @SerializedName("AttackSpeedPerLevel")
-    val attackSpeedPerLevel: Float,
-    @SerializedName("Cons")
-    override val cons: String,
-    @SerializedName("HP5PerLevel")
-    val hP5PerLevel: Float,
-    @SerializedName("Health")
-    override val health: Float,
-    @SerializedName("HealthPerFive")
-    val healthPerFive: Float,
-    @SerializedName("HealthPerLevel")
-    val healthPerLevel: Float,
-    @SerializedName("Lore")
-    override val lore: String,
-    @SerializedName("MP5PerLevel")
-    val mP5PerLevel: Float,
-    @SerializedName("MagicProtection")
-    val magicProtection: Float,
-    @SerializedName("MagicProtectionPerLevel")
-    val magicProtectionPerLevel: Float,
-    @SerializedName("MagicalPower")
-    val magicalPower: Float,
-    @SerializedName("MagicalPowerPerLevel")
-    val magicalPowerPerLevel: Float,
-    @SerializedName("Mana")
-    val mana: Float,
-    @SerializedName("ManaPerFive")
-    val manaPerFive: Float,
-    @SerializedName("ManaPerLevel")
-    val manaPerLevel: Int,
-    @SerializedName("Name")
-    override val name: String,
-    @SerializedName("OnFreeRotation")
-		@JsonAdapter(BooleanTextDeserializer::class)
-    override val freeRotation: Boolean,
-    @SerializedName("Pantheon")
-    val pantheon: String,
-    @SerializedName("PhysicalPower")
-    val physicalPower: Float,
-    @SerializedName("PhysicalPowerPerLevel")
-    val physicalPowerPerLevel: Float,
-    @SerializedName("PhysicalProtection")
-    val physicalProtection: Float,
-    @SerializedName("PhysicalProtectionPerLevel")
-    val physicalProtectionPerLevel: Double,
-    @SerializedName("Pros")
-    override val pros: String,
-    @SerializedName("Roles")
-    override val roles: String,
-    @SerializedName("Speed")
-    override val speed: Float,
-    @SerializedName("Title")
-    override val title: String,
-    @SerializedName("Type")
-    val type: String,
-    val basicAttack: BaseDescription,
-    @SerializedName("godAbility1_URL")
-    val godAbility1URL: String,
-    @SerializedName("godAbility2_URL")
-    val godAbility2URL: String,
-    @SerializedName("godAbility3_URL")
-    val godAbility3URL: String,
-    @SerializedName("godAbility4_URL")
-    val godAbility4URL: String,
-    @SerializedName("godAbility5_URL")
-    val godAbility5URL: String,
-    @SerializedName("godCard_URL")
-    val godCardURL: String,
-    @SerializedName("godIcon_URL")
-    val godIconURL: String,
-    override val id: Long,
-		@JsonAdapter(BooleanTextDeserializer::class)
-    val latestGod: Boolean
+			@SerializedName("Ability_1")
+			override val ability1: GodAbility,
+			@SerializedName("Ability_2")
+			override val ability2: GodAbility,
+			@SerializedName("Ability_3")
+			override val ability3: GodAbility,
+			@SerializedName("Ability_4")
+			override val ability4: GodAbility,
+			@SerializedName("Ability_5")
+			override val ability5: GodAbility,
+			override val returnMessage: String?,
+			@SerializedName("AttackSpeed")
+			val attackSpeed: Float,
+			@SerializedName("AttackSpeedPerLevel")
+			val attackSpeedPerLevel: Float,
+			@SerializedName("Cons")
+			override val cons: String,
+			@SerializedName("HP5PerLevel")
+			val hP5PerLevel: Float,
+			@SerializedName("Health")
+			override val health: Float,
+			@SerializedName("HealthPerFive")
+			val healthPerFive: Float,
+			@SerializedName("HealthPerLevel")
+			val healthPerLevel: Float,
+			@SerializedName("Lore")
+			override val lore: String,
+			@SerializedName("MP5PerLevel")
+			val mP5PerLevel: Float,
+			@SerializedName("MagicProtection")
+			val magicProtection: Float,
+			@SerializedName("MagicProtectionPerLevel")
+			val magicProtectionPerLevel: Float,
+			@SerializedName("MagicalPower")
+			val magicalPower: Float,
+			@SerializedName("MagicalPowerPerLevel")
+			val magicalPowerPerLevel: Float,
+			@SerializedName("Mana")
+			val mana: Float,
+			@SerializedName("ManaPerFive")
+			val manaPerFive: Float,
+			@SerializedName("ManaPerLevel")
+			val manaPerLevel: Int,
+			@SerializedName("Name")
+			override val name: String,
+			@SerializedName("OnFreeRotation")
+			@JsonAdapter(BooleanTextDeserializer::class)
+			override val freeRotation: Boolean,
+			@SerializedName("Pantheon")
+			val pantheon: String,
+			@SerializedName("PhysicalPower")
+			val physicalPower: Float,
+			@SerializedName("PhysicalPowerPerLevel")
+			val physicalPowerPerLevel: Float,
+			@SerializedName("PhysicalProtection")
+			val physicalProtection: Float,
+			@SerializedName("PhysicalProtectionPerLevel")
+			val physicalProtectionPerLevel: Double,
+			@SerializedName("Pros")
+			override val pros: String,
+			@SerializedName("Roles")
+			override val roles: String,
+			@SerializedName("Speed")
+			override val speed: Float,
+			@SerializedName("Title")
+			override val title: String,
+			@SerializedName("Type")
+			val type: String,
+			val basicAttack: BaseDescription,
+			@SerializedName("godAbility1_URL")
+			val godAbility1URL: String,
+			@SerializedName("godAbility2_URL")
+			val godAbility2URL: String,
+			@SerializedName("godAbility3_URL")
+			val godAbility3URL: String,
+			@SerializedName("godAbility4_URL")
+			val godAbility4URL: String,
+			@SerializedName("godAbility5_URL")
+			val godAbility5URL: String,
+			@SerializedName("godCard_URL")
+			val godCardURL: String,
+			@SerializedName("godIcon_URL")
+			val godIconURL: String,
+			override val id: Long,
+			@JsonAdapter(BooleanTextDeserializer::class)
+			val latestGod: Boolean
 ) : HeroData<GodAbility> {
 	val abilityDescription1
 		get() = ability1.description
@@ -144,25 +144,25 @@ data class BaseDescription(
 }
 
 data class GodSkin(
-    @SerializedName("godIcon_URL")
-    val iconUrl: String,
-    @SerializedName("godSkin_URL")
-    val skinUrl: String,
-    @SerializedName("god_id")
-    val godId: Long,
-    @SerializedName("god_name")
-    val godName: String,
-    val obtainability: String,
-    @SerializedName("price_favor")
-    val priceFavor: Int,
-    @SerializedName("price_gems")
-    val priceGems: Int,
-    @SerializedName("skin_id1")
-    val Id1: Long,
-    @SerializedName("skin_id2")
-    val Id2: Long,
-    @SerializedName("skin_name")
-    val name: String
+			@SerializedName("godIcon_URL")
+			val iconUrl: String,
+			@SerializedName("godSkin_URL")
+			val skinUrl: String,
+			@SerializedName("god_id")
+			val godId: Long,
+			@SerializedName("god_name")
+			val godName: String,
+			val obtainability: String,
+			@SerializedName("price_favor")
+			val priceFavor: Int,
+			@SerializedName("price_gems")
+			val priceGems: Int,
+			@SerializedName("skin_id1")
+			val Id1: Long,
+			@SerializedName("skin_id2")
+			val Id2: Long,
+			@SerializedName("skin_name")
+			val name: String
 )
 
 data class UserGodRank(

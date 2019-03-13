@@ -1,16 +1,14 @@
 package hirez.smite
 
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import hirez.smite.json.SmitePlayer
-import hirez.GitProperties
 import hirez.AbstractAPI
-import hirez.Configuration
-import hirez.enums.Language
 import hirez.BaseEndpoint
+import hirez.Configuration
 import hirez.Game
+import hirez.GitProperties
 import hirez.Queue
 import hirez.SessionStorage
+import hirez.enums.Language
 import hirez.enums.Portal
 import hirez.exceptions.PlayerNotFoundException
 import hirez.json.Item
@@ -18,9 +16,9 @@ import hirez.smite.json.Achievements
 import hirez.smite.json.God
 import hirez.smite.json.GodRank
 import hirez.smite.json.GodSkin
+import hirez.smite.json.SmitePlayer
 import hirez.smite.json.TeamItemSearch
 import hirez.smite.json.UserGodRank
-import io.reactivex.Maybe
 import io.reactivex.Single
 
 /**
@@ -80,6 +78,7 @@ class SmiteGame internal constructor(
 	companion object {
 		@JvmStatic
 		fun builder() = Builder()
+		
 		fun create(builder: Builder.() -> Unit) = builder().apply(builder).build()
 	}
 	
