@@ -19,7 +19,7 @@ data class RealmPlayer(
 			override val name: String,
 			override val wins: Long,
 			override val activePlayerId: Long,
-			override val mergedPlayers: Array<MergedPlayer>?,
+			override val mergedPlayers: List<MergedPlayer>?,
 			override val avatar: String,
 			override val hoursPlayed: Int,
 			override val createdAt: Date,
@@ -32,10 +32,7 @@ data class RealmPlayer(
 			override val teamName: String,
 			override val totalAchievements: Int,
 			override val totalWorshippers: Int,
-			val rankedConquest: RankedItem,
-			val rankedDuel: RankedItem,
-			val rankedJoust: RankedItem,
-			val tierConquest: RankedItem.Tier,
-			val tierDuel: RankedItem.Tier,
-			val tierJoust: RankedItem.Tier
+			override val returnMessage: String?,
+			override val hiRezGamerTag: String?,
+			override val hiRezPlayerName: String
 ) : Player

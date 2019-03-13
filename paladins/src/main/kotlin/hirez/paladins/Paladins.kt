@@ -10,7 +10,10 @@ import hirez.BaseEndpoint
 import hirez.Game
 import hirez.Queue
 import hirez.SessionStorage
+import hirez.enums.Portal
+import hirez.exceptions.PlayerNotFoundException
 import hirez.paladins.json.PaladinsPlayer
+import io.reactivex.Single
 
 /**
  *
@@ -21,9 +24,29 @@ import hirez.paladins.json.PaladinsPlayer
 class Paladins(
 			configuration: Configuration,
 			session: SessionStorage,
-			gson: Gson = Gson(),
+			gson: GsonBuilder,
 			userAgent: String
 ) : AbstractAPI<PaladinsPlayer>(configuration, session, gson, userAgent) {
+	
+	override fun getPlayer(name: String) = get<Array<PaladinsPlayer>>("getplayer", name).flatMap { p ->
+		Single.create<PaladinsPlayer> {
+			if (p.isNotEmpty()) {
+				it.onSuccess(p[0])
+			} else {
+				it.onError(PlayerNotFoundException("Player is not exist or it is hidden"))
+			}
+		}
+	}
+	
+	override fun getPlayer(name: String, portal: Portal) = get<Array<PaladinsPlayer>>("getplayer", toDefaultPortal(portal), name).flatMap { p ->
+		Single.create<PaladinsPlayer> {
+			if (p.isNotEmpty()) {
+				it.onSuccess(p[0])
+			} else {
+				it.onError(PlayerNotFoundException("Player is not exist or it is hidden"))
+			}
+		}
+	}
 	
 	val champions
 		get() = getChampions(configuration.defaultLanguage)
@@ -108,7 +131,7 @@ class Paladins(
 			}
 			
 			return Paladins(Configuration(platform, devId, authKey, defaultLanguage),
-						sessionStorage, GsonBuilder().create(), userAgent)
+						sessionStorage, GsonBuilder(), userAgent)
 		}
 	}
 	
