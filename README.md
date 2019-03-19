@@ -54,7 +54,7 @@ repositories {
 
 dependencies {
     // for all games
-  compile "com.github.stachu540:HiRezAPI-core:2.1.0"
+  compile "com.github.stachu540:HiRezApi-core:2.1.0"
     // for paladins
 //  compile "com.github.stachu540:HiRezAPI-paladins:2.1.0"
     // for smite
