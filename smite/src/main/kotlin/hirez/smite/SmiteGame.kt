@@ -1,151 +1,222 @@
 package hirez.smite
 
-import com.google.gson.GsonBuilder
-import hirez.AbstractAPI
-import hirez.BaseEndpoint
-import hirez.Configuration
-import hirez.Game
-import hirez.GitProperties
-import hirez.Queue
-import hirez.SessionStorage
-import hirez.enums.Language
+import com.google.gson.Gson
+import hirez.Config
+import hirez.ConfigBuilder
+import hirez.Language
+import hirez.api.AbstractAPI
+import hirez.api.Http
+import hirez.api.Queue
+import hirez.api.exceptions.PlayerNotFoundException
 import hirez.enums.Portal
-import hirez.exceptions.PlayerNotFoundException
+import hirez.flattenArray
+import hirez.json.CreateSession
+import hirez.json.DataUsage
 import hirez.json.Item
-import hirez.smite.json.Achievements
+import hirez.json.Patch
+import hirez.json.Ping
+import hirez.json.PlayerData
+import hirez.json.Server
+import hirez.json.TestSession
 import hirez.smite.json.God
-import hirez.smite.json.GodRank
+import hirez.smite.json.GodLeaderboard
 import hirez.smite.json.GodSkin
-import hirez.smite.json.SmitePlayer
-import hirez.smite.json.TeamItemSearch
-import hirez.smite.json.UserGodRank
+import hirez.smite.json.Player
+import hirez.statuspage.StatusPage
+import io.reactivex.Flowable
 import io.reactivex.Single
 
 /**
- *
  * @author Damian Staszewski [damian@stachuofficial.tv]
  * @version %I%, %G%
  * @since 1.0
  */
-class SmiteGame internal constructor(
-			configuration: Configuration,
-			session: SessionStorage,
-			gson: GsonBuilder = GsonBuilder(),
-			userAgent: String
-) : AbstractAPI<SmitePlayer>(configuration, session, gson, userAgent) {
-	
-	override fun getPlayer(name: String) = get<Array<SmitePlayer>>("getplayer", name).flatMap { p ->
-		Single.create<SmitePlayer> {
-			if (p.isNotEmpty()) {
-				it.onSuccess(p[0])
-			} else {
-				it.onError(PlayerNotFoundException("Player is not exist or it is hidden"))
-			}
-		}
+object SmiteGame : AbstractAPI() {
+	@JvmStatic
+	fun initConfig(config: Config) {
+		this.config = config
+		this.http = Http(Gson(), config.userAgent)
 	}
 	
-	override fun getPlayer(name: String, portal: Portal) = get<Array<SmitePlayer>>("getplayer", toDefaultPortal(portal), name).flatMap { p ->
-		Single.create<SmitePlayer> {
-			if (p.isNotEmpty()) {
-				it.onSuccess(p[0])
-			} else {
-				it.onError(PlayerNotFoundException("Player is not exist or it is hidden"))
-			}
-		}
-	}
+	@JvmStatic
+	fun initConfig(configBuilder: ConfigBuilder.() -> Unit) =
+				initConfig(ConfigBuilder().apply(configBuilder).build())
 	
-	val gods
-		get() = getGods(configuration.defaultLanguage)
 	
-	fun getGods(language: Language) = get<Array<God>>("getgods", language.id.toString()).flattenAsFlowable { it.asIterable() }
+	@JvmStatic
+	fun createsession() = get<CreateSession>("createsession").doOnSuccess(config.sessionStorage::set)
+	val dataused
+		@JvmStatic get() = get<DataUsage>("getdataused")
+	val hirezserverstatus
+		@JvmStatic get() = get<Array<Server>>("gethirezserverstatus")
+	val patchinfo
+		@JvmStatic get() = get<Patch>("getpatchinfo")
 	
-	fun getGodLeaderboard(godId: Long, queue: Queue) = get<Array<GodRank>>("getgodleaderboard", godId.toString(), queue.id.toString()).flattenAsFlowable { it.asIterable() }
+	@JvmStatic
+	fun ping() = get<String>("ping").map(::Ping)
 	
-	fun getGodSkins(godId: Long) = getGodSkins(godId, configuration.defaultLanguage)
-	fun getGodSkins(godId: Long, language: Language) = get<Array<GodSkin>>("getgodskins", godId.toString(), language.id.toString()).flattenAsFlowable { it.asIterable() }
+	@JvmStatic
+	fun testsession() = get<String>("testsession")
+				.map(::TestSession)
+				.doOnSuccess { if (!it.isSuccessful) config.sessionStorage.remove() }
 	
-	val godRecommendedItems
-		get() = getGodRecommendedItems(configuration.defaultLanguage)
+	fun getGodLeaderboard(godId: Long, queue: Queue) =
+				Single.just(queue).flatMap { if (queue.isRanked) get<Array<GodLeaderboard>>("getgodleaderboard") else Single.error(IllegalArgumentException("Only ranked games are be allowed")) }
+							.flattenArray()
+	fun getGodRecommendedItems() =
+				get<Array<Item>>("getgodrecommendeditems")
+							.flattenArray()
+	fun getGods() =
+				get<Array<God>>("getgods")
+							.flattenArray()
+	fun getGodSkins() =
+				get<Array<GodSkin>>("getgodskins")
+							.flattenArray()
+	fun getItems() =
+				get<Array<Item>>("getitems")
+							.flattenArray()
+	fun getDemoDetails() =
+				get<>("getdemodetails")
+	fun getLeagueLeaderboard() =
+				get<>("getleagueleaderboard")
+	fun getLeagueSeasons() =
+				get<>("getleagueseasons")
+	fun getMatchDetails() =
+				get<>("getmatchdetails")
+	fun getMatchDetailsBatch() =
+				get<>("getmatchdetailsbatch")
+	fun getMatchHistory() =
+				get<>("getmatchhistory")
+	fun getMatchIdsByQueue() =
+				get<>("getmatchidsbyqueue")
+	fun getMatchPlayerDetails() =
+				get<>("getmatchplayerdetails")
+	fun getQueueStats() =
+				get<>("getqueuestats")
+	fun getTopMatches() =
+				get<>("gettopmatches")
+	fun getFriends() =
+				get<>("getfriends")
+	fun getGodRanks() =
+				get<>("getgodranks")
+	fun getPlayer() =
+				get<>("getplayer")
+	fun getPlayerAchievements() =
+				get<>("getplayerachievements")
+	fun getPlayerIdByName() =
+				get<>("getplayeridbyname")
+	fun getPlayerIdByPortalUserId() =
+				get<>("getplayeridbyportaluserid")
+	fun getPlayerIdsByGamertag() =
+				get<>("getplayeridsbygamertag")
+	fun getPlayerStatus() =
+				get<>("getplayerstatus")
+	fun getTeamDetails() =
+				get<>("getteamdetails")
+	fun getTeamPlayers() =
+				get<>("getteamplayers")
+	fun searchTeams() =
+				get<>("searchteams")
+	fun getEsportsProLeagueDetails() =
+				get<>("getesportsproleaguedetails")
+	fun getMOTD() =
+				get<>("getmotd")
+
+//	@JvmStatic
+//	fun ping() = get<String>("ping")
+//				.map(::Ping)
+//
+//	@JvmStatic
+//	fun createSession() =
+//				get<CreateSession>("createsession")
+//							.doOnSuccess(config.sessionStorage::set)
+//
+//	@JvmStatic
+//	fun testSession() = get<String>("testsession")
+//				.map(::TestSession)
+//				.doOnSuccess { if (!it.isSuccessful) config.sessionStorage.remove() }
+//
+//	@JvmStatic
+//	val dataUsed
+//		get() = get<Array<DataUsage>>("getdataused")
+//					.map { it[0] }
+//
+//	@JvmStatic
+//	val patchInfo
+//		get() = get<Patch>("getpatchinfo")
+//
+//	@JvmStatic
+//	val statusPage
+//		get() = StatusPage(http)
+//
+//	@JvmStatic
+//	val hiRezServerStatus
+//		get() = get<Array<Server>>("gethirezserverstatus")
+//					.flattenAsFlowable { it.asIterable() }
+//	@JvmStatic
+//	val gods
+//		get() = getGods(config.defaultLanguage)
+//
+//	@JvmStatic
+//	fun getGods(language: Language) =
+//				get<Array<God>>("getgods", language.id.toString())
+//							.flattenAsFlowable { it.asIterable() }
+//
+//	@JvmStatic
+//	fun getGodLeaderboard(godId: Long, queue: Queue) = get<Array<GodLeaderboard>>("getgodleaderboard", godId.toString(), queue.id.toString())
+//				.flattenAsFlowable { it.asIterable() }
+//
+//	@JvmStatic
+//	fun getGodSkins(godId: Long, language: Language) =
+//				get<Array<GodSkin>>("", godId.toString(), language.id.toString())
+//							.flattenAsFlowable { it.asIterable() }
+//
+//	@JvmStatic
+//	fun getGodSkins(godId: Long) = SmiteGame.getGodSkins(godId, config.defaultLanguage)
+//
+//	@JvmStatic
+//	fun getGodRecommendedItems(godId: Long, language: Language) =
+//				get<Array<Item>>("getgodrecommendeditems", godId.toString(), language.id.toString())
+//							.flattenAsFlowable { it.asIterable() }
+//
+//	@JvmStatic
+//	fun getGodRecommendedItems(godId: Long) = getGodRecommendedItems(godId, config.defaultLanguage)
+//
+//	@JvmStatic
+//	fun getItems(language: Language) =
+//				get<Array<Item>>("getitems", language.id.toString())
+//							.flattenAsFlowable { it.asIterable() }
+//
+//	@JvmStatic
+//	val items
+//		get() = getItems(config.defaultLanguage)
+//
+//	@JvmStatic
+//	fun getPlayer(name: String) =
+//				getPlayerIdByName(name).flatMap { get<Array<Player>>("getplayer", it[0].id.toString()) }
+//							.map { if (it.isNotEmpty()) it[0] else throw PlayerNotFoundException("This profile is hidden: $name") }
+//
+//	@JvmStatic
+//	fun getPlayer(name: String, portal: Portal) =
+//				getPlayerIdByName(name).flatMap {
+//					val p = it.firstOrNull { it.portal == portal }
+//					if (p != null) get<Array<Player>>("getplayer", p.id.toString(), p.portal.id.toString())
+//					else Single.error(PlayerNotFoundException("Player: $name is not assignable to this portal: ${portal.name}"))
+//				}.map { if (it.isNotEmpty()) it[0] else throw PlayerNotFoundException("This profile is hidden: $name") }
+//
+//	@JvmStatic
+//	fun getPlayerIdByName(name: String) =
+//				get<Array<PlayerData>>("getplayeridbyname", name)
+//							.map { if (it.isNotEmpty()) it else throw PlayerNotFoundException("Player does not exist: $name") }
+//
+//	@JvmStatic
+//	fun getPlayerIdByPortalUserId(userId: Long, portal: Portal) =
+//				get<Array<PlayerData>>("getplayeridbyportaluserid", portal.id.toString(), userId.toString())
+//							.map { if (it.isNotEmpty()) it else throw PlayerNotFoundException("Player does not exist: ID[$userId]") }
+//
+//	@JvmStatic
+//	fun getPlayerIdByGamertag(gamertag: String, portal: Portal) =
+//				get<Array<PlayerData>>("getplayeridbyportaluserid", portal.id.toString(), gamertag)
+//							.map { if (it.isNotEmpty()) it else throw PlayerNotFoundException("Player does not exist: $gamertag") }
 	
-	fun getGodRecommendedItems(language: Language) = get<Array<Item>>("getgodrecommendeditems", language.id.toString()).flattenAsFlowable { it.asIterable() }
-	
-	fun getGodRanks(player: String) = get<Array<UserGodRank>>("getgodranks", player).flattenAsFlowable { it.asIterable() }
-	
-	fun getPlayerAchievements(playerId: Long) = get<Achievements>("getplayerachievements", playerId.toString())
-	
-	fun searchTeam(query: String) = get<Array<TeamItemSearch>>("searchteams", query).flattenAsFlowable { it.asIterable() }
-	
-	companion object {
-		@JvmStatic
-		fun builder() = Builder()
-		
-		fun create(builder: Builder.() -> Unit) = builder().apply(builder).build()
-	}
-	
-	class Builder internal constructor() {
-		var platform: Platform = Platform.PC
-			private set
-		lateinit var devId: String
-			private set
-		lateinit var authKey: String
-			private set
-		var defaultLanguage: Language = Language.English
-			private set
-		var sessionStorage: SessionStorage = SessionStorage.DEFAULT
-			private set
-		var userAgent: String = "HiRez-API v${GitProperties.get(GitProperties.APPLICATION_VERSION)} [Rev. ${GitProperties.get(GitProperties.GIT_COMMIT_ID_ABBREV)}]"
-			private set
-		
-		fun setPlatform(platform: Platform): Builder {
-			this.platform = platform
-			return this
-		}
-		
-		fun setDevId(devId: String): Builder {
-			this.devId = devId
-			return this
-		}
-		
-		fun setAuthKey(authKey: String): Builder {
-			this.authKey = authKey
-			return this
-		}
-		
-		fun setDefaultLanguage(defaultLanguage: Language): Builder {
-			this.defaultLanguage = defaultLanguage
-			return this
-		}
-		
-		fun setSessionStorage(sessionStorage: SessionStorage): Builder {
-			this.sessionStorage = sessionStorage
-			return this
-		}
-		
-		fun setUserAgent(userAgent: String): Builder {
-			this.userAgent = userAgent
-			return this
-		}
-		
-		fun build(): SmiteGame {
-			if (!::devId.isInitialized || devId.isBlank()) {
-				throw NullPointerException("devId must be initialized")
-			}
-			if (!::authKey.isInitialized || authKey.isBlank()) {
-				throw NullPointerException("authKey must be initialized")
-			}
-			
-			return SmiteGame(Configuration(platform, devId, authKey, defaultLanguage),
-						sessionStorage, GsonBuilder(), userAgent)
-		}
-	}
-	
-	enum class Platform(override val baseUrl: String, platform: String) : BaseEndpoint {
-		PC("http://api.smitegame.com/smiteapi.svc", "23d1x2hb4kyq"),
-		XBOX("http://api.xbox.smitegame.com/smiteapi.svc", "7q3rm3krkkt6"),
-		PS4("http://api.ps4.smitegame.com/smiteapi.svc", "glnkmmppldgp");
-		
-		override val game = Game("542zlqj9nwr6", "Smite")
-		
-		override val platform = hirez.Platform(platform, name)
-	}
 }

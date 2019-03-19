@@ -1,14 +1,24 @@
 package hirez.smite
 
-import hirez.Queue
+import hirez.api.BaseEndpoint
+import hirez.api.Game
+import hirez.api.Platform
+import hirez.api.Queue
+import java.text.SimpleDateFormat
+import java.time.ZoneOffset
+import java.util.*
 
-/**
- *
- * @author Damian Staszewski [damian@stachuofficial.tv]
- * @version %I%, %G%
- * @since 1.0
- */
-enum class GameQueue(
+enum class Smite(override val baseUrl: String, platform: String) : BaseEndpoint {
+	PC("http://api.smitegame.com/smiteapi.svc", "23d1x2hb4kyq"),
+	XBOX("http://api.xbox.smitegame.com/smiteapi.svc", "7q3rm3krkkt6"),
+	PS4("http://api.ps4.smitegame.com/smiteapi.svc", "glnkmmppldgp");
+	
+	override val game = Game("542zlqj9nwr6", "Smite")
+	
+	override val platform = Platform(platform, name)
+}
+
+enum class Queues(
 			override val id: Int,
 			override val value: String
 ) : Queue {
@@ -56,5 +66,4 @@ enum class GameQueue(
 	BASIC_TUTORIAL(436, "Basic Tutorial");
 	
 	override val isRanked: Boolean = rankedQueues.contains(id)
-	
 }

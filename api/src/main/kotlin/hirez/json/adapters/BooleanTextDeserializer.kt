@@ -17,7 +17,7 @@ class BooleanTextDeserializer : JsonDeserializer<Boolean> {
 					when {
 						it.equals("y", ignoreCase = true) -> true
 						it.equals("n", ignoreCase = true) -> false
-						else -> false
+						else -> context.deserialize(json, typeOfT)
 					}
 				}
 }

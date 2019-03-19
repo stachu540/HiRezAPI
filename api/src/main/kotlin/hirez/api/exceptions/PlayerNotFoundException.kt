@@ -1,4 +1,4 @@
-package hirez.exceptions
+package hirez.api.exceptions
 
 import java.lang.RuntimeException
 

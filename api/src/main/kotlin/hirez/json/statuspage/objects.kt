@@ -1,7 +1,5 @@
-package hirez.statuspage.json
+package hirez.json.statuspage
 
-import hirez.json.Creation
-import hirez.json.IdObject
 import java.util.*
 
 /**
@@ -12,13 +10,13 @@ import java.util.*
  */
 data class IncidentUpdate(
 			val body: String,
-			override val createdAt: Date,
+			val createdAt: Date,
 			val displayAt: Date,
-			override val id: String,
+			val id: String,
 			val incidentId: String,
 			val status: String,
-			override val updatedAt: Date
-) : IdObject<String>, Creation, Updates
+			val updatedAt: Date
+)
 
 /**
  *
@@ -27,7 +25,7 @@ data class IncidentUpdate(
  * @since 3.0.0
  */
 data class Component(
-			override val id: String,
+			val id: String,
 			val createdAt: Date,
 			val updatedAt: Date,
 			val description: Any,
@@ -35,7 +33,7 @@ data class Component(
 			val pageId: String,
 			val position: Int,
 			val status: String
-) : IdObject<String>
+)
 
 /**
  *
@@ -44,10 +42,10 @@ data class Component(
  * @since 3.0.0
  */
 data class ScheduleMaintenance(
-			override val createdAt: Date,
-			override val id: String,
+			val createdAt: Date,
+			val id: String,
 			val impact: String,
-			val incidentUpdates: Array<IncidentUpdate>,
+			val incidentUpdates: List<IncidentUpdate>,
 			val monitoringAt: Date?,
 			val name: String,
 			val pageId: String,
@@ -56,8 +54,8 @@ data class ScheduleMaintenance(
 			val scheduledUntil: String,
 			val shortlink: String,
 			val status: String,
-			override val updatedAt: Date
-) : IdObject<String>, Creation, Updates
+			val updatedAt: Date
+)
 
 /**
  *
@@ -77,18 +75,18 @@ data class Status(
  * @since 3.0.0
  */
 data class Incident(
-			override val createdAt: Date,
-			override val id: String,
+			val createdAt: Date,
+			val id: String,
 			val impact: String,
-			val incidentUpdates: Array<IncidentUpdate>,
+			val incidentUpdates: List<IncidentUpdate>,
 			val monitoringAt: Date?,
 			val name: String,
 			val pageId: String,
 			val resolvedAt: Date?,
 			val shortlink: String,
 			val status: String,
-			override val updatedAt: Date
-) : IdObject<String>, Creation, Updates
+			val updatedAt: Date
+)
 
 /**
  *
@@ -97,8 +95,8 @@ data class Incident(
  * @since 3.0.0
  */
 data class StatusPage(
-			override val id: String,
+			val id: String,
 			val name: String,
 			val updatedAt: Date,
 			val url: String
-) : IdObject<String>
+)

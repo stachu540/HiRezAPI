@@ -1,8 +1,11 @@
-package hirez
+package hirez.api
 
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.util.*
+
+@Throws(NoSuchAlgorithmException::class)
+internal fun String.md5() = String(MessageDigest.getInstance("MD5").digest(toByteArray()))
 
 private val map = TreeMap<Int, String>().apply {
 	put(9, "IX")
@@ -10,15 +13,6 @@ private val map = TreeMap<Int, String>().apply {
 	put(4, "IV")
 	put(1, "I")
 }
-
-/**
- *
- * @author Damian Staszewski [damian@stachuofficial.tv]
- * @version %I%, %G%
- * @since 1.0
- */
-@Throws(NoSuchAlgorithmException::class)
-internal fun String.md5() = MessageDigest.getInstance("MD5").digest(toByteArray()).joinToString("") { String.format("%02x", it) }
 
 /**
  *

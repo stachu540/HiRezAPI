@@ -1,6 +1,6 @@
-package hirez
+package hirez.api
 
-import hirez.json.IdObject
+import com.google.gson.annotations.SerializedName
 
 /**
  *
@@ -22,5 +22,10 @@ interface BaseEndpoint {
 	val baseUrl: String
 }
 
-data class Game(override val id: String, val name: String) : IdObject<String>
-data class Platform(override val id: String, val name: String) : IdObject<String>
+interface ReturnedMessage {
+	@get:SerializedName("ret_msg")
+	val returnedMessage: String?
+}
+
+data class Game(val id: String, val name: String)
+data class Platform(val id: String, val name: String)

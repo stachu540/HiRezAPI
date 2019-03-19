@@ -1,123 +1,11 @@
 package hirez.json
 
+import com.google.gson.annotations.JsonAdapter
+import hirez.api.toRomanNumber
 import com.google.gson.annotations.SerializedName
-import hirez.enums.Portal
-import hirez.toRomanNumber
+import hirez.json.adapters.CsvLongConverter
 import java.util.*
 
-/**
- *
- * @author Damian Staszewski [damian@stachuofficial.tv]
- * @version %I%, %G%
- * @since 1.0
- */
-data class Friend(
-			val accountId: Long,
-			val avatarUrl: String,
-			val name: String,
-			val playerId: Long
-)
-
-/**
- *
- * @author Damian Staszewski [damian@stachuofficial.tv]
- * @version %I%, %G%
- * @since 1.0
- */
-data class Item(
-			val childItemId: Int,
-			val deviceName: String,
-			val iconId: Int,
-			val itemDescription: ItemDescription,
-			val itemId: Int,
-			val itemTier: Int,
-			val price: Int,
-			val restrictedRoles: String,
-			val rootItemId: Int,
-			val shortDesc: String,
-			val startingItem: Boolean,
-			val type: String,
-			val itemIconURL: String
-)
-
-/**
- *
- * @author Damian Staszewski [damian@stachuofficial.tv]
- * @version %I%, %G%
- * @since 1.0
- */
-data class PlayerData(
-			@SerializedName("player_id")
-			override val id: Long,
-			@SerializedName("portal")
-			val portalName: String,
-			@SerializedName("portal_id")
-			val portalId: Int
-) : IdObject<Long> {
-	val portal: Portal = Portal.values().firstOrNull { it.id == portalId } ?: Portal.UNKNOWN
-}
-
-/**
- *
- * @author Damian Staszewski [damian@stachuofficial.tv]
- * @version %I%, %G%
- * @since 1.0
- */
-data class PlayerState(
-			val match: Int,
-			val personalStatusMessage: String,
-			val status: Status,
-			val statusString: String
-) {
-	enum class Status { OFFLINE, IN_LOBBY, GOD_SELECTION, IN_GAME, ONLINE, UNKNOWN }
-}
-
-data class TeamItem(
-			val founder: String,
-			val founderId: Long,
-			val losses: Int,
-			val name: String,
-			val players: Int,
-			val rating: Int,
-			val tag: String,
-			val teamId: Long,
-			val wins: Int
-)
-
-/**
- *
- * @author Damian Staszewski [damian@stachuofficial.tv]
- * @version %I%, %G%
- * @since 1.0
- */
-data class MergedPlayer(
-			val mergeDatetime: Date,
-			val playerId: String,
-			val portalId: String
-)
-
-/**
- *
- * @author Damian Staszewski [damian@stachuofficial.tv]
- * @version %I%, %G%
- * @since 1.0
- */
-data class ItemDescription(
-			val description: String,
-			val menuitems: Array<Menuitem>,
-			val secondaryDescription: String?
-)
-
-/**
- *
- * @author Damian Staszewski [damian@stachuofficial.tv]
- * @version %I%, %G%
- * @since 1.0
- */
-data class Menuitem(
-			val description: String,
-			val value: String
-)
 
 /**
  *
@@ -181,9 +69,39 @@ data class RankedItem(
 	}
 }
 
-/**
- *
- * @author Damian Staszewski [damian@stachuofficial.tv]
- * @version %I%, %G%
- * @since 1.0
- */
+data class MOTD(
+    val description: String,
+    val gameMode: String,
+    val maxPlayers: String,
+    val name: String,
+    @SerializedName("ret_msg")
+    override val returnMessage: String?,
+    val startDateTime: Date,
+		@SerializedName("team1GodsCSV")
+		@JsonAdapter(CsvLongConverter::class)
+    val team1Picks: List<Long>,
+		@SerializedName("team2GodsCSV")
+		@JsonAdapter(CsvLongConverter::class)
+    val team2Picks: List<Long>,
+    val title: String
+): ReturnMessage
+
+data class ProLeagueDetail(
+    val awayTeamClanId: Int,
+    val awayTeamName: String,
+    val awayTeamTagname: String,
+    val homeTeamClanId: Int,
+    val homeTeamName: String,
+    val homeTeamTagname: String,
+    val mapInstanceId: String,
+    @SerializedName("match_date")
+    val matchDate: Date,
+    val matchNumber: String,
+    val matchStatus: String,
+    val matchupId: String,
+    val region: String,
+    @SerializedName("ret_msg")
+    override val returnMessage: String?,
+    val tournamentName: String,
+    val winningTeamClanId: Int
+) : ReturnMessage

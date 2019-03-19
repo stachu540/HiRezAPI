@@ -30,12 +30,12 @@ private fun parse(timestamp: String) = timestamp.let {
  */
 data class Ping(
 			val rawMessage: String
-) : Timestamp {
+) {
 	val game: String
 	val version: String
 	val patchVersion: String
 	val isPingReceived: Boolean
-	override val timestamp: Date
+	val timestamp: Date
 	
 	init {
 		val matcher = Pattern
@@ -62,11 +62,11 @@ data class Ping(
  */
 data class CreateSession(
 			@SerializedName("ret_msg")
-			val returnedMessage: String,
+			override val returnMessage: String,
 			@SerializedName("session_id")
 			val sessionId: String,
-			override val timestamp: Date
-) : Timestamp
+			val timestamp: Date
+) : ReturnMessage
 
 /**
  *
@@ -76,9 +76,9 @@ data class CreateSession(
  */
 data class TestSession(
 			val rawMessage: String
-) : Timestamp {
+) {
 	val isSuccessful: Boolean
-	override val timestamp: Date
+	val timestamp: Date
 	
 	init {
 		val matcher =
@@ -102,6 +102,8 @@ data class TestSession(
  * @since 1.0
  */
 data class DataUsage(
+			@SerializedName("ret_msg")
+			override val returnMessage: String,
 			val activeSessions: Int,
 			val concurrentSessions: Int,
 			val requestLimitDaily: Int,
@@ -109,7 +111,7 @@ data class DataUsage(
 			val sessionTimeLimit: Int,
 			val totalRequestsToday: Int,
 			val totalSessionsToday: Int
-)
+) : ReturnMessage
 
 /**
  *
@@ -118,11 +120,26 @@ data class DataUsage(
  * @since 1.0
  */
 data class Server(
+			@SerializedName("ret_msg")
+			override val returnMessage: String?,
 			val entryDatetime: Date,
 			val limitedAccess: Boolean,
-			val platform: String,
 			val status: Status,
-			val version: String
-) {
+			val version: String,
+			val platform: String = "PC"
+) : ReturnMessage {
 	enum class Status { UP, DOWN }
 }
+
+/**
+ *
+ * @author Damian Staszewski [damian@stachuofficial.tv]
+ * @version %I%, %G%
+ * @since 1.0
+ */
+data class Patch(
+			@SerializedName("ret_msg")
+			override val returnMessage: String?,
+			@SerializedName("version", alternate = ["version_string"])
+			val version: String
+) : ReturnMessage

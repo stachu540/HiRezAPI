@@ -64,9 +64,6 @@ subprojects {
 		if (!arrayOf("bom", "all").contains(project.name)) {
 			compile(kotlin("stdlib-jdk8"))
 			
-			// https://docs.gradle.org/5.0/userguide/managing_transitive_dependencies.html#sec:bom_import
-			compile(enforcedPlatform("com.fasterxml.jackson:jackson-bom:2.9.8"))
-			
 			compile("org.slf4j:slf4j-api:1.7.25")
 			
 			testCompile("ch.qos.logback:logback-classic:1.2.3")
@@ -86,10 +83,10 @@ subprojects {
 							"Created-By" to "Gradle ${gradle.gradleVersion} - JDK ${System.getProperty("java.specification.version")} (${System.getProperty(
 										"java.version"
 							)})",
-							"Implementation-Title" to rootProject.name,
-							"Implementation-Vendor" to base.archivesBaseName,
-							"Implementation-Version" to version,
-							"Implementation-Date" to timestamp
+							"compile-Title" to rootProject.name,
+							"compile-Vendor" to base.archivesBaseName,
+							"compile-Version" to version,
+							"compile-Date" to timestamp
 				)
 			}
 		}
