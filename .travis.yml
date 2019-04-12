@@ -31,7 +31,8 @@ jobs:
         skip_cleanup: true
         committer-from-gh: true
         verbose: true
-    - jdk: openjdk8
+    - stage: deploy
+      jdk: openjdk8
       install: skip
       script: ./gradlew bintrayUpload -x test
       if: tag IS present
