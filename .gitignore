@@ -1,6 +1,14 @@
+.gradle/
+build/
+logs/
+
 .idea
 *.iml
 out/
-.gradle
-build/
-logs/
+
+lombok.config
+
+*.txt
+
+all/src/
+BOM/src/
