@@ -26,7 +26,7 @@ Add to `pom.xml` build.
 <repositories>
     <repository>
         <id>jcenter</id>
-        <url>https://jitpack.io</url>
+        <url>https://jcenter.bintyray.com</url>
     </repository>
 </repositories>
 
@@ -41,7 +41,7 @@ Add to `pom.xml` build.
           <!--<artifactId>HiRezAPI-smite</artifactId>-->
           <!--for realm royale-->
           <!--<artifactId>HiRezAPI-realm</artifactId>-->
-          <version>master</version>
+          <version>3.0.0</version>
      </dependency>
 </dependencies>
 ```
@@ -49,18 +49,18 @@ Add to `pom.xml` build.
 Add to `build.gradle` build.
 ```groovy
 repositories {
-  maven { url "https://jitpack.io" }
+    jcenter()
 }
 
 dependencies {
 // for all games
-  compile "com.github.stachu540:HiRezAPI-all:master"
+  compile "com.github.stachu540:HiRezAPI-all:3.0.0"
 // for paladins
-//  compile "com.github.stachu540:HiRezAPI-paladins:master"
+//  compile "com.github.stachu540:HiRezAPI-paladins:3.0.0"
 // for smite
-//  compile "com.github.stachu540:HiRezAPI-smite:master"
+//  compile "com.github.stachu540:HiRezAPI-smite:3.0.0"
 // for realm royale
-//  compile "com.github.stachu540:HiRezAPI-realm:master"
+//  compile "com.github.stachu540:HiRezAPI-realm:3.0.0"
 }
 ```
 
