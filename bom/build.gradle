@@ -1,0 +1,26 @@
+plugins {
+    id "io.spring.dependency-management" version "1.0.7.RELEASE"
+}
+
+def projectList = [
+        project(":api"),
+        project(":smite"),
+        project(":paladins"),
+        project(":realm")
+]
+
+description = "Bills of Materials (BOM) for ${rootProject.name} packages"
+
+compileJava.enabled = false
+javadoc.enabled = false
+tasks.withType(Jar.class) { enabled = false }
+test.enabled = false
+
+dependencyManagement {
+    dependencies {
+        projectList.each {
+           dependency("${it.group}:${it.archivesBaseName}:${it.version}")
+       }
+    }
+}
+

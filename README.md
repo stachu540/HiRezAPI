@@ -1,13 +1,9 @@
-[![Build Status](https://travis-ci.org/stachu540/HiRezAPI.svg)](https://travis-ci.org/stachu540/HiRezAPI)
+[![Build Status](https://travis-ci.com/stachu540/HiRezAPI.svg)](https://travis-ci.com/stachu540/HiRezAPI)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ee16a92996a3425d87403780aa18f316)](https://www.codacy.com/app/stachu540/HiRezAPI?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=stachu540/HiRezAPI&amp;utm_campaign=Badge_Grade)
-[![Download](https://api.bintray.com/packages/stachu540/Java/HiRezAPI/images/download.svg) ](https://bintray.com/stachu540/Java/HiRezAPI/_latestVersion)
+[![Download](https://api.bintray.com/packages/stachu540/Java/HiRezAPI/images/download.svg)](https://bintray.com/stachu540/Java/HiRezAPI/_latestVersion)
+
 ##### Javadocs
-| Package | Javadoc |
-|---|---|
-| Common | [![Javadocs](http://javadoc.io/badge/com.github.stachu540/HiRezApi-common.svg)](http://javadoc.io/doc/com.github.stachu540/HiRezApi-common) |
-| Smite | [![Javadocs](http://javadoc.io/badge/com.github.stachu540/HiRezApi-smite.svg)](http://javadoc.io/doc/com.github.stachu540/HiRezApi-smite) |
-| Paladins | [![Javadocs](http://javadoc.io/badge/com.github.stachu540/HiRezApi-paladins.svg)](http://javadoc.io/doc/com.github.stachu540/HiRezApi-paladins) |
-| Core | [![Javadocs](http://javadoc.io/badge/com.github.stachu540/HiRezApi-core.svg)](http://javadoc.io/doc/com.github.stachu540/HiRezApi-core) |
+Soon :tm:
 
 # HiRezAPI
 Java-Based API Wrapper for Hi-Rez Studios games. Currently supports:
@@ -16,7 +12,7 @@ Java-Based API Wrapper for Hi-Rez Studios games. Currently supports:
  
 ## Features
 
-All features will be on [Project](https://github.com/stachu540/HiRezAPI/projects/4) tab
+All features will be on [Project](https://github.com/stachu540/HiRezAPI/projects/5) tab
 
 ## Getting Started
 
@@ -31,7 +27,7 @@ Add to `pom.xml` build.
 <repositories>
     <repository>
         <id>jcenter</id>
-        <url>https://jcenter.bintray.com</url>
+        <url>https://jitpack.io</url>
     </repository>
 </repositories>
 
@@ -39,12 +35,14 @@ Add to `pom.xml` build.
     <dependency>
           <groupId>com.github.stachu540</groupId>
           <!--for all games-->
-          <artifactId>HiRezAPI-core</artifactId> 
+          <artifactId>HiRezAPI-all</artifactId> 
           <!--for paladins-->
           <!--<artifactId>HiRezAPI-paladins</artifactId>-->
           <!--for smite-->
           <!--<artifactId>HiRezAPI-smite</artifactId>-->
-          <version>2.1.0</version>
+          <!--for realm royale-->
+          <!--<artifactId>HiRezAPI-realm</artifactId>-->
+          <version>v3</version>
      </dependency>
 </dependencies>
 ```
@@ -52,16 +50,18 @@ Add to `pom.xml` build.
 Add to `build.gradle` build.
 ```groovy
 repositories {
-  jcenter()
+  maven { url "https://jitpack.io" }
 }
 
 dependencies {
-    // for all games
-  compile "com.github.stachu540:HiRezAPI-core:2.1.0"
-    // for paladins
-//  compile "com.github.stachu540:HiRezAPI-paladins:2.1.0"
-    // for smite
-//  compile "com.github.stachu540:HiRezAPI-smite:2.1.0"
+// for all games
+  compile "com.github.stachu540:HiRezAPI-all:v3"
+// for paladins
+//  compile "com.github.stachu540:HiRezAPI-paladins:v3"
+// for smite
+//  compile "com.github.stachu540:HiRezAPI-smite:v3"
+// for realm royale
+//  compile "com.github.stachu540:HiRezAPI-realm:v3"
 }
 ```
 
