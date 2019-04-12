@@ -1,0 +1,170 @@
+import java.text.SimpleDateFormat
+
+plugins {
+    id "java"
+    id "maven-publish"
+    id "com.jfrog.bintray" version "1.8.4"
+    id "com.github.ben-manes.versions" version "0.21.0"
+    id "com.github.johnrengelman.shadow" version "5.0.0"
+    id "io.freefair.lombok" version "3.2.0" apply false
+    id "com.gorylenko.gradle-git-properties" version "2.0.0" apply false
+}
+
+def bintrayUser = System.getenv("BINTRAY_USER") ?: findProperty("bintray.user").toString()
+def bintrayApiKey = System.getenv("BINTRAY_API_KEY") ?: findProperty("bintray.api_key").toString()
+def sonatypeUser = System.getenv("CENTRAL_USER") ?: findProject("central.user").toString()
+def sonatypePassword = System.getenv("CENTRAL_PASSWORD") ?: findProject("central.password").toString()
+
+static def timestamp() {
+    def sdf = new SimpleDateFormat("MMM dd yyyy HH:mm:ss zzz", Locale.ENGLISH)
+    sdf.setTimeZone(TimeZone.getTimeZone("GMT"))
+    return sdf.format(new Date())
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+subprojects {
+    apply plugin: "java"
+    apply plugin: "maven-publish"
+
+    sourceCompatibility = targetCompatibility = 1.8
+
+    archivesBaseName = (project.name == rootProject.name) ? rootProject.name : "${rootProject.name}-${project.name}"
+
+    dependencies {
+        if (!["all", "BOM"].contains(project.name)) {
+            implementation "org.slf4j:slf4j-api:1.7.25"
+
+            implementation "com.google.code.findbugs:jsr305:3.0.2"
+
+            testImplementation "ch.qos.logback:logback-classic:1.2.3"
+        }
+    }
+
+    javadoc {
+        title archivesBaseName
+        options {
+            encoding = "UTF-8"
+            windowTitle = archivesBaseName
+        }
+    }
+
+    task sourceJar(type: Jar, dependsOn: classes) {
+        classifier = "sources"
+        from sourceSets.main.allSource
+    }
+
+    task javadocJar(type: Jar, dependsOn: javadoc) {
+        classifier = "javadoc"
+        from javadoc.destinationDir
+    }
+
+    tasks.withType(JavaCompile.class) {
+        options.incremental = true
+        options.encoding = "UTF-8"
+    }
+    tasks.withType(Jar.class).matching {
+        mainfest {
+            attributes = [
+                    "Manifest-Version"      : "1.0",
+                    "Created-By"            : "Gradle ${gradle.gradleVersion} - JDK ${System.getProperty("java.specification.version")} (${System.getProperty("java.version")})",
+                    "Implementation-Title"  : rootProject.name,
+                    "Implementation-Vendor" : base.archivesBaseName,
+                    "Implementation-Version": version,
+                    "Implementation-Date"   : timestamp()
+            ]
+        }
+    }
+
+    artifacts {
+        archives sourceJar
+        archives javadocJar
+    }
+
+    publishing {
+        publications {
+            project(MavenPublication) {
+                artifactId archivesBaseName
+                if (project.name != "BOM") {
+                    if (project.name != "all") {
+                        from components.java
+                        artifact sourceJar
+                    }
+                    artifact javadocJar
+                }
+                pom {
+                    url = "https://github.com/stachu540/hirezapi"
+                    inceptionYear = "2019"
+                    issueManagement {
+                        system = "GitHub"
+                        url = "https://github.com/stachu540/hirezapi/issues"
+                    }
+                    ciManagement {
+                        system = "Travis-CI"
+                        url = "https://travis-ci.com/stachu540/hirezapi"
+                    }
+                    developers {
+                        developer {
+                            id = "stachu540"
+                            name = "Damian Staszewski"
+                            url = "https://github.com/stachu540"
+                            timezone = "Europe/Warsaw"
+                        }
+                    }
+                    licenses {
+                        license {
+                            name = "MIT"
+                            url = "https://github.com/stachu540/hirezapi/blob/master/LICENCE.md"
+                            distribution = "repo"
+                        }
+                    }
+                    scm {
+                        connection = "scm:git:https://github.com/stachu540/hirezapi.git"
+                        developerConnection = "scm:git:git@github.com:stachu540/hirezapi.git"
+                        url = "https://github.com/stachu540/hirezapi"
+                    }
+                    distributionManagement {
+                        downloadUrl = "https://github.com/stachu540/hirezapi/releases"
+                    }
+                }
+            }
+        }
+    }
+
+    if (sourceSets.main.allSource.isEmpty() && ["BOM", "all"].contains(project.name)) {
+        bintrayUpload.enabled = false
+        bintrayPublish.enabled = false
+    }
+    
+    bintray {
+        user = bintrayUser
+        key = bintrayApiKey
+        publications = ["project"]
+        dryRun = false
+        publish = true
+        override = false
+        pkg {
+            userOrg = bintrayUser
+            repo = "Java"
+            name = rootProject.name
+            desc = rootProject.description
+            licenses = ["MIT"]
+            publicDownloadNumbers = true
+            vcsUrl = "https://github.com/stachu540/hirezapi.git"
+            version {
+                name = rootProject.version
+                vcsTag = "v${rootProject.version}"
+                released = new Date()
+            }
+        }
+    }
+}
+
+wrapper {
+    gradleVersion = "5.3.1"
+    distributionType = Wrapper.DistributionType.ALL
+}
