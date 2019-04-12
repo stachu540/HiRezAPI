@@ -4,7 +4,6 @@
 
 ##### Javadocs
 Soon :tm:
-
 # HiRezAPI
 Java-Based API Wrapper for Hi-Rez Studios games. Currently supports:
  * [Smite](https://smitegame.com/)
@@ -42,7 +41,7 @@ Add to `pom.xml` build.
           <!--<artifactId>HiRezAPI-smite</artifactId>-->
           <!--for realm royale-->
           <!--<artifactId>HiRezAPI-realm</artifactId>-->
-          <version>v3</version>
+          <version>master</version>
      </dependency>
 </dependencies>
 ```
@@ -55,13 +54,13 @@ repositories {
 
 dependencies {
 // for all games
-  compile "com.github.stachu540:HiRezAPI-all:v3"
+  compile "com.github.stachu540:HiRezAPI-all:master"
 // for paladins
-//  compile "com.github.stachu540:HiRezAPI-paladins:v3"
+//  compile "com.github.stachu540:HiRezAPI-paladins:master"
 // for smite
-//  compile "com.github.stachu540:HiRezAPI-smite:v3"
+//  compile "com.github.stachu540:HiRezAPI-smite:master"
 // for realm royale
-//  compile "com.github.stachu540:HiRezAPI-realm:v3"
+//  compile "com.github.stachu540:HiRezAPI-realm:master"
 }
 ```
 
