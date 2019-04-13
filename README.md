@@ -26,7 +26,7 @@ Add to `pom.xml` build.
 <repositories>
     <repository>
         <id>jcenter</id>
-        <url>https://jcenter.bintyray.com</url>
+        <url>https://jcenter.bintray.com</url>
     </repository>
 </repositories>
 
