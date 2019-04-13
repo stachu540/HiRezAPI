@@ -30,6 +30,8 @@ allprojects {
 subprojects {
     apply plugin: "java"
     apply plugin: "maven-publish"
+    apply plugin: "com.jfrog.bintray"
+    apply plugin: "com.github.johnrengelman.shadow"
 
     sourceCompatibility = targetCompatibility = 1.8
 
@@ -53,6 +55,11 @@ subprojects {
         }
     }
 
+    shadowJar {
+        enabled = (name != "BOM")
+        classifier = "shaded"
+    }
+
     task sourceJar(type: Jar, dependsOn: classes) {
         classifier = "sources"
         from sourceSets.main.allSource
@@ -67,6 +74,7 @@ subprojects {
         options.incremental = true
         options.encoding = "UTF-8"
     }
+
     tasks.withType(Jar.class).matching {
         mainfest {
             attributes = [
@@ -81,31 +89,37 @@ subprojects {
     }
 
     artifacts {
-        archives sourceJar
-        archives javadocJar
+        if (project.name != "BOM") {
+            if (project.name != "all") {
+                archives sourceJar
+            }
+            archives shadowJar
+            archives javadocJar
+        }
     }
 
     publishing {
         publications {
-            project(MavenPublication) {
+            maven(MavenPublication) {
                 artifactId archivesBaseName
                 if (project.name != "BOM") {
                     if (project.name != "all") {
                         from components.java
                         artifact sourceJar
                     }
+                    artifact shadowJar
                     artifact javadocJar
                 }
                 pom {
-                    url = "https://github.com/stachu540/hirezapi"
+                    url = "https://github.com/stachu540/HiRezAPI"
                     inceptionYear = "2019"
                     issueManagement {
                         system = "GitHub"
-                        url = "https://github.com/stachu540/hirezapi/issues"
+                        url = "https://github.com/stachu540/HiRezAPI/issues"
                     }
                     ciManagement {
                         system = "Travis-CI"
-                        url = "https://travis-ci.com/stachu540/hirezapi"
+                        url = "https://travis-ci.com/stachu540/HiRezAPI"
                     }
                     developers {
                         developer {
@@ -118,24 +132,24 @@ subprojects {
                     licenses {
                         license {
                             name = "MIT"
-                            url = "https://github.com/stachu540/hirezapi/blob/master/LICENCE.md"
+                            url = "https://github.com/stachu540/HiRezAPI/blob/master/LICENCE.md"
                             distribution = "repo"
                         }
                     }
                     scm {
-                        connection = "scm:git:https://github.com/stachu540/hirezapi.git"
-                        developerConnection = "scm:git:git@github.com:stachu540/hirezapi.git"
+                        connection = "scm:git:https://github.com/stachu540/HiRezAPI.git"
+                        developerConnection = "scm:git:git@github.com:stachu540/HiRezAPI.git"
                         url = "https://github.com/stachu540/hirezapi"
                     }
                     distributionManagement {
-                        downloadUrl = "https://github.com/stachu540/hirezapi/releases"
+                        downloadUrl = "https://github.com/stachu540/HiRezAPI/releases"
                     }
                 }
             }
         }
     }
 
-    if (sourceSets.main.allSource.isEmpty() && ["BOM", "all"].contains(project.name)) {
+    if (sourceSets.main.allSource.isEmpty() && !["bom", "all"].contains(project.name)) {
         bintrayUpload.enabled = false
         bintrayPublish.enabled = false
     }
@@ -143,7 +157,7 @@ subprojects {
     bintray {
         user = bintrayUser
         key = bintrayApiKey
-        publications = ["project"]
+        publications = ["maven"]
         dryRun = false
         publish = true
         override = false
@@ -154,11 +168,17 @@ subprojects {
             desc = rootProject.description
             licenses = ["MIT"]
             publicDownloadNumbers = true
-            vcsUrl = "https://github.com/stachu540/hirezapi.git"
+            vcsUrl = "https://github.com/stachu540/HiRezAPI.git"
             version {
                 name = rootProject.version
                 vcsTag = "v${rootProject.version}"
                 released = new Date()
+//                mavenCentralSync {
+//                    sync = true
+//                    user = sonatypeUser
+//                    password = sonatypePassword
+//                    close = '1'
+//                }
             }
         }
     }

@@ -22,17 +22,16 @@ jobs:
     - stage: deploy
       jdk: openjdk11
       install: skip
-      script: chmod +x ./javadoc.sh && ./javadoc.sh
       if: tag IS present
       deploy:
         provider: pages
-        local-dir: ./javadoc
+        local-dir: ./all/build/docs/javadoc
         api_key: $GITHUB_OAUTH_TOKEN
         skip_cleanup: true
         committer-from-gh: true
         verbose: true
     - stage: deploy
-      jdk: openjdk8
+      jdk: openjdk11
       install: skip
       script: ./gradlew bintrayUpload -x test
       if: tag IS present
