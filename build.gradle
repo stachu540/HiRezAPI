@@ -173,12 +173,6 @@ subprojects {
                 name = rootProject.version
                 vcsTag = "v${rootProject.version}"
                 released = new Date()
-//                mavenCentralSync {
-//                    sync = true
-//                    user = sonatypeUser
-//                    password = sonatypePassword
-//                    close = '1'
-//                }
             }
         }
     }
