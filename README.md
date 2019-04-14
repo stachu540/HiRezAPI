@@ -7,6 +7,7 @@
 Java-Based API Wrapper for Hi-Rez Studios games. Currently supports:
  * [Smite](https://smitegame.com/)
  * [Paladins](https://paladins.com/)
+ * [Realm Royale](https://realmroyale.com/)
  
 ## Features
 
