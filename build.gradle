@@ -57,10 +57,7 @@ subprojects {
         dependsOn delombok
         source = delombok.destinationDir
         title = "$archivesBaseName ${rootProject.version} API"
-        options {
-            encoding = "UTF-8"
-            windowTitle = "$archivesBaseName ${rootProject.version}"
-        }
+        options.windowTitle = "$archivesBaseName ${rootProject.version}"
     }
 
     shadowJar {
@@ -78,12 +75,12 @@ subprojects {
         from javadoc.destinationDir
     }
 
-    tasks.withType(JavaCompile.class) {
+    tasks.withType(JavaCompile) {
         options.incremental = true
         options.encoding = "UTF-8"
     }
 
-    tasks.withType(Jar.class).matching {
+    tasks.withType(Jar).matching {
         mainfest {
             attributes = [
                     "Manifest-Version"      : "1.0",
@@ -93,6 +90,13 @@ subprojects {
                     "Implementation-Version": version,
                     "Implementation-Date"   : timestamp()
             ]
+        }
+    }
+    
+    tasks.withType(Javadoc) {
+        options {
+            encoding = "UTF-8"
+            addBooleanOption "-no-module-directories", true
         }
     }
 
@@ -168,7 +172,7 @@ subprojects {
         publications = ["maven"]
         dryRun = false
         publish = true
-        override = false
+        override = true
         pkg {
             userOrg = bintrayUser
             repo = "Java"

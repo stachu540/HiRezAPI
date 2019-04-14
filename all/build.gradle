@@ -21,6 +21,7 @@ javadoc {
         author = true
         encoding = "UTF-8"
         quiet()
+        addBooleanOption "-no-module-directories", true
     }
 
     projectList.each {
