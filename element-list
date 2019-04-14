@@ -1,0 +1,12 @@
+hirez.api
+hirez.api.object
+hirez.api.object.adapters
+hirez.api.object.interfaces
+hirez.api.object.statuspage
+hirez.api.sessions
+hirez.paladins
+hirez.paladins.object
+hirez.realm
+hirez.realm.object
+hirez.smite
+hirez.smite.object
