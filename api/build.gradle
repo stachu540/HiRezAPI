@@ -1,5 +1,4 @@
 plugins {
-    id "io.freefair.lombok"
     id "com.gorylenko.gradle-git-properties"
 }
 
@@ -13,11 +12,11 @@ dependencies {
     
     compile "io.reactivex.rxjava2:rxjava:2.2.8"
 
-    compile "com.squareup.okhttp3:okhttp:3.14.0"
-    compile "com.squareup.okhttp3:logging-interceptor:3.14.0"
+    compile "com.squareup.okhttp3:okhttp:3.14.1"
+    compile "com.squareup.okhttp3:logging-interceptor:3.14.1"
     
-    testCompile "com.google.guava:guava:27.1-android"
-    testCompile "com.squareup.okhttp3:mockwebserver:3.14.0"
+//    testCompile "com.google.guava:guava:27.1-android"
+    testCompile "com.squareup.okhttp3:mockwebserver:3.14.1"
 }
 
 gitProperties {
@@ -31,6 +30,6 @@ gitProperties {
     dateFormatTimeZone = "GMT"
     customProperty "application.name", rootProject.name
     customProperty "application.version", rootProject.version
-    customProperty "application.url", "https://github.com/stachu540/hirezapi"
+    customProperty "application.url", "https://github.com/stachu540/HiRezAPI"
     customProperty "application.description", rootProject.description
 }

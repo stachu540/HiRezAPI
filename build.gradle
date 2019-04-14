@@ -3,10 +3,11 @@ import java.text.SimpleDateFormat
 plugins {
     id "java"
     id "maven-publish"
+    id "net.ltgt.apt" version "0.21"
     id "com.jfrog.bintray" version "1.8.4"
+    id "de.lukaskoerfer.gradle.delombok" version "0.2"
     id "com.github.ben-manes.versions" version "0.21.0"
     id "com.github.johnrengelman.shadow" version "5.0.0"
-    id "io.freefair.lombok" version "3.2.0" apply false
     id "com.gorylenko.gradle-git-properties" version "2.0.0" apply false
 }
 
@@ -29,9 +30,11 @@ allprojects {
 
 subprojects {
     apply plugin: "java"
+    apply plugin: "net.ltgt.apt"
     apply plugin: "maven-publish"
     apply plugin: "com.jfrog.bintray"
     apply plugin: "com.github.johnrengelman.shadow"
+    apply plugin: "de.lukaskoerfer.gradle.delombok"
 
     sourceCompatibility = targetCompatibility = 1.8
 
@@ -39,6 +42,9 @@ subprojects {
 
     dependencies {
         if (!["all", "BOM"].contains(project.name)) {
+            compileOnly "org.projectlombok:lombok:1.18.6"
+            annotationProcessor "org.projectlombok:lombok:1.18.6"
+
             implementation "org.slf4j:slf4j-api:1.7.25"
 
             implementation "com.google.code.findbugs:jsr305:3.0.2"
@@ -48,10 +54,12 @@ subprojects {
     }
 
     javadoc {
-        title archivesBaseName
+        dependsOn delombok
+        source = delombok.destinationDir
+        title = "$archivesBaseName ${rootProject.version} API"
         options {
             encoding = "UTF-8"
-            windowTitle = archivesBaseName
+            windowTitle = "$archivesBaseName ${rootProject.version}"
         }
     }
 

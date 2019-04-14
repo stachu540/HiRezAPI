@@ -1,7 +1,3 @@
-plugins {
-    id "io.freefair.lombok"
-}
-
 dependencies {
     compile project(":api")
 }
