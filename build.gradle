@@ -96,7 +96,9 @@ subprojects {
     tasks.withType(Javadoc) {
         options {
             encoding = "UTF-8"
-            addBooleanOption "-no-module-directories", true
+            if (JavaVersion.current().isJava9Compatible()) {
+                addBooleanOption "-no-module-directories", true
+            }
         }
     }
 
@@ -191,6 +193,6 @@ subprojects {
 }
 
 wrapper {
-    gradleVersion = "5.3.1"
+    gradleVersion = "5.4.1"
     distributionType = Wrapper.DistributionType.ALL
 }
