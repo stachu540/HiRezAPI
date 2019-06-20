@@ -5,6 +5,8 @@ import hirez.api.object.Platform;
 
 public interface BaseEndpoint {
     Game getGame();
+
     Platform getPlatform();
+
     String getBaseUrl();
 }

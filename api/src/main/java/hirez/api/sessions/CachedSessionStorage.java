@@ -23,7 +23,8 @@ public class CachedSessionStorage implements SessionStorage {
     public void get(Consumer<String> session) {
         try {
             session.accept(get());
-        } catch (Exception ignore) {}
+        } catch (Exception ignore) {
+        }
     }
 
     @Override

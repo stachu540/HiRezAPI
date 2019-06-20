@@ -1,17 +1,14 @@
 package hirez.api;
 
-import lombok.*;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.text.SimpleDateFormat;
-import java.time.ZoneOffset;
-import java.util.Date;
-import java.util.TimeZone;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@Accessors(chain = true)
 public class ConfigurationBuilder {
     private String devId;
     private String authKey;

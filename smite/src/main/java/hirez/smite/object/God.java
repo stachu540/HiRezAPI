@@ -3,7 +3,6 @@ package hirez.smite.object;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import hirez.api.object.adapters.TextToBoolean;
-import hirez.api.object.interfaces.IDObject;
 import hirez.api.object.interfaces.ReturnedMessage;
 import lombok.Data;
 

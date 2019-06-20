@@ -149,7 +149,7 @@ public class SmiteGame {
 
         int minutes = Integer.parseInt(mdf.format(timestamp));
 
-        minutes = minutes - minutes % 10 + ((minutes % 10) > 4 ? 10 : 0 );
+        minutes = minutes - minutes % 10 + ((minutes % 10) > 4 ? 10 : 0);
 
         return testAndCall(MatchId[].class, "getmatchidsbyqueue", queue.getId().toString(), df.format(timestamp) + minutes)
                 .flattenAsFlowable(Arrays::asList);

@@ -18,8 +18,6 @@ import java.util.TimeZone;
 
 @Slf4j
 public class RealmRoyale {
-    private static RestClient REST;
-
     private static final BaseEndpoint DEFAULT_BASE = new BaseEndpoint() {
         @Override
         public Game getGame() {
@@ -36,6 +34,7 @@ public class RealmRoyale {
             return "https://api.realmroyale.com/realmapi.svc";
         }
     };
+    private static RestClient REST;
 
     public static void initConfig(ConfigurationBuilder configuration) {
         if (configuration.getBaseEndpoint() == null) {
@@ -119,7 +118,7 @@ public class RealmRoyale {
 
         int minutes = Integer.parseInt(mdf.format(timestamp));
 
-        minutes = minutes - minutes % 10 + ((minutes % 10) > 4 ? 10 : 0 );
+        minutes = minutes - minutes % 10 + ((minutes % 10) > 4 ? 10 : 0);
 
         return testAndCall(MatchId[].class, "getmatchidsbyqueue", queue.getId().toString(), df.format(timestamp) + minutes)
                 .flattenAsFlowable(Arrays::asList);

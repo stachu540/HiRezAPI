@@ -1,4 +1,3 @@
-
 package hirez.api.object;
 
 import com.fasterxml.jackson.annotation.JsonAlias;

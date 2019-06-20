@@ -4,6 +4,7 @@ import hirez.api.object.interfaces.IDObject;
 import lombok.Data;
 
 import java.util.Date;
+
 @Data
 public class Page implements IDObject<String> {
     private final String id;

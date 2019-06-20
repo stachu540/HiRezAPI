@@ -1,11 +1,10 @@
-
 package hirez.paladins.object;
 
-import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import hirez.api.object.interfaces.IDObject;
 import hirez.api.object.interfaces.ReturnedMessage;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class PlayerLoadout implements ReturnedMessage {

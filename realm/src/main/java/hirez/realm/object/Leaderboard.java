@@ -1,12 +1,12 @@
-
 package hirez.realm.object;
 
-import java.util.Date;
-import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import hirez.api.object.adapters.DateTimeFormat;
 import hirez.api.object.interfaces.ReturnedMessage;
 import lombok.Data;
+
+import java.util.Date;
+import java.util.List;
 
 @Data
 public class Leaderboard implements ReturnedMessage {

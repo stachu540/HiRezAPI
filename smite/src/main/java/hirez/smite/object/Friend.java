@@ -1,7 +1,5 @@
-
 package hirez.smite.object;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import hirez.api.object.interfaces.ReturnedMessage;
 import lombok.Data;
 

@@ -27,8 +27,7 @@ public class FileSessionStorage implements SessionStorage {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        }
-        else
+        } else
             throw new NullPointerException("Please register session first!");
     }
 
@@ -36,7 +35,8 @@ public class FileSessionStorage implements SessionStorage {
     public void get(Consumer<String> session) {
         try {
             session.accept(get());
-        } catch (Exception ignore) {}
+        } catch (Exception ignore) {
+        }
     }
 
     @Override

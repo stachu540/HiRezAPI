@@ -1,7 +1,5 @@
 package hirez.realm;
 
-import lombok.RequiredArgsConstructor;
-
 public enum Criteria {
     Team_Wins(1),
     Team_Average_Placement(2),

@@ -1,4 +1,3 @@
-
 package hirez.paladins.object;
 
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -1,9 +1,7 @@
-
 package hirez.paladins.object;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import hirez.api.object.adapters.TextToBoolean;
-import hirez.api.object.interfaces.IDObject;
 import hirez.api.object.interfaces.ReturnedMessage;
 import lombok.Data;
 

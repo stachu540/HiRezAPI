@@ -1,4 +1,3 @@
-
 package hirez.realm.object;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
