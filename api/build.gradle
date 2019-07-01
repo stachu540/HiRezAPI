@@ -16,7 +16,7 @@ dependencies {
     compile "com.squareup.okhttp3:logging-interceptor:3.14.2"
     
 //    testCompile "com.google.guava:guava:27.1-android"
-    testCompile "com.squareup.okhttp3:mockwebserver:3.14.1"
+    testCompile "com.squareup.okhttp3:mockwebserver:4.0.0"
 }
 
 gitProperties {
