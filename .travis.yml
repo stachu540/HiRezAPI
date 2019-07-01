@@ -1,7 +1,8 @@
 language: java
 jdk:
-  - oraclejdk8
-  - oraclejdk11
+  - openjdk8
+  - openjdk11
+  - openjdk12
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -31,7 +32,7 @@ jobs:
         committer-from-gh: true
         verbose: true
     - stage: deploy
-      jdk: openjdk11
+      jdk: openjdk8
       install: skip
       script: ./gradlew bintrayUpload -x test
       if: tag IS present
