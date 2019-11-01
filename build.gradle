@@ -6,7 +6,7 @@ plugins {
     id "net.ltgt.apt" version "0.21"
     id "com.jfrog.bintray" version "1.8.4"
     id "de.lukaskoerfer.gradle.delombok" version "0.2"
-    id "com.github.ben-manes.versions" version "0.21.0"
+    id "com.github.ben-manes.versions" version "0.27.0"
     id "com.github.johnrengelman.shadow" version "5.1.0"
     id "com.gorylenko.gradle-git-properties" version "2.0.0" apply false
 }
