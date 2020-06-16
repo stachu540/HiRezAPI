@@ -54,13 +54,13 @@ repositories {
 
 dependencies {
 // for all games
-  compile "com.github.stachu540:HiRezAPI-all:3.0.0"
+  implementation("com.github.stachu540:HiRezAPI-all:3.0.0")
 // for paladins
-//  compile "com.github.stachu540:HiRezAPI-paladins:3.0.0"
+//  implementation("com.github.stachu540:HiRezAPI-paladins:3.0.0")
 // for smite
-//  compile "com.github.stachu540:HiRezAPI-smite:3.0.0"
+//  implementation("com.github.stachu540:HiRezAPI-smite:3.0.0")
 // for realm royale
-//  compile "com.github.stachu540:HiRezAPI-realm:3.0.0"
+//  implementation("com.github.stachu540:HiRezAPI-realm:3.0.0")
 }
 ```
 
