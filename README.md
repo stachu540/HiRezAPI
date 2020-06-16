@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.com/stachu540/HiRezAPI.svg)](https://travis-ci.com/stachu540/HiRezAPI)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ee16a92996a3425d87403780aa18f316)](https://www.codacy.com/app/stachu540/HiRezAPI?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=stachu540/HiRezAPI&amp;utm_campaign=Badge_Grade)
 [![Download](https://api.bintray.com/packages/stachu540/Java/HiRezAPI/images/download.svg)](https://bintray.com/stachu540/Java/HiRezAPI/_latestVersion)
 [![Javadoc](https://img.shields.io/static/v1.svg?label=all&message=Javadoc&color=sucess&style=flat&logoColor=sucess&logo=java)](https://stachu540.github.io/HiRezAPI)
 
