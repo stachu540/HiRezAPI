@@ -1,3 +1,0 @@
-rootProject.name = "HiRezAPI"
-
-include "all", "BOM", "api", "smite", "paladins", "realm"
