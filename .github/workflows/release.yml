@@ -1,0 +1,96 @@
+# Using created GitHub Tag to publishing into publishing platform
+name: Release Publication
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  test:
+    name: Final Test Release
+    runs-on:  [ubuntu-latest]
+    strategy:
+      matrix:
+        jvm: [8, 11, 14]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.0
+        with:
+          fetch-depth: 50
+      - name: Gradle Cache
+        id: gradle-cache
+        uses: actions/cache@v2.0.0
+        with:
+          path: ~/.gradle/caches
+          key: jdk${{ matrix.jvm }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            jdk${{ matrix.jvm }}-gradle-
+      - name: Set up JDK ${{ matrix.jvm }}
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.jvm }}
+      - name: Gradle Test
+        run: |
+          chmod +x ./gradlew
+          ./gradlew test -x javadoc
+  release-bintray:
+    name: Release Publication
+    runs-on: [ubuntu-latest]
+    needs: test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.0
+        with:
+          fetch-depth: 50
+      - name: Gradle Cache
+        id: gradle-cache
+        uses: actions/cache@v1.0.0
+        with:
+          path: ~/.gradle/caches
+          key: jdk8-gradle-${{ hashFiles('**/build.gradle*') }}
+          restore-keys: |
+            jdk8-gradle-
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 8
+      - name: Deploy release
+        env:
+          BINTRAY_USER: stachu540
+          BINTRAY_API_KEY: ${{ secrets.BINTRAY_API_KEY }}
+        run: |
+          chmod +x ./gradlew
+          ./gradlew bintrayUpload
+
+  release-docs:
+    name: Release Documentation to Github Pages
+    runs-on: [ubuntu-latest]
+    needs: test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.0
+        with:
+          fetch-depth: 50
+      - name: Gradle Cache
+        id: gradle-cache
+        uses: actions/cache@v1.0.0
+        with:
+          path: ~/.gradle/caches
+          key: jdk11-gradle-${{ hashFiles('**/build.gradle*') }}
+          restore-keys: |
+            jdk11-gradle-
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Prepare Javadoc
+        run: |
+          chmod +x ./gradlew
+          ./gradlew :all:javadoc
+      - name: Deploy Documentation
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./all/build/docs/javadoc
+          commit_message: ${{ github.event.head_commit.message }}
+
