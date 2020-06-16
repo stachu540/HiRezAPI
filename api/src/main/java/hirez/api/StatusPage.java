@@ -1,43 +1,43 @@
 package hirez.api;
 
 import hirez.api.object.statuspage.*;
-import io.reactivex.Single;
+import io.reactivex.rxjava3.core.Single;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class StatusPage {
-    private final RestClient client;
+    private final Endpoint endpoint;
 
     public Single<Summary> getSummary() {
-        return client.get(Summary.class, combineUrl("/summary.json"));
+        return endpoint.get(Summary.class, combineUrl("/summary.json"));
     }
 
     public Single<StatusData> getStatus() {
-        return client.get(StatusData.class, combineUrl("/status.json"));
+        return endpoint.get(StatusData.class, combineUrl("/status.json"));
     }
 
     public Single<Components> getComponents() {
-        return client.get(Components.class, combineUrl("/components.json"));
+        return endpoint.get(Components.class, combineUrl("/components.json"));
     }
 
     public Single<Incidents> getUnresolvedIncidents() {
-        return client.get(Incidents.class, combineUrl("/incidents/unresolved.json"));
+        return endpoint.get(Incidents.class, combineUrl("/incidents/unresolved.json"));
     }
 
     public Single<Incidents> getIncidents() {
-        return client.get(Incidents.class, combineUrl("/incidents.json"));
+        return endpoint.get(Incidents.class, combineUrl("/incidents.json"));
     }
 
     public Single<ScheduledMaintenances> getUpcomingScheduledMaintenances() {
-        return client.get(ScheduledMaintenances.class, combineUrl("/scheduled-maintenances/upcoming.json"));
+        return endpoint.get(ScheduledMaintenances.class, combineUrl("/scheduled-maintenances/upcoming.json"));
     }
 
     public Single<ScheduledMaintenances> getActiveScheduledMaintenances() {
-        return client.get(ScheduledMaintenances.class, combineUrl("/scheduled-maintenances/active.json"));
+        return endpoint.get(ScheduledMaintenances.class, combineUrl("/scheduled-maintenances/active.json"));
     }
 
     public Single<ScheduledMaintenances> getAllScheduledMaintenances() {
-        return client.get(ScheduledMaintenances.class, combineUrl("/scheduled-maintenances.json"));
+        return endpoint.get(ScheduledMaintenances.class, combineUrl("/scheduled-maintenances.json"));
     }
 
     private String combineUrl(String endpoint) {

@@ -2,7 +2,7 @@ package hirez.api.sessions;
 
 import hirez.api.SessionStorage;
 import hirez.api.object.CreateSession;
-import io.reactivex.functions.Consumer;
+import java.util.function.Consumer;
 
 public class CachedSessionStorage implements SessionStorage {
     private String session;
@@ -23,7 +23,7 @@ public class CachedSessionStorage implements SessionStorage {
     public void get(Consumer<String> session) {
         try {
             session.accept(get());
-        } catch (Exception ignore) {
+        } catch (Throwable ignore) {
         }
     }
 

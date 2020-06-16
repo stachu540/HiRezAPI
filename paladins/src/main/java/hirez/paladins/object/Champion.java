@@ -70,6 +70,7 @@ public class Champion implements ReturnedMessage {
     private final boolean onFreeWeeklyRotation;
     /**
      * @deprecated Unused when returns a same value {@code Norse}
+     * @return only {@code Norse}
      */
     @Deprecated
     @JsonProperty("Pantheon")

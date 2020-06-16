@@ -1,7 +1,11 @@
 package hirez.api;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
+import okhttp3.OkHttpClient;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -9,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.time.ZoneOffset;
 import java.util.Date;
 import java.util.TimeZone;
+import java.util.function.Consumer;
 
 @Getter
 @AllArgsConstructor
@@ -19,9 +24,13 @@ public class Configuration {
     private final SessionStorage sessionStorage;
     private final String userAgent;
     private final Language language;
+    @Getter(AccessLevel.PACKAGE)
+    private final Consumer<ObjectMapper> mapper;
+    @Getter(AccessLevel.PACKAGE)
+    private final Consumer<OkHttpClient.Builder> httpClient;
 
     public Configuration(ConfigurationBuilder cb) {
-        this(cb.getDevId(), cb.getAuthKey(), cb.getBaseEndpoint(), cb.getSessionStorage(), cb.getUserAgent(), cb.getLanguage());
+        this(cb.getDevId(), cb.getAuthKey(), cb.getBaseEndpoint(), cb.getSessionStorage(), cb.getUserAgent(), cb.getLanguage(), cb.getMapper(), cb.getHttpClient());
     }
 
     public String createUrl(String method, String... args) {

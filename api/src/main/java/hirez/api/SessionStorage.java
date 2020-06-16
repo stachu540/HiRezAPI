@@ -2,7 +2,8 @@ package hirez.api;
 
 import hirez.api.object.CreateSession;
 import hirez.api.sessions.CachedSessionStorage;
-import io.reactivex.functions.Consumer;
+
+import java.util.function.Consumer;
 
 public interface SessionStorage {
     SessionStorage DEFAULT = CachedSessionStorage.create();
