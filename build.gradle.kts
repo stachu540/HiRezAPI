@@ -13,10 +13,6 @@ allprojects {
         version = "$version".substring(1)
     }
 
-    task("version") {
-        println("${project.displayName}: $version")
-    }
-
     repositories {
         jcenter()
     }
