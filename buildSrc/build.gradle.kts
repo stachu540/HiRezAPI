@@ -7,5 +7,5 @@ repositories {
 }
 
 dependencies {
-
+    api("org.kohsuke:github-api:1.114")
 }

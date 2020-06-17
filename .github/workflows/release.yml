@@ -61,9 +61,10 @@ jobs:
         env:
           BINTRAY_USER: stachu540
           BINTRAY_API_KEY: ${{ secrets.BINTRAY_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           chmod +x ./gradlew
-          ./gradlew -Pversion=${{ steps.tag.outputs.id }} bintrayUpload
+          ./gradlew -Pversion=${{ steps.tag.outputs.id }} bintrayUpload releaseAssets
   release-docs:
     name: Release Documentation to Github Pages
     runs-on: [ubuntu-latest]

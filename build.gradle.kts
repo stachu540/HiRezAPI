@@ -9,6 +9,10 @@ plugins {
 }
 
 allprojects {
+    beforeEvaluate {
+        extensions.add("github", if (githubToken.isNullOrBlank()) org.kohsuke.github.GitHub.connectAnonymously() else org.kohsuke.github.GitHub.connectUsingOAuth(githubToken))
+    }
+
     if ("$version".startsWith("v")) {
         version = "$version".substring(1)
     }
@@ -17,9 +21,11 @@ allprojects {
         jcenter()
     }
 
-    pluginManager.withPlugin("io.freefair.lombok") {
-        tasks.generateLombokConfig {
-            enabled = false
+    tasks {
+        pluginManager.withPlugin("io.freefair.lombok") {
+            generateLombokConfig {
+                enabled = false
+            }
         }
     }
 }
@@ -83,6 +89,7 @@ subprojects {
             }
 
             shadowJar {
+                isEnabled = name != "api"
                 archiveClassifier.set("shaded")
             }
 
@@ -129,7 +136,17 @@ subprojects {
     }
 }
 
-tasks.wrapper {
-    gradleVersion = "6.5"
-    distributionType = Wrapper.DistributionType.ALL
+tasks {
+    wrapper {
+        gradleVersion = "6.5"
+        distributionType = Wrapper.DistributionType.ALL
+    }
+    create<ReleaseAssets>("releaseAssets") {
+        dependsOn(shadowJar)
+        onlyIf { !githubToken.isNullOrBlank() }
+        jarFiles = files(*globalProjects.mapNotNull {
+            if (it.name == "api") null
+            else (it.tasks.findByName("shadowJar") as? org.gradle.jvm.tasks.Jar)?.archiveFile?.get()?.asFile
+        }.toTypedArray())
+    }
 }
