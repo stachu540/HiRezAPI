@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/stachu540/HiRezAPI.svg)](https://travis-ci.com/stachu540/HiRezAPI)
+[![Build Status](https://github.com/stachu540/HiRezAPI/workflows/CI/badge.svg)](https://github.com/stachu540/HiRezAPI/actions?query=workflow%3ACI)
 [![Download](https://api.bintray.com/packages/stachu540/Java/HiRezAPI/images/download.svg)](https://bintray.com/stachu540/Java/HiRezAPI/_latestVersion)
 [![Javadoc](https://img.shields.io/static/v1.svg?label=all&message=Javadoc&color=sucess&style=flat&logoColor=sucess&logo=java)](https://stachu540.github.io/HiRezAPI)
 

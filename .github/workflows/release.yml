@@ -1,5 +1,4 @@
-# Using created GitHub Tag to publishing into publishing platform
-name: Release Publication
+name: Release
 
 on:
   release:
