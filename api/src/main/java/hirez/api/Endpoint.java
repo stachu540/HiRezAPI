@@ -59,15 +59,41 @@ public class Endpoint {
                     public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                         sink.onSuccess(buildResponse(response, type));
                     }
-                })).doOnSuccess(r -> LOGGER.debug("[onSuccess()] \"" + url + "\""))
-                .doOnError(e -> LOGGER.error("[onError()] \"" + url + "\"", e))
-                .doOnSubscribe(d -> LOGGER.debug("[onSubscribe()] \"" + url + "\""))
-                .doOnDispose(() -> LOGGER.debug("[onDisposed()] \"" + url + "\""))
-                .doOnTerminate(() -> LOGGER.trace("[onTerminate()] \"" + url + "\""));
+                }))
+                .doOnEvent((success, error) -> {
+                    if (Objects.nonNull(success)) {
+                        LOGGER.debug("[SUCCESS] " + url + " -> " + success);
+                    }
+                    if (Objects.nonNull(error)) {
+                        LOGGER.error("[ERROR] " + url, error);
+                    }
+                })
+                .doOnSubscribe(d -> LOGGER.debug("[SUBSCRIBE] \"" + url + "\""))
+                .doOnDispose(() -> LOGGER.debug("[DISPOSE] \"" + url + "\""))
+                .doOnTerminate(() -> LOGGER.warn("[TERMINATE] \"" + url + "\""));
     }
 
-    protected final  <T> Single<T> call(Class<T> type, String method, String... argv) {
-        return get(type, configuration.createUrl(method, argv));
+    protected final <T> Single<T> call(Class<T> type, String method, String... argv) {
+        return get(type, configuration.createUrl(method, argv)).flatMap(r -> Single.create(sink -> {
+            if (type.isAssignableFrom(ReturnedMessage.class)) {
+                ReturnedMessage rm = (type.isArray()) ? ((ReturnedMessage[]) r)[0] : (ReturnedMessage) r;
+                if (rm.getReturnedMessage() != null) {
+                    if (method.equalsIgnoreCase("createsession")) {
+                        if (rm.getReturnedMessage().equals("Approved")) {
+                            sink.onSuccess(r);
+                        } else {
+                            sink.onError(new HiRezException(rm));
+                        }
+                    } else {
+                        sink.onError(new HiRezException(rm));
+                    }
+                } else {
+                    sink.onSuccess(r);
+                }
+            } else {
+                sink.onSuccess(r);
+            }
+        }));
     }
 
     private <T> T buildResponse(Response response, Class<T> type) throws IOException {
@@ -89,18 +115,7 @@ public class Endpoint {
                 } else {
                     return call(type, method, argv);
                 }
-            }).flatMap(r -> Single.create(sink -> {
-                if (type.isAssignableFrom(ReturnedMessage.class)) {
-                    ReturnedMessage rm = (type.isArray()) ? ((ReturnedMessage[]) r)[0] : (ReturnedMessage) r;
-                    if (rm.getReturnedMessage() != null) {
-                        sink.onError(new HiRezException(rm));
-                    } else {
-                        sink.onSuccess(r);
-                    }
-                } else {
-                    sink.onSuccess(r);
-                }
-            }));
+            });
         }
     }
 
@@ -114,7 +129,15 @@ public class Endpoint {
 
     public final Single<TestSession> testSession() {
         return call(String.class, "testsession")
-                .map(TestSession::new);
+                .map(TestSession::new).flatMap(response ->
+                        Single.create(sink -> {
+                            if (response.isSuccessful()) {
+                                sink.onSuccess(response);
+                            } else {
+                                sink.onError(new HiRezException(response.getRawMessage()));
+                            }
+                        })
+                );
     }
 
     public final Single<Ping> ping() {

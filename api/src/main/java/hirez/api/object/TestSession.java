@@ -14,9 +14,9 @@ public class TestSession {
     private final Date timestamp;
 
     public TestSession(String raw) {
-        this.rawMessage = raw;
+        this.rawMessage = raw.replace("\"", "");
 
-        Matcher matcher = Pattern.compile("^(.+): developer: ([0-9]{4}) time: " + "(?<timestamp>.+) signature: (.+) session: (.+)$").matcher(raw.replace("\"", ""));
+        Matcher matcher = Pattern.compile("^(.+): developer: ([0-9]{4}) time: (?<timestamp>.+) signature: (.+) session: (.+)$").matcher(raw.replace("\"", ""));
         if (matcher.find()) {
             successful = true;
             timestamp = HiRezUtils.parse(matcher.group("timestamp"));
