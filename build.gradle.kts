@@ -57,8 +57,8 @@ subprojects {
                 compileOnly(lombok)
                 annotationProcessor(lombok)
 
-                implementation(slf4j)
-                implementation("com.google.code.findbugs:jsr305:3.0.2")
+                compile(slf4j)
+                compile("com.google.code.findbugs:jsr305:3.0.2")
 
                 testImplementation("ch.qos.logback:logback-classic:${Version.logback}")
             }

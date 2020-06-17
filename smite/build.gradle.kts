@@ -1,3 +1,3 @@
 dependencies {
-    implementation(project(":api"))
+    compile(project(":api"))
 }

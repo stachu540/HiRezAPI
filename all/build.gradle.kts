@@ -1,6 +1,6 @@
 dependencies {
     rootProject.globalProjects.forEach {
-        implementation(it)
+        compile(it)
     }
 }
 
