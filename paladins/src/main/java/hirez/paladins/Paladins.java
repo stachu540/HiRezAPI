@@ -3,12 +3,9 @@ package hirez.paladins;
 import hirez.api.*;
 import hirez.api.object.*;
 import hirez.api.object.interfaces.Queue;
-import hirez.api.object.interfaces.ReturnedMessage;
 import hirez.paladins.object.*;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

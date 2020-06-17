@@ -8,7 +8,6 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-@SuppressWarnings("unused")
 public class Item implements ReturnedMessage {
 
     @TextToBoolean
@@ -36,7 +35,6 @@ public class Item implements ReturnedMessage {
     private final String type;
 
     @Data
-    @SuppressWarnings("unused")
     public static class Description {
         private final String description;
         @JsonProperty("menuitems")

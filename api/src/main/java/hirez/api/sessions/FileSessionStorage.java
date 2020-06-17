@@ -2,10 +2,10 @@ package hirez.api.sessions;
 
 import hirez.api.SessionStorage;
 import hirez.api.object.CreateSession;
-import java.util.function.Consumer;
 import lombok.RequiredArgsConstructor;
 
 import java.io.*;
+import java.util.function.Consumer;
 
 @RequiredArgsConstructor
 public class FileSessionStorage implements SessionStorage {

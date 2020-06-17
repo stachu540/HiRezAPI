@@ -4,7 +4,6 @@ import hirez.api.object.interfaces.ReturnedMessage;
 import lombok.Data;
 
 @Data
-@SuppressWarnings("unused")
 public class Friend implements ReturnedMessage {
     private final long accountId;
     private final String avatarUrl;

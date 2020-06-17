@@ -8,7 +8,6 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-@SuppressWarnings("unused")
 public class DemoDetail implements ReturnedMessage {
     @JsonProperty("BanId1")
     private final long banId1;

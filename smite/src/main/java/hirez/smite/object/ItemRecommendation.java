@@ -5,7 +5,6 @@ import hirez.api.object.interfaces.ReturnedMessage;
 import lombok.Data;
 
 @Data
-@SuppressWarnings("unused")
 public class ItemRecommendation implements ReturnedMessage {
     private final String category;
     private final long categoryValueId;

@@ -5,7 +5,6 @@ import hirez.api.object.interfaces.ReturnedMessage;
 import lombok.Data;
 
 @Data
-@SuppressWarnings("unused")
 public class GodLeaderboard implements ReturnedMessage {
     private final long godId;
     private final int losses;

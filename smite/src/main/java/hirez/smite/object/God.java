@@ -9,7 +9,6 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-@SuppressWarnings("unused")
 public class God implements ReturnedMessage {
     @JsonProperty("Ability_1")
     private final Ability ability1;
@@ -94,7 +93,6 @@ public class God implements ReturnedMessage {
     private final String type;
 
     @Data
-    @SuppressWarnings("unused")
     @JsonRootName("itemDescription")
     public static class Description {
         private final String cooldown;
@@ -108,7 +106,6 @@ public class God implements ReturnedMessage {
     }
 
     @Data
-    @SuppressWarnings("unused")
     public static class Ability {
         private final Description description;
         private final long id;

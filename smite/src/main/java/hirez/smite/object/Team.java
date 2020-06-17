@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
-@SuppressWarnings("unused")
 public class Team {
 
     @JsonProperty("Founder")

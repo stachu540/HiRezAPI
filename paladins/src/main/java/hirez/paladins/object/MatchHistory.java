@@ -8,7 +8,6 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-@SuppressWarnings("unused")
 public class MatchHistory implements ReturnedMessage {
 
     @JsonProperty("Active_1")

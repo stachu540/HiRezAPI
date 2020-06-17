@@ -8,7 +8,6 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-@SuppressWarnings("unused")
 public class CreateSession implements ReturnedMessage {
     @JsonProperty("ret_msg")
     private String returnedMessage;

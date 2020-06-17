@@ -5,7 +5,6 @@ import hirez.api.object.MergedAccount;
 import lombok.Data;
 
 @Data
-@SuppressWarnings("unused")
 public class Player {
     @JsonProperty("ActivePlayerId")
     private final long activePlayerId;
@@ -77,7 +76,6 @@ public class Player {
     private final long wins;
 
     @Data
-    @SuppressWarnings("unused")
     public static class RankItem {
         @JsonProperty("Leaves")
         private final long leaves;

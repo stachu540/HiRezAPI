@@ -21,7 +21,6 @@ public class MatchDetails {
     private final List<Team> teams;
 
     @Data
-    @SuppressWarnings("unused")
     public static class Team {
 
         private final long id;
@@ -29,7 +28,6 @@ public class MatchDetails {
         private final List<Player> players;
 
         @Data
-        @SuppressWarnings("unused")
         public static class Player {
 
             private final int assists;

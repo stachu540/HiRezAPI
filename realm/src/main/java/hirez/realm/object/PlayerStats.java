@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 @Data
-@SuppressWarnings("unused")
 public class PlayerStats implements ReturnedMessage {
     private final AggregateStats aggregateStats;
     @DateTimeFormat("yyyy-MM-dd'T'hh:mm:ss.SSS")
@@ -24,7 +23,6 @@ public class PlayerStats implements ReturnedMessage {
 
 
     @Data
-    @SuppressWarnings("unused")
     public static class QueueClass {
         private final long classId;
         private final String className;
@@ -33,7 +31,6 @@ public class PlayerStats implements ReturnedMessage {
         private final Stats stats;
 
         @Data
-        @SuppressWarnings("unused")
         public static class Stats {
             private final int assists;
             @JsonProperty("average_placement")
@@ -75,7 +72,6 @@ public class PlayerStats implements ReturnedMessage {
     }
 
     @Data
-    @SuppressWarnings("unused")
     public static class AggregateStats {
         private final int assists;
         private final int averagePlacement;
@@ -102,7 +98,6 @@ public class PlayerStats implements ReturnedMessage {
     }
 
     @Data
-    @SuppressWarnings("unused")
     public static class Placement {
         private final int occurrences;
         private final int position;

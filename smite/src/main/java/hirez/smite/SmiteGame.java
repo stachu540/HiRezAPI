@@ -3,7 +3,6 @@ package hirez.smite;
 import hirez.api.*;
 import hirez.api.object.*;
 import hirez.api.object.interfaces.Queue;
-import hirez.api.object.interfaces.ReturnedMessage;
 import hirez.smite.object.*;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
@@ -28,6 +27,10 @@ public class SmiteGame extends Endpoint {
                 cfg.setBaseEndpoint(SmitePlatform.PC);
             }
         }).build());
+    }
+
+    static boolean isRanked(int id) {
+        return Arrays.asList(440, 450, 451, 502, 503, 504).contains(id);
     }
 
     public Flowable<GodLeaderboard> getGodLeaderboard(long godId, Queue queue) {
@@ -202,9 +205,5 @@ public class SmiteGame extends Endpoint {
     public Flowable<PlayerQuery> searchPlayer(String query) {
         return testAndCall(PlayerQuery[].class, "searchplayers", query)
                 .flattenAsFlowable(Arrays::asList);
-    }
-
-    static boolean isRanked(int id) {
-        return Arrays.asList(440, 450, 451, 502, 503, 504).contains(id);
     }
 }

@@ -2,6 +2,7 @@ package hirez.api.sessions;
 
 import hirez.api.SessionStorage;
 import hirez.api.object.CreateSession;
+
 import java.util.function.Consumer;
 
 public class CachedSessionStorage implements SessionStorage {

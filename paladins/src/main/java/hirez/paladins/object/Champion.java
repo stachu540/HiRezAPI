@@ -69,8 +69,8 @@ public class Champion implements ReturnedMessage {
     @JsonProperty("OnFreeWeeklyRotation")
     private final boolean onFreeWeeklyRotation;
     /**
-     * @deprecated Unused when returns a same value {@code Norse}
      * @return only {@code Norse}
+     * @deprecated Unused when returns a same value {@code Norse}
      */
     @Deprecated
     @JsonProperty("Pantheon")

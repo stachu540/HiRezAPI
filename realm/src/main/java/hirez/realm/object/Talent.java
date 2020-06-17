@@ -5,7 +5,6 @@ import hirez.api.object.interfaces.ReturnedMessage;
 import lombok.Data;
 
 @Data
-@SuppressWarnings("unused")
 public class Talent implements ReturnedMessage {
     private final String categoryName;
     @JsonProperty("item_id")

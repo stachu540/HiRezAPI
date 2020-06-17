@@ -8,7 +8,6 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-@SuppressWarnings("unused")
 public class TopMatch implements ReturnedMessage {
     @JsonProperty("Ban1")
     private final String ban1;

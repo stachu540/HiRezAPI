@@ -5,7 +5,6 @@ import hirez.api.object.MergedAccount;
 import lombok.Data;
 
 @Data
-@SuppressWarnings("unused")
 public class MatchDetail {
     private final int accountLevel;
 

@@ -1,5 +1,4 @@
 import org.gradle.api.artifacts.dsl.DependencyHandler
-import org.gradle.kotlin.dsl.kotlin
 
 val DependencyHandler.slf4j
     get() = "org.slf4j:slf4j-api:${Version.slf4j}"

@@ -9,8 +9,8 @@ import java.util.*
 val Project.github: GitHub
     get() = extensions.getByName("github") as GitHub
 
-fun Project.github(github: GitHub.() -> Unit)=
-    extensions.configure<GitHub>("github", github)
+fun Project.github(github: GitHub.() -> Unit) =
+        extensions.configure<GitHub>("github", github)
 
 val Project.globalProjects
     get() = rootProject.subprojects.filter { it.name !in arrayOf("bom", "all") }

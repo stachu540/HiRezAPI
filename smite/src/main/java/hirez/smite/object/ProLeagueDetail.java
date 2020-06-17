@@ -8,7 +8,6 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-@SuppressWarnings("unused")
 public class ProLeagueDetail implements ReturnedMessage {
     private final long awayTeamClanId;
     private final String awayTeamName;

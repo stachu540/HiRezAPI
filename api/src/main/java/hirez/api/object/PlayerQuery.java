@@ -5,7 +5,6 @@ import hirez.api.object.interfaces.ReturnedMessage;
 import lombok.Data;
 
 @Data
-@SuppressWarnings("unused")
 public class PlayerQuery implements ReturnedMessage {
     private final long id;
     private final String name;

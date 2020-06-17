@@ -5,7 +5,6 @@ import hirez.api.object.interfaces.ReturnedMessage;
 import lombok.Data;
 
 @Data
-@SuppressWarnings("unused")
 public class PlayerIdXboxSwitch implements ReturnedMessage {
     private final String gamerTag;
     @JsonProperty("Name")
