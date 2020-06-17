@@ -48,7 +48,7 @@ public class Endpoint {
     final <T> Single<T> get(Class<T> type, String url) {
         return Single.<T>create(sink ->
                 httpClient.newCall(new Request.Builder().get()
-                        .addHeader("User-Agent", configuration.getUserAgent())
+                        .header("User-Agent", configuration.getUserAgent())
                         .url(url).build()).enqueue(new Callback() {
                     @Override
                     public void onFailure(@NotNull Call call, @NotNull IOException e) {
