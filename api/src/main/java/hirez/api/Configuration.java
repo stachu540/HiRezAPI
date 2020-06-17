@@ -44,8 +44,6 @@ public class Configuration {
             sb.append("/").append(doSignature(method, timestamp));
             if (!method.equals("createsession") && sessionStorage.isPresent()) {
                 sb.append("/").append(sessionStorage.get());
-            } else {
-                throw new HiRezException("Require generate session for: " + method);
             }
             sb.append("/").append(timestamp);
             if (args.length > 0) {
