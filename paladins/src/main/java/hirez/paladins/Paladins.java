@@ -37,6 +37,10 @@ public class Paladins extends Endpoint {
                 .flattenAsFlowable(Arrays::asList);
     }
 
+    public Flowable<ChampionCard> getChampionCards(long championId) {
+        return getChampionCards(championId, getConfiguration().getLanguage());
+    }
+
     public Flowable<ChampionLeaderboard> getChampionLeaderboard(long championId, Queue queue) {
         return testAndCall(ChampionLeaderboard[].class, "getchampionleaderboard", Long.toString(championId), queue.getId().toString())
                 .flattenAsFlowable(Arrays::asList);
@@ -47,9 +51,17 @@ public class Paladins extends Endpoint {
                 .flattenAsFlowable(Arrays::asList);
     }
 
+    public Flowable<Champion> getChampions() {
+        return getChampions(getConfiguration().getLanguage());
+    }
+
     public Flowable<Item> getItems(Language language) {
         return testAndCall(Item[].class, "getitems", language.getId().toString())
                 .flattenAsFlowable(Arrays::asList);
+    }
+
+    public Flowable<Item> getItems() {
+        return getItems(getConfiguration().getLanguage());
     }
 
     public Single<DemoDetail> getDemoDetails(long matchId) {

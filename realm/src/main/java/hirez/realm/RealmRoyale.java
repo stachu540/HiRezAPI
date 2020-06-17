@@ -54,6 +54,10 @@ public class RealmRoyale extends Endpoint {
                 .flattenAsFlowable(Arrays::asList);
     }
 
+    public Flowable<Talent> getTalents() {
+        return getTalents(getConfiguration().getLanguage());
+    }
+
     public Single<Leaderboard> getLeaderboard(Queue queue, Criteria criteria) {
         return testAndCall(Leaderboard.class, "getleaderboard", queue.getId().toString(), criteria.id.toString());
     }
