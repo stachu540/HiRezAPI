@@ -21,11 +21,9 @@ allprojects {
         jcenter()
     }
 
-    tasks {
-        pluginManager.withPlugin("io.freefair.lombok") {
-            generateLombokConfig {
-                enabled = false
-            }
+    pluginManager.withPlugin("io.freefair.lombok") {
+        lombok {
+            config.put("lombok.anyConstructor.addConstructorProperties", "true")
         }
     }
 }
