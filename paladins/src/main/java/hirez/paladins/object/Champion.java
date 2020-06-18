@@ -18,33 +18,49 @@ public class Champion implements ReturnedMessage {
     @JsonProperty("Ability_5")
     private final Ability ability5;
 
-    private final String abilityDescription1;
-    private final String abilityDescription2;
-    private final String abilityDescription3;
-    private final String abilityDescription4;
-    private final String abilityDescription5;
+    @JsonProperty("Ability1")
+    private final String ability1Name;
+    @JsonProperty("Ability2")
+    private final String ability2Name;
+    @JsonProperty("Ability3")
+    private final String ability3Name;
+    @JsonProperty("Ability4")
+    private final String ability4Name;
+    @JsonProperty("Ability5")
+    private final String ability5Name;
+
+    @JsonProperty("abilityDescription1")
+    private final String ability1Description;
+    @JsonProperty("abilityDescription2")
+    private final String ability2Description;
+    @JsonProperty("abilityDescription3")
+    private final String ability3Description;
+    @JsonProperty("abilityDescription4")
+    private final String ability4Description;
+    @JsonProperty("abilityDescription5")
+    private final String ability5Description;
 
     @JsonProperty("AbilityId1")
-    private final long abilityId1;
+    private final long ability1Id;
     @JsonProperty("AbilityId2")
-    private final long abilityId2;
+    private final long ability2Id;
     @JsonProperty("AbilityId3")
-    private final long abilityId3;
+    private final long ability3Id;
     @JsonProperty("AbilityId4")
-    private final long abilityId4;
+    private final long ability4Id;
     @JsonProperty("AbilityId5")
-    private final long abilityId5;
+    private final long ability5Id;
 
     @JsonProperty("ChampionAbility1_URL")
-    private final String championAbility1URL;
+    private final String ability1URL;
     @JsonProperty("ChampionAbility2_URL")
-    private final String championAbility2URL;
+    private final String ability2URL;
     @JsonProperty("ChampionAbility3_URL")
-    private final String championAbility3URL;
+    private final String ability3URL;
     @JsonProperty("ChampionAbility4_URL")
-    private final String championAbility4URL;
+    private final String ability4URL;
     @JsonProperty("ChampionAbility5_URL")
-    private final String championAbility5URL;
+    private final String ability5URL;
 
     @JsonProperty("ChampionCard_URL")
     private final String championCardURL;
@@ -57,11 +73,14 @@ public class Champion implements ReturnedMessage {
     private final int health;
     private final long id;
     @TextToBoolean
+    @JsonProperty("latestChampion")
     private final boolean latestChampion;
     @JsonProperty("Lore")
     private final String lore;
     @JsonProperty("Name")
     private final String name;
+    @JsonProperty("Name_English")
+    private final String nameEnglish;
     @TextToBoolean
     @JsonProperty("OnFreeRotation")
     private final boolean onFreeRotation;
@@ -89,12 +108,15 @@ public class Champion implements ReturnedMessage {
     private final String type;
 
     @Data
-    public class Ability {
+    public static class Ability {
         @JsonProperty("Description")
         private final String description;
+        @JsonProperty("rechargeSeconds")
         private final long rechargeSeconds;
         @JsonProperty("Summary")
         private final String name;
+        @JsonProperty("damageType")
+        private final String damageType;
         @JsonProperty("Id")
         private final long id;
         @JsonProperty("URL")
