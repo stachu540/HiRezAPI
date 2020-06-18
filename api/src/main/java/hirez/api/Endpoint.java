@@ -1,5 +1,6 @@
 package hirez.api;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import hirez.api.object.*;
@@ -97,12 +98,7 @@ public class Endpoint {
     }
 
     private <T> T buildResponse(Response response, Class<T> type) throws IOException {
-        String body = Objects.requireNonNull(response.body()).string();
-        if (type.isInstance(body)) { // Safety reflection if instance is String
-            return type.cast(body); // Safety cast avoid use @SuppressWarnings annotation
-        } else {
-            return mapper.readValue(body, type);
-        }
+        return mapper.readValue(Objects.requireNonNull(response.body()).charStream(), type);
     }
 
     protected final <T> Single<T> testAndCall(Class<T> type, String method, String... argv) {
@@ -130,14 +126,18 @@ public class Endpoint {
     public final Single<TestSession> testSession() {
         return call(String.class, "testsession")
                 .map(TestSession::new).flatMap(response ->
-                        Single.create(sink -> {
+                        Single.<TestSession>create(sink -> {
                             if (response.isSuccessful()) {
                                 sink.onSuccess(response);
                             } else {
                                 sink.onError(new HiRezException(response.getRawMessage()));
                             }
                         })
-                );
+                ).onErrorResumeNext(e -> {
+                    if (e instanceof HiRezException && e.getMessage().contains("Invalid session id.")) {
+                        return createSession().flatMap($ -> testSession());
+                    } else return Single.error(e);
+                });
     }
 
     public final Single<Ping> ping() {
