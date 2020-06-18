@@ -52,13 +52,15 @@ public class FileSessionStorage implements SessionStorage {
 
     @Override
     public boolean isPresent() {
-        return file.exists() && isEmpty();
+        return file.exists() && !isEmpty();
     }
 
     private String readFile() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(file));
         String data = reader.readLine();
         reader.close();
+
+        System.out.println(data);
 
         return data;
     }
