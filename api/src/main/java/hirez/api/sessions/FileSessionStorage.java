@@ -60,8 +60,6 @@ public class FileSessionStorage implements SessionStorage {
         String data = reader.readLine();
         reader.close();
 
-        System.out.println(data);
-
         return data;
     }
 
