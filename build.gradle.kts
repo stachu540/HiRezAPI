@@ -9,9 +9,6 @@ plugins {
 }
 
 allprojects {
-    beforeEvaluate {
-        extensions.add("github", if (githubToken.isNullOrBlank()) org.kohsuke.github.GitHub.connectAnonymously() else org.kohsuke.github.GitHub.connectUsingOAuth(githubToken))
-    }
 
     if ("$version".startsWith("v")) {
         version = "$version".substring(1)
@@ -24,6 +21,28 @@ allprojects {
     pluginManager.withPlugin("io.freefair.lombok") {
         lombok {
             config.put("lombok.anyConstructor.addConstructorProperties", "true")
+        }
+    }
+
+    pluginManager.withPlugin("com.jfrog.bintray") {
+        bintray {
+            user = bintrayUser
+            key = bintrayApiKey
+            setPublications("maven")
+            pkg.apply {
+                userOrg = bintrayUser
+                repo = "Java"
+                name = "HiRezAPI"
+                desc = rootProject.description
+                setLicenses("MIT")
+                publicDownloadNumbers = true
+                vcsUrl = "${RootProject.githubUrl}.git"
+                version.apply {
+                    name = "${project.version}"
+                    vcsTag = "v${project.version}"
+                    released = "${Date()}"
+                }
+            }
         }
     }
 }
@@ -109,26 +128,6 @@ subprojects {
                 pom {
                     default()
                 }
-            }
-        }
-    }
-
-    bintray {
-        user = bintrayUser
-        key = bintrayApiKey
-        setPublications("maven")
-        pkg.apply {
-            userOrg = bintrayUser
-            repo = "Java"
-            name = "HiRezAPI"
-            desc = rootProject.description
-            setLicenses("MIT")
-            publicDownloadNumbers = true
-            vcsUrl = "${RootProject.githubUrl}.git"
-            version.apply {
-                name = "$version"
-                vcsTag = "$version"
-                released = "${Date()}"
             }
         }
     }

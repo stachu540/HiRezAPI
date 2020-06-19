@@ -1,5 +1,5 @@
 object RootProject {
-    const val repoSlug = "stachu540/HiRez-API"
+    const val repoSlug = "stachu540/HiRezAPI"
     const val githubUrl = "https://github.com/$repoSlug"
     const val ciUrl = "$githubUrl/actions"
     const val scmHttps = "scm:git:$githubUrl.git"

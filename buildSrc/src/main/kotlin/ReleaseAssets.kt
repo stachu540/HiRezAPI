@@ -7,14 +7,18 @@ import java.nio.file.Files
 
 open class ReleaseAssets : DefaultTask() {
 
+    private val github by lazy {
+        if (project.githubToken.isNullOrBlank()) org.kohsuke.github.GitHub.connectAnonymously() else org.kohsuke.github.GitHub.connectUsingOAuth(project.githubToken)
+    }
+
+
     @InputFiles
     var jarFiles: FileCollection = project.files(*project.rootProject.globalProjects
             .mapNotNull { (it.tasks.findByName("shadowJar") as? Jar)?.archiveFile?.get()?.asFile }.toTypedArray())
 
     @TaskAction
     fun upload() {
-        val release = project.github.getRepository(RootProject.repoSlug)
-                .getReleaseByTagName("${project.version.let { if ("$it".startsWith("v")) it else "v$it" }}")
+        val release = github.getRepository(RootProject.repoSlug).latestRelease
 
         jarFiles.forEach { file ->
             release.uploadAsset(file, Files.probeContentType(file.toPath()))
