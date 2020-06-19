@@ -2,15 +2,16 @@ package hirez.realm.object;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import hirez.api.object.adapters.DateTimeFormat;
+import hirez.api.object.interfaces.ReturnedMessage;
 import lombok.Data;
 
 import java.util.Date;
 import java.util.List;
 
 @Data
-public class MatchDetails {
+public class MatchDetails implements ReturnedMessage {
     private final long durationSecs;
-    @DateTimeFormat("yyyy-MM-dd'T'hh:mm:ss.SSS")
+    @DateTimeFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
     private final Date matchDatetime;
     private final long matchId;
     private final int matchQueueId;

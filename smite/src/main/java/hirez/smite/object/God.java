@@ -142,10 +142,16 @@ public class God implements ReturnedMessage {
         private final String cost;
         private final String description;
         @JsonProperty("menuitems")
-        private final List<DescriptionValue> menuItems;
+        private final List<Item> menuItems;
         @JsonProperty("rankitems")
-        private final List<DescriptionValue> rankItems;
+        private final List<Item> rankItems;
         private final String secondaryDescription;
+
+        @Data
+        public static class Item {
+            private final String description;
+            private final String value;
+        }
     }
 
     @Data

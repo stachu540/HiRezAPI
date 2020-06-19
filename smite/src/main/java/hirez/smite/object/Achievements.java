@@ -6,31 +6,56 @@ import lombok.Data;
 
 @Data
 public class Achievements implements ReturnedMessage {
-    private final int wildJuggernautKills;
-    private final int goldFuryKills;
+    @JsonProperty("AssistedKills")
+    private final int assistedKills;
+    @JsonProperty("CampsCleared")
+    private final int campsCleared;
+    @JsonProperty("Deaths")
+    private final int deaths;
+    @JsonProperty("DivineSpree")
+    private final int divineSpree;
+    @JsonProperty("DoubleKills")
+    private final int doubleKills;
+    @JsonProperty("FireGiantKills")
+    private final int fireGiantKills;
+    @JsonProperty("FirstBloods")
     private final int firstBloods;
+    @JsonProperty("GodLikeSpree")
+    private final int godLikeSpree;
+    @JsonProperty("GoldFuryKills")
+    private final int goldFuryKills;
+    @JsonProperty("Id")
+    private final long id;
+    @JsonProperty("ImmortalSpree")
     private final int immortalSpree;
+    @JsonProperty("KillingSpree")
+    private final int killingSpree;
+    @JsonProperty("MinionKills")
+    private final int minionKills;
+    @JsonProperty("Name")
+    private final String name;
+    @JsonProperty("PentaKills")
+    private final int pentaKills;
+    @JsonProperty("PhoenixKills")
+    private final int phoenixKills;
+    @JsonProperty("PlayerKills")
+    private final int playerKills;
+    @JsonProperty("QuadraKills")
+    private final int quadraKills;
+    @JsonProperty("RampageSpree")
+    private final int rampageSpree;
+    @JsonProperty("ShutdownSpree")
+    private final int shutdownSpree;
+    @JsonProperty("SiegeJuggernautKills")
+    private final int siegeJuggernautKills;
+    @JsonProperty("TowerKills")
+    private final int towerKills;
+    @JsonProperty("TripleKills")
+    private final int tripleKills;
+    @JsonProperty("UnstoppableSpree")
+    private final int unstoppableSpree;
+    @JsonProperty("WildJuggernautKills")
+    private final int wildJuggernautKills;
     @JsonProperty("ret_msg")
     private final String returnedMessage;
-    private final int assistedKills;
-    private final int towerKills;
-    private final String name;
-    private final int pentaKills;
-    private final int siegeJuggernautKills;
-    private final int divineSpree;
-    private final int killingSpree;
-    private final int campsCleared;
-    private final int tripleKills;
-    private final int minionKills;
-    private final int deaths;
-    private final int rampageSpree;
-    private final int godLikeSpree;
-    private final int unstoppableSpree;
-    private final int fireGiantKills;
-    private final int playerKills;
-    private final int phoenixKills;
-    private final int shutdownSpree;
-    private final int quadraKills;
-    private final int doubleKills;
-    private final long id;
 }

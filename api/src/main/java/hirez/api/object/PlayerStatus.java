@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 public class PlayerStatus implements ReturnedMessage {
-    @JsonProperty("Match")
+    @JsonAlias("Match")
     private final long matchId;
     private final int matchQueueId;
     private final String personalStatusMessage;
@@ -17,5 +17,4 @@ public class PlayerStatus implements ReturnedMessage {
     private final int statusId;
     @JsonAlias("status")
     private final String statusString;
-
 }

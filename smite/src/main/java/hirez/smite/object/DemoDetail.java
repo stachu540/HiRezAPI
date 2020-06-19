@@ -2,9 +2,13 @@ package hirez.smite.object;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import hirez.api.object.adapters.DateTimeFormat;
+import hirez.api.object.adapters.DurationTime;
 import hirez.api.object.interfaces.ReturnedMessage;
 import lombok.Data;
 
+import javax.annotation.Nullable;
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 @Data
@@ -22,17 +26,20 @@ public class DemoDetail implements ReturnedMessage {
     private final Date entryDatetime;
     @JsonProperty("Match")
     private final long id;
+    @DurationTime
     @JsonProperty("Match_Time")
-    private final long matchTime;
+    private final Duration matchTime;
     @JsonProperty("Offline_Spectators")
     private final int offlineSpectators;
     @JsonProperty("Queue")
     private final int queueId;
     @JsonProperty("Realtime_Spectators")
     private final int realtimeSpectators;
+    @Nullable
     @DateTimeFormat
     @JsonProperty("Recording_Ended")
     private final Date recordingEnded;
+    @Nullable
     @DateTimeFormat
     @JsonProperty("Recording_Started")
     private final Date recordingStarted;

@@ -2,22 +2,15 @@ package hirez.paladins.object;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import hirez.api.object.adapters.DateTimeFormat;
+import hirez.api.object.adapters.DurationTime;
 import hirez.api.object.interfaces.ReturnedMessage;
 import lombok.Data;
 
+import java.time.Duration;
 import java.util.Date;
 
 @Data
 public class MatchHistory implements ReturnedMessage {
-
-    @JsonProperty("Active_1")
-    private String active1;
-    @JsonProperty("Active_2")
-    private String active2;
-    @JsonProperty("Active_3")
-    private String active3;
-    @JsonProperty("Active_4")
-    private String active4;
     @JsonProperty("ActiveId1")
     private long activeId1;
     @JsonProperty("ActiveId2")
@@ -34,6 +27,14 @@ public class MatchHistory implements ReturnedMessage {
     private int activeLevel3;
     @JsonProperty("ActiveLevel4")
     private int activeLevel4;
+    @JsonProperty("Active_1")
+    private String active1;
+    @JsonProperty("Active_2")
+    private String active2;
+    @JsonProperty("Active_3")
+    private String active3;
+    @JsonProperty("Active_4")
+    private String active4;
     @JsonProperty("Assists")
     private int assists;
     @JsonProperty("Champion")
@@ -70,18 +71,6 @@ public class MatchHistory implements ReturnedMessage {
     private int healingBot;
     @JsonProperty("Healing_Player_Self")
     private int healingPlayerSelf;
-    @JsonProperty("Item_1")
-    private String item1;
-    @JsonProperty("Item_2")
-    private String item2;
-    @JsonProperty("Item_3")
-    private String item3;
-    @JsonProperty("Item_4")
-    private String item4;
-    @JsonProperty("Item_5")
-    private String item5;
-    @JsonProperty("Item_6")
-    private String item6;
     @JsonProperty("ItemId1")
     private long itemId1;
     @JsonProperty("ItemId2")
@@ -106,6 +95,18 @@ public class MatchHistory implements ReturnedMessage {
     private int itemLevel5;
     @JsonProperty("ItemLevel6")
     private int itemLevel6;
+    @JsonProperty("Item_1")
+    private String item1;
+    @JsonProperty("Item_2")
+    private String item2;
+    @JsonProperty("Item_3")
+    private String item3;
+    @JsonProperty("Item_4")
+    private String item4;
+    @JsonProperty("Item_5")
+    private String item5;
+    @JsonProperty("Item_6")
+    private String item6;
     @JsonProperty("Killing_Spree")
     private int killingSpree;
     @JsonProperty("Kills")
@@ -122,19 +123,15 @@ public class MatchHistory implements ReturnedMessage {
     @JsonProperty("Match_Time")
     private Date matchTime;
     @JsonProperty("Minutes")
-    private long minutes;
+    private int minutes;
     @JsonProperty("Multi_kill_Max")
     private int multiKillMax;
     @JsonProperty("Objective_Assists")
     private int objectiveAssists;
-    private long playerId;
-    private String playerName;
     @JsonProperty("Queue")
     private String queue;
     @JsonProperty("Region")
     private String region;
-    @JsonProperty("ret_msg")
-    private String returnedMessage;
     @JsonProperty("Skin")
     private String skin;
     @JsonProperty("SkinId")
@@ -147,13 +144,20 @@ public class MatchHistory implements ReturnedMessage {
     private int team1Score;
     @JsonProperty("Team2Score")
     private int team2Score;
+    @DurationTime
     @JsonProperty("Time_In_Match_Seconds")
-    private int timeInMatchSeconds;
+    private Duration timeInMatch;
     @JsonProperty("Wards_Placed")
     private int wardsPlaced;
     @JsonProperty("Win_Status")
     private String winStatus;
     @JsonProperty("Winning_TaskForce")
     private int winningTaskForce;
+    @JsonProperty("playerId")
+    private long playerId;
+    @JsonProperty("playerName")
+    private String playerName;
+    @JsonProperty("ret_msg")
+    private String returnedMessage;
 
 }

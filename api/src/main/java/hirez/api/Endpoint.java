@@ -1,6 +1,5 @@
 package hirez.api;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import hirez.api.object.*;
@@ -76,8 +75,15 @@ public class Endpoint {
 
     protected final <T> Single<T> call(Class<T> type, String method, String... argv) {
         return get(type, configuration.createUrl(method, argv)).flatMap(r -> Single.create(sink -> {
-            if (type.isAssignableFrom(ReturnedMessage.class)) {
-                ReturnedMessage rm = (type.isArray()) ? ((ReturnedMessage[]) r)[0] : (ReturnedMessage) r;
+            ReturnedMessage rm = null;
+            if (r instanceof ReturnedMessage[] && ((ReturnedMessage[]) r).length > 0) {
+                rm = ((ReturnedMessage[]) r)[0];
+            }
+            if (r instanceof ReturnedMessage) {
+                rm = (ReturnedMessage) r;
+            }
+
+            if (rm != null) {
                 if (rm.getReturnedMessage() != null) {
                     if (method.equalsIgnoreCase("createsession")) {
                         if (rm.getReturnedMessage().equals("Approved")) {
@@ -145,12 +151,12 @@ public class Endpoint {
                 .map(Ping::new);
     }
 
-    public final Single<DataUsage> getDataUsed() {
+    public Single<DataUsage> getDataUsed() {
         return testAndCall(DataUsage[].class, "getdataused")
                 .map(d -> d[0]);
     }
 
-    public final Flowable<HiRezServer> getHiRezServerStatus() {
+    public Flowable<HiRezServer> getHiRezServerStatus() {
         return testAndCall(HiRezServer[].class, "gethirezserverstatus")
                 .flattenAsFlowable(Arrays::asList);
     }

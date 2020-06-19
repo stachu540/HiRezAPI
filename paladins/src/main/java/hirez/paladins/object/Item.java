@@ -6,22 +6,25 @@ import lombok.Data;
 
 @Data
 public class Item implements ReturnedMessage {
-    private final long championId;
+    @JsonProperty("Description")
     private final String description;
     @JsonProperty("DeviceName")
     private final String name;
+    @JsonProperty("IconId")
     private final long iconId;
-    @JsonProperty("itemIcon_URL")
-    private final String iconURL;
     @JsonProperty("ItemId")
     private final long id;
+    @JsonProperty("Price")
+    private final long price;
+    @JsonProperty("ShortDesc")
+    private final String shortDescription;
+    private final long championId;
+    @JsonProperty("itemIcon_URL")
+    private final String iconURL;
     @JsonProperty("item_type")
     private final String type;
-    private final long price;
     private final long rechargeSeconds;
     @JsonProperty("ret_msg")
     private final String returnedMessage;
-    @JsonProperty("ShortDesc")
-    private final String shortDescription;
     private final long talentRewardLevel;
 }

@@ -4,6 +4,7 @@ import hirez.api.*;
 import hirez.api.object.*;
 import hirez.api.object.interfaces.Queue;
 import hirez.smite.object.*;
+import hirez.smite.object.Rank;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
 
@@ -79,8 +80,8 @@ public class SmiteGame extends Endpoint {
                 .map(it -> it[0]);
     }
 
-    public Flowable<LeagueLeaderboard> getLeagueLeaderboard(Queue queue, Division division, int season) {
-        return testAndCall(LeagueLeaderboard[].class, "getleagueleaderboard", queue.getId().toString(), Integer.toString(division.ordinal()), Integer.toString(season))
+    public Flowable<Rank> getLeagueLeaderboard(Queue queue, Division division, int round) {
+        return testAndCall(Rank[].class, "getleagueleaderboard", queue.getId().toString(), Integer.toString(division.ordinal()), Integer.toString(round))
                 .flattenAsFlowable(Arrays::asList);
     }
 

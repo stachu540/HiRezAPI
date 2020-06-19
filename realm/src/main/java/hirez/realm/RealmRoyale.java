@@ -3,6 +3,7 @@ package hirez.realm;
 import hirez.api.*;
 import hirez.api.object.*;
 import hirez.api.object.interfaces.Queue;
+import hirez.realm.object.PlayerQuery;
 import hirez.realm.object.*;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
@@ -31,7 +32,7 @@ public class RealmRoyale extends Endpoint {
 
         @Override
         public String getBaseUrl() {
-            return "https://api.realmroyale.com/realmapi.svc";
+            return "http://api.realmroyale.com/realmapi.svc";
         }
     };
 
@@ -48,11 +49,18 @@ public class RealmRoyale extends Endpoint {
         }).build());
     }
 
+    /**
+     * @deprecated This endpoint is not exist. Will be removed in the next release.
+     */
+    @Deprecated
     public Flowable<Talent> getTalents(Language language) {
-        return testAndCall(Talent[].class, "gettalents", language.getId().toString())
-                .flattenAsFlowable(Arrays::asList);
+        return Flowable.error(new HiRezException("This endpoint has been removed!"));
     }
 
+    /**
+     * @deprecated This endpoint is not exist. Will be removed in the next release.
+     */
+    @Deprecated
     public Flowable<Talent> getTalents() {
         return getTalents(getConfiguration().getLanguage());
     }
@@ -62,7 +70,7 @@ public class RealmRoyale extends Endpoint {
     }
 
     public Single<MatchDetails> getMatchDetails(long matchId) {
-        return testAndCall(MatchDetails.class, "getmatchdetails", "17327425");
+        return testAndCall(MatchDetails.class, "getmatchdetails", Long.toString(matchId));
     }
 
     public Flowable<MatchId> getMatchIdsByQueue(Queue queue, Date timestamp) {
@@ -121,5 +129,15 @@ public class RealmRoyale extends Endpoint {
     public Flowable<PlayerQuery> searchPlayer(String query) {
         return testAndCall(PlayerQuery[].class, "searchplayers", query)
                 .flattenAsFlowable(Arrays::asList);
+    }
+
+    @Override
+    public Flowable<HiRezServer> getHiRezServerStatus() {
+        return testAndCall(HiRezServer.class, "gethirezserverstatus")
+                .flattenAsFlowable(Arrays::asList);
+    }
+
+    public Single<DataUsage> getDataUsed() {
+        return testAndCall(DataUsage.class, "getdataused");
     }
 }

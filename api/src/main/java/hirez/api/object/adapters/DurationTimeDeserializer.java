@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.deser.ContextualDeserializer;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
@@ -17,24 +18,20 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
 
-public class DateTimeDeserializer extends JsonDeserializer<Date> implements ContextualDeserializer {
+public class DurationTimeDeserializer extends JsonDeserializer<Duration> implements ContextualDeserializer {
 
-    private DateTimeFormat annotationDTF;
+    private DurationTime durationTime;
 
     @Override
-    public Date deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+    public Duration deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
         if (p.hasToken(JsonToken.VALUE_NULL)) return null;
-        String text = p.getText();
-        if (text.isEmpty()) return null;
 
-        return Date.from(DateTimeFormatter.ofPattern(annotationDTF.value(), Locale.US)
-                .withZone(ZoneId.from(ZoneOffset.UTC))
-                .parse(text, Instant::from));
+        return Duration.of(p.getLongValue(), durationTime.value());
     }
 
     @Override
     public JsonDeserializer<?> createContextual(DeserializationContext ctxt, BeanProperty property) throws JsonMappingException {
-        annotationDTF = property.getMember().getAnnotation(DateTimeFormat.class);
+        durationTime = property.getMember().getAnnotation(DurationTime.class);
 
         return this;
     }

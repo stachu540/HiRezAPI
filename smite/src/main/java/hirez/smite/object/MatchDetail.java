@@ -2,21 +2,31 @@ package hirez.smite.object;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import hirez.api.object.MergedAccount;
+import hirez.api.object.adapters.DateTimeFormat;
+import hirez.api.object.adapters.DurationTime;
+import hirez.api.object.adapters.TextToBoolean;
+import hirez.api.object.interfaces.ReturnedMessage;
 import lombok.Data;
+import lombok.experimental.Accessors;
+
+import java.time.Duration;
+import java.util.Date;
 
 @Data
-public class MatchDetail {
+public class MatchDetail implements ReturnedMessage {
+    @JsonProperty("Account_Level")
     private final int accountLevel;
 
     @JsonProperty("ActiveId1")
-    private final long activeId1;
+    private final long active1Id;
     @JsonProperty("ActiveId2")
-    private final long activeId2;
+    private final long active2Id;
     @JsonProperty("ActiveId3")
-    private final long activeId3;
+    private final long active3Id;
     @JsonProperty("ActiveId4")
-    private final long activeId4;
+    private final long active4Id;
 
+    @JsonProperty("ActivePlayerId")
     private final long activePlayerId;
 
     @JsonProperty("Assists")
@@ -103,10 +113,11 @@ public class MatchDetail {
     private final long duelTier;
     @JsonProperty("Duel_Wins")
     private final long duelWins;
+    @DateTimeFormat
     @JsonProperty("Entry_Datetime")
-    private final String entryDatetime;
+    private final Date entryDatetime;
     @JsonProperty("Final_Match_Level")
-    private final long finalMatchLevel;
+    private final int finalMatchLevel;
     @JsonProperty("First_Ban_Side")
     private final String firstBanSide;
     @JsonProperty("GodId")
@@ -115,49 +126,44 @@ public class MatchDetail {
     private final long goldEarned;
     @JsonProperty("Gold_Per_Minute")
     private final long goldPerMinute;
-    private final String hasReplay;
     @JsonProperty("Healing")
     private final long healing;
     @JsonProperty("Healing_Bot")
     private final long healingBot;
     @JsonProperty("Healing_Player_Self")
     private final long healingPlayerSelf;
-    @JsonProperty("hz_gamer_tag")
-    private final Object hzGamerTag;
-    @JsonProperty("hz_player_name")
-    private final String hzPlayerName;
-    @JsonProperty("Item_Active_1")
-    private final String itemActive1;
-    @JsonProperty("Item_Active_2")
-    private final String itemActive2;
-    @JsonProperty("Item_Active_3")
-    private final String itemActive3;
-    @JsonProperty("Item_Active_4")
-    private final String itemActive4;
     @JsonProperty("ItemId1")
-    private final long itemId1;
+    private final long item1Id;
     @JsonProperty("ItemId2")
-    private final long itemId2;
+    private final long item2Id;
     @JsonProperty("ItemId3")
-    private final long itemId3;
+    private final long item3Id;
     @JsonProperty("ItemId4")
-    private final long itemId4;
+    private final long item4Id;
     @JsonProperty("ItemId5")
-    private final long itemId5;
+    private final long item5Id;
     @JsonProperty("ItemId6")
-    private final long itemId6;
+    private final long item6Id;
+    @JsonProperty("Item_Active_1")
+    private final String item1Active;
+    @JsonProperty("Item_Active_2")
+    private final String item2Active;
+    @JsonProperty("Item_Active_3")
+    private final String item3Active;
+    @JsonProperty("Item_Active_4")
+    private final String item4Active;
     @JsonProperty("Item_Purch_1")
-    private final String itemPurch1;
+    private final String item1Name;
     @JsonProperty("Item_Purch_2")
-    private final String itemPurch2;
+    private final String item2Name;
     @JsonProperty("Item_Purch_3")
-    private final String itemPurch3;
+    private final String item3Name;
     @JsonProperty("Item_Purch_4")
-    private final String itemPurch4;
+    private final String item4Name;
     @JsonProperty("Item_Purch_5")
-    private final String itemPurch5;
+    private final String item5Name;
     @JsonProperty("Item_Purch_6")
-    private final String itemPurch6;
+    private final String item6Name;
     @JsonProperty("Joust_Losses")
     private final long joustLosses;
     @JsonProperty("Joust_Points")
@@ -199,26 +205,20 @@ public class MatchDetail {
     @JsonProperty("Mastery_Level")
     private final long masteryLevel;
     @JsonProperty("Match")
-    private final long match;
+    private final long matchId;
+    @DurationTime
     @JsonProperty("Match_Duration")
-    private final long matchDuration;
-    @JsonProperty("match_queue_id")
-    private final long matchQueueId;
+    private final Duration matchDuration;
     @JsonProperty("MergedPlayers")
     private final MergedAccount[] mergedPlayers;
     @JsonProperty("Minutes")
-    private final long minutes;
+    private final int minutes;
     @JsonProperty("Multi_kill_Max")
     private final long multiKillMax;
-    private final String name;
     @JsonProperty("Objective_Assists")
     private final long objectiveAssists;
     @JsonProperty("PartyId")
     private final long partyId;
-    private final String playerId;
-    private final String playerName;
-    private final String playerPortalId;
-    private final String playerPortalUserId;
     @JsonProperty("Rank_Stat_Conquest")
     private final double rankStatConquest;
     @JsonProperty("Rank_Stat_Duel")
@@ -229,8 +229,6 @@ public class MatchDetail {
     private final String referenceName;
     @JsonProperty("Region")
     private final String region;
-    @JsonProperty("ret_msg")
-    private final Object retMsg;
     @JsonProperty("Skin")
     private final String skin;
     @JsonProperty("SkinId")
@@ -238,19 +236,20 @@ public class MatchDetail {
     @JsonProperty("Structure_Damage")
     private final long structureDamage;
     @JsonProperty("Surrendered")
-    private final long surrendered;
+    private final int surrendered;
     @JsonProperty("TaskForce")
-    private final long taskForce;
+    private final int taskForce;
     @JsonProperty("Team1Score")
-    private final long team1Score;
+    private final int team1Score;
     @JsonProperty("Team2Score")
-    private final long team2Score;
+    private final int team2Score;
     @JsonProperty("TeamId")
     private final long teamId;
     @JsonProperty("Team_Name")
     private final String teamName;
+    @DurationTime
     @JsonProperty("Time_In_Match_Seconds")
-    private final long timeInMatchSeconds;
+    private final Duration timeInMatch;
     @JsonProperty("Towers_Destroyed")
     private final long towersDestroyed;
     @JsonProperty("Wards_Placed")
@@ -258,6 +257,26 @@ public class MatchDetail {
     @JsonProperty("Win_Status")
     private final String winStatus;
     @JsonProperty("Winning_TaskForce")
-    private final long winningTaskForce;
-
+    private final int winningTaskForce;
+    @TextToBoolean
+    @Accessors(fluent = true)
+    @JsonProperty("hasReplay")
+    private final boolean hasReplay;
+    @JsonProperty("hz_gamer_tag")
+    private final Object hzGamerTag;
+    @JsonProperty("hz_player_name")
+    private final String hzPlayerName;
+    @JsonProperty("match_queue_id")
+    private final long matchQueueId;
+    private final String name;
+    @JsonProperty("playerId")
+    private final long playerId;
+    @JsonProperty("playerName")
+    private final String playerName;
+    @JsonProperty("playerPortalId")
+    private final int playerPortalId;
+    @JsonProperty("playerPortalUserId")
+    private final long playerPortalUserId;
+    @JsonProperty("ret_msg")
+    private final String returnedMessage;
 }

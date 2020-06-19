@@ -1,29 +1,33 @@
 package hirez.smite.object;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import hirez.api.object.adapters.DateTimeFormat;
+import hirez.api.object.adapters.DurationTime;
+import hirez.api.object.interfaces.ReturnedMessage;
 import lombok.Data;
 
-@Data
-public class MatchHistory {
+import javax.annotation.Nullable;
+import java.time.Duration;
+import java.util.Date;
 
-    @JsonProperty("Active_1")
-    private final String active1;
-    @JsonProperty("Active_2")
-    private final String active2;
-    @JsonProperty("Active_3")
-    private final Object active3;
+@Data
+public class MatchHistory implements ReturnedMessage {
     @JsonProperty("ActiveId1")
     private final long activeId1;
     @JsonProperty("ActiveId2")
     private final long activeId2;
+    @JsonProperty("Active_1")
+    private final String active1;
+    @JsonProperty("Active_2")
+    private final String active2;
+    @Nullable
+    @JsonProperty("Active_3")
+    private final String active3;
     @JsonProperty("Assists")
     private final long assists;
+
     @JsonProperty("Ban1")
     private final String ban1;
-    @JsonProperty("Ban10")
-    private final String ban10;
-    @JsonProperty("Ban10Id")
-    private final long ban10Id;
     @JsonProperty("Ban1Id")
     private final long ban1Id;
     @JsonProperty("Ban2")
@@ -58,6 +62,11 @@ public class MatchHistory {
     private final String ban9;
     @JsonProperty("Ban9Id")
     private final long ban9Id;
+    @JsonProperty("Ban10")
+    private final String ban10;
+    @JsonProperty("Ban10Id")
+    private final long ban10Id;
+
     @JsonProperty("Creeps")
     private final long creeps;
     @JsonProperty("Damage")
@@ -94,18 +103,6 @@ public class MatchHistory {
     private final long healingBot;
     @JsonProperty("Healing_Player_Self")
     private final long healingPlayerSelf;
-    @JsonProperty("Item_1")
-    private final String item1;
-    @JsonProperty("Item_2")
-    private final String item2;
-    @JsonProperty("Item_3")
-    private final String item3;
-    @JsonProperty("Item_4")
-    private final String item4;
-    @JsonProperty("Item_5")
-    private final String item5;
-    @JsonProperty("Item_6")
-    private final String item6;
     @JsonProperty("ItemId1")
     private final long itemId1;
     @JsonProperty("ItemId2")
@@ -118,6 +115,18 @@ public class MatchHistory {
     private final long itemId5;
     @JsonProperty("ItemId6")
     private final long itemId6;
+    @JsonProperty("Item_1")
+    private final String item1;
+    @JsonProperty("Item_2")
+    private final String item2;
+    @JsonProperty("Item_3")
+    private final String item3;
+    @JsonProperty("Item_4")
+    private final String item4;
+    @JsonProperty("Item_5")
+    private final String item5;
+    @JsonProperty("Item_6")
+    private final String item6;
     @JsonProperty("Killing_Spree")
     private final long killingSpree;
     @JsonProperty("Kills")
@@ -130,22 +139,19 @@ public class MatchHistory {
     private final long match;
     @JsonProperty("Match_Queue_Id")
     private final long matchQueueId;
+    @DateTimeFormat
     @JsonProperty("Match_Time")
-    private final String matchTime;
+    private final Date matchTime;
     @JsonProperty("Minutes")
-    private final long minutes;
+    private final int minutes;
     @JsonProperty("Multi_kill_Max")
     private final long multiKillMax;
     @JsonProperty("Objective_Assists")
     private final long objectiveAssists;
-    private final long playerId;
-    private final String playerName;
     @JsonProperty("Queue")
     private final String queue;
     @JsonProperty("Region")
     private final String region;
-    @JsonProperty("ret_msg")
-    private final Object retMsg;
     @JsonProperty("Skin")
     private final String skin;
     @JsonProperty("SkinId")
@@ -158,13 +164,20 @@ public class MatchHistory {
     private final long team1Score;
     @JsonProperty("Team2Score")
     private final long team2Score;
+    @DurationTime
     @JsonProperty("Time_In_Match_Seconds")
-    private final long timeInMatchSeconds;
+    private final Duration timeInMatch;
     @JsonProperty("Wards_Placed")
     private final long wardsPlaced;
     @JsonProperty("Win_Status")
     private final String winStatus;
     @JsonProperty("Winning_TaskForce")
     private final long winningTaskForce;
+    @JsonProperty("playerId")
+    private final long playerId;
+    @JsonProperty("playerName")
+    private final String playerName;
+    @JsonProperty("ret_msg")
+    private final String returnedMessage;
 
 }

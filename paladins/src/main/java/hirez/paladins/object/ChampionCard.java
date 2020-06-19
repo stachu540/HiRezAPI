@@ -1,9 +1,12 @@
 package hirez.paladins.object;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import hirez.api.object.adapters.DurationTime;
 import hirez.api.object.adapters.TextToBoolean;
 import hirez.api.object.interfaces.ReturnedMessage;
 import lombok.Data;
+
+import java.time.Duration;
 
 @Data
 public class ChampionCard implements ReturnedMessage {
@@ -33,7 +36,9 @@ public class ChampionCard implements ReturnedMessage {
     private final boolean exclusive;
     private final int rank;
     private final String rarity;
-    private final long rechargeSeconds;
+    @DurationTime
+    @JsonProperty("recharge_seconds")
+    private final Duration recharge;
     @JsonProperty("ret_msg")
     private final String returnedMessage;
 }

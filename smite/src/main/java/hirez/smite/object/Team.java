@@ -1,10 +1,11 @@
 package hirez.smite.object;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import hirez.api.object.interfaces.ReturnedMessage;
 import lombok.Data;
 
 @Data
-public class Team {
+public class Team implements ReturnedMessage {
 
     @JsonProperty("Founder")
     private final String founder;
@@ -19,7 +20,7 @@ public class Team {
     @JsonProperty("Rating")
     private final long rating;
     @JsonProperty("ret_msg")
-    private final Object retMsg;
+    private final String returnedMessage;
     @JsonProperty("Tag")
     private final String tag;
     @JsonProperty("TeamId")

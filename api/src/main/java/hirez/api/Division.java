@@ -27,7 +27,7 @@ public enum Division {
     Diamond_III,
     Diamond_II,
     Diamond_I,
-    Master,
+    Master_I,
     Grandmaster;
 
     private final String value =

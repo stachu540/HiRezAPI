@@ -10,7 +10,7 @@ import java.util.List;
 
 @Data
 public class Leaderboard implements ReturnedMessage {
-    @DateTimeFormat("yyyy-MM-dd'T'hh:mm:ss.SSS")
+    @DateTimeFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
     private final Date lastUpdated;
     @JsonProperty("leaderboard_details")
     private final List<Detail> leaderboardDetails;

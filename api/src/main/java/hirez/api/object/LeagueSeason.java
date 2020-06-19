@@ -14,5 +14,4 @@ public class LeagueSeason implements ReturnedMessage {
     private final String returnedMessage;
     private final int round;
     private final int season;
-
 }

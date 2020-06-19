@@ -3,13 +3,20 @@ package hirez.paladins.object;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import hirez.api.object.MergedAccount;
 import hirez.api.object.adapters.DateTimeFormat;
+import hirez.api.object.adapters.DurationTime;
+import hirez.api.object.adapters.TextToBoolean;
 import hirez.api.object.interfaces.ReturnedMessage;
 import lombok.Data;
+import lombok.Getter;
+import lombok.experimental.Accessors;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 @Data
 public class MatchDetail implements ReturnedMessage {
+    @JsonProperty("Account_Level")
     private final int accountLevel;
 
     @JsonProperty("ActiveId1")
@@ -30,6 +37,7 @@ public class MatchDetail implements ReturnedMessage {
     @JsonProperty("ActiveLevel4")
     private final long activeLevel4;
 
+    @JsonProperty("ActivePlayerId")
     private final long activePlayerId;
     @JsonProperty("Assists")
     private final long assists;
@@ -86,25 +94,12 @@ public class MatchDetail implements ReturnedMessage {
     private final int goldEarned;
     @JsonProperty("Gold_Per_Minute")
     private final int goldPerMinute;
-    private final String hasReplay;
     @JsonProperty("Healing")
     private final int healing;
     @JsonProperty("Healing_Bot")
     private final int healingBot;
     @JsonProperty("Healing_Player_Self")
     private final int healingPlayerSelf;
-    @JsonProperty("hz_gamer_tag")
-    private final String hiRezGamerTag;
-    @JsonProperty("hz_player_name")
-    private final String hiRezPlayerName;
-    @JsonProperty("Item_Active_1")
-    private final String itemActive1;
-    @JsonProperty("Item_Active_2")
-    private final String itemActive2;
-    @JsonProperty("Item_Active_3")
-    private final String itemActive3;
-    @JsonProperty("Item_Active_4")
-    private final String itemActive4;
     @JsonProperty("ItemId1")
     private final long itemId1;
     @JsonProperty("ItemId2")
@@ -129,6 +124,14 @@ public class MatchDetail implements ReturnedMessage {
     private final int itemLevel5;
     @JsonProperty("ItemLevel6")
     private final int itemLevel6;
+    @JsonProperty("Item_Active_1")
+    private final String itemActive1;
+    @JsonProperty("Item_Active_2")
+    private final String itemActive2;
+    @JsonProperty("Item_Active_3")
+    private final String itemActive3;
+    @JsonProperty("Item_Active_4")
+    private final String itemActive4;
     @JsonProperty("Item_Purch_1")
     private final String itemPurch1;
     @JsonProperty("Item_Purch_2")
@@ -183,35 +186,27 @@ public class MatchDetail implements ReturnedMessage {
     private final int masteryLevel;
     @JsonProperty("Match")
     private final long matchId;
+    @DurationTime
     @JsonProperty("Match_Duration")
-    private final long matchDuration;
-    @JsonProperty("match_queue_id")
-    private final int matchQueueId;
+    private final Duration matchDuration;
     @JsonProperty("MergedPlayers")
     private final MergedAccount[] mergedPlayers;
     @JsonProperty("Minutes")
-    private final long minutes;
+    private final int minutes;
     @JsonProperty("Multi_kill_Max")
     private final int multiKillMax;
-    private final String name;
     @JsonProperty("Objective_Assists")
     private final int objectiveAssists;
     @JsonProperty("PartyId")
     private final long partyId;
     @JsonProperty("Platform")
     private final String platform;
-    private final long playerId;
-    private final String playerName;
-    private final int playerPortalId;
-    private final long playerPortalUserId;
     @JsonProperty("Rank_Stat_League")
     private final int rankStatLeague;
     @JsonProperty("Reference_Name")
     private final String referenceName;
     @JsonProperty("Region")
     private final String region;
-    @JsonProperty("ret_msg")
-    private final String returnedMessage;
     @JsonProperty("Skin")
     private final String skin;
     @JsonProperty("SkinId")
@@ -230,8 +225,9 @@ public class MatchDetail implements ReturnedMessage {
     private final long teamId;
     @JsonProperty("Team_Name")
     private final String teamName;
+    @DurationTime
     @JsonProperty("Time_In_Match_Seconds")
-    private final long timeInMatchSeconds;
+    private final Duration timeInMatch;
     @JsonProperty("Towers_Destroyed")
     private final int towersDestroyed;
     @JsonProperty("Wards_Placed")
@@ -240,5 +236,24 @@ public class MatchDetail implements ReturnedMessage {
     private final String winStatus;
     @JsonProperty("Winning_TaskForce")
     private final int winningTaskForce;
-
+    @TextToBoolean
+    @JsonProperty("hasReplay")
+    @Accessors(fluent = true)
+    private final boolean hasReplay;
+    @JsonProperty("hz_gamer_tag")
+    private final String hiRezGamerTag;
+    @JsonProperty("hz_player_name")
+    private final String hiRezPlayerName;
+    private final int matchQueueId;
+    private final String name;
+    @JsonProperty("playerId")
+    private final long playerId;
+    @JsonProperty("playerName")
+    private final String playerName;
+    @JsonProperty("playerPortalId")
+    private final int playerPortalId;
+    @JsonProperty("playerPortalUserId")
+    private final long playerPortalUserId;
+    @JsonProperty("ret_msg")
+    private final String returnedMessage;
 }

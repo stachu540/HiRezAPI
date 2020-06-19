@@ -4,7 +4,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import hirez.api.object.interfaces.ReturnedMessage;
 import lombok.Data;
 
+/**
+ * @deprecated This endpoint is not exist
+ */
 @Data
+@Deprecated
 public class Talent implements ReturnedMessage {
     private final String categoryName;
     @JsonProperty("item_id")

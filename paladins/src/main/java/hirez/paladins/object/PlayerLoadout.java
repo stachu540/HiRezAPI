@@ -18,7 +18,9 @@ public class PlayerLoadout implements ReturnedMessage {
     private final String deckName;
     @JsonProperty("LoadoutItems")
     private final List<Item> loadoutItems;
+    @JsonProperty("playerId")
     private final long playerId;
+    @JsonProperty("playerName")
     private final String playerName;
     @JsonProperty("ret_msg")
     private final String returnedMessage;

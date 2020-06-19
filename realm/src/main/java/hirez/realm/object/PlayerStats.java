@@ -12,9 +12,9 @@ import java.util.Map;
 @Data
 public class PlayerStats implements ReturnedMessage {
     private final AggregateStats aggregateStats;
-    @DateTimeFormat("yyyy-MM-dd'T'hh:mm:ss.SSS")
+    @DateTimeFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
     private final Date placementWindowEnd;
-    @DateTimeFormat("yyyy-MM-dd'T'hh:mm:ss")
+    @DateTimeFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
     private final Date placementWindowStart;
     private final long playerId;
     private final List<QueueClass> queueClassStats;
@@ -33,39 +33,24 @@ public class PlayerStats implements ReturnedMessage {
         @Data
         public static class Stats {
             private final int assists;
-            @JsonProperty("average_placement")
             private final int averagePlacement;
             private final int damage;
-            @JsonProperty("damage_done_in_hand")
             private final int damageDoneInHand;
-            @JsonProperty("damage_mitigated")
             private final int damageMitigated;
-            @JsonProperty("damage_taken")
             private final int damageTaken;
             private final int deaths;
-            @JsonProperty("duration_secs")
             private final long durationSecs;
-            @JsonProperty("earned_tokens")
             private final int earnedTokens;
-            @JsonProperty("earned_xp")
             private final int earnedXp;
-            @JsonProperty("games_played")
             private final int gamesPlayed;
-            @JsonProperty("healing_player")
             private final int healingPlayer;
-            @JsonProperty("healing_player_self")
             private final double healingPlayerSelf;
-            @JsonProperty("killing_spree_max")
             private final int killingSpreeMax;
-            @JsonProperty("kills_bot")
             private final int killsBot;
-            @JsonProperty("kills_player")
             private final int killsPlayer;
             private final int losses;
-            @JsonProperty("placement_list")
-            private final Map<Integer, Integer> placementList;
+            private final String placementList;
             private final List<Placement> placements;
-            @JsonProperty("wards_mines_placed")
             private final int wardsMinesPlaced;
             private final int wins;
         }
@@ -90,7 +75,7 @@ public class PlayerStats implements ReturnedMessage {
         private final int killsBot;
         private final int killsPlayer;
         private final int losses;
-        private final Map<Integer, Integer> placementList;
+        private final String placementList;
         private final List<Placement> placements;
         private final int wardsMinesPlaced;
         private final int wins;

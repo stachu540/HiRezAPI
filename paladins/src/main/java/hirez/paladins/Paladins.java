@@ -3,14 +3,17 @@ package hirez.paladins;
 import hirez.api.*;
 import hirez.api.object.*;
 import hirez.api.object.interfaces.Queue;
+import hirez.paladins.object.Rank;
 import hirez.paladins.object.*;
 import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Maybe;
 import io.reactivex.rxjava3.core.Single;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -38,8 +41,13 @@ public class Paladins extends Endpoint {
         return getChampionCards(championId, getConfiguration().getLanguage());
     }
 
-    public Flowable<ChampionLeaderboard> getChampionLeaderboard(long championId, Queue queue) {
-        return testAndCall(ChampionLeaderboard[].class, "getchampionleaderboard", Long.toString(championId), queue.getId().toString())
+    /**
+     * Only queue {@link Queues#COMPETITIVE_GAMEPAD}
+     * @param championId
+     * @return
+     */
+    public Flowable<ChampionLeaderboard> getChampionLeaderboard(long championId) {
+        return testAndCall(ChampionLeaderboard[].class, "getchampionleaderboard", Long.toString(championId), Queues.COMPETITIVE_GAMEPAD.getId().toString())
                 .flattenAsFlowable(Arrays::asList);
     }
 
@@ -50,6 +58,15 @@ public class Paladins extends Endpoint {
 
     public Flowable<Champion> getChampions() {
         return getChampions(getConfiguration().getLanguage());
+    }
+
+    public Flowable<ChampionSkin> getChampionSkins(long championId, Language language) {
+        return testAndCall(ChampionSkin[].class, "getchampionskins", Long.toString(championId), language.getId().toString())
+                .flattenAsFlowable(Arrays::asList);
+    }
+
+    public Flowable<ChampionSkin> getChampionSkins(long championId) {
+        return getChampionSkins(championId, getConfiguration().getLanguage());
     }
 
     public Flowable<Item> getItems(Language language) {
@@ -63,16 +80,23 @@ public class Paladins extends Endpoint {
 
     public Single<DemoDetail> getDemoDetails(long matchId) {
         return testAndCall(DemoDetail[].class, "getdemodetails", Long.toString(matchId))
-                .map(it -> it[0]);
+                .flatMap(it -> Single.create(sink -> {
+                    if (it.length > 0) {
+                        sink.onSuccess(it[0]);
+                    } else {
+                        sink.onError(new HiRezException(String.format("Demo of match %d is not exist", matchId)));
+                    }
+                }));
     }
 
-    public Flowable<LeagueLeaderboard> getLeagueLeaderboard(Queue queue, Division division, int season) {
-        return testAndCall(LeagueLeaderboard[].class, "getleagueleaderboard", queue.getId().toString(), Integer.toString(division.ordinal()), Integer.toString(season))
+    public Flowable<Rank> getLeagueLeaderboard(Queue queue, Division division, int round) {
+        return testAndCall(Rank[].class, "getleagueleaderboard", queue.getId().toString(), Integer.toString(division.ordinal()), Integer.toString(round))
                 .flattenAsFlowable(Arrays::asList);
     }
 
-    public Single<LeagueSeason[]> getLeagueSeasons(Queue queue) {
-        return testAndCall(LeagueSeason[].class, "getleagueseasons", queue.getId().toString());
+    public Flowable<LeagueSeason> getLeagueSeasons(Queue queue) {
+        return testAndCall(LeagueSeason[].class, "getleagueseasons", queue.getId().toString())
+                .flattenAsFlowable(Arrays::asList);
     }
 
     public Flowable<MatchDetail> getMatchDetails(long matchId) {
@@ -150,8 +174,9 @@ public class Paladins extends Endpoint {
                 .flattenAsFlowable(Arrays::asList);
     }
 
-    public Single<PlayerIdXboxSwitch[]> getPlayerIdInfoForXboxAndSwitch() {
-        return testAndCall(PlayerIdXboxSwitch[].class, "getplayeridinfoforxboxandswitch", "stachu%20official");
+    public Flowable<PlayerIdXboxSwitch> getPlayerIdInfoForXboxAndSwitch(String gamertag) {
+        return testAndCall(PlayerIdXboxSwitch[].class, "getplayeridinfoforxboxandswitch", gamertag)
+                .flattenAsFlowable(Arrays::asList);
     }
 
     public Flowable<PlayerLoadout> getPlayerLoadouts(String user, Language language) {
@@ -180,8 +205,9 @@ public class Paladins extends Endpoint {
         return getPlayerStatus(Long.toString(id));
     }
 
-    public Single<ProLeagueDetail[]> getEsportsProLeagueDetails() {
-        return testAndCall(ProLeagueDetail[].class, "getesportsproleaguedetails");
+    public Flowable<ProLeagueDetail> getEsportsProLeagueDetails() {
+        return testAndCall(ProLeagueDetail[].class, "getesportsproleaguedetails")
+                .flattenAsFlowable(Arrays::asList);
     }
 
     public Flowable<PlayerQuery> searchPlayer(String query) {

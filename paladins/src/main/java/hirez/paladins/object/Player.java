@@ -3,24 +3,28 @@ package hirez.paladins.object;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import hirez.api.object.MergedAccount;
 import hirez.api.object.adapters.DateTimeFormat;
+import hirez.api.object.adapters.DurationTime;
 import hirez.api.object.interfaces.ReturnedMessage;
 import lombok.Data;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 @Data
 public class Player implements ReturnedMessage {
     @JsonProperty("ActivePlayerId")
     private final long activePlayerId;
+    @JsonProperty("AvatarId")
+    private final long avatarId;
+    @JsonProperty("AvatarURL")
+    private final String avatarURL;
     @DateTimeFormat
     @JsonProperty("Created_Datetime")
     private final Date createdDatetime;
+    @DurationTime(ChronoUnit.HOURS)
     @JsonProperty("HoursPlayed")
-    private final int hoursPlayed;
-    @JsonProperty("hz_gamer_tag")
-    private final String hiRezGamerTag;
-    @JsonProperty("hz_player_name")
-    private final String hiRezPlayerName;
+    private final Duration hoursPlayed;
     @JsonProperty("Id")
     private final long id;
     @DateTimeFormat
@@ -30,12 +34,17 @@ public class Player implements ReturnedMessage {
     private final int leaves;
     @JsonProperty("Level")
     private final int level;
+    @JsonProperty("LoadingFrame")
+    private final String loadingFrame;
     @JsonProperty("Losses")
     private final int losses;
     @JsonProperty("MasteryLevel")
     private final int masteryLevel;
     @JsonProperty("MergedPlayers")
     private final MergedAccount[] mergedPlayers;
+    @DurationTime(ChronoUnit.MINUTES)
+    @JsonProperty("MinutesPlayed")
+    private final Duration minutesPlayed;
     @JsonProperty("Name")
     private final String name;
     @JsonProperty("Personal_Status_Message")
@@ -43,15 +52,13 @@ public class Player implements ReturnedMessage {
     @JsonProperty("Platform")
     private final String platform;
     @JsonProperty("RankedConquest")
-    private final RankItem rankedConquest;
+    private final Rank rankedConquest;
     @JsonProperty("RankedController")
-    private final RankItem rankedController;
+    private final Rank rankedController;
     @JsonProperty("RankedKBM")
-    private final RankItem rankedKBM;
+    private final Rank rankedKBM;
     @JsonProperty("Region")
     private final String region;
-    @JsonProperty("ret_msg")
-    private final String returnedMessage;
     @JsonProperty("TeamId")
     private final long teamId;
     @JsonProperty("Team_Name")
@@ -62,39 +69,20 @@ public class Player implements ReturnedMessage {
     private final int tierRankedController;
     @JsonProperty("Tier_RankedKBM")
     private final int tierRankedKBM;
+    @JsonProperty("Title")
+    private final String title;
     @JsonProperty("Total_Achievements")
     private final int totalAchievements;
     @JsonProperty("Total_Worshippers")
     private final int totalWorshippers;
+    @JsonProperty("Total_XP")
+    private final int totalExp;
     @JsonProperty("Wins")
     private final int wins;
-
-    @Data
-    public static class RankItem implements ReturnedMessage {
-        @JsonProperty("Leaves")
-        private final int leaves;
-        @JsonProperty("Losses")
-        private final int losses;
-        @JsonProperty("Name")
-        private final String name;
-        @JsonProperty("player_id")
-        private final long playerId;
-        @JsonProperty("Points")
-        private final int points;
-        @JsonProperty("PrevRank")
-        private final int prevRank;
-        @JsonProperty("Rank")
-        private final int rank;
-        @JsonProperty("ret_msg")
-        private final String returnedMessage;
-        @JsonProperty("Season")
-        private final int season;
-        @JsonProperty("Tier")
-        private final int tier;
-        @JsonProperty("Trend")
-        private final int trend;
-        @JsonProperty("Wins")
-        private final int wins;
-
-    }
+    @JsonProperty("hz_gamer_tag")
+    private final String hiRezGamerTag;
+    @JsonProperty("hz_player_name")
+    private final String hiRezPlayerName;
+    @JsonProperty("ret_msg")
+    private final String returnedMessage;
 }

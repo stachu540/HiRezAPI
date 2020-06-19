@@ -23,7 +23,7 @@ public enum Queues implements Queue {
     ARENA_CUSTOM(438, "Arena (Custom)"),
     CONQUEST_CUSTOM(429, "Conquest (Custom)"),
     CONQUEST_AI_MEDIUM(461, "Conquest AI (Medium)"),
-    ARENA_AI_EASY(457, "Arena AI (Easy)"),
+    ARENA_AI_VERY_EASY(457, "Arena AI (Easy)"),
     CONQUEST_AI_EASY(476, "Conquest AI (Easy)"),
     JOUST_AI_EASY(474, "Joust AI (Easy)"),
     CONQUEST_LEAGUE_CONTROLLER(504, "Conquest League (Controller)"),
@@ -47,7 +47,32 @@ public enum Queues implements Queue {
     CLASH_PRACTICE_MEDIUM(477, "Clash Practice (Medium)"),
     CLASH_PRACTICE_EASY(470, "Clash Practice (Easy)"),
     CLASH_TUTORIAL(471, "Clash Tutorial"),
-    BASIC_TUTORIAL(436, "Basic Tutorial");
+    BASIC_TUTORIAL(436, "Basic Tutorial"),
+    /**
+     * @deprecated No longer in active playlist
+     */
+    @Deprecated
+    CONQUEST_OLD(423, "Conquest"),
+    /**
+     * @deprecated No longer in active playlist
+     */
+    @Deprecated
+    CONQUEST_LEAGUE_SOLO(430, "Conquest League (Solo)"),
+    /**
+     * @deprecated No longer in active playlist
+     */
+    @Deprecated
+    DOMINATION(433, "Domination"),
+    /**
+     * @deprecated No longer in active playlist
+     */
+    @Deprecated
+    ARENA_LEAGUE(452, "Arena League"),
+    CONQUEST_AI_VERY_EASY(10182, "Conquest AI (Very Easy)"),
+    ARENA_AI_EASY(10163, "Arena AI (Easy)"),
+    ARENA_AI_VERY_HARD(10158, "Arena AI (Very Hard)"),
+    CONQUEST_AI_HARD(10161, "Conquest AI (Hard)"),
+    JOUST_AI_VERY_HARD(10162, "Joust AI (Very Hard)");
 
     @Getter
     private final Integer id;

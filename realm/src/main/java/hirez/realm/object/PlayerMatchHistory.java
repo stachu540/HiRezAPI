@@ -34,7 +34,7 @@ public class PlayerMatchHistory implements ReturnedMessage {
         private final int killingSpreeMax;
         private final int kills;
         private final String mapGame;
-        @DateTimeFormat("yyyy-MM-dd'T'hh:mm:ss.SSS")
+        @DateTimeFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
         private final Date matchDatetime;
         private final long matchDurationSecs;
         private final long matchId;
