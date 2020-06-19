@@ -40,7 +40,7 @@ Add to `pom.xml` build.
           <!--<artifactId>HiRezAPI-smite</artifactId>-->
           <!--for realm royale-->
           <!--<artifactId>HiRezAPI-realm</artifactId>-->
-          <version>3.0.0</version>
+          <version>3.1.0</version>
      </dependency>
 </dependencies>
 ```
@@ -53,13 +53,13 @@ repositories {
 
 dependencies {
 // for all games
-  implementation("com.github.stachu540:HiRezAPI-all:3.0.0")
+  implementation("com.github.stachu540:HiRezAPI-all:3.1.0")
 // for paladins
-//  implementation("com.github.stachu540:HiRezAPI-paladins:3.0.0")
+//  implementation("com.github.stachu540:HiRezAPI-paladins:3.1.0")
 // for smite
-//  implementation("com.github.stachu540:HiRezAPI-smite:3.0.0")
+//  implementation("com.github.stachu540:HiRezAPI-smite:3.1.0")
 // for realm royale
-//  implementation("com.github.stachu540:HiRezAPI-realm:3.0.0")
+//  implementation("com.github.stachu540:HiRezAPI-realm:3.1.0")
 }
 ```
 
