@@ -49,9 +49,6 @@ jobs:
           key: jdk8-gradle-${{ hashFiles('**/build.gradle*') }}
           restore-keys: |
             jdk8-gradle-
-      - name: Get tag name
-        id: tag
-        run: ::set-output name=id::${GITHUB_REF#refs/tags/}
       - name: Set up JDK
         uses: actions/setup-java@v1
         with:
@@ -63,7 +60,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           chmod +x ./gradlew
-          ./gradlew -Pversion=${{ steps.tag.outputs.id }} bintrayUpload releaseAssets
+          ./gradlew bintrayUpload releaseAssets
   release-docs:
     name: Release Documentation to Github Pages
     runs-on: [ubuntu-latest]
@@ -91,11 +88,12 @@ jobs:
       - name: Prepare Javadoc
         run: |
           chmod +x ./gradlew
-          ./gradlew -Pversion=${{ steps.tag.outputs.id }} :all:javadoc
+          ./gradlew :all:javadoc
       - name: Deploy Documentation
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./all/build/docs/javadoc
-          commit_message: ${{ github.event.head_commit.message }}
+          commit_message: Deploy documentation for ${{ steps.tag.outputs.id }}
+
 
