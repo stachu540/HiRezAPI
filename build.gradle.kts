@@ -3,7 +3,7 @@ import java.util.*
 plugins {
     java
     `maven-publish`
-    id("com.jfrog.bintray") version Version.bintray
+    id("com.jfrog.bintray") version 1.8.5
     id("io.freefair.lombok") version Version.freefairPlugin
     id("com.github.johnrengelman.shadow") version Version.shadow
 }
