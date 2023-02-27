@@ -5,7 +5,7 @@ plugins {
     `maven-publish`
     id("com.jfrog.bintray") version Version.bintray
     id("io.freefair.lombok") version Version.freefairPlugin
-    id("com.github.johnrengelman.shadow") version Version.shadow
+    id("com.github.johnrengelman.shadow") version 8.0.0
 }
 
 allprojects {
